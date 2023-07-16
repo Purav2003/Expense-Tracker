@@ -19,6 +19,7 @@ var userSchema = new mongoose.Schema({
         type:String,
         required:true,
         unique:true,
+        match:[/^(\+\d{1,3}[- ]?)?\d{10}$/]
     },
     password:{
         type:String,
