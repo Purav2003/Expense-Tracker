@@ -2,7 +2,6 @@ require("express-async-errors")
 const customAPIError = require("../errors/custom-error")
 const User = require("../models/user")
 const nodemailer = require("nodemailer")
-const mailgen = require("mailgen")
 
 const signup = async (req,res)=>{
     const user = await User.create(req.body)
