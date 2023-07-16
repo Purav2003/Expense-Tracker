@@ -1,5 +1,4 @@
 import axios from "axios"
-import Signup from "./Signup"
 
 const Login = () => {
 
@@ -16,7 +15,7 @@ const Login = () => {
   return (
     <>
     <form onSubmit={handleSubmit}>
-      Name:<input type="email" name="email" className="email" ></input><br></br>
+      Email:<input type="email" name="email" className="email" ></input><br></br>
       Password:<input type="password" name="password" className="password"></input><br></br>
       <button type="submit" >Submit</button>
     </form>

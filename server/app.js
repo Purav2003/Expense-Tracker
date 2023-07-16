@@ -42,12 +42,4 @@ const start = async ()=>{
     })
 }
 
-process.on('SIGTERM', () => {
-  console.info('SIGTERM signal received.');
-  console.log('Closing http server.');
-  app.close(() => {
-    console.log('Http server closed.');
-  });
-});
-
 start()
