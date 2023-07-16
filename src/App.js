@@ -1,8 +1,17 @@
 import logo from './logo.svg';
 import Login from './Pages/Login';
+import Signup from './Pages/Signup';
+import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
 function App() {
   return (
-    <Login></Login>
+    <>
+    <Router>
+      <Routes>
+        <Route path='/login' element={<Login />}></Route>
+        <Route path='/signup' element={<Signup />}></Route>
+      </Routes>
+    </Router>
+    </>
     );
 }
 

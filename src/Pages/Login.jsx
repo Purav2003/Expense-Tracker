@@ -20,7 +20,8 @@ const Login = () => {
       Password:<input type="password" name="password" className="password"></input><br></br>
       <button type="submit" >Submit</button>
     </form>
-          <a href={Signup}>Signup</a>
+        <a href="/signup">Singup</a>
+
 </>
   )
 }
