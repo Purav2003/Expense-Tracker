@@ -1,11 +1,53 @@
 require("express-async-errors")
 const customAPIError = require("../errors/custom-error")
 const User = require("../models/user")
+const nodemailer = require("nodemailer")
+const mailgen = require("mailgen")
 
 const signup = async (req,res)=>{
     const user = await User.create(req.body)
-    const token = user.createJWT()
-    res.status(200).send({user,token,success:true})
+    const config = {
+        service:"gmail",
+        auth:{
+            user:process.env.EMAIL,
+            pass:process.env.PASSWORD   
+        }
+    }
+
+    const transporter =  nodemailer.createTransport(config)
+
+    const MailGenerator = new mailgen({
+        theme: "default",
+        product : {
+            name: "Mailgen",
+            link : 'https://mailgen.js/'
+        }
+    })
+
+    const response = {
+        body: {
+            name : "Daily Tuition",
+            intro: "Your bill has arrived!",
+            outro: "Looking forward to do more business"
+        }
+    }
+
+    const mail = MailGenerator.generate(response)
+
+    
+    let message = {
+        from : process.env.EMAIL,
+        to : req.body.email,
+        subject: "Place Order",
+        html: mail
+    }
+
+    transporter.sendMail(message).then(() => {
+        const token = user.createJWT()
+        res.status(200).send({user,token,success:true})
+    }).catch(error => {
+        return res.status(500).json({ error })
+    })
 }
 
 const signin = async (req,res)=>{
