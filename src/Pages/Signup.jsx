@@ -9,7 +9,7 @@ const Signup = () => {
     const phone = document.querySelector('.mobile').value
     const repassword = document.querySelector('.repassword').value
     const phonearray = Array.from(phone)
-    repassword===password && phonearray.length==10?<>
+    repassword===password && phonearray.length===10?<>
     try {
       await axios.post('http://localhost:5000/api/v1/auth/signup', { name, email, password ,phone})        
     } catch (error) {
@@ -32,4 +32,3 @@ const Signup = () => {
   )
 }
 export default Signup
-
