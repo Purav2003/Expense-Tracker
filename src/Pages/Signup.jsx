@@ -11,13 +11,20 @@ const Signup = () => {
     const name = document.querySelector('.name').value
     const mobile = document.querySelector('.mobile').value
     const phonearray = Array.from(mobile)
-    phonearray.length===10?<>
+    if(phonearray.length!==10){
+      const error_number = 1
+    }
+    if(!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/.test(password)){
+      const error_password = 1
+    }
+    phonearray.length===10 && /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/.test(password)? 
+     <>
+     {document.getElementById('error').innerHTML = ''}
     try {
-      await axios.post('http://localhost:5000/api/v1/auth/signup', { email, password, name, mobile})
+      await axios.post('http://localhost:5000/api/v1/auth/signup', { email, password, name, mobile})      
     } catch (error) {
       
-    }</>:console.log("Error")
-    document.getElementById('error').innerHTML += '<h1>Invalid Phone Number</h1>';
+    }</>:<></>
         
     
   }
@@ -25,7 +32,6 @@ const Signup = () => {
     <>
     <div className="lg:flex lg:flex-row">
     <div className="pl-[5vw] pt-[3vw] first-div">
-      <div id="error" className="pl-[2.4vw]"></div>
           <div>
 
             <h1 className="text-[35px] heading-signup font-bold pl-[13vw] pt-[1vw] text-[#1BA329]">Sign up</h1>
@@ -43,6 +49,8 @@ const Signup = () => {
                     Phone Number
                   </label>
                   <input className="mobile shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="number" placeholder="Phone Number" />
+                  <div id="error" className="pt-[0.5vw]"></div>
+
                 </div>
                 <div className="mb-4 form-field">
                   <label className="block text-black-700 text-sm font-bold mb-2">
