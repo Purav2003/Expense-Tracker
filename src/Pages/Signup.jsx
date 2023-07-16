@@ -11,7 +11,7 @@ const Signup = () => {
     const phonearray = Array.from(phone)
     repassword===password && phonearray.length==10?<>
     try {
-      await axios.post('http://localhost:3001/api/v1/auth/signup', { name, email, password ,phone})        
+      await axios.post('http://localhost:5000/api/v1/auth/signup', { name, email, password ,phone})        
     } catch (error) {
       
     }</>:<div>
@@ -26,8 +26,8 @@ const Signup = () => {
       Email:<input type="email" name="email" className="email" required></input><br></br>
       Phone:<input type="number" name="mobile" className="mobile" required></input><br></br>
       Password:<input type="password" name="password" className="password" required></input><br></br>
-      Retype-Password:<input type="password" name="repassword" className="repassword" required></input><br></br>
-      <button type="submit" >Submit</button>
+      Retype-Password:<input type="password" name="repassword" className="repassword font-bold" required></input><br></br>
+      <button type="submit">Submit</button>
     </form>
   )
 }
