@@ -5,6 +5,7 @@ const notFound = require("./middlewares/not-found")
 const errorHandler = require("./middlewares/error-handler")
 const expense = require("./routes/expense")
 const auth = require("./routes/auth")
+const mongoose = require("mongoose")
 
 //extra security
 const helmet = require("helmet")
@@ -37,9 +38,13 @@ const port = process.env.PORT
 const mongo_url = process.env.MONGO_URL
 const start = async ()=>{
     await connectDB(mongo_url)
-    app.listen(port, ()=>{
+    const server = app.listen(port, ()=>{
         console.log(`Server is listening on PORT: ${port}`);
     })
+    process.on('SIGTERM', () => {
+      server.close()
+      mongoose.connect.close()
+    });
 }
 
 start()
