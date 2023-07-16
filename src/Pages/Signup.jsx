@@ -17,7 +17,7 @@ const Signup = () => {
       
     }</>:<div>
       <h1 style={{background:'yellow',textAlign:'center'}}>Password to sarkho nakh be</h1>    
-        {document.querySelector('.repassword').value=''}
+        
     </div>
   }
   return (
