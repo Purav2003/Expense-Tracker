@@ -24,6 +24,7 @@ var userSchema = new mongoose.Schema({
     password:{
         type:String,
         required:true,
+        match:[/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/]
     },
 },{timestamps:true});
 
