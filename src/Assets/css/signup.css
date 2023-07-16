@@ -1,0 +1,52 @@
+@media screen and (min-width:220px) and (max-width:650px) {
+    .form-field input{
+        width: 230px !important;
+    }
+
+    .form-field label{
+        width: 300px !important;
+    }
+
+    .form-field .button{
+        width: 230px !important;
+        margin-top: 2vw !important;
+        text-align: center !important;
+    }
+    form{
+        width: 300px !important;
+        margin-left: 4vw !important;
+    }
+
+    .heading-signup{
+        margin-top: 10vh !important;
+        margin-left: 14vw !important;    
+    }
+    .second-signup{
+        margin-left: 10vw !important;
+    }
+    .photo-signup{
+        width: 0px !important;
+        height: 0px !important;
+    }
+  .first-div{
+    height: 1px !important;
+  }
+}
+
+@media screen and (min-width:651px) and (max-width:950px) {
+    form{
+        padding-left: 12vw !important;
+        width: 80vw !important;
+    }
+    .heading-signup{
+        padding-left: 36vw !important;
+    }
+    .second-signup{
+        padding-left: 12vw !important;
+    }
+    .photo-signup{
+        width: 0px !important;
+        height: 0px !important;
+    }
+}
+
