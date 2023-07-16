@@ -3,15 +3,29 @@ const express = require("express")
 const connectDB = require("./db/connectDB")
 const notFound = require("./middlewares/not-found")
 const errorHandler = require("./middlewares/error-handler")
+const expense = require("./routes/expense")
+
+//extra security
+const helmet = require("helmet")
 const cors = require("cors")
-const testroute = require("./routes/test")
+const xss = require("xss-clean")
+const ratelimiter = require("express-rate-limit")
 
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended: true}));
-app.use(cors())
 
-app.use("/api/v1/expresstracker",testroute)
+app.set("trust proxy",1)
+app.use(express.json());
+app.use(ratelimiter({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100 // limit each IP to 100 requests per windowMs
+}))
+app.use(helmet())
+app.use(cors())
+app.use(xss())
+
+app.use("/api/v1/expresstracker/expense",expense)
 
 app.use(notFound)
 app.use(errorHandler)
