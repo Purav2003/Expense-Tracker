@@ -5,7 +5,6 @@ const notFound = require("./middlewares/not-found")
 const errorHandler = require("./middlewares/error-handler")
 const expense = require("./routes/expense")
 const auth = require("./routes/auth")
-const mongoose = require("mongoose")
 
 //extra security
 const helmet = require("helmet")
