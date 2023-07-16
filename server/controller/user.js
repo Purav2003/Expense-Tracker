@@ -26,9 +26,9 @@ const signup = async (req,res)=>{
 
     const response = {
         body: {
-            name : "Daily Tuition",
-            intro: "Your bill has arrived!",
-            outro: "Looking forward to do more business"
+            name : "Congrulations you have successfully registered with Expense Tracker",
+            intro: `Dear ${req.body.name} <br> Congratulations! We are thrilled to inform you that your registration with Expense Tracker has been successfully completed. On behalf of our team, we extend a warm welcome to you as a valued member of our community. <br> Remember, our team is here to support you every step of the way. Should you have any questions or require assistance, please don't hesitate to reach out to us. Our dedicated support team is available via ${process.env.EMAIL}, and we are committed to ensuring you have a seamless experience.`,
+            outro: "Thank you for choosing Expense Tracker as your trusted financial companion. We look forward to helping you gain control over your finances and achieve your financial aspirations. <br> Best regards"
         }
     }
 
@@ -38,7 +38,7 @@ const signup = async (req,res)=>{
     let message = {
         from : process.env.EMAIL,
         to : req.body.email,
-        subject: "Place Order",
+        subject: "Welcome to Expense Tracker! Your Registration is Complete.",
         html: mail
     }
 
