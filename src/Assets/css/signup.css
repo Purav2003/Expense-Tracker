@@ -50,3 +50,12 @@
     }
 }
 
+.icon-google{
+    text-align:  center !important;
+    margin-left: 7.5vw !important;
+    font-size: 24px !important;
+}
+
+#error{
+    color: tomato;
+}
