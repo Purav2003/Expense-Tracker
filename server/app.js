@@ -4,6 +4,7 @@ const connectDB = require("./db/connectDB")
 const notFound = require("./middlewares/not-found")
 const errorHandler = require("./middlewares/error-handler")
 const expense = require("./routes/expense")
+const auth = require("./routes/auth")
 
 //extra security
 const helmet = require("helmet")
@@ -25,7 +26,9 @@ app.use(helmet())
 app.use(cors())
 app.use(xss())
 
-app.use("/api/v1/expresstracker/expense",expense)
+app.use("/api/v1/",expense)
+app.use("/api/v1/auth",auth)
+
 
 app.use(notFound)
 app.use(errorHandler)
@@ -38,5 +41,13 @@ const start = async ()=>{
         console.log(`Server is listening on PORT: ${port}`);
     })
 }
+
+process.on('SIGTERM', () => {
+  console.info('SIGTERM signal received.');
+  console.log('Closing http server.');
+  app.close(() => {
+    console.log('Http server closed.');
+  });
+});
 
 start()
