@@ -13,7 +13,7 @@ const Signup = () => {
     try {
       await axios.post('http://localhost:3001/api/v1/auth/signup', { name, email, password ,phone})        
     } catch (error) {
-      console.log(error)
+      
     }</>:<><h1>Password to sarkho nakh be</h1>    
         {document.querySelector('.repassword').value}
     

@@ -1,6 +1,7 @@
 import axios from "axios"
-import Signup from "./signup"
-const Signin = () => {
+import Signup from "./Signup"
+
+const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -23,5 +24,5 @@ const Signin = () => {
 </>
   )
 }
-export default Signin
+export default Login
 
