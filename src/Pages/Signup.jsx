@@ -11,23 +11,35 @@ const Signup = () => {
     const name = document.querySelector('.name').value
     const mobile = document.querySelector('.mobile').value
     const phonearray = Array.from(mobile)
+    let error_number = 0
+    let error_password = 0
+
     if (phonearray.length !== 10) {
-      const error_number = 1
+      error_number = 1
     }
     if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/.test(password)) {
-      const error_password = 1
+      error_password = 1
     }
     phonearray.length === 10 && /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/.test(password) ?
       <>
         {document.getElementById('error').innerHTML = ''}
+        {document.getElementById('errora').innerHTML = ''}
+
+
         try {
-          await axios.post('http://localhost:5000/api/v1/auth/signup', { email, password, name, mobile })                            
+          await axios.post('http://localhost:5000/api/v1/auth/signup', { email, password, name, mobile })
         } catch (error) {
 
-        }</> : document.getElementById('error').innerHTML = '<h1 className="pt-[0.5vw]">Invalid Phone Number</h1>'
+        }</> : <>
+            {
+        error_number===1?document.getElementById('error').innerHTML = '<h1 className="pt-[0.5vw]">Invalid Phone Number</h1>':""        
+        }
+        {
+           error_password===1?document.getElementById('errora').innerHTML = '<h1 className="pt-[0.5vw]">Password is not safe</h1>':""        
 
+        }
 
-
+      </>
   }
   return (
     <>
@@ -64,18 +76,19 @@ const Signup = () => {
                   Password
                 </label>
                 <input className="password shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Password" />
+                <div id="errora"></div>
+
               </div>
               <div className="flex form-field items-center">
                 <button className="bg-[#1BA329] button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
                   Sign Up
                 </button>
-                <button className="border content-center border-[#1BA329] ml-[1vw] button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="button">
+                <button className="border content-center border-[#1BA329] ml-[1vw] button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline flex flex-row " type="button">
                   <icons.FcGoogle className="icon-google"></icons.FcGoogle>
                 </button>
-
               </div>
             </form>
-            <p className="pl-[2.4vw] second-signup">Already have an account? <a href="/login" className="underline text-[#1BA329]">Login</a></p>
+            <p className="pl-[2.4vw] second-signup">Already have an account? <a href="/" className="underline text-[#1BA329]">Login</a></p>
 
           </div>
         </div>
