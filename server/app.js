@@ -38,13 +38,9 @@ const port = process.env.PORT
 const mongo_url = process.env.MONGO_URL
 const start = async ()=>{
     await connectDB(mongo_url)
-    const server = app.listen(port, ()=>{
+    app.listen(port, ()=>{
         console.log(`Server is listening on PORT: ${port}`);
     })
-    process.on('SIGTERM', () => {
-      server.close()
-      mongoose.connect.close()
-    });
 }
 
 start()
