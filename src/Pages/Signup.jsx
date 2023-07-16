@@ -1,4 +1,5 @@
 import axios from "axios"
+
 const Signup = () => {
 
   const handleSubmit = async (e) => {
@@ -6,7 +7,7 @@ const Signup = () => {
     const email = document.querySelector('.email').value
     const password = document.querySelector('.password').value
     const name = document.querySelector('.name').value
-    const phone = document.querySelector('.mobile').value
+    const phone = document.querySelector('.phone').value
     const repassword = document.querySelector('.repassword').value
     const phonearray = Array.from(phone)
     repassword===password && phonearray.length==10?<>
