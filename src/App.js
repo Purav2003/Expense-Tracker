@@ -1,9 +1,9 @@
 import logo from './logo.svg';
-import Form from './Form';
+import Signin from './Pages/signin';
 function App() {
   return (
-    <Form />
-  );
+<Signin />
+    );
 }
 
 export default App;

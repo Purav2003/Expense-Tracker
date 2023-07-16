@@ -1,4 +1,5 @@
 import axios from "axios"
+import Signup from "./signup"
 const Signin = () => {
 
   const handleSubmit = async (e) => {
@@ -12,11 +13,14 @@ const Signin = () => {
     }
   }
   return (
+    <>
     <form onSubmit={handleSubmit}>
       Name:<input type="email" name="email" className="email" ></input><br></br>
       Password:<input type="password" name="password" className="password"></input><br></br>
       <button type="submit" >Submit</button>
     </form>
+          <a href={Signup}>Signup</a>
+</>
   )
 }
 export default Signin
