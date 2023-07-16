@@ -11,14 +11,10 @@ const Signup = () => {
 
     repassword===password?<>
     try {
-      await axios.post('http://localhost:5000/api/v1/auth/signup', { name, email, password ,phone})        
+      await axios.post('http://localhost:3001/api/v1/auth/signup', { name, email, password ,phone})        
     } catch (error) {
       console.log(error)
-    }</>:<><h1>Password to sarkho nakh be</h1>
-    {document.querySelector('.email').value=''}
-        {document.querySelector('.password').value=''}
-        {document.querySelector('.name').value=''        }
-        {document.querySelector('.phone').value}
+    }</>:<><h1>Password to sarkho nakh be</h1>    
         {document.querySelector('.repassword').value}
     
     </>

@@ -6,7 +6,7 @@ const Signin = () => {
     const email = document.querySelector('.email').value
     const password = document.querySelector('.password').value
     try {
-      await axios.post('http://localhost:5000/api/v1/auth/signin', { email, password })
+      await axios.post('http://localhost:3001/api/v1/auth/signin', { email, password })
     } catch (error) {
       console.log(error)
     }
