@@ -9,7 +9,6 @@ const Signup = () => {
     const password = document.querySelector('.password').value
     const name = document.querySelector('.name').value
     const mobile = document.querySelector('.mobile').value
-    const repassword = document.querySelector('.repassword').value
     const phonearray = Array.from(mobile)
     phonearray.length===10?<>
     try {
