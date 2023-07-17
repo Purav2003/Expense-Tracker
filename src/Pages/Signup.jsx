@@ -37,12 +37,22 @@ const Signup = () => {
         error_number===1?document.getElementById('error').innerHTML = '<h1 className="pt-[0.5vw]">Invalid Phone Number</h1>':""        
         }
         {
-           error_password===1?document.getElementById('errora').innerHTML = '<h1 className="pt-[0.5vw]">Password is not safe</h1>':""        
+            error_password===1?document.getElementById('errora').innerHTML = '<h1 className="pt-[0.5vw]">Password is not safe</h1>':""        
 
         }
 
       </>
   }
+
+  const googleSignup = async (e) =>{
+    e.preventDefault()
+    try {
+      await axios.get('http://localhost:5000/api/v1/auth/google')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <>
       <div className="lg:flex lg:flex-row">
@@ -85,7 +95,7 @@ const Signup = () => {
                 <button className="bg-[#1BA329] button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
                   Sign Up
                 </button>
-                <button className="border content-center border-[#1BA329] ml-[1vw] button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline flex flex-row " type="button">
+                <button onClick={googleSignup}  className="border content-center border-[#1BA329] ml-[1vw] button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline flex flex-row " type="button">
                   <icons.FcGoogle className="icon-google"></icons.FcGoogle>
                 </button>
               </div>
@@ -96,12 +106,9 @@ const Signup = () => {
         </div>
         <div className="photo-signup ml-[23vw] w-full h-[100vh] pt-[6vw] bg-[#1BA329] invisible sm:invisible md:invisible lg:visible xl:visible">
           <h1 className="text-center font-bold text-[30px] text-bold text-white">Create an Account</h1>
-          <img src={signup} className="pl-[5vw] pt-[3vw]"></img>
+          <img src={signup} className="pl-[5vw] pt-[3vw]" alt="signupImage"></img>
         </div>
       </div>
-
-
-
     </>
   )
 }

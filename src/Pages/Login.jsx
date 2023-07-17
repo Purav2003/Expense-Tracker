@@ -2,8 +2,6 @@ import axios from "axios"
 import signin from '../Assets/images/login.png';
 import "../Assets/css/signup.css";
 import * as icons from 'react-icons/fc';
-import { Link } from "react-router-dom";
-
 const Login = () => {
 
   const handleSubmit = async (e) => {
@@ -22,14 +20,12 @@ const Login = () => {
       input.value = '';
     });
   }
-
-  
   return (
     <>
       <div className="lg:flex lg:flex-row">
-        <div className="photo-signup w-[50%] h-[100vh] pt-[7vw] bg-[#2d8536] invisible sm:invisible md:invisible lg:visible xl:visible">
-          <h1 className="text-center ml-[80px] w-[70%] font-bold text-[30px] text-bold text-white">Login into your Account</h1>
-          <img src={signin} className="h-[30vw] mt-[59px] ml-[-15px] max-h-sm"></img>
+        <div className="photo-signup w-[50%] h-[100vh] pt-[7vw] bg-[#1BA329] invisible sm:invisible md:invisible lg:visible xl:visible">
+          <h1 className="text-center ml-[80px] w-[70%] font-bold text-[19px] text-bold text-white">A budget tells us what we can't afford, but it doesn't keep us from buying it.</h1>
+          <img src={signin} className="h-[30vw] mt-[59px] ml-[-15px] max-h-sm" alt="signinImage"></img>
         </div>
         <div className="pl-[5vw] pt-[3vw] first-div">
           <div>
@@ -60,8 +56,7 @@ const Login = () => {
                 </button>
               </div>
             </form>
-            <p className="pl-[2.4vw] second-signup">New user? <Link to="/signup" className="underline text-[#1BA329]">
-Sign up</Link></p>
+            <p className="pl-[2.4vw] second-signup">New user? <a href="/signup" className="underline text-[#1BA329]">Sign up</a></p>
 
           </div>
         </div>
