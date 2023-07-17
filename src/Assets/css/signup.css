@@ -1,72 +1,89 @@
 @media screen and (min-width:220px) and (max-width:650px) {
-    .form-field input{
+    .form-field input {
         width: 230px !important;
     }
 
-    .form-field label{
+    .form-field label {
         width: 300px !important;
     }
 
-    .form-field .button{
+    .form-field .button {
         width: 230px !important;
         margin-top: 2vw !important;
         text-align: center !important;
     }
-    form{
+
+    form {
         width: 300px !important;
         margin-left: 4vw !important;
     }
 
-    .heading-signup{
+    .heading-signup {
         margin-top: 10vh !important;
-        margin-left: 14vw !important;    
+        margin-left: 14vw !important;
     }
-    .second-signup{
+
+    .second-signup {
         margin-left: 10vw !important;
         margin-top: -8vw !important;
     }
-    .photo-signup{
+
+    .photo-signup {
         width: 0px !important;
         height: 0px !important;
     }
-  .first-div{
-    height: 1px !important;
-  }
+
+    .first-div {
+        height: 1px !important;
+    }
+    .icon-google {
+        font-size: 22px !important;
+        margin-left: 11.7vw;
+    }
 }
 
 @media screen and (min-width:651px) and (max-width:950px) {
-    form{
+    form {
         padding-left: 12vw !important;
         width: 80vw !important;
     }
-    .heading-signup{
+
+    .heading-signup {
         padding-left: 36vw !important;
     }
-    .second-signup{
+
+    .second-signup {
         padding-left: 12vw !important;
     }
-    .photo-signup{
+
+    .photo-signup {
         width: 0px !important;
         height: 0px !important;
     }
+    .icon-google {
+        font-size: 24px !important;
+        margin-left: 14.7vw;
+    }
 }
 
-.icon-google{
-    text-align:  center !important;
-    margin-left: 7.5vw !important;
-    font-size: 24px !important;
-}
 
-#error,#errora{
+
+#error, #errora {
     color: red;
 }
 
 @media screen and (min-width:1000px) {
-    .second-signup{
+    .second-signup {
         margin-top: -2.5vw !important;
-    }    
+    }
+    .icon-google {
+        font-size: 24px !important;
+        margin-left: 7.7vw;
+    }
 }
 
-.eye-icon{
+.eye-icon {
     right: -100 !important;
 }
+
+

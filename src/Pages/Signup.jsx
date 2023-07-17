@@ -31,6 +31,7 @@ const Signup = () => {
         try {
           await axios.post('http://localhost:5000/api/v1/auth/signup', { email, password, name, mobile })
         } catch (error) {
+          
 
         }</> : <>
             {
@@ -58,13 +59,13 @@ const Signup = () => {
                 <label className="block text-black-700 text-sm font-bold mb-2 ">
                   Name
                 </label>
-                <input className="name shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Username" />
+                <input className="name shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Username" required />
               </div>
               <div className="mb-4 form-field">
                 <label className="block text-black-700 text-sm font-bold mb-2">
                   Phone Number
                 </label>
-                <input className="mobile shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="number" placeholder="Phone Number" />
+                <input className="mobile shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="number" placeholder="Phone Number" required/>
                 <div id="error"></div>
 
               </div>
@@ -72,13 +73,13 @@ const Signup = () => {
                 <label className="block text-black-700 text-sm font-bold mb-2">
                   Email
                 </label>
-                <input className="email shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="E-mail" />
+                <input className="email shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="E-mail" required />
               </div>
               <div className="mb-4 form-field">
                 <label className="block text-black-700 text-sm font-bold mb-2">
                   Password
                 </label>
-                <input className="password shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Password" />
+                <input className="password shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Password" required />
                 <div id="errora"></div>
 
               </div>
