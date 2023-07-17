@@ -29,7 +29,6 @@ app.use(xss())
 app.use("/api/v1/",expense)
 app.use("/api/v1/auth",auth)
 
-
 app.use(notFound)
 app.use(errorHandler)
 
