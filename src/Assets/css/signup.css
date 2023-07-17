@@ -23,6 +23,7 @@
     }
     .second-signup{
         margin-left: 10vw !important;
+        margin-top: -8vw !important;
     }
     .photo-signup{
         width: 0px !important;
@@ -58,4 +59,14 @@
 
 #error,#errora{
     color: red;
+}
+
+@media screen and (min-width:1000px) {
+    .second-signup{
+        margin-top: -2.5vw !important;
+    }    
+}
+
+.eye-icon{
+    right: -100 !important;
 }

@@ -2,6 +2,8 @@ import axios from "axios"
 import signup from '../Assets/images/signup.png';
 import "../Assets/css/signup.css";
 import * as icons from 'react-icons/fc';
+import { Link } from "react-router-dom";
+
 const Signup = () => {
 
   const handleSubmit = async (e) => {
@@ -88,7 +90,7 @@ const Signup = () => {
                 </button>
               </div>
             </form>
-            <p className="pl-[2.4vw] second-signup">Already have an account? <a href="/" className="underline text-[#1BA329]">Login</a></p>
+            <p className="pl-[2.4vw] second-signup">Already have an account? <Link to="/" className="underline text-[#1BA329]">Login</Link></p>
 
           </div>
         </div>
