@@ -25,7 +25,7 @@ const Login = () => {
       <div className="lg:flex lg:flex-row">
         <div className="photo-signup w-[50%] h-[100vh] pt-[7vw] bg-[#1BA329] invisible sm:invisible md:invisible lg:visible xl:visible">
           <h1 className="text-center ml-[80px] w-[70%] font-bold text-[19px] text-bold text-white">A budget tells us what we can't afford, but it doesn't keep us from buying it.</h1>
-          <img src={signin} className="h-[30vw] mt-[59px] ml-[-15px] max-h-sm"></img>
+          <img src={signin} className="h-[30vw] mt-[59px] ml-[-15px] max-h-sm" alt="signinImage"></img>
         </div>
         <div className="pl-[5vw] pt-[3vw] first-div">
           <div>

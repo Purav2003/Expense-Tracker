@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 const {signin,signup} = require("../controller/user")
 const passport = require("passport")
+require("../middlewares/passport-setup")
 
 router.route("/signup").post(signup)
 router.route("/signin").post(signin)
