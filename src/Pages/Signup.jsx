@@ -44,15 +44,6 @@ const Signup = () => {
       </>
   }
 
-  const googleSignup = async (e) =>{
-    e.preventDefault()
-    try {
-      await axios.get('http://localhost:5000/api/v1/auth/google')
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
   return (
     <>
       <div className="lg:flex lg:flex-row">
@@ -95,9 +86,9 @@ const Signup = () => {
                 <button className="bg-[#1BA329] button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
                   Sign Up
                 </button>
-                <button onClick={googleSignup}  className="border content-center border-[#1BA329] ml-[1vw] button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline flex flex-row " type="button">
+                <Link to="http://localhost:5000/api/v1/auth/google" className="border content-center border-[#1BA329] ml-[1vw] button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline flex flex-row " type="button">
                   <icons.FcGoogle className="icon-google"></icons.FcGoogle>
-                </button>
+                </Link>
               </div>
             </form>
             <p className="pl-[2.4vw] second-signup">Already have an account? <Link to="/" className="underline text-[#1BA329]">Login</Link></p>
