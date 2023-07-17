@@ -44,6 +44,18 @@ const Signup = () => {
       </>
   }
 
+<<<<<<< Updated upstream
+=======
+  const googleSignup = async (e) =>{
+    e.preventDefault()
+    try {
+      await axios.post('http://localhost:5000/api/v1/auth/google')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+>>>>>>> Stashed changes
   return (
     <>
       <div className="lg:flex lg:flex-row">

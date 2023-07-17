@@ -44,7 +44,13 @@ const signin = async (req,res)=>{
     res.status(200).send({user,token,success:true})
 }
 
+const getAllUser = async(req,res)=>{
+    const users = await User.find()
+    res.status(200).send({users,count:users.length,success:true})
+}
+
 module.exports = {
     signup,
-    signin
+    signin,
+    getAllUser
 }
