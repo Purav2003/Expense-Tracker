@@ -1,0 +1,20 @@
+@media screen and (min-width:640px) {
+    .bottom-menu{
+        width: 0px !important;
+        height: 0px !important;
+    }
+    .bottom-menu div{
+        width: 0px !important;
+        height: 0px !important;
+    }
+    .mobile-nav{
+        width: 0px !important;
+        height: 0px !important;
+    }
+}
+
+.bottom-menu div{
+    border-top-left-radius: 20% !important;
+    border-top-right-radius:20% !important ;
+    margin-top: 1px !important;
+}
