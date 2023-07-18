@@ -5,6 +5,8 @@ const notFound = require("./middlewares/not-found")
 const errorHandler = require("./middlewares/error-handler")
 const expense = require("./routes/expense")
 const auth = require("./routes/auth")
+const session = require('express-session');
+const morgan = require("morgan")
 
 //extra security
 const helmet = require("helmet")
@@ -15,6 +17,7 @@ const ratelimiter = require("express-rate-limit")
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended: true}));
+app.use(morgan('dev'));
 
 app.set("trust proxy",1)
 app.use(express.json());
@@ -26,10 +29,18 @@ app.use(helmet())
 app.use(cors())
 app.use(xss())
 
+app.use(
+  session({
+    secret: process.env.EXPRESS_SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
 app.use("/api/v1/",expense)
 app.use("/api/v1/auth",auth)
 
-// app.use(notFound)
+app.use(notFound)
 app.use(errorHandler)
 
 const port = process.env.PORT
