@@ -15,21 +15,19 @@ const Signup = () => {
     let error_number = 0
     let error_password = 0
     let error_email = 0
+    let count_succ = 0
 
-    phonearray.length !== 10 ?error_number = 1:document.getElementById('error').innerHTML = ''
-    !/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/.test(password)?error_password = 1:document.getElementById('errora').innerHTML = ''
-    !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)?error_email = 1:document.getElementById('errorm').innerHTML = ''
-    
-    phonearray.length === 10 && /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/.test(password) && /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)  ?
+    phonearray.length !== 10 ? error_number = 1 : document.getElementById('error').innerHTML = ''
+    !/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/.test(password) ? error_password = 1 : document.getElementById('errora').innerHTML = ''
+    !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email) ? error_email = 1 : document.getElementById('errorm').innerHTML = ''
+
+    phonearray.length === 10 && /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/.test(password) && /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email) ?
       <>
         {document.getElementById('error').innerHTML = ''}
         {document.getElementById('errora').innerHTML = ''}
         {document.getElementById('errorm').innerHTML = ''}
-        try {
-          await axios.post('http://localhost:5000/api/v1/auth/signup', { email, password, name, mobile })
-          
-        }
-        catch (err) {}
+        {count_succ = 1}
+
       </> : <>
         {
           error_number === 1 ? document.getElementById('error').innerHTML = '<h1 className="pt-[0.5vw]">Invalid Phone Number</h1>' : ""
@@ -37,10 +35,21 @@ const Signup = () => {
         {
           error_password === 1 ? document.getElementById('errora').innerHTML = '<h1 className="pt-[0.5vw]">Password is not safe</h1>' : ""
         }
-   {
+        {
           error_email === 1 ? document.getElementById('errorm').innerHTML = '<h1 className="pt-[0.5vw]">Invalid Email</h1>' : ""
         }
       </>
+
+    if (count_succ === 1) {
+      try {
+        const data = await axios.post('http://localhost:5000/api/v1/auth/signup', { email, password, name, mobile })        
+        console.log(data.response.data.msg)
+      }
+      catch (err) {
+        if(err.response.data.msg === 'User already exists')
+        document.getElementById('user').innerHTML = err.response.data.msg
+      }
+    }
 
   }
 
@@ -59,7 +68,6 @@ const Signup = () => {
                   Name
                 </label>
                 <input className="name shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Username" required />
-                <div id="demo"></div>
               </div>
               <div className="mb-4 form-field">
                 <label className="block text-black-700 text-sm font-bold mb-2">
@@ -75,6 +83,8 @@ const Signup = () => {
                 </label>
                 <input className="email shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="E-mail" required />
                 <div id="errorm"></div>
+                <div id="user"></div>
+
               </div>
               <div className="mb-4 form-field">
                 <label className="block text-black-700 text-sm font-bold mb-2">
@@ -88,9 +98,9 @@ const Signup = () => {
                 <button className="bg-[#1BA329] button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
                   Sign Up
                 </button>
-                <Link to="http://localhost:5000/api/v1/auth/google" className="border content-center border-[#1BA329] ml-[1vw] button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline flex flex-row " type="button">
+                {/* <Link to="http://localhost:5000/api/v1/auth/google" className="border content-center border-[#1BA329] ml-[1vw] button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline flex flex-row " type="button">
                   <icons.FcGoogle className="icon-google"></icons.FcGoogle>
-                </Link>
+                </Link> */}
               </div>
             </form>
             <p className="pl-[2.4vw] second-signup">Already have an account? <Link to="/" className="underline text-[#1BA329]">Login</Link></p>
