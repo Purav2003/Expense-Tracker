@@ -50,7 +50,6 @@ const Signup = () => {
         document.getElementById('user').innerHTML = err.response.data.msg
       }
     }
-
   }
 
   return (

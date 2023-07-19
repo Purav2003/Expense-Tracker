@@ -6,7 +6,6 @@ const httpProxy = require('http-proxy');
 const proxy = httpProxy.createServer({});
 
 const signup = async (req,res)=>{
-    console.log("HEllo")
     const userexist = await User.findOne({email:req.body.email})
     if(!userexist){
         const user = await User.create(req.body)
