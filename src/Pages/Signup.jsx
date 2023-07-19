@@ -5,6 +5,8 @@ import * as icons from 'react-icons/fc';
 import { Link } from "react-router-dom";
 
 const Signup = () => {
+  localStorage.setItem('checkMail', JSON.stringify(false))
+  localStorage.setItem('checkUsername',JSON.stringify(false))
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -26,7 +28,6 @@ const Signup = () => {
       <>
         {document.getElementById('error').innerHTML = ''}
         {document.getElementById('errora').innerHTML = ''}
-
 
         try {
           await axios.post('http://localhost:5000/api/v1/auth/signup', { email, password, name, mobile })

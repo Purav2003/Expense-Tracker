@@ -18,3 +18,20 @@
     border-top-right-radius:20% !important ;
     margin-top: 1px !important;
 }
+
+
+.text-hello a{
+    color:#fff !important;
+}
+
+.text-by a{
+    color:grey !important;
+}
+
+.text-hello a .text-white{
+    color: #fff !important;
+}
+
+.text-by a .text-white{
+    color: grey !important;
+}
