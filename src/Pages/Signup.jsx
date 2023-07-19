@@ -5,9 +5,6 @@ import * as icons from 'react-icons/fc';
 import { Link } from "react-router-dom";
 
 const Signup = () => {
-  localStorage.setItem('checkMail', JSON.stringify(false))
-  localStorage.setItem('checkUsername', JSON.stringify(false))
-
   const handleSubmit = async (e) => {
     e.preventDefault()
     const email = document.querySelector('.email').value
@@ -17,43 +14,34 @@ const Signup = () => {
     const phonearray = Array.from(mobile)
     let error_number = 0
     let error_password = 0
+    let error_email = 0
 
-    let mail = (localStorage.getItem('checkMail'))
-    mail = JSON.parse(localStorage.getItem('checkMail'))
-
-    let user = (localStorage.getItem('checkUsername'))
-    user = JSON.parse(localStorage.getItem('checkUsername'))
-
-    if (phonearray.length !== 10) {
-      error_number = 1
-    }
-    if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/.test(password)) {
-      error_password = 1
-    }
-    phonearray.length === 10 && /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/.test(password) && mail === false && user === false ?
+    phonearray.length !== 10 ?error_number = 1:document.getElementById('error').innerHTML = ''
+    !/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/.test(password)?error_password = 1:document.getElementById('errora').innerHTML = ''
+    !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)?error_email = 1:document.getElementById('errorm').innerHTML = ''
+    
+    phonearray.length === 10 && /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/.test(password) && /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)  ?
       <>
         {document.getElementById('error').innerHTML = ''}
         {document.getElementById('errora').innerHTML = ''}
-
+        {document.getElementById('errorm').innerHTML = ''}
         try {
           await axios.post('http://localhost:5000/api/v1/auth/signup', { email, password, name, mobile })
-        } catch (error) {
-
-
-        }</> : <>
+          
+        }
+        catch (err) {}
+      </> : <>
         {
           error_number === 1 ? document.getElementById('error').innerHTML = '<h1 className="pt-[0.5vw]">Invalid Phone Number</h1>' : ""
         }
         {
           error_password === 1 ? document.getElementById('errora').innerHTML = '<h1 className="pt-[0.5vw]">Password is not safe</h1>' : ""
         }
-        {
-          user === true ? document.getElementById('user').innerHTML = '<h1 className="pt-[0.5vw]">Username already exist</h1>' : ""
-        }
-        {
-          mail === true ? document.getElementById('mail').innerHTML = '<h1 className="pt-[0.5vw]">Mail already exist</h1>' : ""
+   {
+          error_email === 1 ? document.getElementById('errorm').innerHTML = '<h1 className="pt-[0.5vw]">Invalid Email</h1>' : ""
         }
       </>
+
   }
 
   return (
@@ -71,7 +59,7 @@ const Signup = () => {
                   Name
                 </label>
                 <input className="name shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Username" required />
-                <div id="user"></div>
+                <div id="demo"></div>
               </div>
               <div className="mb-4 form-field">
                 <label className="block text-black-700 text-sm font-bold mb-2">
@@ -85,8 +73,8 @@ const Signup = () => {
                 <label className="block text-black-700 text-sm font-bold mb-2">
                   Email
                 </label>
-                <input className="email shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="E-mail" required />
-                <div id="mail"></div>
+                <input className="email shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="E-mail" required />
+                <div id="errorm"></div>
               </div>
               <div className="mb-4 form-field">
                 <label className="block text-black-700 text-sm font-bold mb-2">
