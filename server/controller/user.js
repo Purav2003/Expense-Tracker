@@ -28,7 +28,7 @@ const signup = async (req,res)=>{
             const token = user.createJWT()
             res.status(200).send({user,token,success:true})
         }).catch(error => {
-            return res.status(500).send({ error })
+            // return res.status(500).send({ error })
         })
     } else{
         // console.log("ama jay che?");
