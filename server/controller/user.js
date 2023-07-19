@@ -5,7 +5,6 @@ const nodemailer = require("nodemailer")
 
 const signup = async (req,res)=>{
     const userexist = await User.findOne({email:req.body.email})
-    console.log(userexist);
     if(!userexist){
         const user = await User.create(req.body)
         const config = {
@@ -27,7 +26,8 @@ const signup = async (req,res)=>{
 
         transporter.sendMail(msg).then(() => {
             const token = user.createJWT()
-            res.status(200).send({user,token,success:true})
+            res.redirect("http://localhost:3000/")
+            // res.status(200).send({user,token,success:true})
         }).catch(error => {
             return res.status(500).send({ error })
         })
