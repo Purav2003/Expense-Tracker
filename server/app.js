@@ -7,6 +7,7 @@ const expense = require("./routes/expense")
 const auth = require("./routes/auth")
 const session = require('express-session');
 const morgan = require("morgan")
+// const cookieParser = require('cookie-parser')
 
 //extra security
 const helmet = require("helmet")
@@ -18,6 +19,7 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended: true}));
 app.use(morgan('dev'));
+// app.use(cookieParser())
 
 app.set("trust proxy",1)
 app.use(express.json());
