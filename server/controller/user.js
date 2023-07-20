@@ -27,12 +27,12 @@ const signup = async (req,res)=>{
                 }
 
             transporter.sendMail(msg).then(() => {
-                const token = user.createJWT()
-                
+                const token = user.createJWT()            
                 res.status(200).send({user,token,success:true})
+                window.location.replace('/')
                 console.log("success")
 
-            }).catch(error => {
+            }).catch(error => {                
                 return res.status(500).send({ error })
             })
         } else{

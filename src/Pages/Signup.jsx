@@ -26,6 +26,9 @@ const Signup = () => {
         {document.getElementById('error').innerHTML = ''}
         {document.getElementById('errora').innerHTML = ''}
         {document.getElementById('errorm').innerHTML = ''}
+        {document.getElementById('user').innerHTML = ''}
+        {document.getElementById('phone').innerHTML = ''}
+
         {count_succ = 1}
 
       </> : <>
@@ -42,13 +45,32 @@ const Signup = () => {
 
     if (count_succ === 1) {
       try {
-        const data = await axios.post('http://localhost:5000/api/v1/auth/signup', { email, password, name, mobile })        
-        console.log(data.response.data.msg)
+        const data = await axios.post('http://localhost:5000/api/v1/auth/signup', { email, password, name, mobile })      
       }
       catch (err) {
-        if(err.response.data.msg === 'User already exists')
-        document.getElementById('user').innerHTML = err.response.data.msg
+        if(err.response.status === 500){
+          console.log("200")
+          window.location.replace('/')   
       }
+        if (err.response.data.msg === 'User already exists') {
+          document.getElementById('user').innerHTML = err.response.data.msg
+        }
+       
+        else if (err.response.data.msg === 'Phone Number already exists') {
+          document.getElementById('phone').innerHTML = err.response.data.msg
+        }
+
+        else{
+           { document.querySelector('.email').value = '' }
+      { document.querySelector('.password').value = '' }
+      { document.querySelector('.name').value = '' }
+      { document.querySelector('.mobile').value = '' }
+        }
+      }
+
+     
+
+
     }
   }
 
@@ -74,6 +96,7 @@ const Signup = () => {
                 </label>
                 <input className="mobile shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="number" placeholder="Phone Number" required />
                 <div id="error"></div>
+                <div id="phone"></div>
 
               </div>
               <div className="mb-4 form-field">
