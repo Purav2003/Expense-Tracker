@@ -20,9 +20,16 @@ const Signup = () => {
     phonearray.length !== 10 ? error_number = 1 : document.getElementById('error').innerHTML = ''
     !/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/.test(password) ? error_password = 1 : document.getElementById('errora').innerHTML = ''
     !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email) ? error_email = 1 : document.getElementById('errorm').innerHTML = ''
+    let data = JSON.stringify({
+      "name": name,
+      "email": email,
+      "mobile": mobile,
+      "password": password
+    });
 
     phonearray.length === 10 && /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/.test(password) && /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email) ?
       <>
+
         {document.getElementById('error').innerHTML = ''}
         {document.getElementById('errora').innerHTML = ''}
         {document.getElementById('errorm').innerHTML = ''}
@@ -45,30 +52,41 @@ const Signup = () => {
 
     if (count_succ === 1) {
       try {
-        const data = await axios.post('http://localhost:5000/api/v1/auth/signup', { email, password, name, mobile })      
+        let config = {
+          method: 'post',
+          url: 'http://localhost:5000/api/v1/auth/signup',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data: data
+        };
+        axios.request(config)
+          .then((response) => {
+            console.log(JSON.stringify(response.status));
+          })
       }
       catch (err) {
-        if(err.response.status === 500){
+        if (err.response.status === 200) {
           console.log("200")
-          window.location.replace('/')   
-      }
+          // window.location.replace('/')   
+        }
         if (err.response.data.msg === 'User already exists') {
           document.getElementById('user').innerHTML = err.response.data.msg
         }
-       
+
         else if (err.response.data.msg === 'Phone Number already exists') {
           document.getElementById('phone').innerHTML = err.response.data.msg
         }
 
-        else{
-           { document.querySelector('.email').value = '' }
-      { document.querySelector('.password').value = '' }
-      { document.querySelector('.name').value = '' }
-      { document.querySelector('.mobile').value = '' }
+        else {
+          { document.querySelector('.email').value = '' }
+          { document.querySelector('.password').value = '' }
+          { document.querySelector('.name').value = '' }
+          { document.querySelector('.mobile').value = '' }
         }
       }
 
-     
+
 
 
     }
