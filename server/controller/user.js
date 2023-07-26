@@ -23,11 +23,11 @@ const signin = async (req, res) => {
     const { email, password } = req.body
     const user = await User.findOne({ email: email })
     if (!user) {
-        throw new customAPIError("User not found", 404)
+        res.status(404).send({msg:"User not found",success:false,status:404})
     }
     const passwordCorrect = user.comparePassword(password)
     if (!passwordCorrect) {
-        throw new customAPIError("Incorrect Password", 401)
+        res.status(404).send({msg:"User not found",success:false,status:404})
     }
     const token = user.createJWT()
     res.status(200).send({ user, token, success: true,status:200 })
