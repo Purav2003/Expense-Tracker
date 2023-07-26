@@ -24,8 +24,7 @@ const signin = async (req, res) => {
     if (!user) {
         res.status(404).send({msg:"User not found",success:false,status:404})
     }
-    const passwordCorrect = await user.comparePassword(password)
-    console.log(passwordCorrect);
+    const passwordCorrect = user.comparePassword(password)
     if (!passwordCorrect) {
         res.status(401).send({msg:"Incorrect Password",success:false,status:401})
     }
