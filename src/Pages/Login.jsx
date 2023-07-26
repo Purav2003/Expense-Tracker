@@ -16,7 +16,6 @@ const Login = () => {
       "password": password
     });
       try {
-
         let config = {
           method: 'post',
           url: 'http://localhost:5000/api/v1/auth/signin',
@@ -27,19 +26,19 @@ const Login = () => {
         };
 
         axios.request(config)
-          .then((response) => {
+          .then((response) => {           
+            console.log("By")
             console.log(JSON.stringify(response.status));      
             if(JSON.stringify(response.status) === '200'){
               window.location.replace("/dashboard")
-            }
+            }     
+            if(JSON.stringify(response.status) === '211'){
+              document.getElementById('errora').innerHTML = '<h1 className="pt-[0.5vw]">Password is not safe</h1>'            }            
           })
-      }
-      
+      }      
       catch (err) {
-      
-        if (err.response.data.msg === 'User already exists') {
-          document.getElementById('user').innerHTML = err.response.data.msg
-        }
+        console.log("Hi")
+        console.log(err.code)
       }
    
     const inputs = document.querySelectorAll('.email, .password');
@@ -69,6 +68,7 @@ const Login = () => {
                   Email
                 </label>
                 <input className="email shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="E-mail" required />
+                <div id="error"></div>
               </div>
               <div className="mb-4 form-field">
                 <label className="block text-black-700 text-sm font-bold mb-2">
