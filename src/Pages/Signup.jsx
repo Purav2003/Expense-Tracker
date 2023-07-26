@@ -51,6 +51,7 @@ const Signup = () => {
       </>
 
     if (count_succ === 1) {
+      let response_status =''
       try {
         let config = {
           method: 'post',
@@ -60,16 +61,16 @@ const Signup = () => {
           },
           data: data
         };
+
         axios.request(config)
           .then((response) => {
-            console.log(JSON.stringify(response.status));
+            console.log(JSON.stringify(response.status));      
+            response_status = JSON.stringify(response.status)      
           })
       }
+      
       catch (err) {
-        if (err.response.status === 200) {
-          console.log("200")
-          // window.location.replace('/')   
-        }
+      
         if (err.response.data.msg === 'User already exists') {
           document.getElementById('user').innerHTML = err.response.data.msg
         }
@@ -85,7 +86,7 @@ const Signup = () => {
           { document.querySelector('.mobile').value = '' }
         }
       }
-
+    
 
 
 

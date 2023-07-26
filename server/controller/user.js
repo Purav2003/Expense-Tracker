@@ -4,10 +4,8 @@ const User = require("../models/user")
 // const nodemailer = require("nodemailer")
 
 const signup = async (req,res)=>{
-<<<<<<< HEAD
     const user = await User.create(req.body)
     res.status(200).send({user,success:true,status:200})
-=======
     // const user = await User.create(req.body)
     // res.status(200).send({user,success:true})
     const userexist = await User.findOne({email:req.body.email})
@@ -35,7 +33,7 @@ const signup = async (req,res)=>{
             // transporter.sendMail(msg).then(() => {
                 const token = user.createJWT()
                 
-                res.status(200).send({user,token,success:true})
+                res.status(200).send({user,token,success:true,status:200})
                 console.log("success")
 
             // }).catch(error => {
@@ -47,7 +45,6 @@ const signup = async (req,res)=>{
     } else{
         res.status(403).send({msg:"User already exists",success:false,status:403})
     }
->>>>>>> 67c016b0f1c9091c0aaa3c40978317d01907648f
     
 }
 
