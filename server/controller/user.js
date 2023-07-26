@@ -8,12 +8,12 @@ const signup = async (req, res) => {
         if (!phoneexist) {
             const user = await User.create(req.body)
                     const token = user.createJWT()
-                    res.status(200).send({ user, token, success: true, status: 200 })
+                    res.send({ user, token, success: true, status: 200 })
         } else {
-            res.status(403).send({ msg: "Phone Number already exists", success: false, status: 403 })
+            res.send({ msg: "Phone Number already exists", success: false, status: 403 })
         }
     } else {
-        res.status(403).send({ msg: "User already exists", success: false, status: 403 })
+        res.send({ msg: "User already exists", success: false, status: 403 })
     }
 }
 
@@ -23,22 +23,22 @@ const signin = async (req, res) => {
     console.log(user);
     if (!user) {
         console.log("user not found");
-        res.status(405).send({msg:"User not found",success:false,status:405})
+        res.send({msg:"User not found",success:false,status:404})
     } else{
         console.log("PASSWORD not found");
         const passwordCorrect = await user.comparePassword(password)
         if (!passwordCorrect) {
-            res.status(401).send({msg:"Incorrect Password",success:false,status:401})
+            res.send({msg:"Incorrect Password",success:false,status:401})
         } else{
             const token = user.createJWT()
-            res.status(200).send({ user, token, success: true,status:200 })       
+            res.send({ user, token, success: true,status:200 })       
         }
     }
 }
 
 const getAllUser = async (req, res) => {
     const users = await User.find()
-    res.status(200).send({ users, count: users.length, success: true })
+    res.send({ users, count: users.length, success: true })
 }
 
 module.exports = {
