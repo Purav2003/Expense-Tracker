@@ -1,39 +1,15 @@
 require("express-async-errors")
 const customAPIError = require("../errors/custom-error")
 const User = require("../models/user")
-const nodemailer = require("nodemailer")
 
 const signup = async (req, res) => {
-    // const user = await User.create(req.body)
-    // res.status(200).send({user,success:true,status:200})
     const userexist = await User.findOne({ email: req.body.email })
     if (!userexist) {
         const phoneexist = await User.findOne({ mobile: req.body.mobile })
         if (!phoneexist) {
             const user = await User.create(req.body)
-            // var transporter = nodemailer.createTransport({
-            //     service: 'gmail',
-            //     auth: {
-            //         user: process.env.EMAIL,
-            //         pass: process.env.PASSWORD   
-            //     }
-            // });
-
-            // var mailOptions = {
-            //     from: process.env.EMAIL,
-            //     to: req.body.email,
-            //     subject: "Welcome to Expense Tracker! Your Registration is Complete.",
-            //     html: `<b>Congrulations you have successfully registered with Expense Tracker</b><br><p>Dear ${req.body.name}, <br> Congratulations! We are thrilled to inform you that your registration with Expense Tracker has been successfully completed. On behalf of our team, we extend a warm welcome to you as a valued member of our community. <br> Remember, our team is here to support you every step of the way. Should you have any questions or require assistance, please don't hesitate to reach out to us. Our dedicated support team is available via ${process.env.EMAIL}, and we are committed to ensuring you have a seamless experience.<br>Thank you for choosing Expense Tracker as your trusted financial companion. We look forward to helping you gain control over your finances and achieve your financial aspirations. <br><br> <b>Best regards</b></p>`
-            // };
-
-            // transporter.sendMail(mailOptions, function (error, info) {
-            //     if (error) {
-            //         return res.status(500).send({ error ,success:false,status:500})
-            //     } else {
                     const token = user.createJWT()
                     res.status(200).send({ user, token, success: true, status: 200 })
-            //     }
-            // });
         } else {
             res.status(403).send({ msg: "Phone Number already exists", success: false, status: 403 })
         }
@@ -54,7 +30,7 @@ const signin = async (req, res) => {
         throw new customAPIError("Incorrect Password", 401)
     }
     const token = user.createJWT()
-    res.status(200).send({ user, token, success: true })
+    res.status(200).send({ user, token, success: true,status:200 })
 }
 
 const getAllUser = async (req, res) => {
