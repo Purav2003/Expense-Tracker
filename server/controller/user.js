@@ -1,5 +1,4 @@
 require("express-async-errors")
-const customAPIError = require("../errors/custom-error")
 const User = require("../models/user")
 
 const signup = async (req, res) => {
@@ -27,7 +26,7 @@ const signin = async (req, res) => {
     }
     const passwordCorrect = user.comparePassword(password)
     if (!passwordCorrect) {
-        res.status(404).send({msg:"User not found",success:false,status:404})
+        res.status(401).send({msg:"Incorrect Password",success:false,status:401})
     }
     const token = user.createJWT()
     res.status(200).send({ user, token, success: true,status:200 })
