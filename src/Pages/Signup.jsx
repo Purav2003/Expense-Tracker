@@ -65,7 +65,9 @@ const Signup = () => {
         axios.request(config)
           .then((response) => {
             console.log(JSON.stringify(response.status));      
-            response_status = JSON.stringify(response.status)      
+            if(JSON.stringify(response.status) === '200'){
+              window.location.replace("/")
+            }
           })
       }
       
@@ -86,6 +88,7 @@ const Signup = () => {
           { document.querySelector('.mobile').value = '' }
         }
       }
+  
     
 
 
