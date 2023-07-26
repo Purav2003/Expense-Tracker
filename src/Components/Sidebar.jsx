@@ -40,11 +40,11 @@ const Sidebar = () => {
              bottom-0 bottom-menu'>
 
                 <div className="fixed bottom-0 left-0 z-50 w-full h-16">
-                    <div className="grid h-full max-w-lg grid-cols-5 mx-auto font-medium bg-[#27374D]">
+                    <div className="grid h-full max-w-lg grid-cols-5 mx-auto font-medium  border border-black border-r-0 border-l-0 border-b-0 ">
 
                     {navLinks.map((link) => (
                             <button key={link.id} className={`${active === link.title
-                                ? "text-white text-hello bg-[rgba(255,255,255,0.1)]"
+                                ? "text-white text-hello border border-black border-t-2 border-r-0 border-l-0 border-b-0"
                                 : "text-secondary text-by"} inline-flex flex-col items-center justify-center px-5 group`}
                                 onClick={() => setActive(link.title)}>
                                 <a href="#" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white group">
