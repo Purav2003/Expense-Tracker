@@ -21,15 +21,20 @@ const signup = async (req, res) => {
 const signin = async (req, res) => {
     const { email, password } = req.body
     const user = await User.findOne({ email: email })
+    console.log(user);
     if (!user) {
+        console.log("user not found");
         res.status(404).send({msg:"User not found",success:false,status:404})
+    } else{
+        console.log("PASSWORD not found");
+        const passwordCorrect = await user.comparePassword(password)
+        if (!passwordCorrect) {
+            res.status(401).send({msg:"Incorrect Password",success:false,status:401})
+        } else{
+            const token = user.createJWT()
+            res.status(200).send({ user, token, success: true,status:200 })       
+        }
     }
-    const passwordCorrect = user.comparePassword(password)
-    if (!passwordCorrect) {
-        res.status(401).send({msg:"Incorrect Password",success:false,status:401})
-    }
-    const token = user.createJWT()
-    res.status(200).send({ user, token, success: true,status:200 })
 }
 
 const getAllUser = async (req, res) => {

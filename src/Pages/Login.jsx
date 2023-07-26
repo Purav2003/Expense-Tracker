@@ -28,10 +28,12 @@ const Login = () => {
         axios.request(config)
           .then((response) => {           
             console.log("By")
-            console.log(JSON.stringify(response));      
+            console.log(JSON.stringify(response.status));      
             if(JSON.stringify(response.status) === '200'){
               window.location.replace("/dashboard")
-            }            
+            }     
+            if(JSON.stringify(response.status) === '211'){
+              document.getElementById('errora').innerHTML = '<h1 className="pt-[0.5vw]">Password is not safe</h1>'            }            
           })
       }      
       catch (err) {
