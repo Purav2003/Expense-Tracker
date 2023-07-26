@@ -15,7 +15,6 @@ const signup = async (req, res) => {
     } else {
         res.status(403).send({ msg: "User already exists", success: false, status: 403 })
     }
-
 }
 
 const signin = async (req, res) => {
@@ -24,7 +23,7 @@ const signin = async (req, res) => {
     console.log(user);
     if (!user) {
         console.log("user not found");
-        res.status(404).send({msg:"User not found",success:false,status:404})
+        res.send({msg:"User not found",success:false,status:404})
     } else{
         console.log("PASSWORD not found");
         const passwordCorrect = await user.comparePassword(password)
