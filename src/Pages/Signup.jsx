@@ -51,7 +51,6 @@ const Signup = () => {
       </>
 
     if (count_succ === 1) {
-      let response_status =''
       try {
         let config = {
           method: 'post',

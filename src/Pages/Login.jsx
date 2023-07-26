@@ -11,12 +11,37 @@ const Login = () => {
     const email = document.querySelector('.email').value
     const password = document.querySelector('.password').value
 
+    let data = JSON.stringify({
+      "email": email,
+      "password": password
+    });
+      try {
 
-    try {
-      await axios.post('http://localhost:5000/api/v1/auth/signin', { email, password })
-    } catch (error) {
-      console.log(error)
-    }
+        let config = {
+          method: 'post',
+          url: 'http://localhost:5000/api/v1/auth/signin',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data: data
+        };
+
+        axios.request(config)
+          .then((response) => {
+            console.log(JSON.stringify(response.status));      
+            if(JSON.stringify(response.status) === '200'){
+              window.location.replace("/dashboard")
+            }
+          })
+      }
+      
+      catch (err) {
+      
+        if (err.response.data.msg === 'User already exists') {
+          document.getElementById('user').innerHTML = err.response.data.msg
+        }
+      }
+   
     const inputs = document.querySelectorAll('.email, .password');
     inputs.forEach(input => {
       input.value = '';
