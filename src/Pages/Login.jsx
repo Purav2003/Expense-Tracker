@@ -29,6 +29,8 @@ const Login = () => {
           console.log("By")
           console.log(JSON.stringify(response.status));
           if (JSON.stringify(response.data.status) === '200') {
+            console.log(response.data.token)
+            localStorage.setItem("Token",response.data.token)
             window.location.replace("/dashboard")
           }
           if (JSON.stringify(response.data.status) === '404') {
