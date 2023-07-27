@@ -6,7 +6,6 @@ const errorHandler = require("./middlewares/error-handler")
 const income = require("./routes/income")
 const auth = require("./routes/auth")
 const session = require('express-session');
-const morgan = require("morgan")
 // const cookieParser = require('cookie-parser')
 
 //extra security
@@ -18,7 +17,6 @@ const ratelimiter = require("express-rate-limit")
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended: true}));
-app.use(morgan('dev'));
 // app.use(cookieParser())
 
 app.set("trust proxy",1)
