@@ -7,7 +7,7 @@ const addIncome = async (req,res)=>{
 
 const getSingleIncome = async (req,res)=>{
     const id = req.params.id
-    const expenses = await Income.findById(id)
+    const expenses = await Income.find({createdBy:id})
     if(!expenses){
         res.send({expenses,count:0,success:true,status:200})
     } else{
