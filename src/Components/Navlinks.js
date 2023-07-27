@@ -15,7 +15,7 @@ export const navLinks = [
       id: "income",
       title: "Income",
       icon: <income.PiMoneyLight></income.PiMoneyLight>,
-      link:"/dashboard",
+      link:"/income",
       iconm:<income.PiMoneyLight className='text-white text-[25px]'></income.PiMoneyLight>,
 
     },
