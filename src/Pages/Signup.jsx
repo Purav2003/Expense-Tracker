@@ -63,32 +63,31 @@ const Signup = () => {
 
         axios.request(config)
           .then((response) => {
-            console.log(JSON.stringify(response.status));      
-            if(JSON.stringify(response.status) === '200'){
+            if (JSON.stringify(response.status) === '200') {
               window.location.replace("/")
             }
+            if (response.data.msg === 'Phone Number already exists') {
+              document.getElementById('phone').innerHTML = '<h1 className="pt-[0.5vw]">Phone Number already exists</h1>'
+            }
+            if (response.data.msg === 'User already exists') {
+              document.getElementById('user').innerHTML = response.data.msg
+            }
+
           })
       }
-      
+
       catch (err) {
-      
-        if (err.response.data.msg === 'User already exists') {
-          document.getElementById('user').innerHTML = err.response.data.msg
-        }
 
-        else if (err.response.data.msg === 'Phone Number already exists') {
-          document.getElementById('phone').innerHTML = err.response.data.msg
-        }
 
-        else {
-          { document.querySelector('.email').value = '' }
-          { document.querySelector('.password').value = '' }
-          { document.querySelector('.name').value = '' }
-          { document.querySelector('.mobile').value = '' }
-        }
+
+        { document.querySelector('.email').value = '' }
+        { document.querySelector('.password').value = '' }
+        { document.querySelector('.name').value = '' }
+        { document.querySelector('.mobile').value = '' }
+
       }
-  
-    
+
+
 
 
 
@@ -97,7 +96,7 @@ const Signup = () => {
 
   return (
     <>
-      <div className="lg:flex lg:flex-row">
+      <div className="lg:flex lg:flex-row bg-white">
         <div className="pl-[5vw] pt-[3vw] first-div">
           <div>
 

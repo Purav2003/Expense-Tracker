@@ -15,32 +15,37 @@ const Login = () => {
       "email": email,
       "password": password
     });
-      try {
-        let config = {
-          method: 'post',
-          url: 'http://localhost:5000/api/v1/auth/signin',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          data: data
-        };
+    try {
+      let config = {
+        method: 'post',
+        url: 'http://localhost:5000/api/v1/auth/signin',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: data
+      };
 
-        axios.request(config)
-          .then((response) => {           
-            console.log("By")
-            console.log(JSON.stringify(response.status));      
-            if(JSON.stringify(response.status) === '200'){
-              window.location.replace("/dashboard")
-            }     
-            if(JSON.stringify(response.status) === '211'){
-              document.getElementById('errora').innerHTML = '<h1 className="pt-[0.5vw]">Password is not safe</h1>'            }            
-          })
-      }      
-      catch (err) {
-        console.log("Hi")
-        console.log(err.code)
-      }
-   
+      axios.request(config)
+        .then((response) => {
+          console.log("By")
+          console.log(JSON.stringify(response.status));
+          if (JSON.stringify(response.data.status) === '200') {
+            window.location.replace("/dashboard")
+          }
+          if (JSON.stringify(response.data.status) === '404') {
+            document.getElementById('error').innerHTML = '<h1 className="pt-[0.5vw]">User Not Found</h1>'
+          }
+          if (JSON.stringify(response.data.status) === '401') {
+            document.getElementById('error').innerHTML = ' '
+            document.getElementById('errora').innerHTML = '<h1 className="pt-[0.5vw]">Password is incorrect</h1>'
+          }
+        })
+    }
+    catch (err) {
+      console.log("Hi")
+      console.log(err.code)
+    }
+
     const inputs = document.querySelectorAll('.email, .password');
     inputs.forEach(input => {
       input.value = '';
@@ -48,7 +53,7 @@ const Login = () => {
   }
   return (
     <>
-      <div className="lg:flex lg:flex-row">
+      <div className="lg:flex lg:flex-row bg-white">
         <div className="photo-signup w-[50%] h-[100vh] pt-[7vw] bg-[#2a8c34] invisible sm:invisible md:invisible lg:visible xl:visible">
           <h1 className="text-center ml-[80px] w-[70%] font-bold text-[19px] text-bold text-white">A budget tells us what we can't afford, but it doesn't keep us from buying it.</h1>
           <img src={signin} className=" fixed
@@ -75,13 +80,14 @@ const Login = () => {
                   Password
                 </label>
                 <input className="password shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Password" required />
+                <div id="errora"></div>
               </div>
               <div className="flex form-field items-center">
                 <button className="bg-[#1BA329] button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
                   Login
                 </button>
                 <button className="ml-[1vw] border border-[#1BA329] button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
-                <icons.FcGoogle className="icon-google"></icons.FcGoogle>            </button>
+                  <icons.FcGoogle className="icon-google"></icons.FcGoogle>            </button>
 
               </div>
             </form>
