@@ -1,6 +1,7 @@
 import Sidebar from "../Components/Sidebar"
 import { Link } from "react-router-dom"
 import IncomeForm from "../Components/IncomeForm"
+import IncomeBar from "../Components/IncomeBar"
 const Income = () =>{
     return(
         <div>

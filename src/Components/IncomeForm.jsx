@@ -63,7 +63,7 @@ const IncomeForm = () => {
                 <label className="block text-black-700 text-sm font-bold mb-2">
                   Date
                 </label>
-                <input className="date shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="date" placeholder="Amount" required />
+                <input className="date shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="datetime-local" placeholder="Amount" required />
               </div>
               <div className="mb-4 form-field">
                 <label className="block text-black-700 text-sm font-bold mb-2">
