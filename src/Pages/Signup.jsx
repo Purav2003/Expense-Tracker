@@ -1,7 +1,6 @@
 import axios from "axios"
 import signup from '../Assets/images/signup.png';
 import "../Assets/css/signup.css";
-import * as icons from 'react-icons/fc';
 import { Link } from "react-router-dom";
 
 const Signup = () => {
@@ -75,22 +74,12 @@ const Signup = () => {
 
           })
       }
-
       catch (err) {
-
-
-
-        { document.querySelector('.email').value = '' }
-        { document.querySelector('.password').value = '' }
-        { document.querySelector('.name').value = '' }
-        { document.querySelector('.mobile').value = '' }
-
+        document.querySelector('.email').value = ''
+        document.querySelector('.password').value = ''
+        document.querySelector('.name').value = ''
+        document.querySelector('.mobile').value = ''
       }
-
-
-
-
-
     }
   }
 
