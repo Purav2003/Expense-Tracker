@@ -1,7 +1,6 @@
 import axios from "axios"
 import signin from '../Assets/images/login.png';
 import "../Assets/css/signup.css";
-import * as icons from 'react-icons/fc';
 import { Link } from "react-router-dom";
 
 const Login = () => {
@@ -85,10 +84,7 @@ const Login = () => {
               <div className="flex form-field items-center">
                 <button className="bg-[#1BA329] button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
                   Login
-                </button>
-                <button className="ml-[1vw] border border-[#1BA329] button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
-                  <icons.FcGoogle className="icon-google"></icons.FcGoogle>            </button>
-
+                </button>               
               </div>
             </form>
             <p className="pl-[2.4vw] second-signup">New user? <Link to="/signup" className="underline text-[#1BA329]">Sign up</Link></p>
