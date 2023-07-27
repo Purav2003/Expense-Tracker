@@ -22,7 +22,6 @@ const IncomeForm = () => {
         if (amount < 0) {
             document.getElementById('error').innerHTML = '<h1 className="pt-[0.5vw]">Invalid Input</h1>'
         }
-
     
         let count_success = 0
         if (amount > 0 ) {

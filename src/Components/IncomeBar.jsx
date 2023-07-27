@@ -4,7 +4,7 @@ import { barLinks } from "./BarList"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import IncomeForm from "./IncomeForm"
-
+import IncomeTable from "./IncomeTable"
 const IncomeBar = () => {
     const [activebar, setActivebar] = useState('one-week');
     const data = (datas) =>{
@@ -43,7 +43,7 @@ const IncomeBar = () => {
             </div>
             <div>
                         <div id="add-income" className="add-income hidden"><IncomeForm /></div>
-                        <div id="one-week" className="one-week hidden">One week</div>
+                        <div id="one-week" className="one-week hidden"><IncomeTable /></div>
                         <div id="one-month" className="one-month hidden">One Month</div>
                         <div id="six-month" className="six-month hidden">Six Months</div>
                         <div id="one-year" className="one-year hidden">One Year</div>

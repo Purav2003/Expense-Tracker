@@ -31,6 +31,7 @@ const Login = () => {
           if (JSON.stringify(response.data.status) === '200') {
             console.log(response.data.token)
             localStorage.setItem("Token",response.data.token)
+            localStorage.setItem("IdExpense",response.data._id)
             console.log(response.data.email);
             localStorage.setItem("createdBy",email)
             window.location.replace("/dashboard")
@@ -45,7 +46,6 @@ const Login = () => {
         })
     }
     catch (err) {
-      console.log("Hi")
       console.log(err.code)
     }
 
