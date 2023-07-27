@@ -20,12 +20,9 @@ const signup = async (req, res) => {
 const signin = async (req, res) => {
     const { email, password } = req.body
     const user = await User.findOne({ email: email })
-    console.log(user);
     if (!user) {
-        console.log("user not found");
         res.send({msg:"User not found",success:false,status:404})
     } else{
-        console.log("PASSWORD not found");
         const passwordCorrect = await user.comparePassword(password)
         if (!passwordCorrect) {
             res.send({msg:"Incorrect Password",success:false,status:401})
