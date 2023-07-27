@@ -1,6 +1,7 @@
 import axios from "axios"
-
+import { Link } from "react-router-dom"
 const IncomeForm = () => {
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         const description = document.querySelector('.description').value
@@ -8,23 +9,23 @@ const IncomeForm = () => {
         const date = document.querySelector('.date').value
         const mode = document.querySelector('.mode').value
         let token = localStorage.getItem("Token")
+        let id = localStorage.getItem("IdExpense")
         let data = JSON.stringify({
             "description": description,
             "amount": amount,
             "date": date,
             "mode": mode,
             "token": token,
+            "id":id,
         });
         console.log(token)
         if (amount < 0) {
             document.getElementById('error').innerHTML = '<h1 className="pt-[0.5vw]">Invalid Input</h1>'
         }
-        if (mode === "select") {
-            document.getElementById('errora').innerHTML = '<h1 className="pt-[0.5vw]">Invalid Mode</h1>'
-        }
 
-
-        if (amount > 0 || mode !== "select") {
+    
+        let count_success = 0
+        if (amount > 0 ) {
             try {
                 let config = {
                     method: 'post',
@@ -37,6 +38,7 @@ const IncomeForm = () => {
 
                 axios.request(config)
                     .then((response) => {
+                         count_success = 1
                         console.log(JSON.stringify(response.status));
                         if (JSON.stringify(response.data.status) === '200') {
                             window.location.replace("/dashboard")
@@ -47,10 +49,12 @@ const IncomeForm = () => {
                 console.log(err.code)
             }
         }
+        if(count_success === 1){
         const inputs = document.querySelectorAll('.description, .amount, .date,.mode');
         inputs.forEach(input => {
             input.value = '';
         });
+    }
     }
     return (
         <div className="w-full max-w-xs">
@@ -80,7 +84,7 @@ const IncomeForm = () => {
                         Mode
                     </label>
                     <select className="mode border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline ">
-                        <option value="select" >Select</option>
+                        <option value="select" disabled>Select</option>
                         <option value="Online" >Online</option>
                         <option value="Offline">Offline</option>
                     </select>
