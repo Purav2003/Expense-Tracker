@@ -2,18 +2,29 @@ require("express-async-errors")
 const User = require("../models/user")
 
 const signup = async (req, res) => {
-    const userexist = await User.findOne({ email: req.body.email })
-    if (!userexist) {
-        const phoneexist = await User.findOne({ mobile: req.body.mobile })
-        if (!phoneexist) {
-            const user = await User.create(req.body)
-                    const token = user.createJWT()
-                    res.send({ user, token, success: true, status: 200 })
+    const{numberError,passwordError,emailError} = req.user
+    if(numberError && passwordError && emailError){
+        const userexist = await User.findOne({ email: req.body.email })
+        if (!userexist) {
+            const phoneexist = await User.findOne({ mobile: req.body.mobile })
+            if (!phoneexist) {
+                const user = await User.create(req.body)
+                        const token = user.createJWT()
+                        res.send({ user, token, success: true, status: 200 })
+            } else {
+                res.send({ msg: "Phone Number already exists", success: false, status: 403 })
+            }
         } else {
-            res.send({ msg: "Phone Number already exists", success: false, status: 403 })
+            res.send({ msg: "User already exists", success: false, status: 403 })
         }
-    } else {
-        res.send({ msg: "User already exists", success: false, status: 403 })
+    } else{
+        if(!numberError){
+            res.send({ msg:"Enter Valid Number", success: false, status: 403 })
+        } else if(!passwordError){
+            res.send({ msg:"Enter Valid Password", success: false, status: 403 })
+        } else if(!emailError){
+            res.send({ msg:"Enter Valid Email", success: false, status: 403 })
+        }
     }
 }
 
