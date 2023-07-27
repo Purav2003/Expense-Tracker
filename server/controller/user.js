@@ -2,28 +2,30 @@ require("express-async-errors")
 const User = require("../models/user")
 
 const signup = async (req, res) => {
-    const{numberError,passwordError,emailError} = req.user
-    if(numberError && passwordError && emailError){
+    console.log(req.user)
+    const { numberError, passwordError, emailError } = req.user
+    if (numberError && passwordError && emailError) {
         const userexist = await User.findOne({ email: req.body.email })
         if (!userexist) {
             const phoneexist = await User.findOne({ mobile: req.body.mobile })
             if (!phoneexist) {
                 const user = await User.create(req.body)
-                        const token = user.createJWT()
-                        res.send({ user, token, success: true, status: 200 })
+                const token = user.createJWT()
+                res.send({ user, token, success: true, status: 200 })
             } else {
                 res.send({ msg: "Phone Number already exists", success: false, status: 403 })
             }
         } else {
             res.send({ msg: "User already exists", success: false, status: 403 })
         }
-    } else{
-        if(!numberError){
-            res.send({ msg:"Enter Valid Number", success: false, status: 403 })
-        } else if(!passwordError){
-            res.send({ msg:"Enter Valid Password", success: false, status: 403 })
-        } else if(!emailError){
-            res.send({ msg:"Enter Valid Email", success: false, status: 403 })
+    } else {
+        if (!numberError) {
+            res.send({ msg: "Enter Valid Number", success: false, status: 403 })
+        } else if (!emailError) {
+            res.send({ msg: "Enter Valid Email", success: false, status: 403 })
+        }
+        else if (!passwordError) {
+            res.send({ msg: "Enter Valid Password", success: false, status: 403 })
         }
     }
 }
@@ -32,14 +34,14 @@ const signin = async (req, res) => {
     const { email, password } = req.body
     const user = await User.findOne({ email: email })
     if (!user) {
-        res.send({msg:"User not found",success:false,status:404})
-    } else{
+        res.send({ msg: "User not found", success: false, status: 404 })
+    } else {
         const passwordCorrect = await user.comparePassword(password)
         if (!passwordCorrect) {
-            res.send({msg:"Incorrect Password",success:false,status:401})
-        } else{
+            res.send({ msg: "Incorrect Password", success: false, status: 401 })
+        } else {
             const token = user.createJWT()
-            res.send({ user, token, success: true,status:200 })       
+            res.send({ user, token, success: true, status: 200 })
         }
     }
 }
