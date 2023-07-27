@@ -1,4 +1,4 @@
-const Income = require("../models/incModel")
+const Income = require("../models/incomeModel")
 
 const addExpense = async (req,res)=>{
     const income = await Income.create(req.body)
