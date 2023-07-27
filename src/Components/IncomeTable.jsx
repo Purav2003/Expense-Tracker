@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 const IncomeTable = () => {
     const [data,setData] = useState([]);
-    let id = localStorage.getItem("IdExpense")
-    const API_URL = 'localhost:5000/api/v1/income/'+id
+    let id = localStorage.getItem("createdBy")
+    const API_URL = 'http://localhost:5000/api/v1/income/'+id
     useEffect(() => {
         fetch(API_URL)
           .then((res) => res.json())
           .then(data => {
-            setData(data.results) 
+            setData(data.expenses) 
           })      
         
       }, [])
@@ -41,6 +41,9 @@ const IncomeTable = () => {
                         return(
                             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                 <td>{description}</td>
+                                <td>{amount}</td>
+                                <td>{date}</td>
+                                <td>{mode}</td>
                             </tr>
                         )
                     })
