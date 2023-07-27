@@ -10,7 +10,7 @@ var incomeSchema = new mongoose.Schema({
         maxLength:25,
     },
     amount:{
-        type:Long,
+        type:Number,
         required:true,
     },
     date:{
