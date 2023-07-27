@@ -1,12 +1,13 @@
 const Income = require("../models/incomeModel")
 
-const addExpense = async (req,res)=>{
-    const income = await Income.create(req.body)
+const addIncome = async (req,res)=>{
+    const {description,amount,date,mode} = req.body
     console.log(req.body);
+    const income = await Income.create({description,amount,date,mode})
     res.send({income,success:true,status:200})
 }
 
-const getExpenses = async (req,res)=>{
+const getIncome = async (req,res)=>{
     const expenses = await Income.find()
     res.send({expenses,count:expenses.length,success:true,status:200})
 }
@@ -20,7 +21,7 @@ const getExpenses = async (req,res)=>{
 // }
 
 module.exports = {
-    addExpense,
-    getExpenses,
+    addIncome,
+    getIncome,
     // deleteExpense
 }
