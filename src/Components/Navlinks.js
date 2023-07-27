@@ -7,6 +7,7 @@ export const navLinks = [
     {
       id: "dashboard",
       title: "Dashboard",
+      link:"/dashboard",
       icon: <dash.RxDashboard></dash.RxDashboard>,
       iconm:<dash.RxDashboard className='text-white text-[25px]'></dash.RxDashboard>,
     },
@@ -14,6 +15,7 @@ export const navLinks = [
       id: "income",
       title: "Income",
       icon: <income.PiMoneyLight></income.PiMoneyLight>,
+      link:"/dashboard",
       iconm:<income.PiMoneyLight className='text-white text-[25px]'></income.PiMoneyLight>,
 
     },

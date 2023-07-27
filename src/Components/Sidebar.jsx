@@ -1,7 +1,7 @@
 import "../Assets/css/sidebar.css"
 import { useState } from 'react'
 import { navLinks } from './Navlinks'
-
+import { Link } from "react-router-dom"
 const Sidebar = () => {
     const [active, setActive] = useState('Dashboard');
 
@@ -18,9 +18,9 @@ const Sidebar = () => {
                                 ? "text-hello bg-[rgba(255,255,255,0.1)] rounded-lg"
                                 : "text-by"} hover:text-white text-[18px] font-medium`}
                                 onClick={() => setActive(link.title)}>
-                                <a href="#" className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-[rgba(255,255,255,0.1)]  group">
+                                <Link to={link.link} className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-[rgba(255,255,255,0.1)]  group">
                                     {link.icon}<span className="ml-3">{link.title}</span>
-                                </a>
+                                </Link>
                             </li>
                         ))}            
                     </ul>
