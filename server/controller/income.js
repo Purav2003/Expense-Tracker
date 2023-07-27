@@ -2,6 +2,7 @@ const Income = require("../models/incomeModel")
 
 const addExpense = async (req,res)=>{
     const income = await Income.create(req.body)
+    console.log(req.body);
     res.send({income,success:true,status:200})
 }
 
