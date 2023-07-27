@@ -3,7 +3,7 @@ const express = require("express")
 const connectDB = require("./db/connectDB")
 const notFound = require("./middlewares/not-found")
 const errorHandler = require("./middlewares/error-handler")
-const expense = require("./routes/expense")
+const income = require("./routes/income")
 const auth = require("./routes/auth")
 const session = require('express-session');
 const morgan = require("morgan")
@@ -39,8 +39,8 @@ app.use(
   })
 );
 
-app.use("/api/v1/",expense)
 app.use("/api/v1/auth",auth)
+app.use("/api/v1/income",income)
 
 app.use(notFound)
 app.use(errorHandler)

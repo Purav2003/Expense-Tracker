@@ -20,6 +20,11 @@ var incomeSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
+    userName:{
+        type:mongoose.Types.ObjectId,
+        ref:"User",
+        required:[true,"user name not defined"]
+    }
 },{timestamps:true});
 
 module.exports = mongoose.model('Income', incomeSchema);
