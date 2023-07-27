@@ -9,14 +9,14 @@ const IncomeForm = () => {
         const date = document.querySelector('.date').value
         const mode = document.querySelector('.mode').value
         let token = localStorage.getItem("Token")
-        let id = localStorage.getItem("IdExpense")
+        let createdBy = localStorage.getItem("createdBy")
         let data = JSON.stringify({
             "description": description,
             "amount": amount,
             "date": date,
             "mode": mode,
             "token": token,
-            "id":id,
+            "createdBy":createdBy,
         });
         console.log(token)
         if (amount < 0) {

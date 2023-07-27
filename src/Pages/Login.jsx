@@ -31,7 +31,8 @@ const Login = () => {
           if (JSON.stringify(response.data.status) === '200') {
             console.log(response.data.token)
             localStorage.setItem("Token",response.data.token)
-            localStorage.setItem("IdExpense",response.data._id)
+            console.log(response.data.email);
+            localStorage.setItem("createdBy",response.data.email)
             window.location.replace("/dashboard")
           }
           if (JSON.stringify(response.data.status) === '404') {
