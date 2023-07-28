@@ -13,7 +13,7 @@ export const navLinks = [
   },
   {
     id: "income",
-    title: "Income",
+    title: "Credit",
     icon: <income.PiMoneyLight></income.PiMoneyLight>,
     link:"/income",
     iconm:<income.PiMoneyLight className='text-white text-[25px]'></income.PiMoneyLight>,
@@ -21,7 +21,7 @@ export const navLinks = [
   },
   {
     id: "expense",
-    title: "Expense",
+    title: "Debit",
     icon: <income.PiMoneyLight></income.PiMoneyLight>,
     iconm:<income.PiMoneyLight className='text-white text-[25px]'></income.PiMoneyLight>,
   },

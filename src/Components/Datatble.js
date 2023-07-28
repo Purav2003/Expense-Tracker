@@ -1,6 +1,6 @@
-import React from "react";
 import { useTable, usePagination } from "react-table";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid,AreaChart,Tooltip,Area } from 'recharts';
+import React, { PureComponent } from 'react';
+import { useState, useCallback } from "react";
 
 const DataTable = (props) => {
   // Memos
@@ -8,6 +8,7 @@ const DataTable = (props) => {
   const columns = React.useMemo(() => props.columns, [props.columns]);
   const initialState = React.useMemo(() => props.initialState);
 
+  
   // Use the state and functions returned from useTable to build your UI
   const {
     getTableProps,
@@ -35,7 +36,7 @@ const DataTable = (props) => {
   //change
   return (
     <>
-      <table {...getTableProps()} className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <table {...getTableProps()} className="w-[95%] text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
@@ -104,23 +105,8 @@ const DataTable = (props) => {
           ))}
         </select>
       </div>
-      <AreaChart
-                width={500}
-                height={400}
-                data={data}
-                margin={{
-                    top: 10,
-                    right: 30,
-                    left: 0,
-                    bottom: 0,
-                }}
-            >
-                {/* <CartesianGrid /> */}
-                <XAxis dataKey="description" />
-                <YAxis />
-                <Tooltip />
-                <Area type="natural" dataKey="amount" stroke="#8884d8" fill="#8884d8" />
-            </AreaChart> 
+      
+    
     </>
   );
 };

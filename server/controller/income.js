@@ -13,10 +13,10 @@ const getSingleIncome = async (req,res)=>{
     } else{
         const page = Number(req.query.page) || 1
         const limit = Number(req.query.limit) || 5
-        const skip = (page-1)*limit
+        // const skip = (page-1)*limit
         const totalItems = await result.countDocuments()
         const totalPages = Math.ceil(totalItems / limit);
-        result = result.skip(skip).limit(limit)
+        // result = result.skip(skip).limit(limit)
         const expenses = await result
         res.send({totalItems,totalPages,expenses,currentPage:page,count:expenses.length,success:true,status:200})
     }
