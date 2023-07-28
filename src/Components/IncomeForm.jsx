@@ -20,7 +20,6 @@ const IncomeForm = () => {
             "token": token,
             "createdBy":createdBy,
         });
-        console.log(token)
         if (amount < 0) {
             document.getElementById('error').innerHTML = '<h1 className="pt-[0.5vw]">Invalid Input</h1>'
         }
@@ -40,7 +39,6 @@ const IncomeForm = () => {
                 axios.request(config)
                     .then((response) => {
                          count_success = 1
-                        console.log(JSON.stringify(response.status));
                         if (JSON.stringify(response.data.status) === '200') {
                             toast.success('Successfully Added');
                         }
