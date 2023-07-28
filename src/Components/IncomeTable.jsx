@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, AreaChart, Tooltip, ComposedChart, Area, Legend, Bar, PieChart, Pie, Cell, Sector } from 'recharts';
+import { LineChart,BarChart, Line, XAxis, YAxis, CartesianGrid, AreaChart, Tooltip, ComposedChart, Area, Legend, Bar, PieChart, Pie, Cell, Sector } from 'recharts';
 import { Link } from "react-router-dom";
+import * as icon from "react-icons/io"
 const IncomeTable = () => {
   const [data, setData] = useState([]);
-  const [currentPage,setCurrentPage] = useState(1)
+  const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1);
-
   let counter = 1
   // localStorage.setItem("Counter",counter)
-  
+
 
   const fetchData = async (page) => {
     let id = localStorage.getItem('createdBy');
     counter = 1
-    const API_URL = 'http://localhost:5000/api/v1/income/' + id + '?page='+page ;
+    const API_URL = 'http://localhost:5000/api/v1/income/' + id + '?page=' + page;
     fetch(API_URL)
       .then((res) => res.json())
       .then((datas) => {
@@ -25,9 +25,10 @@ const IncomeTable = () => {
       });
   };
   useEffect(() => {
-    fetchData(currentPage);    
+    fetchData(currentPage);
 
   }, [currentPage])
+
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
   const RADIAN = Math.PI / 180;
@@ -44,21 +45,20 @@ const IncomeTable = () => {
     );
   };
 
-  const addPage =()=>{
-    setCurrentPage(currentPage+1)
+  const addPage = () => {
+    setCurrentPage(currentPage + 1)
 
   }
-  const removePage =()=>{
-    setCurrentPage(currentPage-1)
+  const removePage = () => {
+    setCurrentPage(currentPage - 1)
 
   }
   return (
     <>
       <br></br><br></br>
-      <div className="relative overflow-x-auto">
-        <button onClick={removePage} disabled={currentPage === 1}>Previous</button>
-        <button onClick={addPage} disabled={currentPage === totalPages}>Next</button> 
-           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <div className="relative flex flex-row">
+        {data.count>0? <>
+        <table className="w-[56%] text-sm text-left text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3">
@@ -74,21 +74,21 @@ const IncomeTable = () => {
                 Mode
               </th>
               <th scope="col" className="px-6 py-3">
-                From 
-              </th>            
+                From
+              </th>
             </tr>
           </thead>
           <tbody>
 
             {
               data.map((tables) => {
-                const { description, amount, date, mode ,from} = tables
+                const { description, amount, date, mode, from } = tables
 
                 return (
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
                     <td>{description}</td>
                     <td>{amount}</td>
-                    <td>{date}</td>
+                    <td>{date.slice(0, 10).split("-").reverse().join("-")}</td>
                     <td>{mode}</td>
                     <td>{from}</td>
                   </tr>
@@ -98,36 +98,57 @@ const IncomeTable = () => {
 
 
           </tbody>
-        </table>
-        <div className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-          sldjsjf
-        </div>
+          <tfoot>
+            <tr className="bg-gray-700 px-2 py-4 text-sm text-left text-gray-500 dark:text-gray-400">
+              <td className="px-4 py-4" colSpan={5}>Page {currentPage} of {totalPages} <button className="pl-[20px]" onClick={removePage} disabled={currentPage === 1}><icon.IoIosArrowBack /> </button><button onClick={addPage} disabled={currentPage === totalPages}><icon.IoIosArrowForward ></icon.IoIosArrowForward></button></td>
+              
+              </tr>
+
+          </tfoot>
+        </table>  
+        </>    
+        :<>Nathi topa data</>
+}
         <br></br>
-        <LineChart
-          width={500}
+        <div >
+        {/* <BarChart className="pt-[3vw]"
+          width={400}
           height={300}
           data={data}
           margin={{
-            top: 20,
+            top: 5,
             right: 30,
             left: 20,
-            bottom: 10,
+            bottom: 5,
           }}
+          barSize={20}
         >
-          <XAxis dataKey="amount" height={60} />
+          <XAxis scale="point" padding={{ left: 60, right: 60 }} />
           <YAxis />
           <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="mode" stroke="#8884d8" />
-          <Line type="monotone" dataKey="amount" stroke="#8884d8" />
+          <Bar dataKey="amount" fill="#404040" background={{ fill: '#eee' }} />
 
-          <XAxis dataKey="name" />
+        </BarChart> */}
+        <LineChart className="pt-[3vw]"
+          width={400}
+          height={300}
+          data={data}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+          barSize={20}
+        >
+          <XAxis scale="point" padding={{ left: 60, right: 60 }} />
           <YAxis />
           <Tooltip />
-          <Legend />
+          <Line dataKey="amount" type="monotone" background={{ fill: '#eee' }} activeDot={{ r: 8 }}/>
 
         </LineChart>
-        <ComposedChart
+        </div>
+        {/* <ComposedChart
           width={500}
           height={400}
           data={data}
@@ -161,7 +182,7 @@ const IncomeTable = () => {
               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
           </Pie>
-        </PieChart>
+        </PieChart> */}
 
       </div>
     </>

@@ -22,7 +22,6 @@ const getSingleIncome = async (req,res)=>{
         const totalPages = Math.ceil(totalItems / limit);
         result = result.skip(skip).limit(limit)
         const income = await result.sort({createdAt:-1})
-        console.log(income);
         res.send({totalItems,totalPages,income,currentPage:page,count:income.length,success:true,status:200})
     }
 }
