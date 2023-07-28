@@ -29,7 +29,7 @@ const IncomeBar = () => {
         <>
 
             <div class="bg-[#174954] rounded-full left-0 z-50 w-full h-16 border-t border-gray-200">
-                <div class="grid h-full grid-cols-5 mx-auto font-medium rounded-full">
+                <div class="grid h-full grid-cols-5 mx-auto font-medium rounded-full overflow-x-auto">
                     
                     {barLinks.map((link) => (
                         <button key={link.id} type="button" className={`${activebar === link.id

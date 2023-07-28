@@ -44,11 +44,11 @@ const IncomeForm = () => {
                          count_success = 1
                         if (JSON.stringify(response.data.status) === '200') {
                             toast.success('Successfully Added');
-                            const inputs = document.querySelectorAll('.description, .amount, .date,.mode');
+                            const inputs = document.querySelectorAll('.description, .amount, .date,.from');
                             inputs.forEach(input => {
                                 input.value = '';
                             });
-                            window.location.reload()
+                            // window.location.reload()
                         }
                         if (JSON.stringify(response.data.status) === '400') {
                             toast.error('Description Is More Than 25 Letters');
@@ -60,7 +60,7 @@ const IncomeForm = () => {
             }
         }
         if(count_success === 1){
-        const inputs = document.querySelectorAll('.description, .amount, .date,.mode');
+        const inputs = document.querySelectorAll('.description, .amount, .date,.from');
         inputs.forEach(input => {
             input.value = '';
         });
