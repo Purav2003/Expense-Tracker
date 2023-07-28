@@ -6,18 +6,14 @@ const IncomeTable = () => {
     let id = localStorage.getItem("createdBy")
     const API_URL = 'http://localhost:5000/api/v1/income/'+id
     useEffect(() => {
-            fetchdata()    
-          console.log("Hit-2")
-
-        
-      }, [])
-      const fetchdata = () => {
         fetch(API_URL)
         .then((res) => res.json())
         .then(data => {
           setData(data.expenses) 
         })      
-      }
+        
+      }, [data])
+     
       const columns = [
         {
           Header: "Description",
