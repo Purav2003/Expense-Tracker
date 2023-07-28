@@ -28,6 +28,9 @@ var incomeSchema = new mongoose.Schema({
     createdBy:{
         type:String,
         required:[true,"User not identified"]
+    },
+    SrNo:{
+        type:Number
     }
 },{timestamps:true});
 
