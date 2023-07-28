@@ -1,4 +1,6 @@
+import DataTable from "./Datatble";
 import { useEffect, useState } from "react";
+
 const IncomeTable = () => {
     const [data,setData] = useState([]);
     let id = localStorage.getItem("createdBy")
@@ -9,8 +11,31 @@ const IncomeTable = () => {
           .then(data => {
             setData(data.expenses) 
           })      
+          console.log("Hit-2")
+
         
-      }, [])
+      }, [data])
+      const columns = [
+        {
+          Header: "Description",
+          accessor: "description"
+        },
+        {
+            Header: "Amount",
+            accessor: "amount"
+          },{
+            Header: "Date",
+            accessor: "date"
+          },{
+            Header: "Mode",
+            accessor: "mode"
+          },
+
+      ];
+      const initialState = {
+        pageSize: 5,
+        pageIndex: 0
+      };
     return (
         <>
         <br></br><br></br>
@@ -54,7 +79,10 @@ const IncomeTable = () => {
             
             
         </tbody>
-    </table>
+    </table><br></br>
+    <DataTable data={data} columns={columns} initialState={initialState} />
+
+   
 </div>
 </>
     )

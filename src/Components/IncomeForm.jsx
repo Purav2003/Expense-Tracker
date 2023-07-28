@@ -1,5 +1,7 @@
 import axios from "axios"
 import { Link } from "react-router-dom"
+import toast, { Toaster } from 'react-hot-toast';
+
 const IncomeForm = () => {
 
     const handleSubmit = async (e) => {
@@ -40,7 +42,7 @@ const IncomeForm = () => {
                          count_success = 1
                         console.log(JSON.stringify(response.status));
                         if (JSON.stringify(response.data.status) === '200') {
-                            window.location.replace("/dashboard")
+                            toast.success('Successfully Added');
                         }
                     })
             }
@@ -56,6 +58,9 @@ const IncomeForm = () => {
     }
     }
     return (
+        <>
+        <div><Toaster/></div>
+
         <div className="w-full max-w-xs">
             <form onSubmit={handleSubmit} className="bg-white rounded w-[40vw] px-8 pt-6 pb-8 mb-4">
 
@@ -97,6 +102,7 @@ const IncomeForm = () => {
             </form>
 
         </div>
+        </>
     )
 }
 

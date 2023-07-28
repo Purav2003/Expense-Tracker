@@ -5,6 +5,8 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import IncomeForm from "./IncomeForm"
 import IncomeTable from "./IncomeTable"
+import IncomeChart from "./IncomeChart"
+
 const IncomeBar = () => {
     const [activebar, setActivebar] = useState('one-week');
     const data = (datas) =>{
@@ -44,7 +46,7 @@ const IncomeBar = () => {
             <div>
                         <div id="add-income" className="add-income hidden"><IncomeForm /></div>
                         <div id="one-week" className="one-week"><IncomeTable /></div>
-                        <div id="one-month" className="one-month hidden">One Month</div>
+                        <div id="one-month" className="one-month hidden"><IncomeChart /></div>
                         <div id="six-month" className="six-month hidden">Six Months</div>
                         <div id="one-year" className="one-year hidden">One Year</div>
 
