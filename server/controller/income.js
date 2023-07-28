@@ -2,7 +2,17 @@ const Income = require("../models/incomeModel")
 
 const addIncome = async (req,res)=>{
     try{
-        const income = await Income.create(req.body)
+        let SrNo = 1
+        const find = await Income.find({createdBy:req.body.createdBy})
+        if(find){
+            for(let i=0;i<find.length;i++){
+                if(find[i].SrNo>=SrNo){
+                    SrNo = find[i].SrNo + 1
+                }
+            }
+        } 
+        const {description,amount,date,mode,from,createdBy} = req.body
+        const income = await Income.create({description,amount,date,mode,from,createdBy,SrNo})
         res.send({income,success:true,status:200})
     } catch(err){
         res.send({msg:"Message is too big",success:false,status:400})
