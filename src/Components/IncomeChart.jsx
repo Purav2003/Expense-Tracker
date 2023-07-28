@@ -2,6 +2,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid,AreaChart,Tooltip,Area } f
 import { useState, useEffect } from 'react';
 const IncomeChart = () => {
     const [data, setData] = useState([]);
+    let data_count=' '
     let id = localStorage.getItem("createdBy")
     const API_URL = 'http://localhost:5000/api/v1/income/' + id
     useEffect(() => {
@@ -10,8 +11,12 @@ const IncomeChart = () => {
             .then(data => {
                 setData(data.expenses)
             })
+        data_count=data.length
+        console.log(data)
         console.log("Hit-1")
-    }, [data])
+        console.log(data_count)
+
+    }, [])
 
     return (
         <>
