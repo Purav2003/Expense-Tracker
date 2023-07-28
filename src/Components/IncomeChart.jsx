@@ -9,7 +9,7 @@ const IncomeChart = () => {
         fetch(API_URL)
             .then((res) => res.json())
             .then(data => {
-                setData(data.expenses)
+                setData(data.income)
             })
         // data_count=data.length
         console.log(data)

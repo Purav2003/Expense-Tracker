@@ -17,7 +17,7 @@ const IncomeTable = () => {
     fetch(API_URL)
       .then((res) => res.json())
       .then((datas) => {
-        setData(datas.expenses);
+        setData(datas.income);
         setTotalPages(datas.totalPages);
       })
       .catch((error) => {
@@ -74,8 +74,8 @@ const IncomeTable = () => {
                 Mode
               </th>
               <th scope="col" className="px-6 py-3">
-                From
-              </th>
+                From 
+              </th>            
             </tr>
           </thead>
           <tbody>
@@ -98,7 +98,11 @@ const IncomeTable = () => {
 
 
           </tbody>
-        </table><br></br>
+        </table>
+        <div className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          sldjsjf
+        </div>
+        <br></br>
         <LineChart
           width={500}
           height={300}
