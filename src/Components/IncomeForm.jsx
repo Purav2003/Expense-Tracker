@@ -10,6 +10,8 @@ const IncomeForm = () => {
         const amount = document.querySelector('.amount').value
         const date = document.querySelector('.date').value
         const mode = document.querySelector('.mode').value
+        const from = document.querySelector('.from').value
+
         let token = localStorage.getItem("Token")
         let createdBy = localStorage.getItem("createdBy")
         let data = JSON.stringify({
@@ -18,6 +20,7 @@ const IncomeForm = () => {
             "date": date,
             "mode": mode,
             "token": token,
+            "from": from,
             "createdBy":createdBy,
         });
         if (amount < 0) {
@@ -80,6 +83,12 @@ const IncomeForm = () => {
                         Date
                     </label>
                     <input className="date shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="datetime-local" placeholder="Amount" required />
+                </div>
+                <div className="mb-4 form-field">
+                    <label className="block text-black-700 text-sm font-bold mb-2">
+                        From
+                    </label>
+                    <input className="from shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Amount" required />
                 </div>
                 <div className="mb-4 form-field">
                     <label className="block text-black-700 text-sm font-bold mb-2">

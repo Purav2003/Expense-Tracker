@@ -3,7 +3,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, AreaChart, Tooltip, Compo
 import { Link } from "react-router-dom";
 const IncomeTable = () => {
   const [data, setData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage,setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1);
 
   let counter = 1
@@ -13,24 +13,21 @@ const IncomeTable = () => {
   const fetchData = async (page) => {
     let id = localStorage.getItem('createdBy');
     counter = 1
-    const API_URL = 'http://localhost:5000/api/v1/income/' + id + '?page=' + page;
-    console.log(API_URL)
+    const API_URL = 'http://localhost:5000/api/v1/income/' + id + '?page='+page ;
     fetch(API_URL)
       .then((res) => res.json())
-      .then((data) => {
-        setData(data.expenses);
-        setTotalPages(data.expenses.totalPages);
+      .then((datas) => {
+        setData(datas.expenses);
+        setTotalPages(datas.totalPages);
       })
       .catch((error) => {
 
       });
   };
   useEffect(() => {
-    fetchData(currentPage);
-    const interval = setInterval(fetchData, 5000);
-    return () => clearInterval(interval);
+    fetchData(currentPage);    
 
-  }, )
+  }, [currentPage])
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
   const RADIAN = Math.PI / 180;
@@ -47,12 +44,20 @@ const IncomeTable = () => {
     );
   };
 
+  const addPage =()=>{
+    setCurrentPage(currentPage+1)
+
+  }
+  const removePage =()=>{
+    setCurrentPage(currentPage-1)
+
+  }
   return (
     <>
       <br></br><br></br>
       <div className="relative overflow-x-auto">
-        <button disabled={currentPage === 1}>Previous</button>
-        <button disabled={currentPage === totalPages}>Next</button> 
+        <button onClick={removePage} disabled={currentPage === 1}>Previous</button>
+        <button onClick={addPage} disabled={currentPage === totalPages}>Next</button> 
            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -68,14 +73,16 @@ const IncomeTable = () => {
               <th scope="col" className="px-6 py-3">
                 Mode
               </th>
-
+              <th scope="col" className="px-6 py-3">
+                From
+              </th>
             </tr>
           </thead>
           <tbody>
 
             {
               data.map((tables) => {
-                const { description, amount, date, mode } = tables
+                const { description, amount, date, mode ,from} = tables
 
                 return (
                   <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -83,12 +90,10 @@ const IncomeTable = () => {
                     <td>{amount}</td>
                     <td>{date}</td>
                     <td>{mode}</td>
+                    <td>{from}</td>
                   </tr>
                 )
               })
-
-
-
             }
 
 

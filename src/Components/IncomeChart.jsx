@@ -16,7 +16,7 @@ const IncomeChart = () => {
         console.log("Hit-1")
         console.log(data_count)
 
-    }, [data])
+    }, [])
 
     return (
         <>
