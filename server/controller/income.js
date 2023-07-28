@@ -1,8 +1,12 @@
 const Income = require("../models/incomeModel")
 
 const addIncome = async (req,res)=>{
-    const income = await Income.create(req.body)
-    res.send({income,success:true,status:200})
+    try{
+        const income = await Income.create(req.body)
+        res.send({income,success:true,status:200})
+    } catch(err){
+        res.send({msg:"Message is too big",success:false,status:400})
+    }
 }
 
 const getSingleIncome = async (req,res)=>{
@@ -18,6 +22,7 @@ const getSingleIncome = async (req,res)=>{
         const totalPages = Math.ceil(totalItems / limit);
         result = result.skip(skip).limit(limit)
         const income = await result
+        console.log(income);
         res.send({totalItems,totalPages,income,currentPage:page,count:income.length,success:true,status:200})
     }
 }
