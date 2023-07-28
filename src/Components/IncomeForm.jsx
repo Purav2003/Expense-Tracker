@@ -44,6 +44,10 @@ const IncomeForm = () => {
                          count_success = 1
                         if (JSON.stringify(response.data.status) === '200') {
                             toast.success('Successfully Added');
+                            const inputs = document.querySelectorAll('.description, .amount, .date,.mode');
+                            inputs.forEach(input => {
+                                input.value = '';
+                            });
                         }
                     })
             }
@@ -88,7 +92,7 @@ const IncomeForm = () => {
                     <label className="block text-black-700 text-sm font-bold mb-2">
                         From
                     </label>
-                    <input className="from shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Amount" required />
+                    <input className="from shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="From" required />
                 </div>
                 <div className="mb-4 form-field">
                     <label className="block text-black-700 text-sm font-bold mb-2">
