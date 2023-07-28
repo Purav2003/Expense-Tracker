@@ -1,21 +1,25 @@
-import { LineChart, Line, XAxis, YAxis, CartesianGrid,AreaChart,Tooltip,Area } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, AreaChart, Tooltip, Area } from 'recharts';
 import { useState, useEffect } from 'react';
+
 const IncomeChart = () => {
     const [data, setData] = useState([]);
-    let data_count=' '
-    let id = localStorage.getItem("createdBy")
-    const API_URL = 'http://localhost:5000/api/v1/income/' + id
-    useEffect(() => {
+    const fetchData = () => {
+        let id = localStorage.getItem('createdBy');
+        const API_URL = 'http://localhost:5000/api/v1/income/' + id;
+    
         fetch(API_URL)
-            .then((res) => res.json())
-            .then(data => {
-                setData(data.expenses)
-            })
-        data_count=data.length
-        console.log(data)
-        console.log("Hit-1")
-        console.log(data_count)
-
+          .then((res) => res.json())
+          .then((data) => {
+            setData(data.expenses);
+          })
+          .catch((error) => {
+          });
+      };
+    useEffect(() => {
+        fetchData(); 
+        const interval = setInterval(fetchData, 5000);
+        return () => clearInterval(interval);
+       
     }, [])
 
     return (

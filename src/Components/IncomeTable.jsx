@@ -3,17 +3,25 @@ import { useEffect, useState } from "react";
 
 const IncomeTable = () => {
     const [data,setData] = useState([]);
-    let id = localStorage.getItem("createdBy")
-    const API_URL = 'http://localhost:5000/api/v1/income/'+id
-    useEffect(() => {
+    const fetchData = () => {
+        let id = localStorage.getItem('createdBy');
+        const API_URL = 'http://localhost:5000/api/v1/income/' + id;
+    
         fetch(API_URL)
-        .then((res) => res.json())
-        .then(data => {
-          setData(data.expenses) 
-        })      
-        
-      }, [data])
-     
+          .then((res) => res.json())
+          .then((data) => {
+            setData(data.expenses);
+          })
+          .catch((error) => {
+            
+          });
+      };
+    useEffect(() => {
+        fetchData(); 
+        const interval = setInterval(fetchData, 5000);
+        return () => clearInterval(interval);
+       
+    }, [])
       const columns = [
         {
           Header: "Description",
@@ -39,7 +47,7 @@ const IncomeTable = () => {
         <>
         <br></br><br></br>
 <div className="relative overflow-x-auto">
-    <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    {/* <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" className="px-6 py-3">
@@ -78,7 +86,7 @@ const IncomeTable = () => {
             
             
         </tbody>
-    </table><br></br>
+    </table><br></br> */}
     <DataTable data={data} columns={columns} initialState={initialState} />
 
    
