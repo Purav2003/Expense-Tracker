@@ -14,3 +14,9 @@ code {
     monospace;
 }
 
+.loading {
+  margin-left: 37vw !important;
+  margin-top: 10vw !important;
+  height: 70px !important;
+  width: 70px !important;
+}

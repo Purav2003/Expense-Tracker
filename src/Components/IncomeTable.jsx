@@ -1,10 +1,19 @@
 import { useEffect, useState } from "react";
 import { LineChart,BarChart, Line, XAxis, YAxis, CartesianGrid, AreaChart, Tooltip, ComposedChart, Area, Legend, Bar, PieChart, Pie, Cell, Sector } from 'recharts';
 import { Link } from "react-router-dom";
-import * as icon from "react-icons/io"
+import * as icon from "react-icons/io";
+import * as icons from "react-icons/ri";
+
+import axios from "axios";
+import toast, { Toaster } from 'react-hot-toast';
+import gif from '../Assets/images/loading.gif';
+import '../index.css'
+
+
 const IncomeTable = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1)
+  const [loading,setLoading] = useState(false)
   const [totalPages, setTotalPages] = useState(1);
   let counter = 1
   // localStorage.setItem("Counter",counter)
@@ -17,7 +26,9 @@ const IncomeTable = () => {
     fetch(API_URL)
       .then((res) => res.json())
       .then((datas) => {
+        setLoading(false);
         setData(datas.income);
+
         setTotalPages(datas.totalPages);
       })
       .catch((error) => {
@@ -26,11 +37,29 @@ const IncomeTable = () => {
   };
   const deleteData = (e) =>{
     console.log(e)
+    let config = {
+      method: 'delete',
+      url: 'http://localhost:5000/api/v1/income/'+e,
+      headers: {
+          'Content-Type': 'application/json'
+      },
+  };
+
+  axios.request(config)
+      .then((response) => {
+          if (JSON.stringify(response.data.status) === '200') {
+              toast.success('Successfully Deleted');             
+              window.location.reload()
+          }
+         
+      })
   }
   useEffect(() => {
+    setLoading(true);
+
     fetchData(currentPage);
 
-  }, [currentPage,data])
+  }, [currentPage])
 
   let count_table = (0 + (currentPage -1)* 5)
 
@@ -46,8 +75,12 @@ const IncomeTable = () => {
   return (
     <>
       <br></br><br></br>
-      <div className="relative lg:flex">
-        {data.length>0? <>
+      <div><Toaster/></div>
+      
+     <div className="relative lg:flex">
+        
+        
+      <div>
         <table className="overflow-x-auto text-sm text-left text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -69,7 +102,7 @@ const IncomeTable = () => {
               <th scope="col" className="px-6 py-3">
                 From
               </th>
-              <th></th>
+              <th className="px-6 py-3"></th>
             </tr>
           </thead>
           <tbody>
@@ -86,7 +119,7 @@ const IncomeTable = () => {
                     <td>{date.slice(0, 10).split("-").reverse().join("-")}</td>
                     <td>{mode}</td>
                     <td>{from}</td>
-                    <td onClick={()=>deleteData(_id)}>Delete</td>
+                    <td onClick={()=>deleteData(_id)}><icons.RiDeleteBinLine className="hover:cursor-pointer text-[20px]"/></td>
                   </tr>
                 )
 
@@ -103,11 +136,8 @@ const IncomeTable = () => {
 
           </tfoot>
         </table>  
-        </>    
-        :<>
-          <h1>No Data Avialable</h1>
-        </>
-}
+        </div>    
+    
         <br></br>
         <div >
         {/* <BarChart className="pt-[3vw]"
@@ -128,24 +158,24 @@ const IncomeTable = () => {
           <Bar dataKey="amount" fill="#404040" background={{ fill: '#eee' }} />
 
         </BarChart> */}
-        <LineChart className="pt-[3vw]"
+         <ComposedChart
           width={400}
           height={300}
           data={data}
           margin={{
-            top: 5,
-            right: 30,
+            top: 20,
+            right: 20,
+            bottom: 20,
             left: 20,
-            bottom: 5,
           }}
-          barSize={20}
         >
-          <XAxis scale="point" padding={{ left: 60, right: 60 }} />
+          <CartesianGrid stroke="#f5f5f5" />
+          <XAxis  scale="band" padding={{ left: 10, right: 10 }}/>
           <YAxis />
           <Tooltip />
-          <Line dataKey="amount" type="monotone" background={{ fill: '#eee' }} activeDot={{ r: 8 }}/>
-
-        </LineChart>
+          <Bar dataKey="amount" barSize={20} fill="#413ea0" />
+          <Line type="bump" dataKey="amount" stroke="#ff7300" />
+        </ComposedChart>
         </div>
        
 
