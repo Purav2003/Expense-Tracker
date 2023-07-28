@@ -30,7 +30,7 @@ const IncomeTable = () => {
   }, [currentPage])
 
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
-
+  let count_table = 0
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
 
@@ -56,11 +56,14 @@ const IncomeTable = () => {
   return (
     <>
       <br></br><br></br>
-      <div className="relative flex flex-row">
-        {data.count>0? <>
-        <table className="w-[56%] text-sm text-left text-gray-500 dark:text-gray-400">
+      <div className="relative flex">
+        {data.length>0? <>
+        <table className="overflow-x-auto text-sm text-left text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
+            <th scope="col" className="px-6 py-3">
+              Sr.No
+              </th>
               <th scope="col" className="px-6 py-3">
                 Description
               </th>
@@ -82,10 +85,12 @@ const IncomeTable = () => {
 
             {
               data.map((tables) => {
-                const { description, amount, date, mode, from } = tables
+                const { SrNo,description, amount, date, mode, from } = tables
+                count_table = count_table+1
 
-                return (
+                return (                  
                   <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
+                    <td>{count_table}</td>
                     <td>{description}</td>
                     <td>{amount}</td>
                     <td>{date.slice(0, 10).split("-").reverse().join("-")}</td>
@@ -100,14 +105,16 @@ const IncomeTable = () => {
           </tbody>
           <tfoot>
             <tr className="bg-gray-700 px-2 py-4 text-sm text-left text-gray-500 dark:text-gray-400">
-              <td className="px-4 py-4" colSpan={5}>Page {currentPage} of {totalPages} <button className="pl-[20px]" onClick={removePage} disabled={currentPage === 1}><icon.IoIosArrowBack /> </button><button onClick={addPage} disabled={currentPage === totalPages}><icon.IoIosArrowForward ></icon.IoIosArrowForward></button></td>
+              <td className="px-4 py-4" colSpan={6}>Page {currentPage} of {totalPages} <button className="pl-[20px]" onClick={removePage} disabled={currentPage === 1}><icon.IoIosArrowBack /> </button><button onClick={addPage} disabled={currentPage === totalPages}><icon.IoIosArrowForward ></icon.IoIosArrowForward></button></td>
               
               </tr>
 
           </tfoot>
         </table>  
         </>    
-        :<>Nathi topa data</>
+        :<>
+          <h1>No Data Avialable</h1>
+        </>
 }
         <br></br>
         <div >

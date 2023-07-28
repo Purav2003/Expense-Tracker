@@ -48,6 +48,10 @@ const IncomeForm = () => {
                             inputs.forEach(input => {
                                 input.value = '';
                             });
+                            window.location.reload()
+                        }
+                        if (JSON.stringify(response.data.status) === '400') {
+                            toast.error('Description Is More Than 25 Letters');
                         }
                     })
             }
