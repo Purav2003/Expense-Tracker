@@ -11,12 +11,12 @@ const IncomeChart = () => {
             .then(data => {
                 setData(data.expenses)
             })
-        data_count=data.length
+        // data_count=data.length
         console.log(data)
         console.log("Hit-1")
         console.log(data_count)
 
-    }, [])
+    }, [data])
 
     return (
         <>

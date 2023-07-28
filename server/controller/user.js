@@ -2,7 +2,6 @@ require("express-async-errors")
 const User = require("../models/user")
 
 const signup = async (req, res) => {
-    console.log(req.user)
     const { numberError, passwordError, emailError } = req.user
     if (numberError && passwordError && emailError) {
         const userexist = await User.findOne({ email: req.body.email })

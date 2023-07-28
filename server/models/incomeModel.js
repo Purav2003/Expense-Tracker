@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 require('mongoose-long')(mongoose);
-const {Types: {Long}} = mongoose;
+// const {Types: {Long}} = mongoose;
 
 var incomeSchema = new mongoose.Schema({
     description:{
@@ -20,6 +20,10 @@ var incomeSchema = new mongoose.Schema({
     mode:{
         type:String,
         required:true,
+    },
+    from:{
+        type:String,
+        required:true
     },
     createdBy:{
         type:String,
