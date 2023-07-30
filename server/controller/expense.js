@@ -21,7 +21,7 @@ const getSingleExpense = async (req,res)=>{
         const skip = (page-1)*limit
         const totalPages = Math.ceil(totalItems / limit);
         result = result.skip(skip).limit(limit)
-        const expenses = await result
+        const expenses = await result.sort({createdAt:-1})
         res.send({totalItems,totalPages,expenses,currentPage:page,count:expenses.length,success:true,status:200})
     }
 }
