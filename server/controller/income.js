@@ -3,7 +3,7 @@ const Income = require("../models/incomeModel")
 const addIncome = async (req,res)=>{
     try{
         const {description, amount, date, mode, from, createdBy} = req.body
-        const income = await Income.create(description, amount, date, mode, from, createdBy)
+        const income = await Income.create({description, amount, date, mode, from, createdBy})
         res.send({income,success:true,status:200})
     } catch(err){
         res.send({msg:"Message is too big",success:false,status:400})
