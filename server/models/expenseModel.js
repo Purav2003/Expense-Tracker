@@ -25,6 +25,10 @@ var expenseSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    category:{
+        type:String,
+        requires:true
+    },
     createdBy:{
         type:String,
         required:[true,"User not identified"]
