@@ -1,8 +1,12 @@
 const Expense = require("../models/expenseModel")
 
 const addExpense = async (req,res)=>{
-    const expense = await Expense.create(req.body)
-    res.send({expense,success:true,status:200})
+    try{
+        const expense = await Expense.create(req.body)
+        res.send({expense,success:true,status:200})
+    } catch(err){
+        res.send({msg:"Message is too big",success:false,status:400})
+    }
 }
 
 const getSingleExpense = async (req,res)=>{
@@ -22,7 +26,14 @@ const getSingleExpense = async (req,res)=>{
     }
 }
 
+const deleteExpense = async (req,res)=>{
+    const id = req.params.id
+    const expense = await Expense.deleteOne({_id:id})
+    res.send({msg:"Item deleted successfully",success:true,status:200})
+}
+
 module.exports = {
     addExpense,
     getSingleExpense,
+    deleteExpense
 }
