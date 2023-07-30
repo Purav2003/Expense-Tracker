@@ -2,14 +2,17 @@
     .bottom-menu{
         width: 0px !important;
         height: 0px !important;
+        display: none !important;
     }
     .bottom-menu div{
         width: 0px !important;
         height: 0px !important;
+        display:none !important;
     }
     .mobile-nav{
         width: 0px !important;
         height: 0px !important;
+        display: none !important;
     }
     .text-hello a{
         color:#fff !important;
@@ -48,5 +51,5 @@
 
 
 body{
-    background: #eee !important;
+    background: #fff !important;
 }
