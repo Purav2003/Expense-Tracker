@@ -21,7 +21,7 @@ var expenseSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
-    To:{
+    to:{
         type:String,
         required:true
     },
