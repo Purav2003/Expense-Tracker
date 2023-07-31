@@ -67,10 +67,8 @@ const ExpenseTable = () => {
     setCurrentPage(currentPage - 1)
 
   }
-   // Define custom colors for the pie chart
    const colors = ['#8884d8', '#82ca9d', '#ffc658', '#0088FE', '#00C49F', '#FFBB28'];
 
-   // Calculate the distribution of amounts across different categories
    const calculateCategoryDistribution = () => {
      const categoryDistribution = {};
  
