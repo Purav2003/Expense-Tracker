@@ -9,7 +9,7 @@ const IncomeForm = () => {
         const description = document.querySelector('.description').value
         const amount = document.querySelector('.amount').value
         const date = document.querySelector('.date').value
-        const mode = document.querySelector('.mode').value
+        const modea = document.querySelector('.modea').value
         const from = document.querySelector('.from').value
 
         let token = localStorage.getItem("Token")
@@ -18,11 +18,12 @@ const IncomeForm = () => {
             "description": description,
             "amount": amount,
             "date": date,
-            "mode": mode,
+            "mode": modea,
             "token": token,
             "from": from,
             "createdBy":createdBy,
         });
+        console.log(data)
         if (amount < 0) {
             document.getElementById('error').innerHTML = '<h1 className="pt-[0.5vw]">Invalid Input</h1>'
         }
@@ -48,7 +49,7 @@ const IncomeForm = () => {
                             inputs.forEach(input => {
                                 input.value = '';
                             });
-                            window.location.reload()
+                            // window.location.reload()
                         }
                         if (JSON.stringify(response.data.status) === '400') {
                             toast.error('Description Is More Than 25 Letters');
@@ -102,7 +103,7 @@ const IncomeForm = () => {
                     <label className="block text-black-700 text-sm font-bold mb-2">
                         Mode
                     </label>
-                    <select className="mode border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline ">
+                    <select className="modea border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline ">
                         <option value="select" disabled>Select</option>
                         <option value="Online" >Online</option>
                         <option value="Offline">Offline</option>
