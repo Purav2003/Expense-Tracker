@@ -208,9 +208,9 @@ const ExpenseTableWeek = () => {
 
         </div>
       ) : <>
-        {loading ? <Skeleton count={5} width={45} /> : <div>
+       <div>
           <h1 className="text-center text-2xl font-bold">NO DATA</h1>
-        </div>}
+        </div>
       </>}
     </>
   )

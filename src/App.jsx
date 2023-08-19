@@ -6,6 +6,7 @@ import Income from './Pages/Income';
 import Expense from './Pages/Expense';
 import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
 import './App.css'
+import IncomeSearch from './Components/IncomeSearch';
 function App() {
   return (
     <>
@@ -16,6 +17,7 @@ function App() {
         <Route path='/dashboard' element={<Dashboard />}></Route>
         <Route path='/income' element={<Income />}></Route>
         <Route path='/expense' element={<Expense />}></Route>
+        <Route path='/search-income' element={<IncomeSearch />}></Route>
         
       </Routes>
        

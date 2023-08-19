@@ -147,7 +147,7 @@ const IncomeTableMonth = () => {
           </div>
           <br></br>
         </div>)
-:<>{loading?<Skeleton count={5} height={45} />:<h1><center>No Data</center></h1>}</>}
+:<><h1><center>No Data</center></h1></>}
     </>
   );
 };

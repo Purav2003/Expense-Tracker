@@ -3,74 +3,102 @@ import { Link } from "react-router-dom";
 import * as icon from "react-icons/io";
 import * as icons from "react-icons/ri";
 import axios from "axios";
+import * as iconf from "react-icons/fi"
+
 import toast, { Toaster } from 'react-hot-toast';
 import Skeleton from "react-loading-skeleton";
+import Sidebar from "./Sidebar";
 
 import '../Assets/css/income.css';
 import '../index.css';
 
-const IncomeTable = () => {
-  const [data, setData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [loading, setLoading] = useState(false);
-  const [totalPages, setTotalPages] = useState(1);
-  let counter = 1;
+const IncomeSearch = () => {
+    const [data, setData] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [loading, setLoading] = useState(false);
+    const [totalPages, setTotalPages] = useState(1);
+    let search = localStorage.getItem('income-trial');
 
-  const fetchData = async (page) => {
-    let id = localStorage.getItem('createdBy');
-    counter = 1;
-    const API_URL = 'http://localhost:5000/api/v1/income/' + id + '?page=' + page ;
-    
-    try {
-      const response = await fetch(API_URL);
-      const datas = await response.json();
-
-      setData(datas.income);
-      setTotalPages(datas.totalPages);
-      setTimeout(() => {  setLoading(false);}, 1000);
-    } catch (error) {
-      // Handle error here
-    }
-  };
-
-  const deleteData = (e) => {
-    console.log(e);
-    let config = {
-      method: 'delete',
-      url: 'http://localhost:5000/api/v1/income/' + e,
-      headers: {
-        'Content-Type': 'application/json'
-      },
+    const fetchData = async (page) => {
+      let id = localStorage.getItem('createdBy');
+      const API_URL = 'http://localhost:5000/api/v1/income/'+id+'?search='+search+'&page=1';
+    console.log(API_URL)
+      try {
+        const response = await fetch(API_URL);
+        const datas = await response.json();
+        console.log(datas)
+        setData(datas.income);
+        setTotalPages(datas.totalPages);
+        setLoading(false)
+      } catch (error) {
+        // Handle error here
+      }
     };
-
-    axios.request(config)
-      .then((response) => {
-        if (JSON.stringify(response.data.status) === '200') {
-          toast.success('Successfully Deleted');
-          window.location.reload();
-        }
-      });
-  };
-
-  useEffect(() => {
-    setLoading(true);
-    fetchData(currentPage);
-  }, [currentPage]);
-
-  let count_table = (0 + (currentPage - 1) * 5);
-
-  const addPage = () => {
-    setCurrentPage(currentPage + 1);
-  };
-
-  const removePage = () => {
-    setCurrentPage(currentPage - 1);
-  };
-
+  
+    const deleteData = (e) => {
+      console.log(e);
+      let config = {
+        method: 'delete',
+        url: 'http://localhost:5000/api/v1/income/' + e,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      };
+  
+      axios.request(config)
+        .then((response) => {
+          if (JSON.stringify(response.data.status) === '200') {
+            toast.success('Successfully Deleted');
+            window.location.reload();
+          }
+        });
+    };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const search = document.querySelector('.search-income').value
+        localStorage.setItem("income-trial",search)
+        window.location.replace('search-income')
+  
+      }
+    useEffect(() => {
+      setLoading(true);
+      fetchData(currentPage);
+    }, [currentPage]);
+  
+    let count_table = (0 + (currentPage - 1) * 5);
+  
+    const addPage = () => {
+      setCurrentPage(currentPage + 1);
+    };
+  
+    const removePage = () => {
+      setCurrentPage(currentPage - 1);
+    };
+  
   return (
-    <>
-      <br /><br />
-      <div><Toaster /></div>
+            <>
+                   <div className="bg-white">            
+                    <div><Toaster /></div>
+
+    <div className="sm:ml-64"><br></br><br></br> 
+    <div className="flex px-8 main-heading-mob">
+    <h1 className="text-2xl font-bold">Search Result Of <i className="font-semibold">"{search}"</i> </h1>  
+    <div className="ml-[22vw] justify-end	relative lg:w-[44%] bg-[#eee] rounded-lg shadow-md px-4 py-2 search-bar">
+    <form onSubmit={handleSubmit}>
+
+      <input
+        type="text"
+        placeholder="Type to Search"
+        className="border-none outline-none bg-transparent pr-8 w-[90%] search-income"
+      />      
+      <div className="absolute inset-y-0 right-0 flex items-center pr-3 ">
+        <button type="submit"><iconf.FiSearch className="h-5 w-5 text-gray-500" /></button>
+      </div>
+      </form>
+
+    </div>  
+</div><br></br><br></br><br></br>
+
 {data.length!==0?(        <div className="relative px-4">
           <div>
             <div className="table-income">
@@ -99,13 +127,13 @@ const IncomeTable = () => {
                   </tr>
                 </thead>
                 <tbody className="w-[10%]">
-                  {loading ? (
+                  { loading? (
                     <tr>
                       <td colSpan="7">                        
                         <Skeleton count={5} height={45} /> 
                       </td>
                     </tr>
-                  ) : (
+                  ) :(
                     data.map((tables) => {
                       const { _id, description, amount, date, mode, from } = tables;
                       count_table = count_table + 1;
@@ -145,9 +173,15 @@ const IncomeTable = () => {
           </div>
           <br></br>
         </div>)
-:<><h1><center>No Data</center></h1></>
-                  }</>
-  );
+:<><h1><center>No Data</center></h1></>}
+
+  <Sidebar />
+
+    
+    </div>
+</div>
+            </>
+    )
 };
 
-export default IncomeTable;
+export default IncomeSearch;
