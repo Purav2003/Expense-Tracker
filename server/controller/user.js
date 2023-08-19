@@ -59,7 +59,7 @@ const getAllUser = async (req, res) => {
 }
 
 const profile  = async (req,res)=>{
-    const user = await User.find({_id:req.params.id})
+    const user = await User.findById(req.params.id)
     res.send({user,success:true,status:200})
 }
 
