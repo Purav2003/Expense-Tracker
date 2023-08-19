@@ -11,8 +11,31 @@ const addExpense = async (req,res)=>{
 
 const getSingleExpense = async (req,res)=>{
     const id = req.params.id
-    let result = Expense.find({createdBy:id})
-    let totalItems = await Expense.find({createdBy:id}).countDocuments()
+    let result;
+    let totalItems;
+    const filterDate = req.query.daysAgo
+    let daysAgo = new Date()
+    if(filterDate==="oneweek"){
+        daysAgo.setDate(daysAgo.getDate() - 7)
+        result = Expense.find({createdBy:id,date:{$gt:daysAgo}})
+        totalItems = await Expense.find({createdBy:id,date:{$gt:daysAgo}}).countDocuments()
+    } else if(filterDate==="onemonth"){
+        daysAgo.setMonth(daysAgo.getMonth() - 1)
+        result = Expense.find({createdBy:id,date:{$gt:daysAgo}})
+        totalItems = await Expense.find({createdBy:id,date:{$gt:daysAgo}}).countDocuments()
+    } else if(filterDate==="sixmonth"){
+        daysAgo.setMonth(daysAgo.getMonth() - 6)
+        result = Expense.find({createdBy:id,date:{$gt:daysAgo}})
+        totalItems = await Expense.find({createdBy:id,date:{$gt:daysAgo}}).countDocuments()
+    } 
+    else if(filterDate==="oneyear"){
+        daysAgo.setFullYear(daysAgo.getFullYear() - 1)
+        result = Expense.find({createdBy:id,date:{$gt:daysAgo}})
+        totalItems = await Expense.find({createdBy:id,date:{$gt:daysAgo}}).countDocuments()
+    } else{
+        result = Expense.find({createdBy:id})
+        totalItems = await Expense.find({createdBy:id}).countDocuments()
+    }
     if(!result){
         res.send({result,count:0,success:true,status:200})
     } else{
