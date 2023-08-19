@@ -19,15 +19,15 @@ const IncomeTable = () => {
   const fetchData = async (page) => {
     let id = localStorage.getItem('createdBy');
     counter = 1;
-    const API_URL = 'http://localhost:5000/api/v1/income/' + id + '?page=' + page;
+    const API_URL = 'http://localhost:5000/api/v1/income/' + id + '?page=' + page ;
     
     try {
       const response = await fetch(API_URL);
       const datas = await response.json();
 
-      setLoading(false);
       setData(datas.income);
       setTotalPages(datas.totalPages);
+      setTimeout(() => {  setLoading(false);}, 1000);
     } catch (error) {
       // Handle error here
     }
@@ -71,8 +71,7 @@ const IncomeTable = () => {
     <>
       <br /><br />
       <div><Toaster /></div>
-
-        <div className="relative px-4">
+{data.length!==0?(        <div className="relative px-4">
           <div>
             <div className="table-income">
               <table className="table-income rounded-lg lg:w-full shadow-lg bg-white overflow-scroll text-sm text-left">
@@ -103,7 +102,9 @@ const IncomeTable = () => {
                   {loading ? (
                     <tr>
                       <td colSpan="7">
-                        <Skeleton count={5} height={45} />
+                        
+                        <Skeleton count={5} height={45} /> 
+
                       </td>
                     </tr>
                   ) : (
@@ -144,10 +145,9 @@ const IncomeTable = () => {
               </div>
             </div>
           </div>
-
           <br></br>
-        </div>
-      
+        </div>)
+:<>{loading?<Skeleton count={5} height={45} />:<h1><center>No Data</center></h1>}</>}
     </>
   );
 };

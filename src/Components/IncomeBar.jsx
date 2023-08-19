@@ -11,10 +11,10 @@ import '../Assets/css/income.css'
 const IncomeBar = () => {
     const [activebar, setActivebar] = useState('all');
     const data = (datas) =>{
-        let all = ['add-income','one-week','one-month','six-month','one-year']    
+        let all = ['all','add-income','one-week','one-month','six-month','one-year']    
         console.log(datas)
         setActivebar(datas)
-        for(let i=0;i<=4;i++){
+        for(let i=0;i<=5;i++){
             if(all[i]!==datas){
                 var trial = document.getElementById(all[i]);     
                 console.log(trial)   
@@ -44,8 +44,8 @@ const IncomeBar = () => {
                 <div class="grid h-full grid-cols-6 w-full mx-auto font-medium overflow-auto">                    
                     {barLinks.map((link) => (
                         <button key={link.id} type="button" className={`${activebar === link.id
-                            ? "text-white bg-[#025FBB] rounded-md"
-                            : "text-gray bg-[#eee] rounded-md"} hover:text-white mt-1 hover:bg-[#025FBB] w-[95%] h-[80%] items-center justify-center hover:rounded-md group`}
+                            ? "text-white bg-[#007A6D] rounded-md"
+                            : "text-gray bg-[#eee] rounded-md"} hover:text-white mt-1 hover:bg-[#007A6D] w-[95%] h-[80%] items-center justify-center hover:rounded-md group`}
                             onClick={() => data(link.id)}
                             >
                             {link.title}
@@ -73,7 +73,7 @@ const IncomeBar = () => {
                     </select>
                 </div>
             <div>
-                        <div id="all" className="all"><IncomeForm /></div>
+                        <div id="all" className="all"><IncomeTable /></div>
                         <div id="add-income" className="add-income hidden"><IncomeForm /></div>
                         <div id="one-week" className="one-week hidden"><IncomeTable /></div>
                         <div id="one-month" className="one-month hidden"><IncomeChart /></div>

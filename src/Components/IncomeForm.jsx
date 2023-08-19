@@ -111,7 +111,7 @@ const IncomeForm = () => {
                     <div id="errora"></div>
                 </div>
                 <div className="flex form-field items-center">
-                    <button className="bg-[#1BA329] button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
+                    <button className="bg-[#007A6D] button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
                         Add Entry
                     </button>
                 </div>
