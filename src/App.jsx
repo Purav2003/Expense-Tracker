@@ -7,6 +7,8 @@ import Expense from './Pages/Expense';
 import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
 import './App.css'
 import IncomeSearch from './Components/IncomeSearch';
+import ExpenseSearch from './Components/ExpenseSearch';
+import Profile from './Pages/Profile';
 function App() {
   return (
     <>
@@ -17,8 +19,9 @@ function App() {
         <Route path='/dashboard' element={<Dashboard />}></Route>
         <Route path='/income' element={<Income />}></Route>
         <Route path='/expense' element={<Expense />}></Route>
+        <Route path='/profile' element={<Profile />}></Route>
         <Route path='/search-income' element={<IncomeSearch />}></Route>
-        
+        <Route path='/search-expense' element={<ExpenseSearch />}></Route>      
       </Routes>
        
     </Router>

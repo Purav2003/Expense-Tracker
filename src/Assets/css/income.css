@@ -16,8 +16,9 @@
         display: none !important;
     }
     .search-bar{
-        width: 190px !important;
-        margin-left: 50px !important;
+        width: 90% !important;
+        margin-left: -0px !important;
+        margin-top:20px !important;
     }
     .main-heading-mob{
         margin-top: 40px !important;

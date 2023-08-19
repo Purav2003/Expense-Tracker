@@ -31,7 +31,7 @@ const Income = () =>{
                     <div><Toaster /></div>
 
     <div className="sm:ml-64"><br></br><br></br> 
-    <div className="flex px-8 main-heading-mob">
+    <div className="lg:flex px-8 main-heading-mob">
     <h1 className="text-4xl font-bold">Income </h1>    
     <div className="ml-[33vw] justify-end	relative lg:w-[44%] bg-[#eee] rounded-lg shadow-md px-4 py-2 search-bar">
 

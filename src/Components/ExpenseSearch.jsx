@@ -12,24 +12,24 @@ import Sidebar from "./Sidebar";
 import '../Assets/css/income.css';
 import '../index.css';
 
-const IncomeSearch = () => {
+const ExpenseSearch = () => {
     const [data, setData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(false);
     const [totalPages, setTotalPages] = useState(1);
-    let search = localStorage.getItem('income-trial');
+    let search = localStorage.getItem('expense-trial');
 
     const fetchData = async (page) => {
       let id = localStorage.getItem('createdBy');
-      const API_URL = 'http://localhost:5000/api/v1/income/'+id+'?search='+search+'&page='+page;
+      const API_URL = 'http://localhost:5000/api/v1/expense/'+id+'?search='+search+'&page='+page;
     console.log(API_URL)
       try {
         const response = await fetch(API_URL);
         const datas = await response.json();
-        console.log(datas.income)
-        setData(datas.income);
+        console.log(datas)
+        setData(datas.expenses);
         setTotalPages(datas.totalPages);
-        setLoading(false) 
+        setLoading(false)
       } catch (error) {
             console.log(error)
       }
@@ -39,7 +39,7 @@ const IncomeSearch = () => {
       console.log(e);
       let config = {
         method: 'delete',
-        url: 'http://localhost:5000/api/v1/income/' + e,
+        url: 'http://localhost:5000/api/v1/expense/' + e,
         headers: {
           'Content-Type': 'application/json'
         },
@@ -55,10 +55,10 @@ const IncomeSearch = () => {
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const search = document.querySelector('.search-income').value
-        localStorage.setItem("income-trial",search)
+        const search = document.querySelector('.search-expense').value
+        localStorage.setItem("expense-trial",search)
         if(search!==""){
-            window.location.replace('search-income')}
+            window.location.replace('search-expense')}
             else{
               document.getElementById('errora').innerHTML = '<h1 className="pt-[0.5vw]">Enter Something</h1>'
             }
@@ -87,13 +87,13 @@ const IncomeSearch = () => {
     <div className="sm:ml-64"><br></br><br></br> 
     <div className="lg:flex px-8 main-heading-mob">
     <h1 className="text-2xl font-bold">Search Result Of <i className="font-semibold">"{search}"</i> </h1>  
-    <div className="ml-[22vw] justify-end	relative lg:w-[44%] bg-[#eee] rounded-lg shadow-md px-4 py-2 search-bar">
+    <div className="ml-[20vw] justify-end	relative lg:w-[44%] bg-[#eee] rounded-lg shadow-md px-4 py-2 search-bar">
     <form onSubmit={handleSubmit}>
 
       <input
         type="text"
         placeholder="Type to Search"
-        className="border-none outline-none bg-transparent pr-8 w-[90%] search-income"
+        className="border-none outline-none bg-transparent pr-8 w-[90%] search-expense"
       />      
       <div className="absolute inset-y-0 right-0 flex items-center pr-3 ">
         <button type="submit"><iconf.FiSearch className="h-5 w-5 text-gray-500" /></button>
@@ -109,7 +109,7 @@ const IncomeSearch = () => {
               <table className="table-income rounded-lg lg:w-full shadow-lg bg-white overflow-scroll text-sm text-left">
                 <thead className="pt-4 text-xs text-gray-700 uppercase">
                   <tr className="text-[#404040] text-[14px]">
-                    <th scope="col" className="px-6 py-3 text-center  ">
+                  <th scope="col" className="px-6 py-3 text-center  ">
                       Sr.No
                     </th>
                     <th scope="col" className="px-6 py-3 text-center">
@@ -122,10 +122,13 @@ const IncomeSearch = () => {
                       Mode
                     </th>
                     <th scope="col" className="px-6 py-3 text-center">
-                      From
+                      To
                     </th>
                     <th scope="col" className="px-6 py-3 text-center">
                       Description
+                    </th>
+                    <th scope="col" className="px-6 py-3 text-center">
+                      Category
                     </th>
                     <th className="px-6 py-3"></th>
                   </tr>
@@ -139,7 +142,7 @@ const IncomeSearch = () => {
                     </tr>
                   ) :(
                     data.map((tables) => {
-                      const { _id, description, amount, date, mode, from } = tables;
+                      const { _id, description, amount, date, mode, to,category } = tables;
                       count_table = count_table + 1;
                       return (
                         <tr className="text-[16px] hover:bg-gray-100 bg-white text-black border-b dark:border-gray-700 text-center">
@@ -147,8 +150,9 @@ const IncomeSearch = () => {
                           <td>{date.slice(0, 10).split("-").reverse().join("-")}</td>
                           <td>&#8377; {amount}</td>
                           <td>{mode}</td>
-                          <td>{from}</td>
+                          <td>{to}</td>
                           <td>{description}</td>
+                          <td>{category}</td>
                           <td onClick={() => deleteData(_id)}>
                             <button className="rounded-md px-4 py-2 text-[15px]">
                               <icons.RiDeleteBinLine className="hover:cursor-pointer text-[20px]" />
@@ -188,4 +192,4 @@ const IncomeSearch = () => {
     )
 };
 
-export default IncomeSearch;
+export default ExpenseSearch;
