@@ -44,12 +44,18 @@ const getSingleIncome = async (req,res)=>{
                 $regex: new RegExp(search,"i")
             }
         })
+        const result1 = await Income.find({
+            createdBy:id,
+            description:{
+                $regex: new RegExp(search,"i")
+            }
+        })
         const page = Number(req.query.page) || 1
         const limit = Number(req.query.limit) || 5
         const skip = (page-1)*limit
         result = result.skip(skip).limit(limit)
         const income = await result.sort({createdAt:-1})
-        totalItems = income.length
+        totalItems = result1.length
         const totalPages = Math.ceil(totalItems / limit);
         res.send({totalItems,totalPages,income,currentPage:page,count:income.length,success:true,status:200})
     }
