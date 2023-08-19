@@ -10,36 +10,20 @@ import gif from '../Assets/images/loading.gif';
 import '../index.css'
 
 
-const IncomeTable = () => {
-  const [data, setData] = useState([]);
+const ExpenseTable = () => {
+  const [dataexp, setDataExp] = useState([]);
   const [currentPage, setCurrentPage] = useState(1)
   const [loading, setLoading] = useState(false)
   const [totalPages, setTotalPages] = useState(1);
-  let counter = 1
-  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
-  const RADIAN = Math.PI / 180;
-  const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    const y = cy + radius * Math.sin(-midAngle * RADIAN);
-  
-    return (
-      <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-        {`${(percent * 100).toFixed(0)}%`}
-      </text>
-    );
-  };
 
   const fetchData = async (page) => {
     let id = localStorage.getItem('createdBy');
-    counter = 1
-    const API_URL = 'http://localhost:5000/api/v1/income/' + id + '?page=' + page;
+    const API_URL = 'http://localhost:5000/api/v1/expense/' + id + '?page=' + page;
     fetch(API_URL)
       .then((res) => res.json())
       .then((datas) => {
         setLoading(false);
-        setData(datas.income);
-
+        setDataExp(datas.expenses);
         setTotalPages(datas.totalPages);
       })
       .catch((error) => {
@@ -50,7 +34,7 @@ const IncomeTable = () => {
     console.log(e)
     let config = {
       method: 'delete',
-      url: 'http://localhost:5000/api/v1/income/' + e,
+      url: 'http://localhost:5000/api/v1/expense/' + e,
       headers: {
         'Content-Type': 'application/json'
       },
@@ -83,12 +67,33 @@ const IncomeTable = () => {
     setCurrentPage(currentPage - 1)
 
   }
+   // Define custom colors for the pie chart
+   const colors = ['#8884d8', '#82ca9d', '#ffc658', '#0088FE', '#00C49F', '#FFBB28'];
+
+   // Calculate the distribution of amounts across different categories
+   const calculateCategoryDistribution = () => {
+     const categoryDistribution = {};
+ 
+     dataexp.forEach((expense) => {
+       const { category, amount } = expense;
+       if (categoryDistribution[category]) {
+         categoryDistribution[category] += amount;
+       } else {
+         categoryDistribution[category] = amount;
+       }
+     });
+ 
+     return Object.keys(categoryDistribution).map((category) => ({
+       name: category,
+       value: categoryDistribution[category],
+     }));
+   };
 
   return (
     <>
       <br></br><br></br>
       <div><Toaster /></div>
-{data.length>0?
+
       <div className="relative px-4">
         <div>
          <div className="table-income">
@@ -103,16 +108,18 @@ const IncomeTable = () => {
                 </th>
                 <th scope="col" className="px-6 py-3 text-center">
                   Amount
-                </th>
-             
+                </th>            
                 <th scope="col" className="px-6 py-3 text-center">
                   Mode
                 </th>
                 <th scope="col" className="px-6 py-3 text-center">
-                  From
+                  To
                 </th>
                 <th scope="col" className="px-6 py-3 text-center">
                   Description
+                </th>
+                <th scope="col" className="px-6 py-3 text-center">
+                  Category
                 </th>
                 <th className="px-6 py-3"></th>
               </tr>
@@ -120,8 +127,8 @@ const IncomeTable = () => {
             <tbody className="w-[10%]">
 
               {
-                data.map((tables) => {
-                  const { _id, description, amount, date, mode, from } = tables
+                dataexp.map((tablesa) => {
+                  const { _id, description, amount, date, mode, to, category } = tablesa
                   count_table = count_table + 1
                   return (
                     <tr className="text-[16px] hover:bg-gray-100 bg-white text-black border-b dark:border-gray-700 text-center">
@@ -129,8 +136,9 @@ const IncomeTable = () => {
                       <td>{date.slice(0, 10).split("-").reverse().join("-")}</td>
                       <td>&#8377; {amount}</td>
                       <td>{mode}</td>
-                      <td>{from}</td>
+                      <td>{to}</td>
                       <td>{description}</td>
+                      <td>{category}</td>
                       <td onClick={() => deleteData(_id)}><button className="rounded-md px-4 py-2 text-[15px]"><icons.RiDeleteBinLine className="hover:cursor-pointer text-[20px]" /></button></td>
                     </tr>
                   )
@@ -145,55 +153,39 @@ const IncomeTable = () => {
         </div>
 
         <br></br>
-        <div className="bg-white lg:flex mt-[10px] bg-white">    
-          <div className="barchart">
-          <ResponsiveContainer width="100%" height={300}>
-         <BarChart
-          data={data}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <XAxis dataKey="from" />
-          <YAxis datakey="description"/>
-          <Tooltip />
-          <Bar dataKey="amount" fill="#8884d8" />
-        </BarChart>
+        <div className="bg-white lg:flex mt-[10px] bg-white">              
+
+      <div className="piechart">
+        <ResponsiveContainer width="100%" height={300}>
+          <PieChart>
+            <Pie
+              data={calculateCategoryDistribution()}
+              dataKey="value"
+              nameKey="name"
+              cx="50%"
+              cy="50%"
+              outerRadius={80}
+              fill="#8884d8"
+              label={({ name, percent }) => `${name} ${(percent * 100).toFixed(2)}%`}
+            >
+              {
+                calculateCategoryDistribution().map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+                ))
+              }
+            </Pie>
+            <Tooltip />
+            <Legend />
+          </PieChart>
         </ResponsiveContainer>
-        </div>
-        <div className="piechart">
-        <ResponsiveContainer width="100%" height={400}>
-
-        <PieChart className="ml-[90px] mt-[-50px]">
-          <Pie
-            data={data}
-            cx="50%"
-            cy="50%"
-            labelLine={false}
-            label={renderCustomizedLabel}
-            outerRadius={130}
-            fill="#8884d8"
-            dataKey="amount"
-          >
-            {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-            ))}
-          </Pie>
-<Tooltip />
-        </PieChart>
-        </ResponsiveContainer>
-        </div>
-        </div>
+      </div>
+        
+          </div>
 
 
-      </div>:<div>
-              <h1 className="text-center text-2xl font-bold">NO DATA</h1>
-        </div>}
+      </div>
     </>
   )
 }
 
-export default IncomeTable
+export default ExpenseTable
