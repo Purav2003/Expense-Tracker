@@ -55,8 +55,20 @@ const deleteIncome = async (req,res)=>{
     res.send({msg:"Item deleted successfully",success:true,status:200})
 }
 
+const search = async (req,res)=>{
+    const id = req.params.id
+    const result = await Income.find({
+        createdBy:id,
+        description:{
+            $regex: new RegExp(req.body.search,"i")
+        }
+    })
+    res.send({result,success:true,status:200})
+}
+
 module.exports = {
     addIncome,
     getSingleIncome,
-    deleteIncome
+    deleteIncome,
+    search
 }
