@@ -64,9 +64,9 @@ const search = async (req,res)=>{
         }
     })
     if(!result){
-        res.send({result,success:false,status:404})
+        res.send({count:result.length,result,success:false,status:404})
     } else{
-        res.send({result,success:true,status:200})
+        res.send({count:result.length,result,success:true,status:200})
     }
 }
 
