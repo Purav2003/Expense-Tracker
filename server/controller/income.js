@@ -45,7 +45,7 @@ const getSingleIncome = async (req, res) => {
                     $or: [
                         {description: {$regex: new RegExp(search, "i")}},
                         {mode: {$regex: new RegExp(search, "i")}},
-                        {from: {$regex: new RegExp(search, "i")}}
+                        {from: {$regex: new RegExp(search, "i")}},
                     ]
                 }   
             ]
