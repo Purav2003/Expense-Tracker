@@ -47,12 +47,15 @@ const ExpenseForm = () => {
                     .then((response) => {
                         count_success = 1
                         if (JSON.stringify(response.status) === '200') {
-                            toast.success('Successfully Added');
+                            toast.success("Succesfully Added",{duration: 1500})
+                            
                             const inputs = document.querySelectorAll('.description, .amount, .date,.from');
                             inputs.forEach(input => {
                                 input.value = '';
                             });
-                            window.location.reload()
+                            setTimeout(() => {
+                                window.location.reload()
+                            }, 2000); 
                         }
                         if (JSON.stringify(response.data.status) === '400') {
                             toast.error('Description Is More Than 25 Letters');
@@ -90,6 +93,7 @@ const ExpenseForm = () => {
             <div><Toaster /></div>
 
             <div className="w-full max-w-xs">
+
                 <form onSubmit={handleSubmit} className="bg-white rounded w-[40vw] px-8 pt-6 pb-8 mb-4">
 
                     <div className="mb-4 form-field">

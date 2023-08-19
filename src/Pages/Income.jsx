@@ -5,6 +5,7 @@ import * as icon from "react-icons/fi"
 import IncomeBar from "../Components/IncomeBar"
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { Toaster } from "react-hot-toast"
 const Income = () =>{
     let token = localStorage.getItem("Token")
     if(token === null){
@@ -12,7 +13,10 @@ const Income = () =>{
     }
     
     return(
+      
         <div className="bg-white">            
+                    <div><Toaster /></div>
+
     <div className="sm:ml-64"><br></br><br></br> 
     <div className="flex px-8 main-heading-mob">
     <h1 className="text-4xl font-bold">Income </h1>

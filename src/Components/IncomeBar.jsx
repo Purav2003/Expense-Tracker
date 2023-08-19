@@ -7,6 +7,10 @@ import IncomeForm from "./IncomeForm"
 import IncomeTable from "./IncomeTable"
 import IncomeChart from "./IncomeChart"
 import '../Assets/css/income.css'
+import IncomeTableWeek from "./IncomeTableWeek"
+import IncomeTableMonth from "./IncomeTableMonth"
+import IncomeTableSix from "./IncomeTableSix"
+import IncomeTableYear from "./IncomeTableYear"
 
 const IncomeBar = () => {
     const [activebar, setActivebar] = useState('all');
@@ -75,10 +79,10 @@ const IncomeBar = () => {
             <div>
                         <div id="all" className="all"><IncomeTable /></div>
                         <div id="add-income" className="add-income hidden"><IncomeForm /></div>
-                        <div id="one-week" className="one-week hidden"><IncomeTable /></div>
-                        <div id="one-month" className="one-month hidden"><IncomeChart /></div>
-                        <div id="six-month" className="six-month hidden">Six Months</div>
-                        <div id="one-year" className="one-year hidden">One Year</div>
+                        <div id="one-week" className="one-week hidden"><IncomeTableWeek /></div>
+                        <div id="one-month" className="one-month hidden"><IncomeTableMonth /></div>
+                        <div id="six-month" className="six-month hidden"><IncomeTableSix /></div>
+                        <div id="one-year" className="one-year hidden"><IncomeTableYear /></div>
 
             </div>
         </>
