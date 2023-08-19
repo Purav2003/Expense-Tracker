@@ -59,7 +59,6 @@ const Sidebar = () => {
                 <div className="fixed bottom-0 left-0 w-full h-16">
                     <div className="grid bg-[white] h-full max-w-lg grid-cols-5 mx-auto font-medium  border border-black border-r-0 border-l-0 border-b-0 ">
                     {navLinks.map((link) => (
-                        link.title
                             <button key={link.id} className={`${active === link.title
                                 ? "text-white text-hello border border-black border-t-2 border-r-0 border-l-0 border-b-0"
                                 : "text-secondary text-by"} inline-flex flex-col items-center justify-center px-5 group`}
