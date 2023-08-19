@@ -37,7 +37,7 @@ const Profile = () => {
                 <center>{data.name}<br></br>
                 {data.mobile}<br></br>
                 {data.email}<br></br>
-                {data.createdAt.slice(0,10)}</center>
+                {data.createdAt?.slice(0,10)}</center>
                 <Sidebar />
             </div>
         </div>
