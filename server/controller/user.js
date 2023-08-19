@@ -1,5 +1,6 @@
 require("express-async-errors")
 const User = require("../models/user")
+const sendEmail = require("./emailctrl")
 
 const signup = async (req, res) => {
     const { numberError, passwordError, emailError } = req.user
@@ -10,6 +11,13 @@ const signup = async (req, res) => {
             if (!phoneexist) {
                 const user = await User.create(req.body)
                 const token = user.createJWT()
+                const data = {
+                    to:req.body.email,
+                    text:`Hey ${req.body.name}`,
+                    subject:"Welcome to Expense Tracker",
+                    html:"<h3>Congrulations you have successfully registered to Expense Tracker</h3>"
+                }
+                sendEmail(data)
                 res.send({ user, token, success: true, status: 200 })
             } else {
                 res.send({ msg: "Phone Number already exists", success: false, status: 403 })
