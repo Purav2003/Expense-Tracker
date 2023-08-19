@@ -10,7 +10,7 @@ const Sidebar = () => {
     return (
         <div>
             <aside id="default-sidebar" className="fixed top-0 left-0 z-40 w-75 h-screen -translate-x-full sm:translate-x-0" aria-label="Sidebar">
-                <div className="h-full px-3 py-4 overflow-y-auto bg-[#025FBB]">
+                <div className="h-full px-3 py-4 overflow-y-auto " style={{background:'#009688'}}>
                     <div>
                         <br></br>   <h1 className='font-bold text-[29px] text-white'>Expense Tracker</h1><br></br><hr></hr><br></br>
                     </div>
@@ -31,7 +31,7 @@ const Sidebar = () => {
             <div className="p-4 sm:ml-64">
             </div>
             <div className='mobile-nav fixed top-0 w-full h-16'>
-                <div className="h-full bg-[#025FBB]">
+                <div className="h-full bg-[rgba(0, 116, 228, 0.8)]">
                     <h1 className='font-bold text-white items-center justify-center py-5 px-3'>Expense Tracker</h1>
                 </div>
             </div>
