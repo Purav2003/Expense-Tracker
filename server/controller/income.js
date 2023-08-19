@@ -21,6 +21,18 @@ const getSingleIncome = async (req,res)=>{
         const skip = (page-1)*limit
         const totalPages = Math.ceil(totalItems / limit);
         result = result.skip(skip).limit(limit)
+        const filterDate = req.query.daysAgo
+        const daysAgo = new Date()
+        if(filterDate==="oneweek"){
+            daysAgo.setDate(Date.now() - 7)
+            result = result.find({createdAt:{$gt:daysAgo}})
+        } else if(filterDate==="onemonth"){
+            daysAgo.setDate(Date.now() - 30)
+            result = result.find({createdAt:{$gt:daysAgo}})
+        } else if(filterDate==="oneyear"){
+            daysAgo.setDate(Date.now() - 365)
+            result = result.find({createdAt:{$gt:daysAgo}})
+        }
         const income = await result.sort({createdAt:-1})
         res.send({totalItems,totalPages,income,currentPage:page,count:income.length,success:true,status:200})
     }
