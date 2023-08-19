@@ -58,8 +58,14 @@ const getAllUser = async (req, res) => {
     res.send({ users, count: users.length, success: true })
 }
 
+const profile  = async (req,res)=>{
+    const user = await User.findById(req.params.id)
+    res.send({user,success:true,status:200})
+}
+
 module.exports = {
     signup,
     signin,
-    getAllUser
+    getAllUser,
+    profile
 }
