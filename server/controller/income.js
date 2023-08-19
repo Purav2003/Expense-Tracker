@@ -44,12 +44,14 @@ const getSingleIncome = async (req,res)=>{
                 $regex: new RegExp(search,"i")
             }
         })
-        totalItems = await Income.find({
-            createdBy:id,
-            description:{
-                $regex: new RegExp(req.body.search,"i")
-            }
-        }).countDocuments
+        const page = Number(req.query.page) || 1
+        const limit = Number(req.query.limit) || 5
+        const skip = (page-1)*limit
+        result = result.skip(skip).limit(limit)
+        const income = await result.sort({createdAt:-1})
+        totalItems = income.length
+        const totalPages = Math.ceil(totalItems / limit);
+        res.send({totalItems,totalPages,income,currentPage:page,count:income.length,success:true,status:200})
     }
     if(!result){
         res.send({result,count:0,success:true,status:200})
@@ -60,7 +62,7 @@ const getSingleIncome = async (req,res)=>{
         const totalPages = Math.ceil(totalItems / limit);
         result = result.skip(skip).limit(limit)
         const income = await result.sort({createdAt:-1})
-        res.send({totalItems:income.length,totalPages,income,currentPage:page,count:income.length,success:true,status:200})
+        res.send({totalItems,totalPages,income,currentPage:page,count:income.length,success:true,status:200})
     }
 }
 
