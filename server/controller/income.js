@@ -63,7 +63,11 @@ const search = async (req,res)=>{
             $regex: new RegExp(req.body.search,"i")
         }
     })
-    res.send({result,success:true,status:200})
+    if(!result){
+        res.send({result,success:false,status:404})
+    } else{
+        res.send({result,success:true,status:200})
+    }
 }
 
 module.exports = {
