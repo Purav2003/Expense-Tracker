@@ -2,8 +2,9 @@ import axios from "axios"
 import toast, { Toaster } from 'react-hot-toast';
 
 const ExpenseForm = () => {
-
+    var todayDate = new Date().toISOString().slice(0, 10);
     const handleSubmit = async (e) => {
+
         e.preventDefault()
         const description = document.querySelector('.description').value
         const amount = document.querySelector('.amount').value
@@ -53,9 +54,8 @@ const ExpenseForm = () => {
                             inputs.forEach(input => {
                                 input.value = '';
                             });
-                            setTimeout(() => {
-                                window.location.reload()
-                            }, 2000); 
+                            window.location.reload()
+                            
                         }
                         if (JSON.stringify(response.data.status) === '400') {
                             toast.error('Description Is More Than 25 Letters');
@@ -113,7 +113,7 @@ const ExpenseForm = () => {
                         <label className="block text-black-700 text-sm font-bold mb-2">
                             Date
                         </label>
-                        <input className="date shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="datetime-local" placeholder="Amount" required />
+                        <input className="date shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="date" id="date" placeholder="Date" max={todayDate}  required />
                     </div>
                     <div className="mb-4 form-field">
                         <label className="block text-black-700 text-sm font-bold mb-2">

@@ -14,6 +14,7 @@ import '../Assets/css/income.css';
 import '../index.css';
 
 const ExpenseTableMonth = () => {
+
   const [dataexp, setDataExp] = useState([]);
   const [currentPage, setCurrentPage] = useState(1)
   const [loading, setLoading] = useState(false)
@@ -22,7 +23,6 @@ const ExpenseTableMonth = () => {
   const fetchData = async (page) => {
     let id = localStorage.getItem('createdBy');
     const API_URL = 'http://localhost:5000/api/v1/expense/' + id + '?page=' + page + '&daysAgo=onemonth';
-
     try {
       const response = await fetch(API_URL);
       const datas = await response.json();
