@@ -57,16 +57,28 @@ const deleteIncome = async (req,res)=>{
 
 const search = async (req,res)=>{
     const id = req.params.id
-    const result = await Income.find({
+    let result = Income.find({
         createdBy:id,
         description:{
             $regex: new RegExp(req.body.search,"i")
         }
     })
+    let totalItems = await Income.find({
+        createdBy:id,
+        description:{
+            $regex: new RegExp(req.body.search,"i")
+        }
+    }).countDocuments()
     if(!result){
         res.send({count:result.length,result,success:false,status:404})
     } else{
-        res.send({count:result.length,result,success:true,status:200})
+        const page = Number(req.query.page) || 1
+        const limit = Number(req.query.limit) || 5
+        const skip = (page-1)*limit
+        const totalPages = Math.ceil(totalItems / limit);
+        result = result.skip(skip).limit(limit)
+        result = await result.sort({createdAt:-1})
+        res.send({totalItems,totalPages,currentPage:page,count:result.length,result,success:true,status:200})
     }
 }
 
