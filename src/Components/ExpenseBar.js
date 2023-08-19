@@ -9,7 +9,7 @@ import ExpenseChart from "./ExpenseChart"
 import '../Assets/css/income.css'
 
 const ExpenseBar = () => {
-    const [activebar, setActivebar] = useState('one-week');
+    const [activebar, setActivebar] = useState('all');
     const data = (datas) =>{
         let all = ['add-expense','one-week','one-month','six-month','one-year']    
         console.log(datas)
@@ -73,8 +73,9 @@ const ExpenseBar = () => {
                     </select>
                 </div>
             <div>
+                        <div id="all" className="all"><ExpenseTable /></div>
                         <div id="add-expense" className="add-expense hidden"><ExpenseForm /></div>
-                        <div id="one-week" className="one-week"><ExpenseTable /></div>
+                        <div id="one-week" className="one-week hidden"><ExpenseTable /></div>
                         <div id="one-month" className="one-month hidden"><ExpenseChart /></div>
                         <div id="six-month" className="six-month hidden">Six Months</div>
                         <div id="one-year" className="one-year hidden">One Year</div>

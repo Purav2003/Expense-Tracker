@@ -3,6 +3,8 @@ import { Link } from "react-router-dom"
 import IncomeForm from "../Components/IncomeForm"
 import * as icon from "react-icons/fi"
 import IncomeBar from "../Components/IncomeBar"
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 const Income = () =>{
     let token = localStorage.getItem("Token")
     if(token === null){

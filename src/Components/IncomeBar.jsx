@@ -9,7 +9,7 @@ import IncomeChart from "./IncomeChart"
 import '../Assets/css/income.css'
 
 const IncomeBar = () => {
-    const [activebar, setActivebar] = useState('one-week');
+    const [activebar, setActivebar] = useState('all');
     const data = (datas) =>{
         let all = ['add-income','one-week','one-month','six-month','one-year']    
         console.log(datas)
@@ -73,8 +73,9 @@ const IncomeBar = () => {
                     </select>
                 </div>
             <div>
+                        <div id="all" className="all"><IncomeForm /></div>
                         <div id="add-income" className="add-income hidden"><IncomeForm /></div>
-                        <div id="one-week" className="one-week"><IncomeTable /></div>
+                        <div id="one-week" className="one-week hidden"><IncomeTable /></div>
                         <div id="one-month" className="one-month hidden"><IncomeChart /></div>
                         <div id="six-month" className="six-month hidden">Six Months</div>
                         <div id="one-year" className="one-year hidden">One Year</div>

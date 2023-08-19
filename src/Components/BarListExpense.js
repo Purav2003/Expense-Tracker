@@ -1,5 +1,8 @@
 export const barexpLinks = [
-
+    {
+        id: "all",
+        title:"All",
+    },
     {
         id: "one-week",
         title:"1 Week",
@@ -16,10 +19,7 @@ export const barexpLinks = [
         id: "one-year",
         title:"1 Year",
     },
-    {
-        id: "one-plue-year",
-        title:"1+ Year",
-    },
+
     {
         id: "add-expense",
         title: "+ Add Expense",

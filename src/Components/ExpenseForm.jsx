@@ -1,5 +1,4 @@
 import axios from "axios"
-import { Link } from "react-router-dom"
 import toast, { Toaster } from 'react-hot-toast';
 
 const ExpenseForm = () => {
@@ -11,7 +10,10 @@ const ExpenseForm = () => {
         const date = document.querySelector('.date').value
         const modeb = document.querySelector('.modeb').value
         const to = document.querySelector('.to').value
-        const category = document.querySelector('.category').value        
+        let category = ' '
+        document.querySelector('.category').value === 'Other'? category = document.querySelector('.other').value:category = document.querySelector('.category').value
+        
+
         let token = localStorage.getItem("Token")
         let createdBy = localStorage.getItem("createdBy")
         let data = JSON.stringify({
@@ -22,7 +24,7 @@ const ExpenseForm = () => {
             "token": token,
             "to": to,
             "createdBy": createdBy,
-            "category":category
+            "category": category
         });
         console.log(data)
         if (amount < 0) {
@@ -68,6 +70,21 @@ const ExpenseForm = () => {
             });
         }
     }
+    const handleCategoryChange = (e) => {
+        const selectedCategory = e.target.value;
+    
+        if (selectedCategory === "Other") {
+          const inputOtherExpense = document.getElementById("Other");
+          if (inputOtherExpense) {
+            inputOtherExpense.classList.remove("hidden");
+          }
+        } else {
+          const inputOtherExpense = document.getElementById("Other");
+          if (inputOtherExpense) {
+            inputOtherExpense.classList.add("hidden");
+          }
+        }
+      };
     return (
         <>
             <div><Toaster /></div>
@@ -104,16 +121,18 @@ const ExpenseForm = () => {
                         <label className="block text-black-700 text-sm font-bold mb-2">
                             Category
                         </label>
-                        <select className="category border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline ">
+                        <select className="category border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline "  onChange={handleCategoryChange}>
                             <option value="select" disabled>Select</option>
                             <option value="Food" >Food</option>
                             <option value="Petrol">Petrol</option>
                             <option value="Cloths">Cloths</option>
                             <option value="Grocery">Grocery</option>
                             <option value="Other">Other</option>
-                            
-
-                        </select>                </div>
+                        </select>
+                    </div>
+                    <div className="mb-4 form-field hidden" id="Other">
+                        {/* <input className="other shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Specify Other"  required /> */}
+                    </div>
                     <div className="mb-4 form-field">
                         <label className="block text-black-700 text-sm font-bold mb-2">
                             Mode
@@ -122,7 +141,7 @@ const ExpenseForm = () => {
                             <option value="select" disabled>Select</option>
                             <option value="Online" >Online</option>
                             <option value="Offline">Offline</option>
-                        </select>
+                        </select> 
                         <div id="errora"></div>
                     </div>
                     <div className="flex form-field items-center">

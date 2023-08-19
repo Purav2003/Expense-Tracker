@@ -44,12 +44,12 @@ const IncomeForm = () => {
                     .then((response) => {
                          count_success = 1
                         if (JSON.stringify(response.data.status) === '200') {
+                            window.location.reload()
                             toast.success('Successfully Added');
-                            const inputs = document.querySelectorAll('.description, .amount, .date,.from');
+                            const inputs = document.querySelectorAll('.description, .amount, .date,.from');                        
                             inputs.forEach(input => {
                                 input.value = '';
                             });
-                            // window.location.reload()
                         }
                         if (JSON.stringify(response.data.status) === '400') {
                             toast.error('Description Is More Than 25 Letters');

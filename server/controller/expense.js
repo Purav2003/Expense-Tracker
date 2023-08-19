@@ -23,7 +23,7 @@ const getSingleExpense = async (req,res)=>{
         result = result.skip(skip).limit(limit)
         const expenses = await result.sort({createdAt:-1})
         res.send({totalItems,totalPages,expenses,currentPage:page,count:expenses.length,success:true,status:200})
-    }
+    } 
 }
 
 const deleteExpense = async (req,res)=>{

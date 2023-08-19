@@ -92,7 +92,7 @@ const ExpenseTable = () => {
       <br></br><br></br>
       <div><Toaster /></div>
 
-      <div className="relative px-4">
+      {dataexp.length>0?<div className="relative px-4">
         <div>
          <div className="table-income">
           <table className="table-income rounded-lg lg:w-full shadow-lg bg-white overflow-scroll text-sm text-left">
@@ -182,6 +182,9 @@ const ExpenseTable = () => {
 
 
       </div>
+      :<div>
+      <h1 className="text-center text-2xl font-bold">NO DATA</h1>
+</div>}
     </>
   )
 }
