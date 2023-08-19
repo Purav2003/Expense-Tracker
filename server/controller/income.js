@@ -10,10 +10,33 @@ const addIncome = async (req,res)=>{
 }
 
 const getSingleIncome = async (req,res)=>{
-    const search = req.query.search
     const id = req.params.id
     let result;
     let totalItems;
+    const filterDate = req.query.daysAgo
+    const search = req.query.search
+    let daysAgo = new Date()
+    if(filterDate==="oneweek"){
+        daysAgo.setDate(daysAgo.getDate() - 7)
+        result = Income.find({createdBy:id,date:{$gt:daysAgo}})
+        totalItems = await Income.find({createdBy:id,date:{$gt:daysAgo}}).countDocuments()
+    } else if(filterDate==="onemonth"){
+        daysAgo.setMonth(daysAgo.getMonth() - 1)
+        result = Income.find({createdBy:id,date:{$gt:daysAgo}})
+        totalItems = await Income.find({createdBy:id,date:{$gt:daysAgo}}).countDocuments()
+    } else if(filterDate==="sixmonth"){
+        daysAgo.setMonth(daysAgo.getMonth() - 6)
+        result = Income.find({createdBy:id,date:{$gt:daysAgo}})
+        totalItems = await Income.find({createdBy:id,date:{$gt:daysAgo}}).countDocuments()
+    } 
+    else if(filterDate==="oneyear"){
+        daysAgo.setFullYear(daysAgo.getFullYear() - 1)
+        result = Income.find({createdBy:id,date:{$gt:daysAgo}})
+        totalItems = await Income.find({createdBy:id,date:{$gt:daysAgo}}).countDocuments()
+    } else{
+        result = Income.find({createdBy:id})
+        totalItems = await Income.find({createdBy:id}).countDocuments()
+    }
     if(search){
         result = Income.find({
             createdBy:id,
@@ -27,52 +50,17 @@ const getSingleIncome = async (req,res)=>{
                 $regex: new RegExp(req.body.search,"i")
             }
         }).countDocuments()
-        if(!result){
-            res.send({count:result.length,result,success:false,status:404})
-        } else{
-            const page = Number(req.query.page) || 1
-            const limit = Number(req.query.limit) || 5
-            const skip = (page-1)*limit
-            const totalPages = Math.ceil(totalItems / limit);
-            result = result.skip(skip).limit(limit)
-            result = await result.sort({createdAt:1})
-            res.send({totalItems,totalPages,currentPage:page,count:result.length,result,success:true,status:200})
-        }
+    }
+    if(!result){
+        res.send({result,count:0,success:true,status:200})
     } else{
-        const filterDate = req.query.daysAgo
-        let daysAgo = new Date()
-        if(filterDate==="oneweek"){
-            daysAgo.setDate(daysAgo.getDate() - 7)
-            result = Income.find({createdBy:id,date:{$gt:daysAgo}})
-            totalItems = await Income.find({createdBy:id,date:{$gt:daysAgo}}).countDocuments()
-        } else if(filterDate==="onemonth"){
-            daysAgo.setMonth(daysAgo.getMonth() - 1)
-            result = Income.find({createdBy:id,date:{$gt:daysAgo}})
-            totalItems = await Income.find({createdBy:id,date:{$gt:daysAgo}}).countDocuments()
-        } else if(filterDate==="sixmonth"){
-            daysAgo.setMonth(daysAgo.getMonth() - 6)
-            result = Income.find({createdBy:id,date:{$gt:daysAgo}})
-            totalItems = await Income.find({createdBy:id,date:{$gt:daysAgo}}).countDocuments()
-        } 
-        else if(filterDate==="oneyear"){
-            daysAgo.setFullYear(daysAgo.getFullYear() - 1)
-            result = Income.find({createdBy:id,date:{$gt:daysAgo}})
-            totalItems = await Income.find({createdBy:id,date:{$gt:daysAgo}}).countDocuments()
-        } else{
-            result = Income.find({createdBy:id})
-            totalItems = await Income.find({createdBy:id}).countDocuments()
-        }
-        if(!result){
-            res.send({result,count:0,success:true,status:200})
-        } else{
-            const page = Number(req.query.page) || 1
-            const limit = Number(req.query.limit) || 5
-            const skip = (page-1)*limit
-            const totalPages = Math.ceil(totalItems / limit);
-            result = result.skip(skip).limit(limit)
-            const income = await result.sort({createdAt:-1})
-            res.send({totalItems,totalPages,income,currentPage:page,count:income.length,success:true,status:200})
-        }
+        const page = Number(req.query.page) || 1
+        const limit = Number(req.query.limit) || 5
+        const skip = (page-1)*limit
+        const totalPages = Math.ceil(totalItems / limit);
+        result = result.skip(skip).limit(limit)
+        const income = await result.sort({createdAt:-1})
+        res.send({totalItems,totalPages,income,currentPage:page,count:income.length,success:true,status:200})
     }
 }
 
