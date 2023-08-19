@@ -11,8 +11,31 @@ const addIncome = async (req,res)=>{
 
 const getSingleIncome = async (req,res)=>{
     const id = req.params.id
-    let result = Income.find({createdBy:id})
-    let totalItems = await Income.find({createdBy:id}).countDocuments()
+    let result;
+    let totalItems;
+    const filterDate = req.query.daysAgo
+    let daysAgo = new Date()
+    if(filterDate==="oneweek"){
+        daysAgo.setDate(daysAgo.getDate() - 7)
+        result = Income.find({createdBy:id,date:{$gt:daysAgo}})
+        totalItems = await Income.find({createdBy:id,date:{$gt:daysAgo}}).countDocuments()
+    } else if(filterDate==="onemonth"){
+        daysAgo.setMonth(daysAgo.getMonth() - 1)
+        result = Income.find({createdBy:id,date:{$gt:daysAgo}})
+        totalItems = await Income.find({createdBy:id,date:{$gt:daysAgo}}).countDocuments()
+    } else if(filterDate==="sixmonth"){
+        daysAgo.setMonth(daysAgo.getMonth() - 6)
+        result = Income.find({createdBy:id,date:{$gt:daysAgo}})
+        totalItems = await Income.find({createdBy:id,date:{$gt:daysAgo}}).countDocuments()
+    } 
+    else if(filterDate==="oneyear"){
+        daysAgo.setFullYear(daysAgo.getFullYear() - 1)
+        result = Income.find({createdBy:id,date:{$gt:daysAgo}})
+        totalItems = await Income.find({createdBy:id,date:{$gt:daysAgo}}).countDocuments()
+    } else{
+        result = Income.find({createdBy:id})
+        totalItems = await Income.find({createdBy:id}).countDocuments()
+    }
     if(!result){
         res.send({result,count:0,success:true,status:200})
     } else{
@@ -21,18 +44,6 @@ const getSingleIncome = async (req,res)=>{
         const skip = (page-1)*limit
         const totalPages = Math.ceil(totalItems / limit);
         result = result.skip(skip).limit(limit)
-        const filterDate = req.query.daysAgo
-        const daysAgo = new Date()
-        if(filterDate==="oneweek"){
-            daysAgo.setDate(Date.now() - 7)
-            result = result.find({createdAt:{$gt:daysAgo}})
-        } else if(filterDate==="onemonth"){
-            daysAgo.setDate(Date.now() - 30)
-            result = result.find({createdAt:{$gt:daysAgo}})
-        } else if(filterDate==="oneyear"){
-            daysAgo.setDate(Date.now() - 365)
-            result = result.find({createdAt:{$gt:daysAgo}})
-        }
         const income = await result.sort({createdAt:-1})
         res.send({totalItems,totalPages,income,currentPage:page,count:income.length,success:true,status:200})
     }
