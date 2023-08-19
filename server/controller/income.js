@@ -77,7 +77,7 @@ const search = async (req,res)=>{
         const skip = (page-1)*limit
         const totalPages = Math.ceil(totalItems / limit);
         result = result.skip(skip).limit(limit)
-        result = await result.sort({createdAt:-1})
+        result = await result.sort({createdAt:1})
         res.send({totalItems,totalPages,currentPage:page,count:result.length,result,success:true,status:200})
     }
 }
