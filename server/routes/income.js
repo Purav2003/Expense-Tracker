@@ -4,6 +4,5 @@ const {addIncome,getSingleIncome,deleteIncome,search} = require("../controller/i
 
 router.route("/").post(addIncome)
 router.route("/:id").get(getSingleIncome).delete(deleteIncome)
-router.route("/search/:id").post(search)
 
 module.exports = router
