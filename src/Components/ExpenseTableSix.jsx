@@ -13,15 +13,16 @@ import Skeleton from "react-loading-skeleton";
 import '../Assets/css/income.css';
 import '../index.css';
 
-const ExpenseTableWeek = () => {
+const ExpenseTableSix = () => {
 
   const [dataexp, setDataExp] = useState([]);
   const [currentPage, setCurrentPage] = useState(1)
   const [loading, setLoading] = useState(false)
   const [totalPages, setTotalPages] = useState(1);
+
   const fetchData = async (page) => {
     let id = localStorage.getItem('createdBy');
-    const API_URL = 'http://localhost:5000/api/v1/expense/' + id + '?page=' + page + '&daysAgo=oneweek';
+    const API_URL = 'http://localhost:5000/api/v1/expense/' + id + '?page=' + page + '&daysAgo=sixmonth';
     try {
       const response = await fetch(API_URL);
       const datas = await response.json();
@@ -216,4 +217,4 @@ const ExpenseTableWeek = () => {
   )
 }
 
-export default ExpenseTableWeek
+export default ExpenseTableSix
