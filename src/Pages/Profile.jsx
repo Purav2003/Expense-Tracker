@@ -37,7 +37,7 @@ const Profile = () => {
 
             <div className="sm:ml-64">
             <div className="lg:flex px-8 main-heading-mob">
-    <h1 className="text-4xl font-bold">Profile </h1> 
+    <h1 className="text-4xl font-bold">Profile</h1> 
     </div>
                 <br></br><br></br>
             <center>
