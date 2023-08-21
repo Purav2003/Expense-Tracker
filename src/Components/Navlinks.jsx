@@ -34,13 +34,6 @@ export const navLinks = [
     iconm:<report.HiOutlineDocumentReport className='text-white text-[25px]'></report.HiOutlineDocumentReport>,
   },
   {
-    id:"profile",
-    title:"Profile",
-    icon:<profile.CgProfile></profile.CgProfile>,
-    link:'/profile',
-    iconm:<profile.CgProfile className='text-white text-[25px]'></profile.CgProfile>,
-  },
-  {
     id:"logout",
     title:"Logout",
     icon:<logout.IoIosLogOut></logout.IoIosLogOut>,

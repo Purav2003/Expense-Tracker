@@ -1,8 +1,7 @@
 import axios from "axios"
 import signin from '../Assets/images/login.png';
-import "../Assets/css/signup.css";
 import { Link } from "react-router-dom";
-
+import "../assets/css/signup.css"
 const Login = () => {
 
   const handleSubmit = async (e) => {

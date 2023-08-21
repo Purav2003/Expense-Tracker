@@ -27,7 +27,7 @@ const IncomeTable = () => {
 
       setData(datas.income);
       setTotalPages(datas.totalPages);
-      setTimeout(() => {  setLoading(false);}, 1000);
+      setTimeout(() => {  setLoading(false);}, 600);
     } catch (error) {
       // Handle error here
     }

@@ -1,11 +1,8 @@
-import * as icon from "react-icons/bs"
 import "../Assets/css/sidebar.css"
 import { barexpLinks } from "./BarListExpense"
 import { useState } from "react"
-import { Link } from "react-router-dom"
 import ExpenseForm from "./ExpenseForm"
 import ExpenseTable from "./ExpenseTable"
-import ExpenseChart from "./ExpenseChart"
 import '../Assets/css/income.css'
 import ExpenseTableMonth from "./ExpenseTableMonth"
 import ExpenseTableWeek from "./ExpenseTableWeek"
@@ -44,8 +41,8 @@ const ExpenseBar = () => {
 
     return (
         <>
-            <div class="px-4 bg-none left-0 z-50 w-full h-16 menu-web">
-                <div class="grid h-full grid-cols-6 w-full mx-auto font-medium overflow-auto">                    
+            <div className="px-4 bg-none left-0 z-50 w-full h-16 menu-web">
+                <div className="grid h-full grid-cols-6 w-full mx-auto font-medium overflow-auto">                    
                     { barexpLinks.map((link) => (
                         <button key={link.id} type="button" className={`${activebar === link.id
                             ? "text-white bg-[#007A6D] rounded-md"
