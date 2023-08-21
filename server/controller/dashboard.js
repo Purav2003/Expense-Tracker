@@ -19,7 +19,20 @@ const dateHighlight = async (req,res)=>{
     res.send({dates:mixedData,success:true,status:200})
 }
 
+const dateData = async (req,res)=>{
+    const id = req.params.id
+    const date = new Date(req.body.date)
+    console.log(date);
+    const incomes = await Income.find({createdBy:id,date:date})
+    const expenses = await Expense.find({createdBy:id,date:date})
+    const mixedData = [...incomes,...expenses]
+    mixedData.sort((a,b)=>a.date-b.date)
+    console.log({dateData:mixedData,success:true,status:200});
+    res.send({dateData:mixedData,success:true,status:200})
+}
+
 module.exports = {
     transaction,
-    dateHighlight
+    dateHighlight,
+    dateData
 }
