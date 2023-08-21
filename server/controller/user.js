@@ -81,12 +81,34 @@ const changePassword = async (req,res)=>{
     }
 }
 
-const forgetPassword = async(re,res)=>{
+const forgetPasswordMailConfirmation = async(req,res)=>{
     const email = req.body
     const user = await User.findOne({email:email})
     if(!user){
-        res.send({msg:"User does not exist"})
+        res.send({msg:"User does not exist",success:false,status:404})
+    } else{
+        const data = {
+            to:email,
+            text:`Hey ${user.name}`,
+            subject:"Forget Password",
+            html:`<h3>You chan change your password by clicking on the given link<a href="http://localhost:5173/forget-password">Click Here</a></h3>`
+        }
+        sendEmail(data)
+        res.send({email:email,msg:"Check your mail",success:true,status:200})
     }
+}
+
+const forgetPassword = async(req,res)=>{
+    const {email,newPassword} = req.body
+    const user = await User.findOne({email:email})
+    let passwordValidation = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/.test(newPassword)
+    if(!passwordValidation){
+        res.send({msg:"Entered Password is not strong",success:false,status:403})
+    } else{
+        user.password = newPassword
+        await user.save()
+        res.send({msg:"Password Changed Successfully",success:true,status:200})
+    }  
 }
 
 module.exports = {
@@ -95,5 +117,6 @@ module.exports = {
     getAllUser,
     profile,
     changePassword,
+    forgetPasswordMailConfirmation,
     forgetPassword
 }
