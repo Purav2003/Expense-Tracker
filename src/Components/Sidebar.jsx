@@ -30,7 +30,7 @@ const Sidebar = () => {
             <aside id="default-sidebar" className="fixed top-0 left-0 z-40 w-75 h-screen -translate-x-full sm:translate-x-0" aria-label="Sidebar">
                 <div className="h-full px-3 py-4 overflow-y-auto " style={{background:'#56A054'}}>
                     <div>
-                        <br></br>   <h1 className='font-bold text-[29px] text-white'>Expense Tracker</h1><br></br><hr></hr><br></br>
+                        <br></br>   <h1 className='font-bold text-[19px] text-white'>Expense Tracker</h1><br></br><hr></hr><br></br>
                     </div>
                     <ul className="space-y-2 font-medium">
                         {navLinks.map((link) => (
@@ -49,11 +49,7 @@ const Sidebar = () => {
             </aside>            
             <div className="p-4 sm:ml-64">
             </div>
-            <div className='mobile-nav fixed top-0 w-full h-16'>
-                <div className="h-full bg-[rgba(0, 116, 228, 0.8)]">
-                    <h1 className='font-bold text-white items-center justify-center py-5 px-3'>Expense Tracker</h1>
-                </div>
-            </div>
+
             <div className='w-0 sm:w-full fixed
              bottom-0 bottom-menu'>
                 <div className="fixed bottom-0 left-0 w-full h-16">

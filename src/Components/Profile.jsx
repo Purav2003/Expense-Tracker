@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import dp from "../Assets/images/signup.png"
+import * as icon from 'react-icons/bi'
+
 const Profile = () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -34,32 +36,27 @@ const Profile = () => {
 
     return (
         <div className="bg-white">
-            <br></br><br></br>
-
-            <div className="sm:ml-64">
-            <div className="lg:flex px-8 main-heading-mob">
-    <h1 className="text-4xl font-bold">Profile</h1> 
+<div className="max-w-sm w-full flex items-center sm:max-w-md bg-white shadow-xl rounded-lg overflow-hidden">
+      <img className="w-32 h-32 mx-8 object-cover items-center" src={dp} alt={data.name} />
+      <div className="p-4">
+        <h2 className="text-xl font-semibold text-gray-800">{data.name}</h2>
+        <p className="text-sm text-gray-600 flex items-center pt-2"><icon.BiEnvelope className="text-[20px]"/>&nbsp;{data.email}</p>
+        <p className="text-sm text-gray-600 flex items-center pt-2"><icon.BiPhone className="text-[20px]"/>&nbsp; {data.mobile}</p>
+        <p className="text-sm text-gray-600 flex items-center pt-2"><icon.BiCalendar className="text-[20px]"/>&nbsp;&nbsp;{data.createdAt?.slice(0,10)}</p>
+        <div className="mt-4">
+          <a
+            href="#"
+            className="block text-blue-500 hover:underline hover:text-blue-700"
+          >
+            
+            Edit Profile
+          </a>
+        </div>
+      </div>
     </div>
-                <br></br><br></br>
-            <center>
-                <div className="shadow-2xl w-[50%]">
-                <div>
-                    <img src={dp}  height={400} width={400} className="rounded-full"/>
 
-                </div><hr></hr><br></br>
 
-                    <table>
-                            <tr><td colSpan={4} className="font-semibold">Name:</td><td> {data.name}</td></tr>
-                            <tr><td colSpan={4} className="font-semibold">Email:</td><td> {data.email}</td></tr>
-                            <tr><td colSpan={4} className="font-semibold">Phone: </td><td>{data.mobile}</td></tr>
-                            <tr><td colSpan={4} className="font-semibold">Creation Date:</td><td> {data.createdAt?.slice(0,10)}</td></tr>
-                    </table><br></br>
-                </div>
-            </center>
-            <Link to="/reset-password">Update Password</Link>
-             
-                <Sidebar />
-            </div>
+            <Sidebar />
         </div>
     )
 }

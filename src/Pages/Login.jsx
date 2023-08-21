@@ -88,7 +88,8 @@ const Login = () => {
                 </button>               
               </div>
             </form>
-            <p className="pl-[2.4vw] second-signup">New user? <Link to="/signup" className="underline text-[#1BA329]">Sign up</Link></p>
+            <p className="pl-[2.4vw] second-signup">New user? <Link to="/signup" className="underline text-[#1BA329]">Sign up</Link></p><br></br><br></br>
+            <p className="pl-[2.4vw] second-signup"><Link to="/forget-password-mail" className="underline text-[#1BA329]">Forget Password? </Link></p>
 
           </div>
         </div>

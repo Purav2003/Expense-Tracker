@@ -41,6 +41,10 @@ const ResetPassword = () =>{
                 document.getElementById('error').innerHTML = ' '
                 document.getElementById('errora').innerHTML = '<h1 className="pt-[0.5vw]">Old Password is incorrect</h1>'
               }
+              if (JSON.stringify(response.data.status) === '403') {
+                document.getElementById('error').innerHTML = ' '
+                document.getElementById('errora').innerHTML = '<h1 className="pt-[0.5vw]">Weak Password</h1>'
+              }
             })
         }
         catch (err) {

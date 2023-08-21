@@ -128,7 +128,7 @@ const Signup = () => {
                 </Link> */}
               </div>
             </form>
-            <p className="pl-[2.4vw] second-signup">Already have an account? <Link to="/" className="underline text-[#1BA329]">Login</Link></p>
+            <p className="pl-[2.4vw] second-signup">Already have an account? <Link to="/" className="underline text-[#1BA329]">Login</Link></p><br></br><br></br>
 
           </div>
         </div>

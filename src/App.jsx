@@ -9,6 +9,8 @@ import IncomeSearch from './Components/IncomeSearch';
 import ExpenseSearch from './Components/ExpenseSearch';
 import ResetPassword from './Components/ResetPassword';
 import PassSuccess from './Components/PassSuccess';
+import ForgetPassword from './Components/ForgetPassword';
+import ForgetPasswordMail from './Components/ForgetPasswordMail';
 function App() {
   return (
     <>
@@ -22,6 +24,9 @@ function App() {
         <Route path='/search-income' element={<IncomeSearch />}></Route>
         <Route path='/search-expense' element={<ExpenseSearch />}></Route>      
         <Route path='/reset-password' element={<ResetPassword />}></Route>      
+        <Route path='/forget-password-mail' element={<ForgetPasswordMail />}></Route>      
+        <Route path='/forget-password' element={<ForgetPassword />}></Route>      
+
     <Route path='/success-changed-pass' element={<PassSuccess />}></Route>
       </Routes>
        
