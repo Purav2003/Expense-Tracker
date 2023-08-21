@@ -102,6 +102,9 @@ const forgetPassword = async(req,res)=>{
     const {email,newPassword} = req.body
     const user = await User.findOne({email:email})
     let passwordValidation = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/.test(newPassword)
+    if(await user.comparePassword(newPassword)){
+        res.send({msg:"The password is same as old password",success:false,status:402})
+    }
     if(!passwordValidation){
         res.send({msg:"Entered Password is not strong",success:false,status:403})
     } else{
