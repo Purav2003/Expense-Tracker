@@ -2,6 +2,7 @@ import axios from "axios"
 import toast, { Toaster } from 'react-hot-toast';
 
 const ExpenseForm = () => {
+
     var todayDate = new Date().toISOString().slice(0, 10);
     const handleSubmit = async (e) => {
 
@@ -11,9 +12,17 @@ const ExpenseForm = () => {
         const date = document.querySelector('.date').value
         const modeb = document.querySelector('.modeb').value
         const to = document.querySelector('.to').value
-        let category = ' '
-        document.querySelector('.category').value === 'Other'? category = document.querySelector('.other').value:category = document.querySelector('.category').value
-        
+        var category= document.querySelector('.category').value
+        console.log(category)
+
+        if(document.querySelector('.category').value === 'Other'){
+            if(document.querySelector('.other').value){
+            category = document.querySelector('.other').value}
+            else{
+                document.getElementById('errorother').innerHTML = '<h1 className="pt-[0.5vw] text-[red]">Enter Something</h1>'
+            }
+        }
+       
 
         let token = localStorage.getItem("Token")
         let createdBy = localStorage.getItem("createdBy")
@@ -28,12 +37,12 @@ const ExpenseForm = () => {
             "category": category
         });
         console.log(data)
-        if (amount < 0) {
-            document.getElementById('error').innerHTML = '<h1 className="pt-[0.5vw]">Invalid Input</h1>'
+        if (amount <= 0) {
+            document.getElementById('error').innerHTML = '<h1 className="pt-[0.5vw] text-[red]">Invalid Input</h1>'
         }
 
         let count_success = 0
-        if (amount > 0) {
+        if (amount > 0 && category) {
             try {
                 let config = {
                     method: 'post',
@@ -94,7 +103,7 @@ const ExpenseForm = () => {
 
             <div className="w-full max-w-xs">
 
-                <form onSubmit={handleSubmit} className="bg-white rounded w-[40vw] px-8 pt-6 pb-8 mb-4">
+                <form onSubmit={handleSubmit} className="bg-white rounded w-[40vw] px-8 pt-6 pb-8 mb-4" >
 
                     <div className="mb-4 form-field">
                         <label className="block text-black-700 text-sm font-bold mb-2">
@@ -127,7 +136,7 @@ const ExpenseForm = () => {
                         </label>
                         <select className="category border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline "  onChange={handleCategoryChange}>
                             <option value="select" disabled>Select</option>
-                            <option value="Food" >Food</option>
+                            <option value="Food" selected>Food</option>
                             <option value="Petrol">Petrol</option>
                             <option value="Cloths">Cloths</option>
                             <option value="Grocery">Grocery</option>
@@ -135,7 +144,9 @@ const ExpenseForm = () => {
                         </select>
                     </div>
                     <div className="mb-4 form-field hidden" id="Other">
-                        <input className="other shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Specify Other"  required />
+                        <input className="other shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight" type="text" placeholder="Specify Other"/>
+                        <div id="errorother" className="text-[red]"></div>
+
                     </div>
                     <div className="mb-4 form-field">
                         <label className="block text-black-700 text-sm font-bold mb-2">
