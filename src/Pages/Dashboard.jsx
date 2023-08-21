@@ -1,6 +1,7 @@
 import Sidebar from "../Components/Sidebar"
 import Profile from "../Components/Profile"
 import RecentTransaction from "../Components/RecentTransaction"
+import CalendarDashboard from "../Components/CalendarDashboard"
 const Dashboard = () => {
 
     let token = localStorage.getItem("Token")
@@ -20,11 +21,10 @@ const Dashboard = () => {
                     {/* 1st Row */}
                     <div className="p-2"><Profile /></div>
                     <div className="bg-green-300">Cell 2</div>
-                    <div className="bg-red-300">Cell 3</div>
+                    <div className="row-span-3"><CalendarDashboard /></div>
 
                     {/* 2nd Row */}
                     <div className="bg-purple-300 col-span-2">Cell 4</div>
-                    <div className="bg-yellow-300 row-span-2">Cell 6</div>
 
                     {/* 3rd Row */}
                     <div className="p-2 col-span-2">
