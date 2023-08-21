@@ -7,6 +7,7 @@ const auth = require("./routes/auth")
 const session = require('express-session');
 const income = require("./routes/income")
 const expense = require("./routes/expense")
+const dashboard = require("./routes/dashboard")
 // const cookieParser = require('cookie-parser')
 
 //extra security
@@ -41,6 +42,7 @@ app.use(
 app.use("/api/v1/auth",auth)
 app.use("/api/v1/income",income)
 app.use("/api/v1/expense",expense)
+app.use("/api/v1/dashboard",dashboard)
 
 app.use(notFound)
 app.use(errorHandler)
