@@ -82,7 +82,7 @@ const changePassword = async (req,res)=>{
 }
 
 const forgetPasswordMailConfirmation = async(req,res)=>{
-    const email = req.body
+    const {email} = req.body
     const user = await User.findOne({email:email})
     if(!user){
         res.send({msg:"User does not exist",success:false,status:404})
