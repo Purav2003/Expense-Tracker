@@ -28,7 +28,7 @@ const Sidebar = () => {
     return (
         <div>
             <aside id="default-sidebar" className="fixed top-0 left-0 z-40 w-75 h-screen -translate-x-full sm:translate-x-0" aria-label="Sidebar">
-                <div className="h-full px-3 py-4 overflow-y-auto " style={{background:'#009688'}}>
+                <div className="h-full px-3 py-4 overflow-y-auto " style={{background:'#56A054'}}>
                     <div>
                         <br></br>   <h1 className='font-bold text-[29px] text-white'>Expense Tracker</h1><br></br><hr></hr><br></br>
                     </div>

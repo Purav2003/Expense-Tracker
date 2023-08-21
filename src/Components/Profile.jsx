@@ -1,6 +1,7 @@
-import Sidebar from "../Components/Sidebar"
+import Sidebar from "./Sidebar"
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import dp from "../Assets/images/signup.png"
 const Profile = () => {
     const [data, setData] = useState([]);
@@ -55,6 +56,7 @@ const Profile = () => {
                     </table><br></br>
                 </div>
             </center>
+            <Link to="/reset-password">Update Password</Link>
              
                 <Sidebar />
             </div>

@@ -1,5 +1,5 @@
 import Sidebar from "../Components/Sidebar"
-
+import Profile from "../Components/Profile"
 const Dashboard = () =>{
     
     let token = localStorage.getItem("Token")
@@ -7,18 +7,17 @@ const Dashboard = () =>{
             window.location.replace("/")
     }
         return(
-            <div>
-                  <div className="lg:flex px-8 main-heading-mob">
-    <h1 className="text-4xl font-bold">Income </h1>    </div>
-        <Sidebar />
-        <div className="p-4 sm:ml-64">
-        <br></br><br></br>
-                
+            <div className="bg-white">
+            <div className="sm:ml-64"><br></br><br></br>
+                <div className="lg:flex px-8 main-heading-mob">
+                    <h1 className="text-4xl font-bold">Dashboard </h1>
+                   
 
+                </div><br></br>
+                <Profile />
+                <Sidebar />
             </div>
-        
         </div>
-
         
         )
 }
