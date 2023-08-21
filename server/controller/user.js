@@ -63,9 +63,23 @@ const profile  = async (req,res)=>{
     res.send({user,success:true,status:200})
 }
 
+const changePassword = async (req,res)=>{
+    const id = req.params.id
+    const {oldPassword,newPassword} = req.body //call api only if newpassword and retyped password matches
+    const user = await User.findById(id)
+    if(await user.comparePassword(oldPassword)){
+        user.password = newPassword
+        await user.save()
+        res.send({msg:"Password Changed Successfully",success:true,status:200})   
+    } else{
+        res.send({msg:"Old Password is Incorrect",success:false,status:401})
+    }
+}
+
 module.exports = {
     signup,
     signin,
     getAllUser,
-    profile
+    profile,
+    changePassword
 }
