@@ -4,6 +4,6 @@ const {transaction,dateHighlight,dateData} = require("../controller/dashboard")
 
 router.route("/:id").get(transaction)
 router.route("/dateHighlight/:id").get(dateHighlight)
-router.route("/dateData/:id").get(dateData)
+router.route("/dateData/:id").post(dateData)
 
 module.exports = router
