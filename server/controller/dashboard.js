@@ -7,7 +7,7 @@ const transaction = async (req,res)=>{
     const expenses = await Expense.find({createdBy:id}).select("-category")
     const mixedData = [...incomes,...expenses]
     mixedData.sort((a,b)=>a.date-b.date)
-    res.send({transaction:mixedData,success:true,status:200})
+    res.send({transaction:mixedData.slice(0,5),success:true,status:200})
 }
 
 module.exports = {
