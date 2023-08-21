@@ -16,7 +16,7 @@ const dateHighlight = async (req,res)=>{
     const expenses = await Expense.find({createdBy:id}).select("date -_id")
     const mixedData = [...incomes,...expenses]
     mixedData.sort((a,b)=>a.date-b.date)
-    res.send({dates:mixedData.slice(0,5),success:true,status:200})
+    res.send({dates:mixedData,success:true,status:200})
 }
 
 module.exports = {
