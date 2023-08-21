@@ -42,7 +42,7 @@ const ExpenseForm = () => {
         }
 
         let count_success = 0
-        if (amount > 0 && category) {
+        if (amount > 0 && category !== 'Other') {
             try {
                 let config = {
                     method: 'post',
