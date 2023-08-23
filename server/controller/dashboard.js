@@ -189,7 +189,6 @@ const search = async(req,res)=>{
             }   
         ]
     })
-    console.log(expenseItems.lent);
     const page = Number(req.query.page) || 1
     const limit = Number(req.query.limit) || 5
     const skip = (page - 1) * limit
