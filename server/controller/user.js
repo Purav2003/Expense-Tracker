@@ -155,10 +155,10 @@ const editProfile = async(req,res)=>{
                 sendEmail(data)
                 res.send({msg:"Profile Updated Successfully",success:true,status:200})
             } else{
-                res.send({ msg: "Phone Number already exists", success: false, status: 403 })
+                res.send({ msg: "Phone Number already exists", success: false, status: 409 })
             }
         } else{
-            res.send({ msg: "Email already exists", success: false, status: 403 })
+            res.send({ msg: "Email already exists", success: false, status: 409 })
         }
     } else{
         if (!numberError) {
