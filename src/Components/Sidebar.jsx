@@ -1,19 +1,39 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import * as icons from 'react-icons/bi';
-import dp from '../assets/images/login.png';
-
-import '../Assets/css/sidebar.css';
-import { navLinks } from './Navlinks';
+import "../Assets/css/sidebar.css"
+import { useState } from 'react'
+import { navLinks } from './Navlinks'
+import dp from '../assets/images/signup.png'
+import { Link } from "react-router-dom"
 
 const Sidebar = () => {
+
+    const highlight = (e) => {
+        localStorage.setItem('highlights', JSON.stringify(e))
+    }
+
+    if (window.location.href.includes('income')) {
+        highlight("Income")
+    }
+    if (window.location.href.includes('dashboard')) {
+        highlight("Dashboard")
+    }
+    if (window.location.href.includes('expense')) {
+        highlight("Expense")
+    }
+    if (window.location.href.includes('report')) {
+        highlight("Report")
+    }
+    if (window.location.href.includes('profile')) {
+        highlight("Profile")
+    }
+    let active = (localStorage.getItem('highlights'))
+    active = JSON.parse(localStorage.getItem('highlights'))
     const [showProfileMenu, setShowProfileMenu] = useState(false);
 
     const toggleProfileMenu = () => {
         setShowProfileMenu(!showProfileMenu);
     };
-
     return (
+
         <nav className="bg-primary border-gray-200 dark:bg-gray-900">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <Link to="/dashboard" className="flex items-center">
@@ -23,29 +43,23 @@ const Sidebar = () => {
                 <div className="hidden w-full md:block md:w-auto" id="navbar-default">
                     <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                         {navLinks.map((link) => (
-                            <li
-                                key={link.id}
-                                className={`font-medium text-hello text-[18px] ${showProfileMenu ? '' : 'group'
-                                    }`}
+                            <li key={link.id} className={`${active === link.title
+                                ? "font-bold bg-[rgba(255,255,255,0.1)] rounded-lg"
+                                : "font-medium"} text-hello hover:text-white text-[18px]`
+                            }
                             >
-                                <Link
-                                    to={link.link}
-                                    className={`flex items-center p-2 text-gray-900 rounded-lg ${showProfileMenu ? 'group' : ''
-                                        }`}
-                                >
-                                    {link.icon}
-                                    <span className="ml-3">{link.title}</span>
+                                <Link to={link.link} className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-[rgba(255,255,255,0.1)]  group">
+                                    {link.icon}<span className="ml-3">{link.title}</span>
                                 </Link>
                             </li>
                         ))}
-
                         <li>
                             <button
                                 onClick={toggleProfileMenu}
-                                className={`flex items-center rounded-lg`}
+                                className={`flex items-center`}
                             >
 
-                                <img src={dp} className='w-12 bg-white rounded-full' />              </button>
+                                <img src={dp} className='w-11 h-11 bg-white rounded-full img-dp' />              </button>
 
                             <ul
                                 className={`${showProfileMenu ? 'block' : 'hidden'
@@ -66,7 +80,7 @@ const Sidebar = () => {
                                     >
                                         Report
                                     </Link>
-                                </li>   
+                                </li>
                                 <li>
                                     <Link
                                         to="/profile"
@@ -74,7 +88,7 @@ const Sidebar = () => {
                                     >
                                         Settings
                                     </Link>
-                                </li>   
+                                </li>
                                 <hr></hr>
                                 <li>
                                     <Link
@@ -86,10 +100,13 @@ const Sidebar = () => {
                                 </li>              </ul>
                         </li>
                     </ul>
+
                 </div>
             </div>
         </nav>
-    );
-};
 
-export default Sidebar;
+    )
+}
+
+export default Sidebar
+
