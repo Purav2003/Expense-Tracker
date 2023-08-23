@@ -201,7 +201,7 @@ const search = async(req,res)=>{
     const totalPages = Math.ceil(totalItems / limit);
     const mixedData = [...finalResultIncome, ...finalResultExpense]
     mixedData.sort((a, b) => a.date - b.date)
-    res.send({totalItems, totalPages,searchedData:mixedData,success:true,status:200})
+    res.send({totalItems, totalPages,currentPage: page,searchedData:mixedData,success:true,status:200})
 }
 
 module.exports = {
