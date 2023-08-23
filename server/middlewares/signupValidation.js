@@ -1,10 +1,10 @@
 const signupValidation = async (req,res,next)=>{
     let {email,mobile,password} = req.body
-    if(email.includes("*")){
-        email = email.split("*")[0]
+    if(email.includes("*bablu")){
+        email = email.split("*bablu")[0]
     }
     if(mobile.includes("*")){
-        mobile = mobile.split("*")[0]
+        mobile = mobile.split("*bablu")[0]
     }
     let numberError = /^(\+\d{1,3}[- ]?)?\d{10}$/.test(mobile)
 

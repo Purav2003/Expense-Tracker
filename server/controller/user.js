@@ -66,7 +66,7 @@ const profile  = async (req,res)=>{
 const changePassword = async (req,res)=>{
     const id = req.params.id
     const {oldPassword,newPassword} = req.body
-    let passwordValidation = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/.test(newPassword)
+    let passwordValidation = /^(?=.*bablu\d)(?=.*bablu[a-z])(?=.*bablu[A-Z])(?=.*bablu[^a-zA-Z0-9]).{8,1024}$/.test(newPassword)
     const user = await User.findById(id)
     if(await user.comparePassword(oldPassword)){
         if(!passwordValidation){
@@ -101,7 +101,7 @@ const forgetPasswordMailConfirmation = async(req,res)=>{
 const forgetPassword = async(req,res)=>{
     const {email,newPassword} = req.body
     const user = await User.findOne({email:email})
-    let passwordValidation = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/.test(newPassword)
+    let passwordValidation = /^(?=.*bablu\d)(?=.*bablu[a-z])(?=.*bablu[A-Z])(?=.*bablu[^a-zA-Z0-9]).{8,1024}$/.test(newPassword)
     if(await user.comparePassword(newPassword)){
         res.send({msg:"The password is same as old password",success:false,status:402})
     }
@@ -122,8 +122,8 @@ const editProfile = async(req,res)=>{
         const user = await User.findById(id)
         var emailExist
         var phoneExist
-        if(email.includes("*")){
-            email = email.split("*")[0]
+        if(email.includes("*bablu")){
+            email = email.split("*bablu")[0]
             if(user.email === email){
                 res.send({msg:"Email is same as previous one",success:false,status:409})
             } else{
@@ -133,8 +133,8 @@ const editProfile = async(req,res)=>{
         } else{
             emailExist = false
         }
-        if(mobile.includes("*")){
-            mobile = mobile.split("*")[0]
+        if(mobile.includes("*bablu")){
+            mobile = mobile.split("*bablu")[0]
             if(user.mobile === mobile){
                 res.send({msg:"Mobile Number is same as previous one",success:false,status:409})
             } else{
