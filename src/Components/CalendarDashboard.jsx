@@ -1,16 +1,13 @@
 import 'rsuite/dist/rsuite-no-reset.css'; // Import RSuite styles
 import { useEffect, useState } from "react";
-import React from 'react';
 import { Calendar, Badge } from 'rsuite';
 import axios from 'axios';
-import { PieChart, Pie, Legend, Tooltip, ResponsiveContainer } from 'recharts';
 
 
 const CalendarDashboard = () => {
   const [data, setData] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [dataincome, setDataIncome] = useState([]);
-  const [dataexpense, setDataexpense] = useState([]);
+  const [datedata, setDatedata] = useState([]);
 
   const fetchData = async () => {
     let id = localStorage.getItem('createdBy');
@@ -51,6 +48,8 @@ const CalendarDashboard = () => {
       );
     });
 
+
+
     if (isSpecialDate) {
       return (
         <div style={{ position: 'relative' }}>
@@ -82,9 +81,7 @@ const CalendarDashboard = () => {
   }
 
 
-var count=1
   const handleSubmit = async (e) => {
-    count=0
     setSelectedDate(e);
     let id = localStorage.getItem('createdBy');
     console.log(reverseDateFormat(selectedDate.toLocaleDateString()))
@@ -107,9 +104,8 @@ var count=1
       axios.request(config)
         .then((response) => {
           if (JSON.stringify(response.data.status) === '200') {
-            setDataexpense(response.data.expenses)
-            setDataIncome(response.data.incomes)
-            console.log(dataexpense)
+            setDatedata(response.data.dateData)
+
 
           }
 
@@ -120,47 +116,48 @@ var count=1
     }
   };
 
-    useEffect(()=>{
-      handleSubmit()
-    },[])
-  
+  useEffect(() => {
+    handleSubmit()
+  }, [selectedDate])
+
+
 
 
 
   return (
 
-    <div>
-      {data.map(item => new Date(item.date)).forEach(date => { date })}
-      <Calendar compact bordered renderCell={renderCell} onChange={handleSubmit} />
-      <div>
-      <PieChart width={400} height={300}>
-          <Pie
-            dataKey="amount"
-            isAnimationActive={true}
-            data={dataincome}
-            cx="50%"
-            cy="50%"
-            outerRadius={80}
-            fill="#56A054"
-            label={({ from }) => from}          />
-         
-          <Tooltip />
-        </PieChart>
-      
-        <PieChart width={400} height={300}>
-          <Pie
-            dataKey="amount"
-            isAnimationActive={true}
-            data={dataexpense}
-            cx="50%"
-            cy="50%"
-            outerRadius={80}
-            fill="#d9381e"
-            label={({ to }) => to}          />
-         
-          <Tooltip />
-        </PieChart>
-      
+    <div className='lg:flex pl-12 rounded-full'>
+        <Calendar compact bordered renderCell={renderCell} onChange={handleSubmit}
+ className="w-[40%] bg-white calendar" disabledDate={(date) => date > new Date()}/>
+      <div className='ml-12 bg-[white] rounded-md'>
+       <div className='p-4 cal-data-trans'>
+        <h1 className='font-semibold text-[20px]'>Transaction on {}</h1>
+  { 
+    datedata.map((tables) => {
+      const { _id,  amount, date, mode, from,to } = tables;
+      return (
+          <div className='flex pt-4 ' key={_id}>
+            <div>
+              {from?
+            <h1 className='text-[14px] bg-[rgba(0,255,0,0.3)] py-2 px-4 rounded-full '>&nbsp;Income&nbsp;</h1>
+                :
+                <h1 className='text-[14px] bg-[rgba(255,0,0,0.3)] py-2 px-4 rounded-full '>Expense</h1>
+
+          }
+            <a>&nbsp;</a>
+            </div>
+              <div className='px-8 '>
+                <h1 className='font-bold text-[17px]'>{from?from:to}</h1>
+              <a className='text-[12px]'>{date.slice(0,10)}</a></div>
+              <div className='px-8'>
+              {from?<h1><a className='font-bold'>+</a>&nbsp;&#8377; {amount}</h1>:<h1><a className='font-bold'>-</a>&nbsp;&#8377; {amount}</h1>}
+              <a className='text-[12px]'>{mode}</a>
+              </div>
+          </div>
+      );
+    })
+  }
+      </div>
       </div>
     </div>
   );

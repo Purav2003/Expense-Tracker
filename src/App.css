@@ -1,6 +1,6 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities; 
+@tailwind utilities;
 
 
 .App {
@@ -37,6 +37,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -46,6 +47,69 @@
 /* Add this to your CSS or stylesheet */
 
 
-.current-cell{
-  background: red ;
+.current-cell {
+  background: red;
 }
+
+
+table {
+  align-self: start;
+}
+
+
+
+.table-cal {
+  height: 400px !important;
+  background: #fff !important;
+}
+
+.cal-data-trans {
+  overflow: auto !important;
+  height: 400px !important;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #4a4a4a;
+  border-radius: 43px !important;
+
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.profile {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media screen and (min-width:650px) {
+  .update-profile{
+    position: absolute;
+    top: 53%;
+    left: 40%;
+    transform: translate(-50%, -50%); 
+  }  
+  .reset-password{
+    position: absolute;
+    top: 55%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+
