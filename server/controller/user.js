@@ -118,25 +118,36 @@ const editProfile = async(req,res)=>{
     const { numberError, emailError } = req.user
     if (numberError && emailError) {
         const id = req.params.id
-        const {email,mobile} = req.body
+        let {email,mobile} = req.body
         const user = await User.findById(id)
-        let emailExist
-        let phoneExist
-        if(user.email === email){
+        var emailExist
+        var phoneExist
+        if(email.includes("*")){
+            email = email.split("*")[0]
+            if(user.email === email){
+                res.send({msg:"Email is same as previous one",success:false,status:409})
+            } else{
+                emailExist = await User.findOne({ email: email })
+                console.log(emailExist);
+            }
+        } else{
             emailExist = false
-        } else{
-            emailExist = await User.findOne({ email: email })
         }
-        if(user.mobile === mobile){
-            phoneExist = false
+        if(mobile.includes("*")){
+            mobile = mobile.split("*")[0]
+            if(user.mobile === mobile){
+                res.send({msg:"Mobile Number is same as previous one",success:false,status:409})
+            } else{
+                phoneExist = await User.findOne({ mobile: mobile })
+            }
         } else{
-            phoneExist = await User.findOne({ mobile:mobile})
+            phoneExist = false
         }
         if(!emailExist){
             if(!phoneExist){
                 const editProfile = await User.findByIdAndUpdate(id,{email:email,mobile:mobile})
                 const data = {
-                    to:req.body.email,
+                    to:email,
                     text:`Hey ${req.body.name}`,
                     subject:"Profile Edited Successfully",
                     html:`<h3>View your profile changes by clicking here <a href="http://localhost:5173/profile">Click Here</a></h3>`
