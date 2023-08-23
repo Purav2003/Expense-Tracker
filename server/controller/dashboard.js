@@ -139,7 +139,7 @@ const statistics = async (req, res) => {
 const search = async(req,res)=>{
     const id = req.params.id
     const search = req.query.search
-    const resultIncome = await Income.find({
+    let resultIncome = Income.find({
         $and: [
             {createdBy: id,},
             {
@@ -151,7 +151,19 @@ const search = async(req,res)=>{
             }   
         ]
     })
-    const resultExpense = await Expense.find({
+    const incomeItems = await Income.find({
+        $and: [
+            {createdBy: id,},
+            {
+                $or: [
+                    {description: {$regex: new RegExp(search, "i")}},
+                    {mode: {$regex: new RegExp(search, "i")}},
+                    {from: {$regex: new RegExp(search, "i")}},
+                ]
+            }   
+        ]
+    })
+    let resultExpense = Expense.find({
         $and: [
             {createdBy: id,},
             {
@@ -164,9 +176,32 @@ const search = async(req,res)=>{
             }   
         ]
     })
-    const mixedData = [...resultIncome, ...resultExpense]
+    const expenseItems = await Expense.find({
+        $and: [
+            {createdBy: id,},
+            {
+                $or: [
+                    {description: {$regex: new RegExp(search, "i")}},
+                    {mode: {$regex: new RegExp(search, "i")}},
+                    {to: {$regex: new RegExp(search, "i")}},
+                    {category: {$regex: new RegExp(search, "i")}}
+                ]
+            }   
+        ]
+    })
+    console.log(expenseItems.lent);
+    const page = Number(req.query.page) || 1
+    const limit = Number(req.query.limit) || 5
+    const skip = (page - 1) * limit
+    resultIncome = resultIncome.skip(skip).limit(limit)
+    const finalResultIncome = await resultIncome.sort({ createdAt: -1 })
+    resultExpense = resultExpense.skip(skip).limit(limit)
+    const finalResultExpense = await resultExpense.sort({createdAt:-1})
+    const totalItems = incomeItems.length + expenseItems.length
+    const totalPages = Math.ceil(totalItems / limit);
+    const mixedData = [...finalResultIncome, ...finalResultExpense]
     mixedData.sort((a, b) => a.date - b.date)
-    res.send({searchedData:mixedData,success:true,status:200})
+    res.send({totalItems, totalPages,searchedData:mixedData,success:true,status:200})
 }
 
 module.exports = {
