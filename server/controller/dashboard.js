@@ -1,4 +1,3 @@
-const mongoose = require("mongoose")
 const Income = require("../models/incomeModel")
 const Expense = require("../models/expenseModel")
 
