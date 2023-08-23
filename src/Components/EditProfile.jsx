@@ -69,22 +69,19 @@ const EditProfile = () => {
         const email = data.email
         const mobile = data.mobile
         let datab = ''
-        if (email !== datas.email && mobile !== datas.mobile) {
+        if (email !== datas.email) {
             datab = JSON.stringify({
-                "email": email+"*"+"Email is changed",
-                "mobile": mobile+"*"+"Mobile is changed",
+                "email": email+"*bablu"+"Email is changed",
+                "mobile": mobile,
             });
         }
-        if (email !== datas.email && mobile === datas.mobile) {
+        if (mobile !== datas.mobile) {
             datab = JSON.stringify({
-                "email": email+"*"+"Email is changed",
+                "email": email,
+                "mobile": mobile+"*bablu"+"Mobile is changed",
             });
         }
-        if (email === datas.email && mobile !== datas.mobile) {
-            datab = JSON.stringify({
-                "mobile": mobile+"*"+"Mobile is changed",
-            });
-        }
+        
         console.log(datab)
         try {
             let config = {
@@ -98,9 +95,28 @@ const EditProfile = () => {
 
             axios.request(config)
                 .then((response) => {
-                    if (JSON.stringify(response.data.status) === '200') {
+
+                    if (response.data.msg === "Profile Updated Successfully") {
                         window.location.replace("/profile")
-                    }                  
+                    }    
+                    if (response.data.msg === 'Email already exists') {
+                        document.getElementById('errore').innerHTML = '<h1 className="pt-[0.5vw]">Email Already Exist</h1>'
+                    }  
+                    if (response.data.msg === 'Phone Number already exists') {
+                        document.getElementById('errorm').innerHTML = '<h1 className="pt-[0.5vw]">Phone Number Already Exist</h1>'
+                    }  
+                    if (response.data.msg === 'Email is same as previous one') {
+                        document.getElementById('errore').innerHTML = '<h1 className="pt-[0.5vw]">Email Same as Previous. Enter New Detail</h1>'
+                    }         
+                    if(response.data.msg === 'Mobile Number is same as previous one'){
+                        document.getElementById('errorm').innerHTML = '<h1 className="pt-[0.5vw]">Phone Number Same as Previous. Enter New Detail</h1>'
+                    }  
+                    if(response.data.msg === 'Enter Valid Number'){
+                        document.getElementById('errorm').innerHTML = '<h1 className="pt-[0.5vw]">Enter Valid Number</h1>'
+                    }  
+                    if( response.data.msg === "Enter Valid Email"){
+                        document.getElementById('errore').innerHTML = '<h1 className="pt-[0.5vw]">Enter Valid Email</h1>'
+                    }                            
                 })
         }
         catch (err) {
@@ -140,8 +156,8 @@ const EditProfile = () => {
                                     onChange={handleEmailChange}
                                     required
                                 />
-                                <div id="errorm"></div>
-                                <div id="user"></div>
+                                                               <div id="errore" className='text-[red]'></div>
+
                             </div>
                             <div className="mb-4 form-field">
                                 <label className="block text-black-700 text-sm font-bold mb-2">
@@ -155,8 +171,7 @@ const EditProfile = () => {
                                     onChange={handleMobileChange}
                                     required
                                 />
-                                <div id="error"></div>
-                                <div id="phone"></div>
+                                <div id="errorm" className='text-[red]'></div>
                             </div>
                             <div className="lg:flex form-field items-center">
                                 <Link to="/profile" className='w-full'><button

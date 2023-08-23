@@ -37,21 +37,18 @@ const SummaryDashboard = () => {
         fetchData();
       }, []);      
   return (
-    <div className='p-4 px-12 lg:flex'>
-            <div className='lg:w-[20%] rounded-md bg-[white] text-black'>
+    <div className='p-4 px-12 lg:flex w-full'>
+            <div className='lg:w-[22.3%] rounded-md bg-[#0d5c46] text-white'>
                 <h1 className='p-4 font-bold text-[20px] rounded-md'>Total Expense</h1>
                 <h1 className='px-4 pb-4'>&#8377;{expense}</h1>
             </div>
-            <div className='lg:w-[20%] lg:mx-4 rounded-md bg-[white] text-black'>
+            <div className='lg:w-[22.3%] lg:mx-4 rounded-md bg-[#fabe50] text-white'>
                 <h1 className='p-4 font-bold text-[20px] rounded-md'>Total Income</h1>
                 <h1 className='px-4 pb-4'>&#8377; {income}</h1>
-            </div><div className='lg:w-[20%] rounded-md bg-[white] text-black'>
+            </div><div className='lg:w-[22.3%] rounded-md bg-[#f1573b] text-white'>
                 <h1 className='p-4 font-bold text-[20px] rounded-md'>{month_name} Expense</h1>
                 <h1 className='px-4 pb-4'>&#8377; {mexpense} </h1>
-            </div><div className='lg:mx-4 lg:w-[20%] rounded-md bg-[white] text-black'>
-                <h1 className='p-4 font-bold text-[20px] rounded-md'>{month_name} Income</h1>
-                <h1 className='px-4 pb-4'>&#8377; {mincome}</h1>
-            </div><div className='lg:w-[20%] rounded-md bg-[white] text-black'>
+            </div><div className='mx-4 lg:w-[22.3%] rounded-md bg-[#824cc6] text-white'>
                 <h1 className='p-4 font-bold text-[20px] rounded-md'>Total Transactions</h1>
                 <h1 className='px-4 pb-4'>{transaction} </h1>
             </div>

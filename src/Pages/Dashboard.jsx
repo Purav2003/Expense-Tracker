@@ -10,8 +10,8 @@ const Dashboard = () => {
         window.location.replace("/")
     }
     return (
-        <div className="bg-tertiary">
-                        <Sidebar />
+        <div className="bg-white">
+            <Sidebar />
 
             <div>
                 <br />
@@ -22,7 +22,7 @@ const Dashboard = () => {
                 <br />
                 <div className="lg:grid grid-cols-2 gap-4">
                     {/* 1st Row */}
-                   <div className="col-span-2"><SummaryDashboard /></div>
+                    <div className="col-span-2 w-full"><SummaryDashboard /></div>
 
                     {/* 2nd Row */}
                     <div className="col-span-2"><CalendarDashboard /></div>
