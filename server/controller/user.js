@@ -119,9 +119,20 @@ const editProfile = async(req,res)=>{
     if (numberError && emailError) {
         const id = req.params.id
         const {email,mobile} = req.body
-        const emailExist = await User.findOne({ email: email })
+        const user = await User.findById(id)
+        let emailExist
+        let phoneExist
+        if(user.email === email){
+            emailExist = false
+        } else{
+            emailExist = await User.findOne({ email: email })
+        }
+        if(user.mobile === mobile){
+            phoneExist = false
+        } else{
+            phoneExist = await User.findOne({ mobile:mobile})
+        }
         if(!emailExist){
-            const phoneExist = await User.findOne({ mobile:mobile})
             if(!phoneExist){
                 const editProfile = await User.findByIdAndUpdate(id,{email:email,mobile:mobile})
                 const data = {
