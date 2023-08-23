@@ -24,11 +24,64 @@ const dateData = async (req,res)=>{
     const date = new Date(req.body.date)
     const incomes = await Income.find({createdBy:id,date:date})
     const expenses = await Expense.find({createdBy:id,date:date})
-    res.send({incomes,expenses,success:true,status:200})
+    const mixedData = [...incomes,...expenses]
+    mixedData.sort((a,b)=>a.date-b.date)
+    res.send({dateData:mixedData,success:true,status:200})
+}
+
+const statistics = async (req,res)=>{
+    const id = req.params.id
+    const totalIncome = await Income.aggregate([
+        {       
+            $match:{
+                createdBy:id
+            }
+        },
+        {
+            $group:{
+                _id:null,
+                totalAmount:{
+                    $sum:'$amount'
+                }
+            }
+        },
+        {
+            $project:{
+                _id:0,
+                totalAmount:1
+            }
+        }
+    ])
+    const totalExpense = await Expense.aggregate([
+        {       
+            $match:{
+                createdBy:id
+            }
+        },
+        {
+            $group:{
+                _id:null,
+                totalAmount:{
+                    $sum:'$amount'
+                }
+            }
+        },
+        {
+            $project:{
+                _id:0,
+                totalAmount:1
+            }
+        }
+    ])
+    const incomes = await Income.find({createdBy:id})
+    const expenses = await Expense.find({createdBy:id})
+    const totalTransactions = [...incomes,...expenses].length
+    res.send({totalIncome,totalExpense,totalTransactions})
 }
 
 module.exports = {
     transaction,
     dateHighlight,
-    dateData
+    dateData,
+    statistics
 }
