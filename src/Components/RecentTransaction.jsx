@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import * as icon from "react-icons/io";
-import * as icons from "react-icons/ri";
+import * as icons from "react-icons/bi";
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
 import Skeleton from "react-loading-skeleton";
@@ -97,15 +97,22 @@ const RecentTransaction = () => {
                     </tr>
                   ) : (
                     data.map((tables) => {
-                      const { _id, description, amount, date, mode, from ,to} = tables;
+                      const { description, amount, date, mode, from ,to} = tables;
                       count_table = count_table + 1;
                       return (
-                        <tr className="text-[16px] hover:bg-gray-100 bg-white text-black border-b dark:border-gray-700 text-center" key={count_table}>
+                        from?<tr className="text-[16px] text-[black] hover:bg-gray-100 bg-white text-black border-b dark:border-gray-700 text-center" key={count_table}>
                           <td className="py-4">{count_table}</td>
                           <td>{date.slice(0, 10).split("-").reverse().join("-")}</td>
-                          <td>&#8377; {amount}</td>
+                          <td><a className="text-[green] font-bold">+</a>&nbsp;&#8377; {amount}</td>
                           <td>{mode}</td>
-                          <td>{from || to} </td>
+                          <td>{from} </td>
+                          <td>{description}</td>                         
+                        </tr>:<tr className="text-[16px] hover:bg-gray-100 bg-white text-black border-b dark:border-gray-700 text-center" key={count_table}>
+                          <td className="py-4">{count_table}</td>
+                          <td>{date.slice(0, 10).split("-").reverse().join("-")}</td>
+                          <td><a className="text-[red] font-bold">-</a>&nbsp;&#8377; {amount}</td>
+                          <td>{mode}</td>
+                          <td>{to} </td>
                           <td>{description}</td>                         
                         </tr>
                       );
