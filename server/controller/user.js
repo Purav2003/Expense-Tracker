@@ -48,7 +48,7 @@ const signin = async (req, res) => {
             res.send({ msg: "Incorrect Password", success: false, status: 401 })
         } else {
             const token = user.createJWT()
-            res.send({ user, token, success: true, status: 200 })
+            res.send({ user,name:user.name token, success: true, status: 200 })
         }
     }
 }
