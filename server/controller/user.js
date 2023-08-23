@@ -91,7 +91,7 @@ const forgetPasswordMailConfirmation = async(req,res)=>{
             to:email,
             text:`Hey ${user.name}`,
             subject:"Forget Password",
-            html:`<h3>You chan change your password by clicking on the given link<a href="http://localhost:5173/forget-password">Click Here</a></h3>`
+            html:`<h3>You can change your password by clicking on the given link<a href="http://localhost:5173/forget-password">Click Here</a></h3>`
         }
         sendEmail(data)
         res.send({email:email,msg:"Check your mail",success:true,status:200})
@@ -101,7 +101,7 @@ const forgetPasswordMailConfirmation = async(req,res)=>{
 const forgetPassword = async(req,res)=>{
     const {email,newPassword} = req.body
     const user = await User.findOne({email:email})
-    let passwordValidation = /^(?=.*bablu\d)(?=.*bablu[a-z])(?=.*bablu[A-Z])(?=.*bablu[^a-zA-Z0-9]).{8,1024}$/.test(newPassword)
+    let passwordValidation = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/.test(newPassword)
     if(await user.comparePassword(newPassword)){
         res.send({msg:"The password is same as old password",success:false,status:402})
     }
