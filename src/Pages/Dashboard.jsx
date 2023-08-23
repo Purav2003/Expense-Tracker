@@ -2,6 +2,7 @@ import Sidebar from "../Components/Sidebar"
 import Profile from "../Components/Profile"
 import RecentTransaction from "../Components/RecentTransaction"
 import CalendarDashboard from "../Components/CalendarDashboard"
+import SummaryDashboard from "../Components/SummayDashboard"
 const Dashboard = () => {
 
     let token = localStorage.getItem("Token")
@@ -9,22 +10,22 @@ const Dashboard = () => {
         window.location.replace("/")
     }
     return (
-        <div className="bg-white">
-            <div className="sm:ml-[13vw]">
+        <div className="bg-tertiary">
+                        <Sidebar />
+
+            <div>
                 <br />
                 <br />
                 <div className="lg:flex px-8 main-heading-mob">
                     <h1 className="text-4xl font-bold">Dashboard</h1>
                 </div>
                 <br />
-                <div className="lg:grid grid-cols-3 gap-4">
+                <div className="lg:grid grid-cols-2 gap-4">
                     {/* 1st Row */}
-                    <div className="p-2"><Profile /></div>
-                    <div className="bg-green-300">Cell 2</div>
-                    <div className="row-span-3"><CalendarDashboard /></div>
+                   <div className="col-span-2"><SummaryDashboard /></div>
 
                     {/* 2nd Row */}
-                    <div className="bg-purple-300 col-span-2">Cell 4</div>
+                    <div className="col-span-2"><CalendarDashboard /></div>
 
                     {/* 3rd Row */}
                     <div className="p-2 col-span-2">
@@ -33,7 +34,6 @@ const Dashboard = () => {
                 </div>
             </div>
             <br></br>
-            <Sidebar />
         </div>
 
     )

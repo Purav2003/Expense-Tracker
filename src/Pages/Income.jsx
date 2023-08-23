@@ -27,10 +27,12 @@ const Income = () =>{
     }
     return(
       
-        <div className="bg-white">            
+        <div className="bg-white">       
+          <Sidebar />
+     
                     <div><Toaster /></div>
 
-    <div className="sm:ml-64"><br></br><br></br> 
+    <div><br></br><br></br> 
     <div className="lg:flex px-8 main-heading-mob">
     <h1 className="text-4xl font-bold">Income </h1>    
     <div className="ml-[33vw] justify-end	relative lg:w-[44%] bg-[#eee] rounded-lg shadow-md px-4 py-2 search-bar">
@@ -54,7 +56,6 @@ const Income = () =>{
 </div> <div id="errora" className="ml-[45vw] pt-[2vh]" ></div><br></br>
 
   <IncomeBar />
-  <Sidebar />
 
     
     </div>

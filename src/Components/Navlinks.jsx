@@ -27,17 +27,7 @@ export const navLinks = [
     link:"/expense",
     iconm:<income.PiMoneyLight className='text-white text-[25px]'></income.PiMoneyLight>,
   },
-  {
-    id:"report",
-    title:"Report",
-    icon:<report.HiOutlineDocumentReport></report.HiOutlineDocumentReport>,
-    iconm:<report.HiOutlineDocumentReport className='text-white text-[25px]'></report.HiOutlineDocumentReport>,
-  },
-  {
-    id:"logout",
-    title:"Logout",
-    icon:<logout.IoIosLogOut></logout.IoIosLogOut>,
-  },
+
     
   ];
 

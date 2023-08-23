@@ -10,7 +10,9 @@ import ExpenseSearch from './Components/ExpenseSearch';
 import ResetPassword from './Components/ResetPassword';
 import PassSuccess from './Components/PassSuccess';
 import ForgetPassword from './Components/ForgetPassword';
+import Profile from './Components/Profile';
 import ForgetPasswordMail from './Components/ForgetPasswordMail';
+import EditProfile from './Components/EditProfile';
 function App() {
   return (
     <>
@@ -26,6 +28,8 @@ function App() {
         <Route path='/reset-password' element={<ResetPassword />}></Route>      
         <Route path='/forget-password-mail' element={<ForgetPasswordMail />}></Route>      
         <Route path='/forget-password' element={<ForgetPassword />}></Route>      
+        <Route path='/profile' element={<Profile />}></Route>      
+        <Route path='/edit-profile' element={<EditProfile />}></Route>      
 
     <Route path='/success-changed-pass' element={<PassSuccess />}></Route>
       </Routes>

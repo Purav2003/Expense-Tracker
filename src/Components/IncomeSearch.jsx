@@ -81,10 +81,12 @@ const IncomeSearch = () => {
   
   return (
             <>
-                   <div className="bg-white">            
+                   <div className="bg-white">         
+                   <Sidebar />
+   
                     <div><Toaster /></div>
 
-    <div className="sm:ml-64"><br></br><br></br> 
+    <div><br></br><br></br> 
     <div className="lg:flex px-8 main-heading-mob">
     <h1 className="text-2xl font-bold">Search Result Of <i className="font-semibold">"{search}"</i> </h1>  
     <div className="ml-[22vw] justify-end	relative lg:w-[44%] bg-[#eee] rounded-lg shadow-md px-4 py-2 search-bar">
@@ -109,6 +111,7 @@ const IncomeSearch = () => {
               <table className="table-income rounded-lg lg:w-full shadow-lg bg-white overflow-scroll text-sm text-left">
                 <thead className="pt-4 text-xs text-gray-700 uppercase">
                   <tr className="text-[#404040] text-[14px]">
+                    
                     <th scope="col" className="px-6 py-3 text-center  ">
                       Sr.No
                     </th>
@@ -179,7 +182,6 @@ const IncomeSearch = () => {
         </div>)
 :<><h1><center>No Data</center></h1></>}
 
-  <Sidebar />
 
     
     </div>

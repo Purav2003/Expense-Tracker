@@ -65,13 +65,15 @@ else{
           input.value = '';
         });}
         return(
-            <div className="bg-white">
-            <div className="sm:ml-64"><br></br><br></br>
-                <div className="lg:flex px-8 main-heading-mob">
+            <div className="bg-tertiary">
+                              <Sidebar />
+
+            <div className="reset-password"><br></br><br></br>
+                <div className="lg:flex main-heading-mob">
                     <h1 className="text-4xl font-bold">Reset Password </h1>                   
-                </div><br></br>
+                </div>
                 <div className="w-full max-w-xs">
-            <form onSubmit={handleSubmit}  className="bg-white rounded w-[40vw] px-8 pt-6 pb-8 mb-4">
+            <form onSubmit={handleSubmit}  className="bg-white rounded w-[40vw] px-8 pt-8 mt-4 pb-8 mb-4">
 
               <div className="mb-4 form-field">
                 <label className="block text-black-700 text-sm font-bold mb-2">
@@ -94,15 +96,20 @@ else{
                 <div id="errora"></div>
               </div>
               <div className="flex form-field items-center">
-                <button className="bg-[#009688] button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
+              <Link to="/profile" className="w-full"><button className="bg-[#009688] button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
+                  Go Back
+                </button> </Link>    
+                <button className="mx-2 bg-[#009688] button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
                   Update Password
                 </button>               
               </div>
             </form>
 
           </div>
-                <Sidebar />
             </div>
+            <div style={{height:'87vh'}}>
+
+</div>
         </div>
         
         )

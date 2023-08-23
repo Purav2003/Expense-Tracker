@@ -35,28 +35,36 @@ const Profile = () => {
     }, []);
 
     return (
-        <div className="bg-white">
-<div className="max-w-sm w-full flex items-center sm:max-w-md bg-white shadow-xl rounded-lg overflow-hidden">
-      <img className="w-32 h-32 mx-8 object-cover items-center" src={dp} alt={data.name} />
-      <div className="p-4">
-        <h2 className="text-xl font-semibold text-gray-800">{data.name}</h2>
-        <p className="text-sm text-gray-600 flex items-center pt-2"><icon.BiEnvelope className="text-[20px]"/>&nbsp;{data.email}</p>
-        <p className="text-sm text-gray-600 flex items-center pt-2"><icon.BiPhone className="text-[20px]"/>&nbsp; {data.mobile}</p>
-        <p className="text-sm text-gray-600 flex items-center pt-2"><icon.BiCalendar className="text-[20px]"/>&nbsp;&nbsp;{data.createdAt?.slice(0,10)}</p>
-        <div className="mt-4">
-          <a
-            href="#"
-            className="block text-blue-500 hover:underline hover:text-blue-700"
+
+        <div className="bg-tertiary">
+        <Sidebar /> 
+        <center><div className="profile w-full flex items-center sm:max-w-2xl bg-white shadow-xl rounded-lg overflow-hidden profile">
+      <img className="w-64 h-64 mx-8 object-cover items-center" src={dp} alt={data.name} />
+      <div className="px-8 ">
+        <h2 className="text-lg text-gray-600 flex items-center pt-2"><icon.BiUser className="text-[20px]"/>&nbsp;User: {data.name}</h2>
+       <p className="text-lg text-gray-600 flex items-center pt-2"><icon.BiEnvelope className="text-[20px]"/>&nbsp;Email:&nbsp;{data.email}</p>
+        <p className="text-lg text-gray-600 flex items-center pt-2"><icon.BiPhone className="text-[20px]"/>&nbsp;Phone:&nbsp; {data.mobile}</p>
+        <p className="text-lg text-gray-600 flex items-center pt-2"><icon.BiCalendar className="text-[20px]"/>&nbsp;&nbsp;Created At:&nbsp;{data.createdAt?.slice(0,10)}</p><br></br>
+        <div className="mt-4 flex ">
+          <Link
+            to="/reset-password"
+            className="block bg-blue-500 px-4 text-white py-2 rounded-full text-center "
+          >
+            Reset Password
+          </Link>
+          <Link
+            to="/edit-profile"
+            className="block bg-blue-500 text-white px-4 mx-2 py-2 rounded-full text-center "
           >
             
             Edit Profile
-          </a>
+          </Link>
         </div>
       </div>
     </div>
 
-
-            <Sidebar />
+    </center>
+    <div style={{height:'87vh'}}></div>
         </div>
     )
 }
