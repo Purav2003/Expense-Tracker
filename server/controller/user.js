@@ -128,7 +128,6 @@ const editProfile = async(req,res)=>{
                 res.send({msg:"Email is same as previous one",success:false,status:409})
             } else{
                 emailExist = await User.findOne({ email: email })
-                console.log(emailExist);
             }
         } else{
             emailExist = false
