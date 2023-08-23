@@ -149,7 +149,7 @@ const editProfile = async(req,res)=>{
                     to:email,
                     text:`Hey ${req.body.name}`,
                     subject:"Profile Edited Successfully",
-                    html:`<h3>View your profile changes by clicking here <a href="http://localhost:5173/profile">Click Here</a></h3>`
+                    html:`<h3>View your profile changes by clicking here <a href="http://localhost:5173/profile"> Click Here</a></h3>`
                 }
                 sendEmail(data)
                 res.send({msg:"Profile Updated Successfully",success:true,status:200})
