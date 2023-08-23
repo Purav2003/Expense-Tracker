@@ -64,8 +64,31 @@ table {
 }
 
 .cal-data-trans {
-  overflow: auto !important;
   height: 400px !important;
+}
+
+.display-cal{
+  overflow: auto !important;
+  height: 320px !important;
+}
+
+
+
+.rs-calendar-table-header-cell-content{
+  color: #000 !important;
+}
+
+.rs-calendar-header-title{
+  color: #000 !important;
+}
+.rs-icon{
+  /* background: red/!important; */
+  color: #000 !important;
+}
+
+
+.rs-calendar-table{
+  border:1px solid #000 !important;
 }
 
 ::-webkit-scrollbar {

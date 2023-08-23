@@ -13,6 +13,7 @@ import ForgetPassword from './Components/ForgetPassword';
 import Profile from './Components/Profile';
 import ForgetPasswordMail from './Components/ForgetPasswordMail';
 import EditProfile from './Components/EditProfile';
+import DashboardSearch from './Components/DashboardSearch';
 function App() {
   return (
     <>
@@ -25,6 +26,7 @@ function App() {
         <Route path='/expense' element={<Expense />}></Route>
         <Route path='/search-income' element={<IncomeSearch />}></Route>
         <Route path='/search-expense' element={<ExpenseSearch />}></Route>      
+        <Route path='/search-dashboard' element={<DashboardSearch />}></Route>      
         <Route path='/reset-password' element={<ResetPassword />}></Route>      
         <Route path='/forget-password-mail' element={<ForgetPasswordMail />}></Route>      
         <Route path='/forget-password' element={<ForgetPassword />}></Route>      

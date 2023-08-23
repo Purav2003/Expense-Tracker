@@ -31,6 +31,7 @@ const Login = () => {
             console.log(response.data.token)
             localStorage.setItem("Token",response.data.token)
             localStorage.setItem("createdBy",response.data.user._id)
+            localStorage.setItem("username",response.data.name)
             window.location.replace("/dashboard")
           }
           if (JSON.stringify(response.data.status) === '404') {

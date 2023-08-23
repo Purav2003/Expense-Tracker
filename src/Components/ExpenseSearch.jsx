@@ -34,25 +34,7 @@ const ExpenseSearch = () => {
             console.log(error)
       }
     };
-  
-    const deleteData = (e) => {
-      console.log(e);
-      let config = {
-        method: 'delete',
-        url: 'http://localhost:5000/api/v1/expense/' + e,
-        headers: {
-          'Content-Type': 'application/json'
-        },
-      };
-  
-      axios.request(config)
-        .then((response) => {
-          if (JSON.stringify(response.data.status) === '200') {
-            toast.success('Successfully Deleted');
-            window.location.reload();
-          }
-        });
-    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const search = document.querySelector('.search-expense').value
@@ -81,13 +63,15 @@ const ExpenseSearch = () => {
   
   return (
             <>
-                   <div className="bg-white">            
+                   <div className="bg-white">   
+                   <Sidebar />
+         
                     <div><Toaster /></div>
 
-    <div className="sm:ml-64"><br></br><br></br> 
+    <div><br></br><br></br> 
     <div className="lg:flex px-8 main-heading-mob">
-    <h1 className="text-2xl font-bold">Search Result Of <i className="font-semibold">"{search}"</i> </h1>  
-    <div className="ml-[20vw] justify-end	relative lg:w-[44%] bg-[#eee] rounded-lg shadow-md px-4 py-2 search-bar">
+    <h1 className="text-2xl w-full font-bold">Search Result Of <i className="font-semibold">"{search}"</i> </h1>  
+    <div className="right-0 lg:w-[80%] 0 ml-[38vw] justify-end	relative bg-[#eee] rounded-lg shadow-md px-4 py-2 search-bar">
     <form onSubmit={handleSubmit}>
 
       <input
@@ -101,7 +85,7 @@ const ExpenseSearch = () => {
       </form>
 
     </div>  
-</div> <div id="errora" className="ml-[41vw] pt-[2vh]" ></div><br></br><br></br><br></br>
+</div> <div id="errora" className="ml-[71vw] pt-[2vh]" ></div><br></br><br></br><br></br>
 
 {data.length!==0?(        <div className="relative px-4">
           <div>
@@ -130,7 +114,6 @@ const ExpenseSearch = () => {
                     <th scope="col" className="px-6 py-3 text-center">
                       Category
                     </th>
-                    <th className="px-6 py-3"></th>
                   </tr>
                 </thead>
                 <tbody className="w-[10%]">
@@ -153,11 +136,7 @@ const ExpenseSearch = () => {
                           <td>{to}</td>
                           <td>{description}</td>
                           <td>{category}</td>
-                          <td onClick={() => deleteData(_id)}>
-                            <button className="rounded-md px-4 py-2 text-[15px]">
-                              <icons.RiDeleteBinLine className="hover:cursor-pointer text-[20px]" />
-                            </button>
-                          </td>
+                        
                         </tr>
                       );
                     })
@@ -183,7 +162,6 @@ const ExpenseSearch = () => {
         </div>)
 :<><h1><center>No Data</center></h1></>}
 
-  <Sidebar />
 
     
     </div>
