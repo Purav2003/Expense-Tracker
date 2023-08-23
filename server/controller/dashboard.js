@@ -1,13 +1,15 @@
 const Income = require("../models/incomeModel")
 const Expense = require("../models/expenseModel")
+const User = require("../models/user")
 
 const transaction = async (req, res) => {
     const id = req.params.id
+    const user = await User.findById(id)
     const incomes = await Income.find({ createdBy: id })
     const expenses = await Expense.find({ createdBy: id }).select("-category")
     const mixedData = [...incomes, ...expenses]
     mixedData.sort((a, b) => a.date - b.date)
-    res.send({ transaction: mixedData.slice(0, 5), success: true, status: 200 })
+    res.send({ transaction: mixedData.slice(0, 5), name:user.name,success: true, status: 200 })
 }
 
 const dateHighlight = async (req, res) => {
@@ -26,7 +28,7 @@ const dateData = async (req, res) => {
     const expenses = await Expense.find({ createdBy: id, date: date })
     const mixedData = [...incomes, ...expenses]
     mixedData.sort((a, b) => a.date - b.date)
-    res.send({ dateData: mixedData, success: true, status: 200 })
+    res.send({ dateData: mixedData, success: true, status: 200 ,date:req.body.date,name:})
 }
 
 const statistics = async (req, res) => {
