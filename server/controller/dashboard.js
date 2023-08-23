@@ -136,9 +136,43 @@ const statistics = async (req, res) => {
     res.send({ totalIncome:totalIncome[0].totalAmount, totalExpense:totalExpense[0].totalAmount, totalMonthlyIncome:totalMonthlyIncome[0].totalAmount, totalMonthlyExpense:totalMonthlyExpense[0].totalAmount ,totalTransactions})
 }
 
+const search = async(req,res)=>{
+    const id = req.params.id
+    const search = req.query.search
+    const resultIncome = await Income.find({
+        $and: [
+            {createdBy: id,},
+            {
+                $or: [
+                    {description: {$regex: new RegExp(search, "i")}},
+                    {mode: {$regex: new RegExp(search, "i")}},
+                    {from: {$regex: new RegExp(search, "i")}},
+                ]
+            }   
+        ]
+    })
+    const resultExpense = await Expense.find({
+        $and: [
+            {createdBy: id,},
+            {
+                $or: [
+                    {description: {$regex: new RegExp(search, "i")}},
+                    {mode: {$regex: new RegExp(search, "i")}},
+                    {to: {$regex: new RegExp(search, "i")}},
+                    {category: {$regex: new RegExp(search, "i")}}
+                ]
+            }   
+        ]
+    })
+    const mixedData = [...resultIncome, ...resultExpense]
+    mixedData.sort((a, b) => a.date - b.date)
+    res.send({searchedData:mixedData,success:true,status:200})
+}
+
 module.exports = {
     transaction,
     dateHighlight,
     dateData,
-    statistics
+    statistics,
+    search
 }
