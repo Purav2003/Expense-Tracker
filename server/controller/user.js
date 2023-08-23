@@ -119,25 +119,15 @@ const editProfile = async(req,res)=>{
     if (numberError && emailError) {
         const id = req.params.id
         const {email,mobile} = req.body
-        const emailExist = await User.findOne({ email: email })
-        if(!emailExist){
-            const phoneExist = await User.findOne({ mobile:mobile})
-            if(!phoneExist){
-                const editProfile = await User.findByIdAndUpdate(id,{email:email,mobile:mobile})
-                const data = {
-                    to:req.body.email,
-                    text:`Hey ${req.body.name}`,
-                    subject:"Profile Edited Successfully",
-                    html:`<h3>View your profile changes by clicking here <a href="http://localhost:5173/profile">Click Here</a></h3>`
-                }
-                sendEmail(data)
-                res.send({msg:"Profile Updated Successfully",success:true,status:200})
-            } else{
-                res.send({ msg: "Phone Number already exists", success: false, status: 403 })
-            }
-        } else{
-            res.send({ msg: "Email already exists", success: false, status: 403 })
+        const editProfile = await User.findByIdAndUpdate(id,{email:email,mobile:mobile})
+        const data = {
+            to:req.body.email,
+            text:`Hey ${req.body.name}`,
+            subject:"Profile Edited Successfully",
+            html:`<h3>View your profile changes by clicking here <a href="http://localhost:5173/profile">Click Here</a></h3>`
         }
+        sendEmail(data)
+        res.send({msg:"Profile Updated Successfully",success:true,status:200})
     } else{
         if (!numberError) {
             res.send({ msg: "Enter Valid Number", success: false, status: 403 })
