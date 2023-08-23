@@ -28,7 +28,7 @@ const dateData = async (req, res) => {
     const expenses = await Expense.find({ createdBy: id, date: date })
     const mixedData = [...incomes, ...expenses]
     mixedData.sort((a, b) => a.date - b.date)
-    res.send({ dateData: mixedData, success: true, status: 200 ,date:req.body.date,name:})
+    res.send({ dateData: mixedData, success: true, status: 200 ,date:req.body.date})
 }
 
 const statistics = async (req, res) => {
