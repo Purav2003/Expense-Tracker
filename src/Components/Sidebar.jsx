@@ -104,7 +104,7 @@ const Sidebar = () => {
                                 </li>
                                 <li>
                                     <Link
-                                        to="/profile"
+                                        to="/settings"
                                         className="block px-4 py-2 text-gray-900 dark:text-white hover:text-[black] hover:bg-white"
                                     >
                                         Settings

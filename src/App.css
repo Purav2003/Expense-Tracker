@@ -140,3 +140,33 @@ table {
 }
 
 
+table tbody tr:nth-child(odd){
+  
+  background: #eee !important;
+
+}
+
+.setting-main{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3%;
+}
+
+option{
+  padding: 10px !important;
+}
+
+.rs-calendar-table-cell-selected .rs-calendar-table-cell-day{
+  background: #57bee6;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: #fff;
+  margin-left: 3px;
+  text-align: center !important;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  border: none;
+}
