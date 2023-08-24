@@ -44,7 +44,9 @@ const Profile = () => {
         <h2 className="text-lg text-gray-600 flex items-center pt-2"><icon.BiUser className="text-[20px]"/>&nbsp;User: {data.name}</h2>
        <p className="text-lg text-gray-600 flex items-center pt-2"><icon.BiEnvelope className="text-[20px]"/>&nbsp;Email:&nbsp;{data.email}</p>
         <p className="text-lg text-gray-600 flex items-center pt-2"><icon.BiPhone className="text-[20px]"/>&nbsp;Phone:&nbsp; {data.mobile}</p>
-        <p className="text-lg text-gray-600 flex items-center pt-2"><icon.BiCalendar className="text-[20px]"/>&nbsp;&nbsp;Created At:&nbsp;{data.createdAt?.slice(0,10)}</p><br></br>
+        <p className="text-lg text-gray-600 flex items-center pt-2"><icon.BiCalendar className="text-[20px]"/>&nbsp;&nbsp;Created At:&nbsp;{data.createdAt?.slice(0,10)}</p>
+        <p className="text-lg text-gray-600 flex items-center pt-2"><icon.BiMoney className="text-[20px]"/>&nbsp;&nbsp;Currency:&nbsp;{data.currency}</p>
+
         <div className="mt-4 flex ">
           <Link
             to="/reset-password"

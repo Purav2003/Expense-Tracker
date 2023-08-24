@@ -71,17 +71,17 @@ const EditProfile = () => {
         let datab = ''
         if (email !== datas.email) {
             datab = JSON.stringify({
-                "email": email+"*bablu"+"Email is changed",
+                "email": email + "*bablu" + "Email is changed",
                 "mobile": mobile,
             });
         }
         if (mobile !== datas.mobile) {
             datab = JSON.stringify({
                 "email": email,
-                "mobile": mobile+"*bablu"+"Mobile is changed",
+                "mobile": mobile + "*bablu" + "Mobile is changed",
             });
         }
-        
+
         console.log(datab)
         try {
             let config = {
@@ -98,25 +98,25 @@ const EditProfile = () => {
 
                     if (response.data.msg === "Profile Updated Successfully") {
                         window.location.replace("/profile")
-                    }    
+                    }
                     if (response.data.msg === 'Email already exists') {
                         document.getElementById('errore').innerHTML = '<h1 className="pt-[0.5vw]">Email Already Exist</h1>'
-                    }  
+                    }
                     if (response.data.msg === 'Phone Number already exists') {
                         document.getElementById('errorm').innerHTML = '<h1 className="pt-[0.5vw]">Phone Number Already Exist</h1>'
-                    }  
+                    }
                     if (response.data.msg === 'Email is same as previous one') {
                         document.getElementById('errore').innerHTML = '<h1 className="pt-[0.5vw]">Email Same as Previous. Enter New Detail</h1>'
-                    }         
-                    if(response.data.msg === 'Mobile Number is same as previous one'){
+                    }
+                    if (response.data.msg === 'Mobile Number is same as previous one') {
                         document.getElementById('errorm').innerHTML = '<h1 className="pt-[0.5vw]">Phone Number Same as Previous. Enter New Detail</h1>'
-                    }  
-                    if(response.data.msg === 'Enter Valid Number'){
+                    }
+                    if (response.data.msg === 'Enter Valid Number') {
                         document.getElementById('errorm').innerHTML = '<h1 className="pt-[0.5vw]">Enter Valid Number</h1>'
-                    }  
-                    if( response.data.msg === "Enter Valid Email"){
+                    }
+                    if (response.data.msg === "Enter Valid Email") {
                         document.getElementById('errore').innerHTML = '<h1 className="pt-[0.5vw]">Enter Valid Email</h1>'
-                    }                            
+                    }
                 })
         }
         catch (err) {
@@ -131,7 +131,7 @@ const EditProfile = () => {
     return (
         <div>
             <Sidebar />
-            <div className=" lg:flex lg:flex-row bg-tertiary">
+            {/* <div className=" lg:flex lg:flex-row bg-tertiary">
                 <div className="update-profile pt-[3vw] first-div">
                     <div>
                         <h1 className="text-[35px] font-bold pt-[1vw] text-[#000]">Edit Profile</h1>
@@ -192,6 +192,39 @@ const EditProfile = () => {
                 </div>
                 <div style={{ height: '87vh' }}>
 
+                </div>
+            </div> */}
+            <div className="setting-main">
+                <div className="w-[50%]">
+                    <h1 className="py-4 font-bold text-[25px]">Edit Profile</h1>
+                    <form onSubmit={handleSubmit}>
+                        <table className="w-full">
+                            <tr className="border p-4">
+                                <td className="border p-4 w-[50%]">Name</td>
+                                <td className="border p-4 w-[50%]">{data.name}
+
+                                </td>
+                            </tr>
+                            <tr className="border p-4">
+                                <td className="border p-4 w-[50%]">E-mail</td>
+                                <td className="border p-4 w-[50%]"><input
+                                    className="email shadow appearance-none rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    type="text"
+                                    placeholder="E-mail"
+                                    value={data.email}
+                                    onChange={handleEmailChange}
+                                    required
+                                /></td>             </tr>
+                            <tr>
+
+                                <td className="py-4 w-[50%] text-center items-center" colSpan={2} >
+                                    <button type="submit" className="bg-fourth text-white py-2 px-4 rounded-full">
+                                        Save Changes
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
                 </div>
             </div>
         </div>

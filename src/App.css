@@ -158,7 +158,7 @@ option{
 }
 
 .rs-calendar-table-cell-selected .rs-calendar-table-cell-day{
-  background: #57bee6;
+  background: #57bee6 ;
   width: 30px;
   height: 30px;
   border-radius: 50%;
