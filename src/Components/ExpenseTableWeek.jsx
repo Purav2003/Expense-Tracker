@@ -9,7 +9,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import gif from '../Assets/images/loading.gif';
 import '../index.css'
 import Skeleton from "react-loading-skeleton";
-
+import Loader from "./Loader";
 import '../Assets/css/income.css';
 import '../index.css';
 
@@ -28,7 +28,7 @@ const ExpenseTableWeek = () => {
 
       setDataExp(datas.expenses);
       setTotalPages(datas.totalPages);
-      setTimeout(() => { setLoading(false); }, 1000);
+      setLoading(false);
     } catch (error) {
       // Handle error here
     }
@@ -71,32 +71,13 @@ const ExpenseTableWeek = () => {
 
   }
 
-  const colors = ['#8884d8', '#82ca9d', '#ffc658', '#0088FE', '#00C49F', '#FFBB28'];
-
-  const calculateCategoryDistribution = () => {
-    const categoryDistribution = {};
-
-    dataexp.forEach((expense) => {
-      const { category, amount } = expense;
-      if (categoryDistribution[category]) {
-        categoryDistribution[category] += amount;
-      } else {
-        categoryDistribution[category] = amount;
-      }
-    });
-
-    return Object.keys(categoryDistribution).map((category) => ({
-      name: category,
-      value: categoryDistribution[category],
-    }));
-  };
 
   return (
     <>
       <br /><br />
       <div><Toaster /></div>
 
-      {dataexp.length > 0 ? (
+      {loading?<Loader />:dataexp.length > 0 ? (
         <div className="relative px-4">
           <div>
             <div className="table-income">
@@ -128,14 +109,7 @@ const ExpenseTableWeek = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {loading ? (
-                    <tr>
-                      <td colSpan="7">
-                        <Skeleton count={5} height={45} />
-
-                      </td>
-                    </tr>
-                  ) : (
+                  {
                     dataexp.map((tablesa) => {
                       const { _id, description, amount, date, mode, to, category } = tablesa
                       count_table = count_table + 1
@@ -155,7 +129,7 @@ const ExpenseTableWeek = () => {
                           </td>
                         </tr>
                       )
-                    })
+                    }
                   )}
                 </tbody>
               </table>
