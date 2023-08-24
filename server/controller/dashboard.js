@@ -147,6 +147,7 @@ const search = async (req, res) => {
                     { description: { $regex: new RegExp(search, "i") } },
                     { mode: { $regex: new RegExp(search, "i") } },
                     { to: { $regex: new RegExp(search, "i") } },
+                    { category: { $regex: new RegExp(search, "i") } }
                 ]
             }
         ]
