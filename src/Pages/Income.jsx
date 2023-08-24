@@ -3,12 +3,11 @@ import { Link } from "react-router-dom"
 import IncomeForm from "../Components/IncomeForm"
 import * as icon from "react-icons/fi"
 import IncomeBar from "../Components/IncomeBar"
-import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { Toaster } from "react-hot-toast"
-import axios from "axios"
+import { useState,useEffect } from "react"
+import Loader from "../Components/Loader"
 const Income = () =>{
-  let id = localStorage.getItem('createdBy');
 
     let token = localStorage.getItem("Token")
     if(token === null){
@@ -30,7 +29,9 @@ const Income = () =>{
         <div className="bg-white">       
           <Sidebar />
      
-                    <div><Toaster /></div>
+               
+<>
+<div><Toaster /></div>
 
     <div><br></br><br></br> 
     <div className="lg:flex px-8 main-heading-mob">
@@ -58,7 +59,7 @@ const Income = () =>{
   <IncomeBar />
 
     
-    </div>
+    </div></>
 </div>
     
     )

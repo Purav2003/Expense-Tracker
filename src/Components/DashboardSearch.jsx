@@ -131,7 +131,7 @@ const DashboardSearch = () => {
                           <td className="py-4">{count_table}</td>
                           <td>{date.slice(0, 10).split("-").reverse().join("-")}</td>
                           <td>{from?"+":"-"}&nbsp;&#8377; {amount}</td>
-                          <td>{mode}</td>
+                          <td className={mode.includes(search) ? 'bg-[yellow]' : 'bg-white'}>{mode}</td>
                           <td>{from?from:to}</td>
                           <td>{description}</td>
                          

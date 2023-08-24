@@ -1,40 +1,40 @@
 import Sidebar from "./Sidebar"
 import axios from "axios"
 import { Link } from "react-router-dom"
-const ResetPassword = () =>{
-    
-    let token = localStorage.getItem("Token")
-    if(token === null){
-            window.location.replace("/")
-    }
-    let id = localStorage.getItem('createdBy');
+const ResetPassword = () => {
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        const oldPassword = document.querySelector('.oldpass').value
-        const newPassword = document.querySelector('.newpass').value
-        const retypepass = document.querySelector('.retypenewpass').value
-    
-        let data = JSON.stringify({
-          "oldPassword": oldPassword,
-          "newPassword": newPassword
-        });
-        if(newPassword !== oldPassword){
-        if(newPassword === retypepass){
+  let token = localStorage.getItem("Token")
+  if (token === null) {
+    window.location.replace("/")
+  }
+  let id = localStorage.getItem('createdBy');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const oldPassword = document.querySelector('.oldpass').value
+    const newPassword = document.querySelector('.newpass').value
+    const retypepass = document.querySelector('.retypenewpass').value
+
+    let data = JSON.stringify({
+      "oldPassword": oldPassword,
+      "newPassword": newPassword
+    });
+    if (newPassword !== oldPassword) {
+      if (newPassword === retypepass) {
         try {
           let config = {
             method: 'post',
-            url: 'http://localhost:5000/api/v1/auth/changePassword/'+id,
+            url: 'http://localhost:5000/api/v1/auth/changePassword/' + id,
             headers: {
               'Content-Type': 'application/json'
             },
             data: data
           };
-    
+
           axios.request(config)
             .then((response) => {
               if (JSON.stringify(response.data.status) === '200') {
-                window.location.replace('/success-changed-pass')           
+                window.location.replace('/success-changed-pass')
               }
 
               if (JSON.stringify(response.data.status) === '401') {
@@ -48,71 +48,72 @@ const ResetPassword = () =>{
             })
         }
         catch (err) {
-            console.log(err.code)
-          }
-    }
-    else{
+          console.log(err.code)
+        }
+      }
+      else {
         document.getElementById('errora').innerHTML = '<h1 className="pt-[0.5vw]">Password Do Not Match</h1>'
+      }
     }
-}
-else{
-    document.getElementById('errora').innerHTML = '<h1 className="pt-[0.5vw]">You Can Not Enter Same Password </h1>'
+    else {
+      document.getElementById('errora').innerHTML = '<h1 className="pt-[0.5vw]">You Can Not Enter Same Password </h1>'
 
-}
+    }
+
+    const inputs = document.querySelectorAll('.email, .password');
+    inputs.forEach(input => {
+      input.value = '';
+    });
+  }
+  return (
+    <div className="bg-white">
+      <Sidebar />
     
-        const inputs = document.querySelectorAll('.email, .password');
-        inputs.forEach(input => {
-          input.value = '';
-        });}
-        return(
-            <div className="bg-tertiary">
-                              <Sidebar />
 
-            <div className="reset-password"><br></br><br></br>
-                <div className="lg:flex main-heading-mob">
-                    <h1 className="text-4xl font-bold">Reset Password </h1>                   
-                </div>
-                <div className="w-full max-w-xs">
-            <form onSubmit={handleSubmit}  className="bg-white rounded w-[40vw] px-8 pt-8 mt-4 pb-8 mb-4">
+      <div className="setting-main">
+        <div className="w-[50%]">
+          <h1 className="py-4 font-bold text-[25px]">Reset Password</h1>
+          <form onSubmit={handleSubmit}>
+            <table className="w-full">
+              <tr className="border p-4">
+                <td className="border p-4 w-[50%]">Old Password</td>
+                <td className="border p-4 w-[50%]">
+                  <input className="oldpass appearance-none rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Old Password" required />
 
-              <div className="mb-4 form-field">
-                <label className="block text-black-700 text-sm font-bold mb-2">
-                  Old Password
-                </label>
-                <input className="oldpass shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Old Password" required />
-                <div id="error"></div>
-              </div>
-              <div className="mb-4 form-field">
-                <label className="block text-black-700 text-sm font-bold mb-2">
-                  New Password
-                </label>
-                <input className="newpass shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="New Password" required />
-              </div>
-              <div className="mb-4 form-field">
-                <label className="block text-black-700 text-sm font-bold mb-2">
-                  Re-type New Password
-                </label>
-                <input className="retypenewpass shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Retype New Password" required />
-                <div id="errora"></div>
-              </div>
-              <div className="flex form-field items-center">
-              <Link to="/profile" className="w-full"><button className="bg-[#009688] button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
-                  Go Back
-                </button> </Link>    
-                <button className="mx-2 bg-[#009688] button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
-                  Update Password
-                </button>               
-              </div>
-            </form>
+                </td>
+              </tr>
+              <tr className="border p-4">
+                <td className="border p-4 w-[50%]">New Password</td>
+                <td className="border p-4 w-[50%]">                
+                <input className="newpass appearance-none rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="New Password" required />
+                </td>
+              </tr>
+              <tr className="border p-4">
+                <td className="border p-4 w-[50%]">Retype New Password</td>
+                <td className="border p-4 w-[50%]">                <input className="retypenewpass appearance-none rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Retype New Password" required />
+</td>             </tr>
+              <tr>
 
-          </div>
-            </div>
-            <div style={{height:'87vh'}}>
+                <td className="py-4 w-[50%] text-center items-center" colSpan={2} >
+                  <Link to="/profile"><button type="button" className="bg-white text-fourth border border-fourth py-2 px-4 rounded-full">
+                    Go Back
+                  </button></Link>
+                  <button type="submit" className="ml-4 bg-fourth text-white py-2 px-4 rounded-full">
+                    Reset Password
+                  </button>
+                </td>
+              </tr>
+            </table>
+          </form>
+          <div id="error" className='text-[red]'></div>
+          <div id="errora" className='text-[red]'></div>
 
-</div>
         </div>
-        
-        )
+      </div>
+
+    </div>
+
+  )
 }
 
 export default ResetPassword

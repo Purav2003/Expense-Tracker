@@ -42,25 +42,34 @@ const ForgetPasswordMail = () => {
   return (
 
     <div>
-      <div onSubmit={handleSubmit} className="w-full max-w-xs">
-        <form className="bg-white rounded w-[40vw] px-8 pt-6 pb-8 mb-4">
+            <div className="setting-main">
+        <div className="w-[50%]">
+          <h1 className="py-4 font-bold text-[25px]">Forget Password</h1>
+          <form onSubmit={handleSubmit}>
+            <table className="w-full">
+              <tr className="border p-4">
+                <td className="border p-4 w-[50%]">Email</td>
+                <td className="border p-4 w-[50%]">
+                <input className="email appearance-none rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="E-mail" required />
 
-          <div className="mb-4 form-field">
-            <label className="block text-black-700 text-sm font-bold mb-2">
-              Email
-            </label>
-            <input className="email shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="E-mail" required />
-          </div>
+                </td>
+              </tr>
+             
+              <tr>
 
-          <div className="flex form-field items-center">
-            <button className="bg-[#1BA329] button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
-              Submit
-            </button>
+                <td className="py-4 w-[50%] text-center items-center" colSpan={2} >
+                 
+                  <button type="submit" className="ml-4 bg-fourth text-white py-2 px-4 rounded-full">
+                    Send Mail
+                  </button>
+                </td>
+              </tr>
+            </table>
+          </form>
+          <div id="error" className='text-[red]'></div>
+          <div id="errora" className='text-[red]'></div>
 
-          </div><br></br>
-          <div id="error"></div>
-
-        </form>
+        </div>
       </div>
     </div>
   );

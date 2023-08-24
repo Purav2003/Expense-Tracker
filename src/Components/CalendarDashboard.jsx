@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Calendar, Badge } from 'rsuite';
 import axios from 'axios';
 import ReactApexChart from 'react-apexcharts';
+import Loader from './Loader'
 
 
 
@@ -11,6 +12,7 @@ const CalendarDashboard = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [datedata, setDatedata] = useState([]);
   const [date, setDate] = useState();
+  const [loading, setLoading] = useState(false);
 
   const fetchData = async () => {
     let id = localStorage.getItem('createdBy');
@@ -20,6 +22,8 @@ const CalendarDashboard = () => {
       const response = await fetch(API_URL);
       const datas = await response.json();
       setData(datas.dates);
+      setTimeout(() => {  setLoading(false);}, 100);
+
     } catch (error) {
       // Handle error here
     }
@@ -28,6 +32,7 @@ const CalendarDashboard = () => {
 
 
   useEffect(() => {
+    setLoading(true)
     fetchData();
   }, []);
 
@@ -190,8 +195,8 @@ const CalendarDashboard = () => {
 
   return (
 
-    <div className='lg:flex lg:pl-12 rounded-full calendar-main'>
-      <Calendar compact bordered renderCell={renderCell} onChange={handleSubmit}
+    <>
+ {loading?<Loader />:   <><div className='lg:flex lg:pl-12 rounded-full calendar-main'>  <Calendar compact bordered renderCell={renderCell} onChange={handleSubmit}
         className="lg:w-[28%] bg-white calendar rounded-md" disabledDate={(date) => date > new Date()} />
       <div className='lg:ml-4 bg-white rounded-md calendar-details lg:w-[32%]'>
         <div className='p-4 '>
@@ -231,8 +236,10 @@ const CalendarDashboard = () => {
 
 
       </div>
-    </div>
+      </div>
 
+      </>}
+</>
   );
 };
 

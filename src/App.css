@@ -142,7 +142,7 @@ table {
 
 table tbody tr:nth-child(odd){
   
-  background: #eee !important;
+  background: #e8ebf8 !important;
 
 }
 
@@ -170,3 +170,48 @@ option{
   display: flex;
   border: none;
 }
+
+/* loader.css */
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40vh;
+}
+
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top: 4px solid #3498db;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+/* Define CSS variables for colors in both dark and light modes */
+:root {
+  --background-color-light: #ffffff;
+  --text-color-light: #333333;
+  --background-color-dark: #333333;
+  --text-color-dark: #ffffff;
+}
+
+/* Apply styles based on the selected mode */
+body {
+  background-color: var(--background-color-light); /* Default background color */
+  color: var(--text-color-light); /* Default text color */
+}
+
+/* Apply dark mode styles when the 'dark-mode' class is present on the body element */
+body.dark-mode {
+  background-color: var(--background-color-dark) !important; /* Dark mode background color */
+  color: var(--text-color-dark) !important; /* Dark mode text color */
+}
+

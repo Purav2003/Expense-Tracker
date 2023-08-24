@@ -1,74 +1,98 @@
-import Sidebar from "./Sidebar"
-import { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import dp from "../Assets/images/signup.png"
-import * as icon from 'react-icons/bi'
+import dp from "../Assets/images/signup.png";
+import Sidebar from "./Sidebar";
 
 const Profile = () => {
-    const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(false);
+  const [data, setData] = useState({});
+  const [loading, setLoading] = useState(true);
 
-    let token = localStorage.getItem("Token")
-    if (token === null) {
-        window.location.replace("/")
+  const token = localStorage.getItem("Token");
+  if (token === null) {
+    window.location.replace("/");
+  }
+
+  const fetchData = async () => {
+    const id = localStorage.getItem('createdBy');
+    const API_URL = `http://localhost:5000/api/v1/auth/profile/${id}`;
+
+    try {
+      const response = await fetch(API_URL);
+      const data_new = await response.json();
+      setData(data_new.user);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
     }
+  };
 
-    const fetchData = async () => {
-        let id = localStorage.getItem('createdBy');
-        const API_URL = 'http://localhost:5000/api/v1/auth/profile/' + id
-        console.log(API_URL)
-        try {
-            const response = await fetch(API_URL);
-            const data_new = await response.json();
-            console.log(data_new.user)
-            setData(data_new.user)
-            console.log(data)
-            setLoading(false)
-        } catch (error) {
-            console.log(error)
-        }
-    };
-    useEffect(() => {
-        setLoading(true);
-        fetchData();
-    }, []);
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-    return (
+  return (
+    <>
+      <Sidebar />
+      <div className="setting-main p-4">
+        <div className="lg:grid grid-cols-2 gap-0 lg:ml-[11vw]">
+          {/* 1st Row */}
+          <div className="col-span-1 w-[60%] p-4">
+            <div className="bg-white">
+              <center><br></br>
+                <img src={dp} className="rounded-full"></img><br></br>
+                <h1 className="font-bold text-[20px]">{data.name}</h1>
+              </center>
+            </div>
+          </div>
+          <div className="col-span-1 w-[100%] p-4 lg:ml-[-19vw]">
+            <div className="bg-white">
+              <div className="setting-main p-4">
+                <div className="w-[100%]">
+                  <h1 className="py-4 font-bold text-[25px]">My Profile</h1>
+                  <table className="w-full">
+                    <tr className="border p-4">
+                      <td className="border p-4 w-[50%]">Name</td>
+                      <td className="border p-4 w-[50%] ">{data.name}
 
-        <div className="bg-tertiary">
-        <Sidebar /> 
-        <center><div className="profile w-full flex items-center sm:max-w-2xl bg-white shadow-xl rounded-lg overflow-hidden profile">
-      <img className="w-64 h-64 mx-8 object-cover items-center" src={dp} alt={data.name} />
-      <div className="px-8 ">
-        <h2 className="text-lg text-gray-600 flex items-center pt-2"><icon.BiUser className="text-[20px]"/>&nbsp;User: {data.name}</h2>
-       <p className="text-lg text-gray-600 flex items-center pt-2"><icon.BiEnvelope className="text-[20px]"/>&nbsp;Email:&nbsp;{data.email}</p>
-        <p className="text-lg text-gray-600 flex items-center pt-2"><icon.BiPhone className="text-[20px]"/>&nbsp;Phone:&nbsp; {data.mobile}</p>
-        <p className="text-lg text-gray-600 flex items-center pt-2"><icon.BiCalendar className="text-[20px]"/>&nbsp;&nbsp;Created At:&nbsp;{data.createdAt?.slice(0,10)}</p>
-        <p className="text-lg text-gray-600 flex items-center pt-2"><icon.BiMoney className="text-[20px]"/>&nbsp;&nbsp;Currency:&nbsp;{data.currency}</p>
+                      </td>
+                    </tr>
+                    <tr className="border p-4">
+                      <td className="border p-4 w-[50%]">E-mail</td>
+                      <td className="p-4">{data.email}</td>
+                    </tr>
+                    <tr className="border p-4">
+                      <td className="border p-4 w-[50%]">Phone</td>
+                      <td className="p-4">{data.mobile}</td>
 
-        <div className="mt-4 flex ">
-          <Link
-            to="/reset-password"
-            className="block bg-blue-500 px-4 text-white py-2 rounded-full text-center "
-          >
-            Reset Password
-          </Link>
-          <Link
-            to="/edit-profile"
-            className="block bg-blue-500 text-white px-4 mx-2 py-2 rounded-full text-center "
-          >
-            
-            Edit Profile
-          </Link>
+                    </tr>
+                    <tr className="border p-4">
+                      <td className="border p-4 w-[50%]">Join Date</td>
+                      <td className="p-4">{data.createdAt?.slice(0,10)}</td>
+
+                    </tr>
+                    <tr>
+
+                      <td className="py-4 w-[50%] text-center items-center" colSpan={2} >
+                        <Link to="/reset-password"><button type="button" className="bg-white text-fourth border border-fourth py-2 px-4 rounded-full">
+                          Reset Password
+                        </button></Link>
+                        <Link to="/edit-profile"><button type="button" className="ml-4 bg-fourth text-white py-2 px-4 rounded-full">
+                          Edit Profile
+                        </button></Link>
+                      </td>
+                    </tr>
+                  </table>
+                  <div id="errore" className='text-[red]'></div>
+                  <div id="errorm" className='text-[red]'></div>
+
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
+  );
+};
 
-    </center>
-    <div style={{height:'87vh'}}></div>
-        </div>
-    )
-}
-
-export default Profile
+export default Profile;

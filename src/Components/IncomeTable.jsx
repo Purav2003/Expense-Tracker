@@ -5,6 +5,7 @@ import * as icons from "react-icons/ri";
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
 import Skeleton from "react-loading-skeleton";
+import Loader from "./Loader";
 
 import '../Assets/css/income.css';
 import '../index.css';
@@ -14,6 +15,7 @@ const IncomeTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [totalPages, setTotalPages] = useState(1);
+  
   let counter = 1;
 
   const fetchData = async (page) => {
@@ -27,7 +29,7 @@ const IncomeTable = () => {
 
       setData(datas.income);
       setTotalPages(datas.totalPages);
-      setTimeout(() => {  setLoading(false);}, 600);
+      setTimeout(() => {  setLoading(false);}, 100);
     } catch (error) {
       // Handle error here
     }
@@ -71,7 +73,9 @@ const IncomeTable = () => {
     <>
       <br /><br />
       <div><Toaster /></div>
-{data.length!==0?(        <div className="relative px-4">
+
+{loading?<Loader />:
+data.length!==0?(        <div className="relative px-4">
           <div>
             <div className="table-income">
               <table className="table-income rounded-lg lg:w-full shadow-lg bg-white overflow-scroll text-sm text-left">
@@ -99,14 +103,8 @@ const IncomeTable = () => {
                   </tr>
                 </thead>
                 <tbody className="w-[10%]">
-                  {loading ? (
-                    <tr>
-                      <td colSpan="7">                        
-                        <Skeleton count={5} height={45} /> 
-                      </td>
-                    </tr>
-                  ) : (
-                    data.map((tables) => {
+                 
+             {       data.map((tables) => {
                       const { _id, description, amount, date, mode, from } = tables;
                       count_table = count_table + 1;
                       return (
@@ -124,8 +122,8 @@ const IncomeTable = () => {
                           </td>
                         </tr>
                       );
-                    })
-                  )}
+                    })}
+                  
                 </tbody>
               </table>
             </div>

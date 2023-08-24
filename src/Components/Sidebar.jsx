@@ -47,7 +47,7 @@ const Sidebar = () => {
 
     return (
         <>
-            <nav className="bg-[#3b72ff] border-gray-200 fixed w-full z-[4]">
+            <nav className="bg-[#3b72ff] border-gray-200 fixed w-full z-[100]">                
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <Link to="/dashboard" className="flex items-center">
                         <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Expense Tracker</span>

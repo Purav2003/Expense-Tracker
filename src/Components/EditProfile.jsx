@@ -131,69 +131,7 @@ const EditProfile = () => {
     return (
         <div>
             <Sidebar />
-            {/* <div className=" lg:flex lg:flex-row bg-tertiary">
-                <div className="update-profile pt-[3vw] first-div">
-                    <div>
-                        <h1 className="text-[35px] font-bold pt-[1vw] text-[#000]">Edit Profile</h1>
-                    </div>
-                    <div className="w-full max-w-xs">
-                        <form className="bg-white px-4 rounded w-[40vw] pt-8 mt-4 pb-8 mb-4" onSubmit={handleSubmit}>
-                            <div className="mb-4 form-field ">
-                                <label className="block text-black-700 text-sm font-bold mb-2 ">
-                                    Name
-                                </label>
-                                <input className="bg-tertiary pointer-events-none name shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Username" value={data.name} required />
-                            </div>
-                            <div className="mb-4 form-field">
-                                <label className="block text-black-700 text-sm font-bold mb-2">
-                                    Email
-                                </label>
-                                <input
-                                    className="email shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    type="text"
-                                    placeholder="E-mail"
-                                    value={data.email}
-                                    onChange={handleEmailChange}
-                                    required
-                                />
-                                                               <div id="errore" className='text-[red]'></div>
-
-                            </div>
-                            <div className="mb-4 form-field">
-                                <label className="block text-black-700 text-sm font-bold mb-2">
-                                    Phone Number
-                                </label>
-                                <input
-                                    className="mobile shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    type="number"
-                                    placeholder="Phone Number"
-                                    value={data.mobile}
-                                    onChange={handleMobileChange}
-                                    required
-                                />
-                                <div id="errorm" className='text-[red]'></div>
-                            </div>
-                            <div className="lg:flex form-field items-center">
-                                <Link to="/profile" className='w-full'><button
-                                    className="bg-[#1BA329] button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline"
-                                    type="button"
-                                >
-                                    Go Back
-                                </button></Link>
-                                <button
-                                    className="mx-2 bg-[#1BA329] button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline"
-                                    type="submit"
-                                >
-                                    Edit Profile
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div style={{ height: '87vh' }}>
-
-                </div>
-            </div> */}
+        
             <div className="setting-main">
                 <div className="w-[50%]">
                     <h1 className="py-4 font-bold text-[25px]">Edit Profile</h1>
@@ -201,30 +139,47 @@ const EditProfile = () => {
                         <table className="w-full">
                             <tr className="border p-4">
                                 <td className="border p-4 w-[50%]">Name</td>
-                                <td className="border p-4 w-[50%]">{data.name}
+                                <td className="border p-4 w-[50%] bg-primary">{data.name}
 
                                 </td>
                             </tr>
                             <tr className="border p-4">
                                 <td className="border p-4 w-[50%]">E-mail</td>
                                 <td className="border p-4 w-[50%]"><input
-                                    className="email shadow appearance-none rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    className="appearance-none rounded w-full text-black outline-0"
                                     type="text"
                                     placeholder="E-mail"
                                     value={data.email}
                                     onChange={handleEmailChange}
                                     required
+                                /></td>            
+                                 </tr>
+                                <tr className="border p-4">
+                                <td className="border p-4 w-[50%]">Phone</td>
+                                <td className="border p-4 w-[50%]"><input
+                                    className="appearance-none rounded w-full text-black outline-0"
+                                    type="text"
+                                    placeholder="Mobile"
+                                    value={data.mobile}
+                                    onChange={handleMobileChange}
+                                    required
                                 /></td>             </tr>
                             <tr>
 
                                 <td className="py-4 w-[50%] text-center items-center" colSpan={2} >
-                                    <button type="submit" className="bg-fourth text-white py-2 px-4 rounded-full">
-                                        Save Changes
+                                    <Link to="/profile"><button type="button" className="bg-white text-fourth border border-fourth py-2 px-4 rounded-full">
+                                            Go Back
+                                    </button></Link>
+                                    <button type="submit" className="ml-4 bg-fourth text-white py-2 px-4 rounded-full">
+                                        Edit Changes
                                     </button>
                                 </td>
                             </tr>
                         </table>
                     </form>
+                    <div id="errore" className='text-[red]'></div>
+                    <div id="errorm" className='text-[red]'></div>
+
                 </div>
             </div>
         </div>

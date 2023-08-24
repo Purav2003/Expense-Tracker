@@ -5,9 +5,11 @@ import CalendarDashboard from "../Components/CalendarDashboard"
 import SummaryDashboard from "../Components/SummayDashboard"
 import * as icon from "react-icons/fi"
 import '../assets/css/dashboard.css'
+import { useState,useEffect } from "react"
+import Loader from "../Components/Loader"
 
 const Dashboard = () => {
-
+   
     let token = localStorage.getItem("Token")
     if (token === null) {
         window.location.replace("/")
@@ -25,8 +27,10 @@ const Dashboard = () => {
   
       }
     return (
-        <div className="bg-white">
+        <div className="bg-normal">
             <Sidebar />
+            
+<>            
 
             <div>
                 <br />
@@ -65,8 +69,7 @@ const Dashboard = () => {
                         <RecentTransaction />
                     </div>
                 </div>
-            </div>
-            <br></br>
+            </div><br></br></>
         </div>
 
     )

@@ -8,7 +8,7 @@ export default {
         primary: "#e6e5de",
         secondary: "#feae49",
         tertiary: "#c0c0be",
-        fourth:"#57bee6",
+        fourth:"#3b72ff",
         fifth:"#3d424a",
         "black-100": "#100d25",
         "black-200": "#090325",

@@ -44,12 +44,12 @@ const IncomeBar = () => {
 
     return (
         <>
-            <div class="px-4 bg-none left-0 z-50 w-full h-16 menu-web">
-                <div class="grid h-full grid-cols-6 w-full mx-auto font-medium overflow-auto">                    
+            <div className="px-4 bg-none left-0 z-50 w-full h-16 menu-web">
+                <div className="grid h-full grid-cols-6 w-full mx-auto font-medium overflow-auto">                    
                     {barLinks.map((link) => (
                         <button key={link.id} type="button" className={`${activebar === link.id
-                            ? "text-white bg-[#007A6D] rounded-md"
-                            : "text-gray bg-[#eee] rounded-md"} hover:text-white mt-1 hover:bg-[#007A6D] w-[95%] h-[80%] items-center justify-center hover:rounded-md group`}
+                            ? "text-white bg-fourth rounded-md"
+                            : "text-gray bg-[#eee] rounded-md"} hover:text-white mt-1 hover:bg-fourth w-[95%] h-[80%] items-center justify-center hover:rounded-md group`}
                             onClick={() => data(link.id)}
                             >
                             {link.title}
