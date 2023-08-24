@@ -20,7 +20,7 @@ const changeCurrency = async (req, res) => {
         const incomeItemAmount = incomeData[i].amount;  
         const response = await fetch(`https://api.apilayer.com/exchangerates_data/convert?to=${newCurrency}&from=${oldCurrency}&amount=${incomeItemAmount}`, requestOptions)
         const data = await response.json()
-        const amount = data.result
+        const amount = data.result.toFixed(2)
         const incomeUpdate = await Income.findByIdAndUpdate(incomeData[i]._id,{amount:amount},{new:true})
     }
     const expenseData = await Expense.find({ createdBy: id })
@@ -28,7 +28,7 @@ const changeCurrency = async (req, res) => {
         const expenseItemAmount = expenseData[i].amount;  
         const response = await fetch(`https://api.apilayer.com/exchangerates_data/convert?to=${newCurrency}&from=${oldCurrency}&amount=${expenseItemAmount}`, requestOptions)
         const data = await response.json()
-        const amount = data.result
+        const amount = data.result.toFixed(2)
         const expenseUpdate = await Expense.findByIdAndUpdate(expenseData[i]._id,{amount:amount},{new:true})
     }
     res.send({ user, msg: "Currency Updated Successfully", success: true, status: 200 })
