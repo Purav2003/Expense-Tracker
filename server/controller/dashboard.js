@@ -6,8 +6,8 @@ const transaction = async (req, res) => {
     const incomes = await Income.find({ createdBy: id })
     const expenses = await Expense.find({ createdBy: id }).select("-category")
     const mixedData = [...incomes, ...expenses]
-    mixedData.sort((a, b) => a.date - b.date)
-    res.send({ transaction: mixedData.slice(0, 5), success: true, status: 200 })
+    mixedData.sort((a, b) => b.date - a.date)
+    res.send({ transaction: mixedData.slice(0,5), success: true, status: 200 })
 }
 
 const dateHighlight = async (req, res) => {
