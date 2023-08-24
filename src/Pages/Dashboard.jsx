@@ -4,6 +4,7 @@ import RecentTransaction from "../Components/RecentTransaction"
 import CalendarDashboard from "../Components/CalendarDashboard"
 import SummaryDashboard from "../Components/SummayDashboard"
 import * as icon from "react-icons/fi"
+import '../assets/css/dashboard.css'
 
 const Dashboard = () => {
 
@@ -54,7 +55,7 @@ const Dashboard = () => {
 <div id="errora" className="ml-[69vw] pt-[2vh]" ></div>             <br />
                 <div className="lg:grid grid-cols-2 gap-4">
                     {/* 1st Row */}
-                    <div className="col-span-2 w-full"><SummaryDashboard /></div>
+                    <div className="col-span-2 w-full"><SummaryDashboard /><br></br></div>
 
                     {/* 2nd Row */}
                     <div className="col-span-2"><CalendarDashboard /></div>

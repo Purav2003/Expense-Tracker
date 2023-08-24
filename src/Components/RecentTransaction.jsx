@@ -40,13 +40,12 @@ const RecentTransaction = () => {
 
 
   return (
-    <>
-      <br /><br />
+    <><br></br>
       <div><Toaster /></div>
-      <h1 className="p-4 font-bold text-[20px]">Recent Transactions</h1>
-{data.length!==0?(        <div className="relative px-4">
+      <h1 className="p-4 lg:px-12 font-bold text-[20px]">Recent Transactions</h1>
+{data.length!==0?(        <div className="relative lg:px-12">
           <div>
-            <div className="table-income">
+            <div className="table-income table-dash">
               <table className="table-income rounded-lg lg:w-full shadow-lg bg-white overflow-scroll text-sm text-left">
                 <thead className="pt-4 text-xs text-gray-700 uppercase">
                   <tr className="text-[#404040] text-[14px]">

@@ -14,6 +14,7 @@ import Profile from './Components/Profile';
 import ForgetPasswordMail from './Components/ForgetPasswordMail';
 import EditProfile from './Components/EditProfile';
 import DashboardSearch from './Components/DashboardSearch';
+import Settings from './Components/Settings';
 function App() {
   return (
     <>
@@ -31,6 +32,7 @@ function App() {
         <Route path='/forget-password-mail' element={<ForgetPasswordMail />}></Route>      
         <Route path='/forget-password' element={<ForgetPassword />}></Route>      
         <Route path='/profile' element={<Profile />}></Route>      
+        <Route path='/settings' element={<Settings />}></Route>      
         <Route path='/edit-profile' element={<EditProfile />}></Route>      
 
     <Route path='/success-changed-pass' element={<PassSuccess />}></Route>
