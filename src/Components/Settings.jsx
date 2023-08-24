@@ -2,32 +2,19 @@ import Sidebar from "./Sidebar";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Loader from "./Loader";
+import { CurrencyList } from "./CurrencyList";
 
 const Settings = () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [mode, setMode] = useState("dark"); // Initialize with a default mode
     const [selectedCurrency, setSelectedCurrency] = useState(""); // Initialize without a default currency
-    const [currencyOptions, setCurrencyOptions] = useState([]);
 
     let token = localStorage.getItem("Token");
     if (token === null) {
         window.location.replace("/");
     }
-
-    const fetchCurrencies = async () => {
-        const API_URL = "https://openexchangerates.org/api/currencies.json";
-
-        try {
-            const response = await axios.get(API_URL);
-            const currencies = Object.keys(response.data);
-            setCurrencyOptions(currencies);
-            setLoading(false)
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
+    const newCur = localStorage.getItem("newCurrency")
     const handleSubmit = async (e) => {
         e.preventDefault();
         let id = localStorage.getItem('createdBy');
@@ -35,6 +22,7 @@ const Settings = () => {
         let data = JSON.stringify({
             "newCurrency": cur,
         });
+        if(newCur !== cur){
         try {
             let config = {
                 method: 'patch',
@@ -49,21 +37,25 @@ const Settings = () => {
                     console.log(JSON.stringify(response.status));
                     if (JSON.stringify(response.status) === '200') {
                         console.log(response.data)
-                        setData(response.data.user);
+                        setData(response.data.user);                        
                         // Update the selected currency and save it in localStorage
                         setSelectedCurrency(cur);
                         localStorage.setItem('selectedCurrency', cur);
+                        window.location.replace("/profile")
                     }
                 })
         }
         catch (err) {
             console.log(err.code)
         }
+   
+    }
+    else{
+        window.location.replace("/profile")
+    }
     }
 
     useEffect(() => {
-        setLoading(true);
-        fetchCurrencies();
         // Retrieve the selected currency from localStorage when the component mounts
         const savedCurrency = localStorage.getItem('selectedCurrency');
         if (savedCurrency) {
@@ -106,9 +98,9 @@ const Settings = () => {
                                         value={selectedCurrency}
                                         onChange={handleCurrencyChange}
                                     >
-                                        {currencyOptions.map((currency) => (
-                                            <option key={currency} value={currency}>
-                                                {currency}
+                                        {CurrencyList.map((currency) => (
+                                            <option key={currency.currency} value={currency.currency}>
+                                                {currency.currency}
                                             </option>
                                         ))}
                                     </select>
