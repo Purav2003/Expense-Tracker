@@ -121,7 +121,7 @@ const statistics = async (req, res) => {
     const incomes = await Income.find({ createdBy: id })
     const expenses = await Expense.find({ createdBy: id })
     const totalTransactions = [...incomes, ...expenses].length
-    res.send({ totalIncome, totalExpense, totalMonthlyExpense, totalTransactions })
+    res.send({ totalIncome:totalIncome.toFixed(2), totalExpense:totalExpense.toFixed(2), totalMonthlyExpense:totalMonthlyExpense.toFixed(2), totalTransactions })
 }
 
 const search = async (req, res) => {
