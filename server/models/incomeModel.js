@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-require('mongoose-long')(mongoose);
-// const {Types: {Long}} = mongoose;
 
 var incomeSchema = new mongoose.Schema({
     description:{
