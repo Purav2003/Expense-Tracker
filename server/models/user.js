@@ -26,6 +26,10 @@ var userSchema = new mongoose.Schema({
         required: true,
         match: [/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/]
     },
+    currency: {
+        type:String,
+        default:'INR'
+    }
 }, { timestamps: true });
 
 userSchema.pre("save", async function () {
