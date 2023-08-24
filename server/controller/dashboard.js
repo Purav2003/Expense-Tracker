@@ -34,7 +34,7 @@ const statistics = async (req, res) => {
     const today = new Date()
     const currentMonth = today.getMonth() + 1
     const currentYear = today.getFullYear()
-    const totalIncome = await Income.aggregate([
+    let totalIncome = await Income.aggregate([
         {
             $match: {
                 createdBy: id
@@ -55,7 +55,7 @@ const statistics = async (req, res) => {
             }
         }
     ])
-    const totalExpense = await Expense.aggregate([
+    let totalExpense = await Expense.aggregate([
         {
             $match: {
                 createdBy: id
@@ -76,7 +76,7 @@ const statistics = async (req, res) => {
             }
         }
     ])
-    const totalMonthlyIncome = await Income.aggregate([
+    let totalMonthlyExpense = await Expense.aggregate([
         {
             $match: {
                 createdBy: id,
@@ -103,37 +103,25 @@ const statistics = async (req, res) => {
             }
         }
     ])
-    const totalMonthlyExpense = await Expense.aggregate([
-        {
-            $match: {
-                createdBy: id,
-                $expr: {
-                    $and: [
-                        { $eq: [{ $year: '$date' }, currentYear] },
-                        { $eq: [{ $month: '$date' }, currentMonth] }
-                    ]
-                }
-            }
-        },
-        {
-            $group: {
-                _id: null,
-                totalAmount: {
-                    $sum: '$amount'
-                }
-            }
-        },
-        {
-            $project: {
-                _id: 0,
-                totalAmount: 1
-            }
-        }
-    ])
+    if(totalIncome.length === 0){
+        totalIncome = 0
+    }else{
+        totalIncome = totalIncome[0].totalAmount
+    }
+    if(totalExpense.length === 0){
+        totalExpense=0
+    }else{
+        totalExpense = totalExpense[0].totalAmount
+    }
+    if(totalMonthlyExpense.length === 0){
+        totalMonthlyExpense = 0
+    }else{
+        totalMonthlyExpense = totalMonthlyExpense[0].totalAmount
+    }
     const incomes = await Income.find({ createdBy: id })
     const expenses = await Expense.find({ createdBy: id })
     const totalTransactions = [...incomes, ...expenses].length
-    res.send({ totalIncome: totalIncome[0].totalAmount, totalExpense: totalExpense[0].totalAmount, totalMonthlyIncome: totalMonthlyIncome[0].totalAmount, totalMonthlyExpense: totalMonthlyExpense[0].totalAmount, totalTransactions })
+    res.send({ totalIncome, totalExpense, totalMonthlyExpense, totalTransactions })
 }
 
 const search = async (req, res) => {
