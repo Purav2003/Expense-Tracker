@@ -73,7 +73,20 @@ const Profile = () => {
                     </tr>
                     <tr className="border p-4">
                       <td className="border p-4 w-[50%]">Currency</td>
-                      <td className="p-4">{data.currency}</td>
+                      <td className="p-4">
+                      {
+                          data.currency==='INR'?'₹ '
+                          :data.currency==='USD'?"$ "
+                          :data.currency==='CAD'?"C$ "
+                          :data.currency==="AED"?"د.إ "
+                          :data.currency==="EUR"?"€ "
+                          :data.currency==="GBP"?"£ "
+                          :data.currency==="JPY"?"¥ "                          
+                          :data.currency==="AUD"?"AU$ "                          
+                          :""
+                        }
+                        
+                        {data.currency}</td>
 
                     </tr>
                     <tr>
