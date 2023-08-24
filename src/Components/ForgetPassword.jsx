@@ -23,13 +23,15 @@ const ForgetPassword = () => {
     
           axios.request(config)
             .then((response) => {
-             
+             console.log(response)
               if (JSON.stringify(response.data.status) === '200') {
-                window.location.replace('/')
-                
+                window.location.replace('/')                
               }
               if (JSON.stringify(response.data.status) === '404') {
                 document.getElementById('error').innerHTML = '<h1 className="pt-[0.5vw]">User Not Found</h1>'
+              }
+              if (JSON.stringify(response.data.status) === '403') {
+                document.getElementById('error').innerHTML = '<h1 className="pt-[0.5vw]">Password is not strong</h1>'
               }
               if (JSON.stringify(response.data.status) === '402') {
                 document.getElementById('error').innerHTML = '<h1 className="pt-[0.5vw]">Your Old Password Can Not Be Your New Password</h1>'

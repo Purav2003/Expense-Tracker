@@ -21,7 +21,7 @@ const RecentTransaction = () => {
     try {
       const response = await fetch(API_URL);
       const datas = await response.json();
-      console.log(datas)
+      console.log(datas.transaction)
       setData(datas.transaction);
       setTimeout(() => {  setLoading(false);}, 600);
     } catch (error) {
@@ -29,24 +29,6 @@ const RecentTransaction = () => {
     }
   };
 
-  const deleteData = (e) => {
-    console.log(e);
-    let config = {
-      method: 'delete',
-      url: 'http://localhost:5000/api/v1/income/' + e,
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    };
-
-    axios.request(config)
-      .then((response) => {
-        if (JSON.stringify(response.data.status) === '200') {
-          toast.success('Successfully Deleted');
-          window.location.reload();
-        }
-      });
-  };
 
   useEffect(() => {
     setLoading(true);
@@ -81,11 +63,12 @@ const RecentTransaction = () => {
                       Mode
                     </th>
                     <th scope="col" className="px-6 py-3 text-center">
-                      From
+                      From / To
                     </th>
                     <th scope="col" className="px-6 py-3 text-center">
                       Description
                     </th>
+                    
                   </tr>
                 </thead>
                 <tbody className="w-[10%]">
@@ -100,19 +83,12 @@ const RecentTransaction = () => {
                       const { description, amount, date, mode, from ,to} = tables;
                       count_table = count_table + 1;
                       return (
-                        from?<tr className="text-[16px] text-[black] hover:bg-gray-100 bg-white text-black border-b dark:border-gray-700 text-center" key={count_table}>
+                        <tr className="text-[16px] text-[black] hover:bg-gray-100 bg-white text-black border-b dark:border-gray-700 text-center" key={count_table}>
                           <td className="py-4">{count_table}</td>
                           <td>{date.slice(0, 10).split("-").reverse().join("-")}</td>
-                          <td>&#8377; {amount}</td>
+                          <td>{from?"+":"-"}&nbsp;&#8377; {amount}</td>
                           <td>{mode}</td>
-                          <td>{from} </td>
-                          <td>{description}</td>                         
-                        </tr>:<tr className="text-[16px] hover:bg-gray-100 bg-white text-black border-b dark:border-gray-700 text-center" key={count_table}>
-                          <td className="py-4">{count_table}</td>
-                          <td>{date.slice(0, 10).split("-").reverse().join("-")}</td>
-                          <td>&#8377; {amount}</td>
-                          <td>{mode}</td>
-                          <td>{to} </td>
+                          <td>{from?from:to} </td>
                           <td>{description}</td>                         
                         </tr>
                       );
@@ -120,6 +96,8 @@ const RecentTransaction = () => {
                   )}
                 </tbody>
               </table>
+               
+          
             </div>          
           </div>
           <br></br>

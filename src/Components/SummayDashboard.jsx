@@ -38,20 +38,21 @@ const SummaryDashboard = () => {
       }, []);      
   return (
     <div className='p-4 px-12 lg:flex w-full'>
-            <div className='lg:w-[22.3%] rounded-md bg-[#0d5c46] text-white'>
+            <div className='lg:w-[24%] rounded-md bg-[#0d5c46] text-white'>
                 <h1 className='p-4 font-bold text-[20px] rounded-md'>Total Expense</h1>
                 <h1 className='px-4 pb-4'>&#8377;{expense?expense:0}</h1>
             </div>
-            <div className='lg:w-[22.3%] lg:mx-4 rounded-md bg-[#fabe50] text-white'>
+            <div className='lg:w-[24%] lg:mx-4 rounded-md bg-[#fabe50] text-white'>
                 <h1 className='p-4 font-bold text-[20px] rounded-md'>Total Income</h1>
                 <h1 className='px-4 pb-4'>&#8377; {income?income:0}</h1>
-            </div><div className='lg:w-[22.3%] rounded-md bg-[#f1573b] text-white'>
+            </div><div className='lg:w-[24%] rounded-md bg-[#f1573b] text-white'>
                 <h1 className='p-4 font-bold text-[20px] rounded-md'>{month_name} Expense</h1>
                 <h1 className='px-4 pb-4'>&#8377; {mexpense?mexpense:0} </h1>
-            </div><div className='mx-4 lg:w-[22.3%] rounded-md bg-[#824cc6] text-white'>
+            </div><div className='mx-4 lg:w-[24%] rounded-md bg-[#824cc6] text-white'>
                 <h1 className='p-4 font-bold text-[20px] rounded-md'>Total Transactions</h1>
                 <h1 className='px-4 pb-4'>{transaction?transaction:0} </h1>
             </div>
+            
     </div>
   );
 }

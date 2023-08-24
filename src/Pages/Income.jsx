@@ -34,8 +34,8 @@ const Income = () =>{
 
     <div><br></br><br></br> 
     <div className="lg:flex px-8 main-heading-mob">
-    <h1 className="text-4xl font-bold">Income </h1>    
-    <div className="ml-[33vw] justify-end	relative lg:w-[44%] bg-[#eee] rounded-lg shadow-md px-4 py-2 search-bar">
+    <h1 className="text-4xl w-full font-bold">Income </h1>    
+    <div className="ml-[33vw] justify-end	relative lg:w-[80%] bg-[#eee] rounded-lg shadow-md px-4 py-2 search-bar">
 
     <form onSubmit={handleSubmit}>
 
@@ -53,7 +53,7 @@ const Income = () =>{
     </div>
    
 
-</div> <div id="errora" className="ml-[45vw] pt-[2vh]" ></div><br></br>
+</div> <div id="errora" className="ml-[69vw] pt-[2vh]" ></div><br></br>
 
   <IncomeBar />
 

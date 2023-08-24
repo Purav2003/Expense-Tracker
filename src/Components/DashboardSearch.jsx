@@ -12,7 +12,7 @@ import Sidebar from "./Sidebar";
 import '../Assets/css/income.css';
 import '../index.css';
 
-const IncomeSearch = () => {
+const DashboardSearch = () => {
     const [data, setData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(false);
@@ -21,13 +21,13 @@ const IncomeSearch = () => {
 
     const fetchData = async (page) => {
       let id = localStorage.getItem('createdBy');
-      const API_URL = 'http://localhost:5000/api/v1/income/'+id+'?search='+search+'&page='+page;
+      const API_URL = 'http://localhost:5000/api/v1/dashboard/search/'+id+'?search='+search+'&page='+page;
     console.log(API_URL)
       try {
         const response = await fetch(API_URL);
         const datas = await response.json();
-        console.log(datas.income)
-        setData(datas.income);
+        console.log(datas.searchedData)
+        setData(datas.searchedData.results);
         setTotalPages(datas.totalPages);
         setLoading(false) 
       } catch (error) {
@@ -41,7 +41,7 @@ const IncomeSearch = () => {
         const search = document.querySelector('.search-income').value
         localStorage.setItem("income-trial",search)
         if(search!==""){
-            window.location.replace('search-income')}
+            window.location.replace('search-dashboard')}
             else{
               document.getElementById('errora').innerHTML = '<h1 className="pt-[0.5vw]">Enter Something</h1>'
             }
@@ -72,7 +72,7 @@ const IncomeSearch = () => {
     <div><br></br><br></br> 
     <div className="lg:flex px-8 main-heading-mob">
     <h1 className="text-2xl w-full font-bold">Search Result Of <i className="font-semibold">"{search}"</i> </h1>  
-    <div className="ml-[35vw] justify-end	relative lg:w-[80%] bg-[#eee] rounded-lg shadow-md px-4 py-2 search-bar">
+    <div className="ml-[32vw] justify-end	relative w-[80%] bg-[#eee] rounded-lg shadow-md px-4 py-2 search-bar">
     <form onSubmit={handleSubmit}>
 
       <input
@@ -86,7 +86,7 @@ const IncomeSearch = () => {
       </form>
 
     </div>  
-</div> <div id="errora" className="ml-[70vw] pt-[2vh]" ></div><br></br><br></br><br></br>
+</div> <div id="errora" className="ml-[69vw] pt-[2vh]" ></div><br></br><br></br>
 
 {data.length!==0?(        <div className="relative px-4">
           <div>
@@ -108,7 +108,7 @@ const IncomeSearch = () => {
                       Mode
                     </th>
                     <th scope="col" className="px-6 py-3 text-center">
-                      From
+                      From / To
                     </th>
                     <th scope="col" className="px-6 py-3 text-center">
                       Description
@@ -124,15 +124,15 @@ const IncomeSearch = () => {
                     </tr>
                   ) :(
                     data.map((tables) => {
-                      const { _id, description, amount, date, mode, from } = tables;
+                      const { _id, description, amount, date, mode, from,to } = tables;
                       count_table = count_table + 1;
                       return (
                         <tr className="text-[16px] hover:bg-gray-100 bg-white text-black border-b dark:border-gray-700 text-center">
                           <td className="py-4">{count_table}</td>
                           <td>{date.slice(0, 10).split("-").reverse().join("-")}</td>
-                          <td>&#8377; {amount}</td>
+                          <td>{from?"+":"-"}&nbsp;&#8377; {amount}</td>
                           <td>{mode}</td>
-                          <td>{from}</td>
+                          <td>{from?from:to}</td>
                           <td>{description}</td>
                          
                         </tr>
@@ -168,4 +168,4 @@ const IncomeSearch = () => {
     )
 };
 
-export default IncomeSearch;
+export default DashboardSearch;

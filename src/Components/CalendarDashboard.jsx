@@ -8,6 +8,7 @@ const CalendarDashboard = () => {
   const [data, setData] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [datedata, setDatedata] = useState([]);
+  const [date,setDate] = useState();
 
   const fetchData = async () => {
     let id = localStorage.getItem('createdBy');
@@ -50,7 +51,7 @@ const CalendarDashboard = () => {
 
     if (isSpecialDate) {
       return (
-        <div style={{ position: 'relative' }}>
+        <div  style={{ position: 'relative' }}>
           <Badge />
         </div>
       );
@@ -60,9 +61,9 @@ const CalendarDashboard = () => {
 
   function reverseDateFormat(inputDate) {
     // Split the input date string by "/"
-    const dateComponents = inputDate.split('/');
+    const dateComponents = inputDate?.split('/');
 
-    if (dateComponents.length === 3) {
+    if (dateComponents?.length === 3) {
       // Rearrange the components to "YYYY-MM-DD" format
       const year = dateComponents[2];
       const month = dateComponents[0].padStart(2, '0'); // Ensure two-digit month
@@ -70,6 +71,26 @@ const CalendarDashboard = () => {
 
       // Create the reversed date string
       const reversedDate = `${year}-${month}-${day}`;
+
+      return reversedDate;
+    }
+
+    // Return the original date if the format is not valid
+    return inputDate;
+  }
+
+  function reverseDate(inputDate) {
+    // Split the input date string by "/"
+    const dateComponents = inputDate?.split('-');
+
+    if (dateComponents?.length === 3) {
+      // Rearrange the components to "YYYY-MM-DD" format
+      const year = dateComponents[0];
+      const month = dateComponents[1].padStart(2, '0'); // Ensure two-digit month
+      const day = dateComponents[2].padStart(2, '0'); // Ensure two-digit day
+
+      // Create the reversed date string
+      const reversedDate = `${day}-${month}-${year}`;
 
       return reversedDate;
     }
@@ -101,10 +122,10 @@ const CalendarDashboard = () => {
 
       axios.request(config)
         .then((response) => {
+
           if (JSON.stringify(response.data.status) === '200') {
             setDatedata(response.data.dateData)
-
-
+            setDate(response.data.date)
           }
 
         })
@@ -126,10 +147,11 @@ const CalendarDashboard = () => {
 
     <div className='lg:flex pl-12 rounded-full '>
       <Calendar compact bordered renderCell={renderCell} onChange={handleSubmit}
-        className="w-[44%] bg-white calendar border border-[#4a4a4a] rounded-md" disabledDate={(date) => date > new Date()} />
-      <div className='ml-4 bg-white rounded-md w-[44%]'>
-        <div className='p-4 cal-data-trans'>
-          <h1 className='font-semibold text-[20px]'>Transaction on { }</h1>
+        className="w-[28%] bg-white calendar rounded-md" disabledDate={(date) => date > new Date()} />
+      <div className='ml-4 bg-white rounded-md w-[32%]'>
+        <div className='p-4 '>
+          <h1 className='font-semibold text-[20px]'>Transactions on {reverseDate(date)}</h1><br></br>
+          <div className='display-cal'>
           {
             datedata.map((tables) => {
               const { _id, amount, date, mode, from, to, description } = tables;
@@ -147,18 +169,16 @@ const CalendarDashboard = () => {
                   <div className='px-8 '>
                     <h1 className='font-bold text-[17px]'>{from ? from : to}</h1>
                     <a className='text-[12px]'>{date.slice(0, 10)}</a></div>
-                  <div className='px-8 w-[30%]'>
+                  <div className='px-8'>
                     {from ? <h1><a className='font-bold'>+</a>&nbsp;&#8377; {amount}</h1> : <h1><a className='font-bold'>-</a>&nbsp;&#8377; {amount}</h1>}
                     <a className='text-[12px]'>{mode}</a>
                   </div>
-                  <div className='px-8'>
-
-                    <h1 className='text-[17px] font-semibold'>{description}</h1>
-                  </div>
+                
                 </div>
               );
             })
           }
+          </div>
         </div>
       </div>
 
