@@ -1,12 +1,10 @@
 import Sidebar from "../Components/Sidebar"
-import Profile from "../Components/Profile"
 import RecentTransaction from "../Components/RecentTransaction"
 import CalendarDashboard from "../Components/CalendarDashboard"
 import SummaryDashboard from "../Components/SummayDashboard"
 import * as icon from "react-icons/fi"
 import '../assets/css/dashboard.css'
-import { useState,useEffect } from "react"
-import Loader from "../Components/Loader"
+import { useEffect } from "react"
 
 const Dashboard = () => {
    
@@ -26,6 +24,23 @@ const Dashboard = () => {
         }
   
       }
+
+  const fetchData = async () => {
+    const API_URL = 'http://ip-api.com/json';
+    
+    try {
+      const response = await fetch(API_URL);
+      const datas = await response.json();
+        console.log(datas.country);
+    } catch (error) {
+      // Handle error here
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+  
     return (
         <div className="bg-normal">
             <Sidebar />
