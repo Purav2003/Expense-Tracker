@@ -71,6 +71,11 @@ const Profile = () => {
                       <td className="p-4">{data.createdAt?.slice(0,10)}</td>
 
                     </tr>
+                    <tr className="border p-4">
+                      <td className="border p-4 w-[50%]">Currency</td>
+                      <td className="p-4">{data.currency}</td>
+
+                    </tr>
                     <tr>
 
                       <td className="py-4 w-[50%] text-center items-center" colSpan={2} >
