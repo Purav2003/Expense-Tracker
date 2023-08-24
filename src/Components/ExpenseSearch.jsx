@@ -4,7 +4,7 @@ import * as icon from "react-icons/io";
 import * as icons from "react-icons/ri";
 import axios from "axios";
 import * as iconf from "react-icons/fi"
-
+import Loader from "./Loader";
 import toast, { Toaster } from 'react-hot-toast';
 import Skeleton from "react-loading-skeleton";
 import Sidebar from "./Sidebar";
@@ -87,7 +87,7 @@ const ExpenseSearch = () => {
     </div>  
 </div> <div id="errora" className="ml-[71vw] pt-[2vh]" ></div><br></br><br></br><br></br>
 
-{data.length!==0?(        <div className="relative px-4">
+{loading?<Loader />:data.length!==0?(        <div className="relative px-4">
           <div>
             <div className="table-income">
               <table className="table-income rounded-lg lg:w-full shadow-lg bg-white overflow-scroll text-sm text-left">
@@ -117,13 +117,7 @@ const ExpenseSearch = () => {
                   </tr>
                 </thead>
                 <tbody className="w-[10%]">
-                  { loading? (
-                    <tr>
-                      <td colSpan="7">                        
-                        <Skeleton count={5} height={45} /> 
-                      </td>
-                    </tr>
-                  ) :(
+                  { 
                     data.map((tables) => {
                       const { _id, description, amount, date, mode, to,category } = tables;
                       count_table = count_table + 1;
@@ -139,7 +133,7 @@ const ExpenseSearch = () => {
                         
                         </tr>
                       );
-                    })
+                    }
                   )}
                 </tbody>
               </table>

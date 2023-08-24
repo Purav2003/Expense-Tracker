@@ -1,6 +1,7 @@
 import Sidebar from "./Sidebar";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Loader from "./Loader";
 
 const Settings = () => {
     const [data, setData] = useState([]);
@@ -21,6 +22,7 @@ const Settings = () => {
             const response = await axios.get(API_URL);
             const currencies = Object.keys(response.data);
             setCurrencyOptions(currencies);
+            setLoading(false)
         } catch (error) {
             console.error(error);
         }
@@ -91,7 +93,7 @@ const Settings = () => {
     return (
         <div className="bg-background">
             <Sidebar />
-            <div className="setting-main">
+            {loading?<Loader />:<div className="setting-main">
                 <div className="w-[50%]">
                     <h1 className="py-4 font-bold text-[25px]">Settings</h1>
                     <form onSubmit={handleSubmit}>
@@ -133,7 +135,7 @@ const Settings = () => {
                         </table>
                     </form>
                 </div>
-            </div>
+            </div>}
         </div>
     );
 };

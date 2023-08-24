@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import dp from "../Assets/images/signup.png";
 import Sidebar from "./Sidebar";
-
+import Loader from "./Loader";
 const Profile = () => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
@@ -27,13 +27,14 @@ const Profile = () => {
   };
 
   useEffect(() => {
+    setLoading(true)
     fetchData();
   }, []);
 
   return (
     <>
       <Sidebar />
-      <div className="setting-main p-4">
+     { loading?<Loader />:<div className="setting-main p-4">
         <div className="lg:grid grid-cols-2 gap-0 lg:ml-[11vw]">
           {/* 1st Row */}
           <div className="col-span-1 w-[60%] p-4">
@@ -90,7 +91,7 @@ const Profile = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div>}
     </>
   );
 };

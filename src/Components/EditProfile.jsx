@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Sidebar from './Sidebar';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Loader from './Loader';
 const EditProfile = () => {
     const [data, setData] = useState({
         email: '',
@@ -13,6 +14,7 @@ const EditProfile = () => {
         mobile: '',
         name: ''
     });
+    const [loading,setLoading] = useState(false)
     let token = localStorage.getItem("Token")
     if (token === null) {
         window.location.replace("/")
@@ -21,7 +23,6 @@ const EditProfile = () => {
     const fetchData = async () => {
         let id = localStorage.getItem('createdBy');
         const API_URL = 'http://localhost:5000/api/v1/auth/profile/' + id;
-        console.log(API_URL)
         try {
             const response = await fetch(API_URL);
             const data_new = await response.json();
@@ -36,6 +37,7 @@ const EditProfile = () => {
                 mobile: data_new.user.mobile,
                 name: data_new.user.name
             });
+            setLoading(false)
 
         } catch (error) {
             console.log(error)
@@ -43,6 +45,7 @@ const EditProfile = () => {
     };
 
     useEffect(() => {
+        setLoading(true)
         fetchData();
     }, []);
 
@@ -132,7 +135,7 @@ const EditProfile = () => {
         <div>
             <Sidebar />
         
-            <div className="setting-main">
+           {loading?<Loader />: <div className="setting-main">
                 <div className="w-[50%]">
                     <h1 className="py-4 font-bold text-[25px]">Edit Profile</h1>
                     <form onSubmit={handleSubmit}>
@@ -181,7 +184,7 @@ const EditProfile = () => {
                     <div id="errorm" className='text-[red]'></div>
 
                 </div>
-            </div>
+            </div>}
         </div>
     );
 }
