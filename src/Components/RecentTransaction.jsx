@@ -36,6 +36,7 @@ const RecentTransaction = () => {
   }, []);
 
   let count_table = (0 + (currentPage - 1) * 5);
+  const currency_symbol = localStorage.getItem("selectedCurrency")
 
 
 
@@ -79,7 +80,20 @@ const RecentTransaction = () => {
                         <tr className="text-[16px] text-[black] hover:bg-gray-100 bg-white text-black border-b dark:border-gray-700 text-center" key={count_table}>
                           <td className="py-4">{count_table}</td>
                           <td>{date.slice(0, 10).split("-").reverse().join("-")}</td>
-                          <td>{from?"+":"-"}&nbsp;&#8377; {amount}</td>
+                          <td>{from?"+":"-"}&nbsp;
+                          {
+                          currency_symbol==='INR'?'₹ '
+                          :currency_symbol==='USD'?"$ "
+                          :currency_symbol==='CAD'?"C$ "
+                          :currency_symbol==="AED"?"د.إ "
+                          :currency_symbol==="EUR"?"€ "
+                          :currency_symbol==="GBP"?"£ "
+                          :currency_symbol==="JPY"?"¥ "                          
+                          :currency_symbol==="AUD"?"AU$ "                          
+                          :""
+                        }
+                          
+                           {amount}</td>
                           <td>{mode}</td>
                           <td>{from?from:to} </td>
                           <td>{description}</td>                         

@@ -72,13 +72,14 @@ const ExpenseTable = () => {
 
   }
 
+  const currency_symbol = localStorage.getItem("selectedCurrency")
 
   return (
     <>
       <br /><br />
       <div><Toaster /></div>
 
-      {loading?<Loader />:dataexp.length > 0 ? (
+      {loading ? <Loader /> : dataexp.length > 0 ? (
         <div className="relative px-4">
           <div>
             <div className="table-income">
@@ -118,7 +119,19 @@ const ExpenseTable = () => {
                         <tr className="text-[16px] hover:bg-gray-100 bg-white text-black border-b dark:border-gray-700 text-center" key={_id}>
                           <td className="py-4">{count_table}</td>
                           <td>{date.slice(0, 10).split("-").reverse().join("-")}</td>
-                          <td>&#8377; {amount}</td>
+                          <td>
+                            {
+                              currency_symbol === 'INR' ? '₹ '
+                                : currency_symbol === 'USD' ? "$ "
+                                  : currency_symbol === 'CAD' ? "C$ "
+                                    : currency_symbol === "AED" ? "د.إ "
+                                      : currency_symbol === "EUR" ? "€ "
+                                        : currency_symbol === "GBP" ? "£ "
+                                          : currency_symbol === "JPY" ? "¥ "
+                                            : currency_symbol === "AUD" ? "AU$ "
+                                              : ""
+                            }
+                            {amount}</td>
                           <td>{mode}</td>
                           <td>{to}</td>
                           <td>{description}</td>
@@ -131,7 +144,7 @@ const ExpenseTable = () => {
                         </tr>
                       )
                     }
-                  )}
+                    )}
                 </tbody>
               </table>
             </div>
@@ -150,11 +163,11 @@ const ExpenseTable = () => {
             </div>
           </div>
 
-          <br></br>          
+          <br></br>
 
         </div>
       ) : <>
-<div>
+        <div>
           <h1 className="text-center text-2xl font-bold">NO DATA</h1>
         </div>
       </>}

@@ -34,11 +34,8 @@ const Settings = () => {
             };
             axios.request(config)
                 .then((response) => {
-                    console.log(JSON.stringify(response.status));
                     if (JSON.stringify(response.status) === '200') {
-                        console.log(response.data)
                         setData(response.data.user);                        
-                        // Update the selected currency and save it in localStorage
                         setSelectedCurrency(cur);
                         localStorage.setItem('selectedCurrency', cur);
                         window.location.replace("/profile")
@@ -100,7 +97,7 @@ const Settings = () => {
                                     >
                                         {CurrencyList.map((currency) => (
                                             <option key={currency.currency} value={currency.currency}>
-                                                {currency.currency}
+                                                {currency.logo}&nbsp;{currency.currency}
                                             </option>
                                         ))}
                                     </select>

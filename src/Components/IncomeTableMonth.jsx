@@ -20,7 +20,7 @@ const IncomeTableMonth = () => {
     let id = localStorage.getItem('createdBy');
     counter = 1;
     const API_URL = 'http://localhost:5000/api/v1/income/' + id + '?page=' + page + '&daysAgo=onemonth';
-    
+
     try {
       const response = await fetch(API_URL);
       const datas = await response.json();
@@ -67,79 +67,94 @@ const IncomeTableMonth = () => {
     setCurrentPage(currentPage - 1);
   };
 
+  const currency_symbol = localStorage.getItem("selectedCurrency")
+
+
   return (
     <>
       <br /><br />
       <div><Toaster /></div>
-{loading?<Loader />:data.length!==0?(        <div className="relative px-4">
-          <div>
-            <div className="table-income">
-              <table className="table-income rounded-lg lg:w-full shadow-lg bg-white overflow-scroll text-sm text-left">
-                <thead className="pt-4 text-xs text-gray-700 uppercase">
-                  <tr className="text-[#404040] text-[14px]">
-                    <th scope="col" className="px-6 py-3 text-center  ">
-                      Sr.No
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-center">
-                      Date
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-center">
-                      Amount
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-center">
-                      Mode
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-center">
-                      From
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-center">
-                      Description
-                    </th>
-                    <th className="px-6 py-3"></th>
-                  </tr>
-                </thead>
-                <tbody className="w-[10%]">
-                  {
-                    data.map((tables) => {
-                      const { _id, description, amount, date, mode, from } = tables;
-                      count_table = count_table + 1;
-                      return (
-                        <tr className="text-[16px] hover:bg-gray-100 bg-white text-black border-b dark:border-gray-700 text-center">
-                          <td className="py-4">{count_table}</td>
-                          <td>{date.slice(0, 10).split("-").reverse().join("-")}</td>
-                          <td>&#8377; {amount}</td>
-                          <td>{mode}</td>
-                          <td>{from}</td>
-                          <td>{description}</td>
-                          <td onClick={() => deleteData(_id)}>
-                            <button className="rounded-md px-4 py-2 text-[15px]">
-                              <icons.RiDeleteBinLine className="hover:cursor-pointer text-[20px]" />
-                            </button>
-                          </td>
-                        </tr>
-                      );
-                    }
+      {loading ? <Loader /> : data.length !== 0 ? (<div className="relative px-4">
+        <div>
+          <div className="table-income">
+            <table className="table-income rounded-lg lg:w-full shadow-lg bg-white overflow-scroll text-sm text-left">
+              <thead className="pt-4 text-xs text-gray-700 uppercase">
+                <tr className="text-[#404040] text-[14px]">
+                  <th scope="col" className="px-6 py-3 text-center  ">
+                    Sr.No
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-center">
+                    Date
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-center">
+                    Amount
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-center">
+                    Mode
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-center">
+                    From
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-center">
+                    Description
+                  </th>
+                  <th className="px-6 py-3"></th>
+                </tr>
+              </thead>
+              <tbody className="w-[10%]">
+                {
+                  data.map((tables) => {
+                    const { _id, description, amount, date, mode, from } = tables;
+                    count_table = count_table + 1;
+                    return (
+                      <tr className="text-[16px] hover:bg-gray-100 bg-white text-black border-b dark:border-gray-700 text-center" key={_id}>
+                        <td className="py-4">{count_table}</td>
+                        <td>{date.slice(0, 10).split("-").reverse().join("-")}</td>
+                        <td>
+                          {
+                            currency_symbol === 'INR' ? '₹ '
+                              : currency_symbol === 'USD' ? "$ "
+                                : currency_symbol === 'CAD' ? "C$ "
+                                  : currency_symbol === "AED" ? "د.إ "
+                                    : currency_symbol === "EUR" ? "€ "
+                                      : currency_symbol === "GBP" ? "£ "
+                                        : currency_symbol === "JPY" ? "¥ "
+                                          : currency_symbol === "AUD" ? "AU$ "
+                                            : ""
+                          }
+                          {amount}</td>
+                        <td>{mode}</td>
+                        <td>{from}</td>
+                        <td>{description}</td>
+                        <td onClick={() => deleteData(_id)}>
+                          <button className="rounded-md px-4 py-2 text-[15px]">
+                            <icons.RiDeleteBinLine className="hover:cursor-pointer text-[20px]" />
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  }
                   )}
-                </tbody>
-              </table>
-            </div>
-            <div className="w-full pg-no">
-              <div className="bg-white text-right">
-                <h1 className="py-4 pr-[30px]">
-                  Page No: {currentPage} of {totalPages}
-                  <button className="pl-[5px] " onClick={removePage} disabled={currentPage === 1}>
-                    <icon.IoIosArrowBack />{" "}
-                  </button>
-                  <button onClick={addPage} disabled={currentPage === totalPages}>
-                    <icon.IoIosArrowForward />
-                  </button>
-                </h1>
-              </div>
+              </tbody>
+            </table>
+          </div>
+          <div className="w-full pg-no">
+            <div className="bg-white text-right">
+              <h1 className="py-4 pr-[30px]">
+                Page No: {currentPage} of {totalPages}
+                <button className="pl-[5px] " onClick={removePage} disabled={currentPage === 1}>
+                  <icon.IoIosArrowBack />{" "}
+                </button>
+                <button onClick={addPage} disabled={currentPage === totalPages}>
+                  <icon.IoIosArrowForward />
+                </button>
+              </h1>
             </div>
           </div>
-          <br></br>
-        </div>)
-:<><h1><center>No Data</center></h1></>}
+        </div>
+        <br></br>
+      </div>)
+        : <><h1><center>No Data</center></h1></>}
     </>
   );
 };

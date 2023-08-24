@@ -191,7 +191,8 @@ const CalendarDashboard = () => {
     },
   ];
 
-  
+  const currency_symbol = localStorage.getItem("selectedCurrency")
+
 
   return (
 
@@ -219,8 +220,32 @@ const CalendarDashboard = () => {
                     <div className='px-8 '>
                       <h1 className='font-bold lg:text-[17px]'>{from ? from : to}</h1>
                       <a className='lg:text-[12px]'>{reverseDate(date.slice(0, 10))}</a></div>
-                    <div className='px-8'>
-                      {from ? <h1 className="cal-head"><a className='font-bold'>+</a>&nbsp;&#8377; {amount}</h1> : <h1><a className='font-bold'>-</a>&nbsp;&#8377; {amount}</h1>}
+                    <div className='px-4'>
+                      {from ? <h1 className="cal-head"><a className='font-bold'>+</a>&nbsp;                  
+                      {
+                          currency_symbol==='INR'?'₹ '
+                          :currency_symbol==='USD'?"$ "
+                          :currency_symbol==='CAD'?"C$ "
+                          :currency_symbol==="AED"?"د.إ "
+                          :currency_symbol==="EUR"?"€ "
+                          :currency_symbol==="GBP"?"£ "
+                          :currency_symbol==="JPY"?"¥ "                          
+                          :currency_symbol==="AUD"?"AU$ "                          
+                          :""
+                        }
+                       {amount}</h1> : <h1><a className='font-bold'>-</a>&nbsp;
+                       {
+                          currency_symbol==='INR'?'₹ '
+                          :currency_symbol==='USD'?"$ "
+                          :currency_symbol==='CAD'?"C$ "
+                          :currency_symbol==="AED"?"د.إ "
+                          :currency_symbol==="EUR"?"€ "
+                          :currency_symbol==="GBP"?"£ "
+                          :currency_symbol==="JPY"?"¥ "                          
+                          :currency_symbol==="AUD"?"AU$ "                          
+                          :""
+                        }
+                        {amount}</h1>}
                       <a className='lg:text-[12px]'>{mode}</a>
                     </div>
 
