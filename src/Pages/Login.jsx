@@ -2,8 +2,11 @@ import axios from "axios"
 import signin from '../Assets/images/login.png';
 import { Link } from "react-router-dom";
 import "../assets/css/signup.css"
+
+
 const Login = () => {
   let token = localStorage.getItem("Token")
+
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -27,15 +30,14 @@ const Login = () => {
 
       axios.request(config)
         .then((response) => {
-          console.log("By")
           console.log(JSON.stringify(response.status));
           if (JSON.stringify(response.data.status) === '200') {
             console.log(response.data.token)
             localStorage.setItem("Token",response.data.token)
             localStorage.setItem("createdBy",response.data.user._id)
-            localStorage.setItem("username")
+            localStorage.setItem("username",response.data.name)
             window.location.replace("/dashboard")
-          }
+            }
           if (JSON.stringify(response.data.status) === '404') {
             document.getElementById('error').innerHTML = '<h1 className="pt-[0.5vw]">User Not Found</h1>'
           }
