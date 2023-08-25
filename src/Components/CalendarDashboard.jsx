@@ -4,7 +4,6 @@ import { Calendar, Badge } from 'rsuite';
 import axios from 'axios';
 import ReactApexChart from 'react-apexcharts';
 import Loader from './Loader'
-import no_trans from '../assets/images/No_Transactions.jpg'
 
 const token = localStorage.getItem("Token");
 
@@ -27,7 +26,11 @@ const CalendarDashboard = () => {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
-      }); const datas = await response.json();
+      });       
+      const datas = await response.json();
+      if(datas.status === 401){
+        window.location.replace('/')
+      }      
       setData(datas.dates);
       setLoading(false);
 

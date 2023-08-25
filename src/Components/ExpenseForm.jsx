@@ -59,6 +59,9 @@ const ExpenseForm = () => {
                 axios.request(config)
                     .then((response) => {
                         count_success = 1
+                        if(JSON.stringify(response.status) === 401){
+                            window.location.replace('/')
+                          }                        
                         if (JSON.stringify(response.status) === '200') {
                             toast.success("Succesfully Added", { duration: 1500 })
 

@@ -23,6 +23,9 @@ const ForgetPasswordMail = () => {
         .then((response) => {
           console.log("By")
           console.log(JSON.stringify(response.status));
+          if(JSON.stringify(response.status) === 401){
+            window.location.replace('/')
+          }
           if (JSON.stringify(response.status) === '200') {
             document.getElementById('error').innerHTML = '<h1 className="pt-[0.5vw]">Check Your Mail</h1>'
           }

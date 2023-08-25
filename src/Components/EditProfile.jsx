@@ -16,16 +16,17 @@ const EditProfile = () => {
     });
     const [loading,setLoading] = useState(false)
     let token = localStorage.getItem("Token")
-    if (token === null) {
-        window.location.replace("/")
-    }
+
 
     const fetchData = async () => {
         let id = localStorage.getItem('createdBy');
         const API_URL = 'http://localhost:5000/api/v1/auth/profile/' + id;
         try {
-            const response = await fetch(API_URL);
+            const response = await fetch(API_URL);            
             const data_new = await response.json();
+            if(data_new.status === 401){
+                window.location.replace('/')
+              }            
             console.log(data_new.user)
             setData({
                 email: data_new.user.email,

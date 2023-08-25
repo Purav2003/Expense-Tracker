@@ -1,14 +1,10 @@
 import { useEffect, useState } from "react";
-import { LineChart, BarChart, Line, XAxis, YAxis, CartesianGrid, AreaChart, ResponsiveContainer, Tooltip, ComposedChart, Area, Legend, Bar, PieChart, Pie, Cell, Sector } from 'recharts';
-import { Link } from "react-router-dom";
 import * as icon from "react-icons/io";
 import * as icons from "react-icons/ri";
 import '../Assets/css/income.css'
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
-import gif from '../Assets/images/loading.gif';
 import '../index.css'
-import Skeleton from "react-loading-skeleton";
 import Loader from "./Loader";
 import '../Assets/css/income.css';
 import '../index.css';
@@ -33,7 +29,9 @@ const ExpenseTable = () => {
           'Content-Type': 'application/json',
         },
       });      const datas = await response.json();
-
+      if(datas.status === 401){
+        window.location.replace('/')
+      }
       setDataExp(datas.expenses);
       setTotalPages(datas.totalPages);
       setLoading(false);

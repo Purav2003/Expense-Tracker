@@ -46,7 +46,9 @@ const IncomeTable = () => {
           'Content-Type': 'application/json',
         },
       });      const datas = await response.json();
-
+      if(datas.status === 401){
+        window.location.replace('/')
+      }
       setData(datas.income);
       setTotalPages(datas.totalPages);
       setLoading(false);

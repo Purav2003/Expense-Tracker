@@ -27,6 +27,9 @@ const RecentTransaction = () => {
           'Content-Type': 'application/json',
         },
       });      const datas = await response.json();
+      if(datas.status === 401){
+        window.location.replace('/')
+      }      
       console.log(datas.transaction)
       setData(datas.transaction);
       setTimeout(() => {  setLoading(false);}, 600);

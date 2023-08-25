@@ -11,7 +11,9 @@ const Settings = () => {
     const [selectedCurrency, setSelectedCurrency] = useState(""); // Initialize without a default currency
 
     let token = localStorage.getItem("Token");
-
+    if (token === null) {
+        window.location.replace("/")
+    }
     const newCur = localStorage.getItem("selectedCurrency")
     const handleSubmit = async (e) => {
         setLoading(true)
@@ -21,37 +23,40 @@ const Settings = () => {
         let data = JSON.stringify({
             "newCurrency": cur,
         });
-        console.log(newCur+cur)
-        if(newCur !== cur){
+        console.log(newCur + cur)
+        if (newCur !== cur) {
             console.log("Called")
-        try {
-            let config = {
-                method: 'patch',
-                url: 'http://localhost:5000/api/v1/settings/changeCurrency/' + id,
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                },
-                data: data
-            };
-            axios.request(config)
-                .then((response) => {
-                    if (JSON.stringify(response.status) === '200') {
-                        setData(response.data.user);                        
-                        setSelectedCurrency(cur);
-                        localStorage.setItem('selectedCurrency', cur);
-                        setLoading(false)
-                    }
-                })
+            try {
+                let config = {
+                    method: 'patch',
+                    url: 'http://localhost:5000/api/v1/settings/changeCurrency/' + id,
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    data: data
+                };
+                axios.request(config)
+                    .then((response) => {
+                        if(JSON.stringify(response.status) === 401){
+                            window.location.replace('/')
+                          }
+                        if (JSON.stringify(response.status) === '200') {
+                            setData(response.data.user);
+                            setSelectedCurrency(cur);
+                            localStorage.setItem('selectedCurrency', cur);
+                            setLoading(false)
+                        }
+                    })
+            }
+            catch (err) {
+                console.log(err.code)
+            }
+
         }
-        catch (err) {
-            console.log(err.code)
+        else {
+            window.location.replace("/profile")
         }
-   
-    }
-    else{
-        window.location.replace("/profile")
-    }
 
     }
 
@@ -75,7 +80,7 @@ const Settings = () => {
     const toggleMode = () => {
         const newMode = mode === "light" ? "dark" : "light";
         setMode(newMode);
-        localStorage.setItem("mode",newMode)
+        localStorage.setItem("mode", newMode)
         // Add or remove a class to the <body> element based on the selected mode
         document.body.classList.toggle("dark-mode", newMode === "dark");
     };
@@ -84,7 +89,7 @@ const Settings = () => {
     return (
         <div className="bg-background">
             <Sidebar />
-            {loading?<Loader />:<div className="setting-main">
+            {loading ? <Loader /> : <div className="setting-main">
                 <div className="w-[50%]">
                     <h1 className="py-4 font-bold text-[25px]">Settings</h1>
                     <form onSubmit={handleSubmit}>

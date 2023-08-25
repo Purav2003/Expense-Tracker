@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import * as icon from "react-icons/io";
-import * as icons from "react-icons/ri";
-import axios from "axios";
+
 import * as iconf from "react-icons/fi"
 import Loader from "./Loader";
 import toast, { Toaster } from 'react-hot-toast';
-import Skeleton from "react-loading-skeleton";
 import Sidebar from "./Sidebar";
 
 import '../Assets/css/income.css';
@@ -32,7 +29,9 @@ const ExpenseSearch = () => {
             'Content-Type': 'application/json',
           },
         });        const datas = await response.json();
-        console.log(datas)
+        if(datas.status === 401){
+          window.location.replace('/')
+        }
         setData(datas.expenses);
         setTotalPages(datas.totalPages);
         setLoading(false)

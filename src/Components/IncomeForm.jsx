@@ -1,5 +1,4 @@
 import axios from "axios"
-import { Link } from "react-router-dom"
 import toast, { Toaster } from 'react-hot-toast';
 import add from '../assets/images/Add_Items_Vector.png'
 
@@ -47,6 +46,9 @@ const IncomeForm = () => {
                 axios.request(config)
                     .then((response) => {
                          count_success = 1
+                         if(JSON.stringify(response.status) === 401){
+                            window.location.replace('/')
+                          }
                         if (JSON.stringify(response.data.status) === '200') {
                             window.location.reload()
                             toast.success('Successfully Added');

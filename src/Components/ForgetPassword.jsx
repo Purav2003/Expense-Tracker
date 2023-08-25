@@ -27,6 +27,9 @@ const ForgetPassword = () => {
 
         axios.request(config)
           .then((response) => {
+            if(JSON.stringify(response.status) === 401){
+              window.location.replace('/')
+            }
             console.log(response)
             if (JSON.stringify(response.data.status) === '200') {
               window.location.replace('/')
