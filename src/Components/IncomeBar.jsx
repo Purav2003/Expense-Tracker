@@ -1,22 +1,15 @@
-import * as icon from "react-icons/bs"
 import "../Assets/css/sidebar.css"
 import { barLinks } from "./BarList"
 import { useState } from "react"
-import { Link } from "react-router-dom"
 import IncomeForm from "./IncomeForm"
 import IncomeTable from "./IncomeTable"
-import IncomeChart from "./IncomeChart"
 import '../Assets/css/income.css'
-import IncomeTableWeek from "./IncomeTableWeek"
-import IncomeTableMonth from "./IncomeTableMonth"
-import IncomeTableSix from "./IncomeTableSix"
-import IncomeTableYear from "./IncomeTableYear"
+
 
 const IncomeBar = () => {
     const [activebar, setActivebar] = useState('all');
     const data = (datas) =>{
-        let all = ['all','add-income','one-week','one-month','six-month','one-year']    
-        console.log(datas)
+        let all = ['all','add-income','oneweek','onemonth','sixmonth','oneyear']    
         setActivebar(datas)
         for(let i=0;i<=5;i++){
             if(all[i]!==datas){
@@ -25,20 +18,22 @@ const IncomeBar = () => {
                 trial.classList.add("hidden");         
             }
         }
-        var element = document.getElementById(datas);        
+        var element = document.getElementById(datas);    
+        document.cookie = "daysAgo="+datas;
         element.classList.remove("hidden");
     }
     const data_mob = (datas) =>{
-        let all = ['add-income','one-week','one-month','six-month','one-year']    
+        let all = ['all','add-income','oneweek','onemonth','sixmonth','oneyear']    
         setActivebar(datas.target.value)
-        for(let i=0;i<=4;i++){
+        for(let i=0;i<=5;i++){
             if(all[i]!==datas.target.value){
                 var trial = document.getElementById(all[i]);     
                 console.log(trial)   
                 trial.classList.add("hidden");         
             }
         }
-        var element = document.getElementById(datas.target.value);        
+        var element = document.getElementById(datas.target.value);   
+        localStorage.setItem("daysAgo",datas.target.value)         
         element.classList.remove("hidden");
     }
 
@@ -79,10 +74,10 @@ const IncomeBar = () => {
             <div>
                         <div id="all" className="all"><IncomeTable /></div>
                         <div id="add-income" className="add-income hidden"><IncomeForm /></div>
-                        <div id="one-week" className="one-week hidden"><IncomeTableWeek /></div>
-                        <div id="one-month" className="one-month hidden"><IncomeTableMonth /></div>
-                        <div id="six-month" className="six-month hidden"><IncomeTableSix /></div>
-                        <div id="one-year" className="one-year hidden"><IncomeTableYear /></div>
+                        <div id="oneweek" className="oneweek hidden"><IncomeTable /></div>
+                        <div id="onemonth" className="onemonth hidden"><IncomeTable/></div>
+                        <div id="sixmonth" className="sixmonth hidden"><IncomeTable /></div>
+                        <div id="oneyear" className="oneyear hidden"><IncomeTable /></div>
 
             </div>
         </>

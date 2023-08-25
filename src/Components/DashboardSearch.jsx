@@ -138,7 +138,7 @@ const DashboardSearch = () => {
                           :""
                         }
                           {amount}</td>
-                          <td className={mode.includes(search) ? 'bg-[yellow]' : 'bg-white'}>{mode}</td>
+                          <td>{mode}</td>
                           <td>{from?from:to}</td>
                           <td>{description}</td>
                          

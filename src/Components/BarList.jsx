@@ -4,19 +4,19 @@ export const barLinks = [
         title:"All",
     },
     {
-        id: "one-week",
+        id: "oneweek",
         title:"1 Week",
     },
     {
-        id: "one-month",
+        id: "onemonth",
         title:"1 Month",
     },
     {
-        id: "six-month",
+        id: "sixmonth",
         title:"6 Months",
     },
     {
-        id: "one-year",
+        id: "oneyear",
         title:"1 Year",
     },
     {

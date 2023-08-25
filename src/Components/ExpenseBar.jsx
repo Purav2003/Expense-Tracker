@@ -4,15 +4,12 @@ import { useState } from "react"
 import ExpenseForm from "./ExpenseForm"
 import ExpenseTable from "./ExpenseTable"
 import '../Assets/css/income.css'
-import ExpenseTableMonth from "./ExpenseTableMonth"
-import ExpenseTableWeek from "./ExpenseTableWeek"
-import ExpenseTableSix from "./ExpenseTableSix"
-import ExpenseTableYear from "./ExpenseTableYear"
+
 
 const ExpenseBar = () => {
     const [activebar, setActivebar] = useState('all');
     const data = (datas) =>{
-        let all = ['all','add-expense','one-week','one-month','six-month','one-year']    
+        let all = ['all','add-expense','oneweek','onemonth','sixmonth','oneyear']    
         console.log(datas)
         setActivebar(datas)
         for(let i=0;i<=5;i++){
@@ -23,10 +20,11 @@ const ExpenseBar = () => {
             }
         }
         var element = document.getElementById(datas);        
+        document.cookie = "daysAgoExp="+datas;
         element.classList.remove("hidden");
     }
     const data_mob = (datas) =>{
-        let all = ['all','add-expense','one-week','one-month','six-month','one-year']    
+        let all = ['all','add-expense','oneweek','onemonth','sixmonth','oneyear']    
         setActivebar(datas.target.value)
         for(let i=0;i<=5;i++){
             if(all[i]!==datas.target.value){
@@ -35,7 +33,8 @@ const ExpenseBar = () => {
                 trial.classList.add("hidden");         
             }
         }
-        var element = document.getElementById(datas.target.value);        
+        var element = document.getElementById(datas.target.value); 
+        document.cookie = "daysAgoExp="+datas.target.value;       
         element.classList.remove("hidden");
     }
 
@@ -76,10 +75,10 @@ const ExpenseBar = () => {
             <div>
                         <div id="all" className="all"><ExpenseTable /></div>
                         <div id="add-expense" className="addexpense hidden"><ExpenseForm /></div>
-                        <div id="one-week" className="oneweek hidden"><ExpenseTableWeek /></div>
-                        <div id="one-month" className="onemonth hidden"><ExpenseTableMonth /></div>
-                        <div id="six-month" className="sixmonth hidden"><ExpenseTableSix /></div>
-                        <div id="one-year" className="oneyear hidden"><ExpenseTableYear /></div>
+                        <div id="oneweek" className="oneweek hidden"><ExpenseTable /></div>
+                        <div id="onemonth" className="onemonth hidden"><ExpenseTable /></div>
+                        <div id="sixmonth" className="sixmonth hidden"><ExpenseTable /></div>
+                        <div id="oneyear" className="oneyear hidden"><ExpenseTable /></div>
 
             </div>
         </>

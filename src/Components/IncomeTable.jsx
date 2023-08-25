@@ -15,13 +15,26 @@ const IncomeTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [totalPages, setTotalPages] = useState(1);
-  
-  let counter = 1;
+  function getCookie(cookieName) {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        // Check if this cookie is the one we are looking for
+        if (cookie.startsWith(cookieName + '=')) {
+            return cookie.substring(cookieName.length + 1);
+        }
+    }
+    // If the cookie is not found, return null
+    return null;
+}
+
+  let daysAgoValue = getCookie('daysAgo');
 
   const fetchData = async (page) => {
     let id = localStorage.getItem('createdBy');
-    counter = 1;
-    const API_URL = 'http://localhost:5000/api/v1/income/' + id + '?page=' + page ;
+    let API_URL =''
+    daysAgoValue==="all"?API_URL = 'http://localhost:5000/api/v1/income/' + id + '?page=' + page:
+    API_URL = 'http://localhost:5000/api/v1/income/' + id + '?page=' + page +'&daysAgo='+daysAgoValue
     
     try {
       const response = await fetch(API_URL);
@@ -57,7 +70,7 @@ const IncomeTable = () => {
   useEffect(() => {
     setLoading(true);
     fetchData(currentPage);
-  }, [currentPage]);
+  }, [currentPage,daysAgoValue]);
 
   let count_table = (0 + (currentPage - 1) * 5);
 
