@@ -4,10 +4,7 @@ import ExpenseForm from "../Components/ExpenseForm"
 import * as icon from "react-icons/fi"
 import ExpenseBar from "../Components/ExpenseBar"
 const Expense = () => {
-    let token = localStorage.getItem("Token")
-    if (token === null) {
-        window.location.replace("/")
-    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const search = document.querySelector('.search-expense').value

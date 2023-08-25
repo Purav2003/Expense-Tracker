@@ -8,10 +8,7 @@ import { useEffect } from "react"
 
 const Dashboard = () => {
 
-  let token = localStorage.getItem("Token")
-  if (token === null) {
-    window.location.replace("/")
-  }
+  
   let name = localStorage.getItem("username")
   const handleSubmit = async (e) => {
     e.preventDefault();

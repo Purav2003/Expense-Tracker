@@ -9,10 +9,7 @@ import { useState,useEffect } from "react"
 import Loader from "../Components/Loader"
 const Income = () =>{
 
-    let token = localStorage.getItem("Token")
-    if(token === null){
-            window.location.replace("/")
-    }
+
     const handleSubmit = async (e) => {
       e.preventDefault();
       const search = document.querySelector('.search-income').value
