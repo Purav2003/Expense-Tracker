@@ -4,6 +4,7 @@ import { Calendar, Badge } from 'rsuite';
 import axios from 'axios';
 import ReactApexChart from 'react-apexcharts';
 import Loader from './Loader'
+import no_trans from '../assets/images/No_Transactions.jpg'
 
 
 
@@ -22,7 +23,7 @@ const CalendarDashboard = () => {
       const response = await fetch(API_URL);
       const datas = await response.json();
       setData(datas.dates);
-      setTimeout(() => {  setLoading(false);}, 100);
+      setLoading(false);
 
     } catch (error) {
       // Handle error here
@@ -197,72 +198,73 @@ const CalendarDashboard = () => {
   return (
 
     <>
- {loading?<Loader />:   <><div className='lg:flex lg:pl-12 rounded-full calendar-main'>  <Calendar compact bordered renderCell={renderCell} onChange={handleSubmit}
+      {loading ? <Loader /> : <><div className='lg:flex lg:pl-12 rounded-full calendar-main'>  <Calendar compact bordered renderCell={renderCell} onChange={handleSubmit}
         className="lg:w-[28%] bg-white calendar rounded-md" disabledDate={(date) => date > new Date()} />
-      <div className='lg:ml-4 bg-white rounded-md calendar-details lg:w-[32%]'>
-        <div className='p-4 '>
-          <h1 className='font-semibold text-calendar text-[20px]'>Transactions on {reverseDate(date)}</h1><br></br>
-          <div className='display-cal'>
-            {
-              datedata.map((tables) => {
-                const { _id, amount, date, mode, from, to } = tables;
-                return (
-                  <div className='flex pt-4 ' key={_id}>
-                    <div>
-                      {from ?
-                        <h1 className='lg:text-[14px] bg-[rgba(0,255,0,0.3)] py-2 px-4 rounded-full '>&nbsp;Income&nbsp;</h1>
-                        :
-                        <h1 className='lg:text-[14px] bg-[rgba(255,0,0,0.3)] py-2 px-4 rounded-full '>Expense</h1>
+        <div className='lg:ml-4 bg-white rounded-md calendar-details lg:w-[32%]'>
+          <div className='p-4 '>
+            <h1 className='font-semibold text-calendar text-[20px]'>Transactions on {reverseDate(date)}</h1><br></br>
+            <div className='display-cal'>
+              {datedata.length > 0 ?
+                datedata.map((tables) => {
+                  const { _id, amount, date, mode, from, to } = tables;
+                  return (
+                    <div className='flex pt-4 ' key={_id}>
+                      <div>
+                        {from ?
+                          <h1 className='lg:text-[14px] bg-[rgba(0,255,0,0.3)] py-2 px-4 rounded-full '>&nbsp;Income&nbsp;</h1>
+                          :
+                          <h1 className='lg:text-[14px] bg-[rgba(255,0,0,0.3)] py-2 px-4 rounded-full '>Expense</h1>
 
-                      }
-                      <a>&nbsp;</a>
-                    </div>
-                    <div className='px-8 '>
-                      <h1 className='font-bold lg:text-[17px]'>{from ? from : to}</h1>
-                      <a className='lg:text-[12px]'>{reverseDate(date.slice(0, 10))}</a></div>
-                    <div className='px-4'>
-                      {from ? <h1 className="cal-head"><a className='font-bold'>+</a>&nbsp;                  
-                      {
-                          currency_symbol==='INR'?'₹ '
-                          :currency_symbol==='USD'?"$ "
-                          :currency_symbol==='CAD'?"C$ "
-                          :currency_symbol==="AED"?"د.إ "
-                          :currency_symbol==="EUR"?"€ "
-                          :currency_symbol==="GBP"?"£ "
-                          :currency_symbol==="JPY"?"¥ "                          
-                          :currency_symbol==="AUD"?"AU$ "                          
-                          :""
                         }
-                       {amount}</h1> : <h1><a className='font-bold'>-</a>&nbsp;
-                       {
-                          currency_symbol==='INR'?'₹ '
-                          :currency_symbol==='USD'?"$ "
-                          :currency_symbol==='CAD'?"C$ "
-                          :currency_symbol==="AED"?"د.إ "
-                          :currency_symbol==="EUR"?"€ "
-                          :currency_symbol==="GBP"?"£ "
-                          :currency_symbol==="JPY"?"¥ "                          
-                          :currency_symbol==="AUD"?"AU$ "                          
-                          :""
-                        }
-                        {amount}</h1>}
-                      <a className='lg:text-[12px]'>{mode}</a>
-                    </div>
+                        <a>&nbsp;</a>
+                      </div>
+                      <div className='px-8 '>
+                        <h1 className='font-bold lg:text-[17px]'>{from ? from : to}</h1>
+                        <a className='lg:text-[12px]'>{reverseDate(date.slice(0, 10))}</a></div>
+                      <div className='px-4'>
+                        {from ? <h1 className="cal-head"><a className='font-bold'>+</a>&nbsp;
+                          {
+                            currency_symbol === 'INR' ? '₹ '
+                              : currency_symbol === 'USD' ? "$ "
+                                : currency_symbol === 'CAD' ? "C$ "
+                                  : currency_symbol === "AED" ? "د.إ "
+                                    : currency_symbol === "EUR" ? "€ "
+                                      : currency_symbol === "GBP" ? "£ "
+                                        : currency_symbol === "JPY" ? "¥ "
+                                          : currency_symbol === "AUD" ? "AU$ "
+                                            : ""
+                          }
+                          {amount}</h1> : <h1><a className='font-bold'>-</a>&nbsp;
+                          {
+                            currency_symbol === 'INR' ? '₹ '
+                              : currency_symbol === 'USD' ? "$ "
+                                : currency_symbol === 'CAD' ? "C$ "
+                                  : currency_symbol === "AED" ? "د.إ "
+                                    : currency_symbol === "EUR" ? "€ "
+                                      : currency_symbol === "GBP" ? "£ "
+                                        : currency_symbol === "JPY" ? "¥ "
+                                          : currency_symbol === "AUD" ? "AU$ "
+                                            : ""
+                          }
+                          {amount}</h1>}
+                        <a className='lg:text-[12px]'>{mode}</a>
+                      </div>
 
-                  </div>
-                );
-              })
-            }
+                    </div>
+                  );
+                })
+                : <p className='lg:ml-[3vw] lg:mt-[10vw] font-bold'>No Transaction On This Date</p>
+              }
+            </div>
           </div>
         </div>
-      </div>
-      <div className='lg:w-[32%]'>
-      <ReactApexChart options={options} series={series} type="bar" height={350} />
-      </div>
+        <div className='lg:w-[32%]'>
+          <ReactApexChart options={options} series={series} type="bar" height={350} />
+        </div>
       </div>
 
       </>}
-</>
+    </>
   );
 };
 

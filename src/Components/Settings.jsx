@@ -14,15 +14,18 @@ const Settings = () => {
     if (token === null) {
         window.location.replace("/");
     }
-    const newCur = localStorage.getItem("newCurrency")
+    const newCur = localStorage.getItem("selectedCurrency")
     const handleSubmit = async (e) => {
+        setLoading(true)
         e.preventDefault();
         let id = localStorage.getItem('createdBy');
         const cur = document.querySelector('.currency').value;
         let data = JSON.stringify({
             "newCurrency": cur,
         });
+        console.log(newCur+cur)
         if(newCur !== cur){
+            console.log("Called")
         try {
             let config = {
                 method: 'patch',
@@ -38,7 +41,7 @@ const Settings = () => {
                         setData(response.data.user);                        
                         setSelectedCurrency(cur);
                         localStorage.setItem('selectedCurrency', cur);
-                        window.location.replace("/profile")
+                        setLoading(false)
                     }
                 })
         }
@@ -50,6 +53,7 @@ const Settings = () => {
     else{
         window.location.replace("/profile")
     }
+
     }
 
     useEffect(() => {
@@ -67,7 +71,6 @@ const Settings = () => {
         setSelectedCurrency(newCurrency);
 
         // Save the selected currency in localStorage when it changes
-        localStorage.setItem('selectedCurrency', newCurrency);
     };
 
     const toggleMode = () => {

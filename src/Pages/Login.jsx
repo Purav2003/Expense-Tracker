@@ -3,6 +3,7 @@ import signin from '../Assets/images/login.png';
 import { Link } from "react-router-dom";
 import "../assets/css/signup.css"
 const Login = () => {
+  let token = localStorage.getItem("Token")
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -18,6 +19,7 @@ const Login = () => {
         method: 'post',
         url: 'http://localhost:5000/api/v1/auth/signin',
         headers: {
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
         data: data

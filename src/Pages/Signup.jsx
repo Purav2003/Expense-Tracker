@@ -22,6 +22,7 @@ const Signup = () => {
         method: 'post',
         url: 'http://localhost:5000/api/v1/auth/signup',
         headers: {
+          
           'Content-Type': 'application/json'
         },
         data: data
@@ -30,6 +31,7 @@ const Signup = () => {
       axios.request(config)
         .then((response) => {
           if (JSON.stringify(response.data.status) === '200') {
+            localStorage.setItem("Token",response.data.token)
             window.location.replace("/")
           }
            if (response.data.msg === 'Phone Number already exists') {

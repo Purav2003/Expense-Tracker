@@ -8,16 +8,23 @@ const Profile = () => {
   const [loading, setLoading] = useState(true);
 
   const token = localStorage.getItem("Token");
-  if (token === null) {
-    window.location.replace("/");
-  }
+  
 
   const fetchData = async () => {
     const id = localStorage.getItem('createdBy');
     const API_URL = `http://localhost:5000/api/v1/auth/profile/${id}`;
-
+  
     try {
-      const response = await fetch(API_URL);
+      const response = await fetch(API_URL, {
+        method: 'GET', 
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+  
+     
+  
       const data_new = await response.json();
       setData(data_new.user);
       setLoading(false);
@@ -25,6 +32,7 @@ const Profile = () => {
       console.error(error);
     }
   };
+  
 
   useEffect(() => {
     setLoading(true)

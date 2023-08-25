@@ -4,9 +4,7 @@ import { Link } from "react-router-dom"
 const ResetPassword = () => {
 
   let token = localStorage.getItem("Token")
-  if (token === null) {
-    window.location.replace("/")
-  }
+ 
   let id = localStorage.getItem('createdBy');
 
   const handleSubmit = async (e) => {
@@ -26,6 +24,7 @@ const ResetPassword = () => {
             method: 'post',
             url: 'http://localhost:5000/api/v1/auth/changePassword/' + id,
             headers: {
+              'Authorization': `Bearer ${token}`,
               'Content-Type': 'application/json'
             },
             data: data

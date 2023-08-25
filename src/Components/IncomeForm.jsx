@@ -1,6 +1,7 @@
 import axios from "axios"
 import { Link } from "react-router-dom"
 import toast, { Toaster } from 'react-hot-toast';
+import add from '../assets/images/Add_Items_Vector.png'
 
 const IncomeForm = () => {
     var todayDate = new Date().toISOString().slice(0, 10);
@@ -71,8 +72,12 @@ const IncomeForm = () => {
     return (
         <>
         <div><Toaster/></div>
+<div className="flex">
 
-        <div className="w-full max-w-xs">
+    <div className="w-[50%] mt-[-4vw]">
+        <img src = {add} className="w-[80%]"/>
+        </div>
+        <div className="w-full max-w-xs"><br></br>
             <form onSubmit={handleSubmit} className="bg-white rounded w-[40vw] px-8 pt-6 pb-8 mb-4">
 
                 <div className="mb-4 form-field">
@@ -85,7 +90,7 @@ const IncomeForm = () => {
                     <label className="block text-black-700 text-sm font-bold mb-2">
                         Amount
                     </label>
-                    <input className="amount shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="number" placeholder="Amount" required />
+                    <input className="amount shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="number" placeholder="Amount" required min={0}/>
                     <div id="error"></div>
                 </div>
                 <div className="mb-4 form-field">
@@ -112,11 +117,13 @@ const IncomeForm = () => {
                     <div id="errora"></div>
                 </div>
                 <div className="flex form-field items-center">
-                    <button className="bg-[#007A6D] button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
+                    <button className="bg-fourth button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
                         Add Entry
                     </button>
                 </div>
             </form>
+
+        </div>
 
         </div>
         </>
