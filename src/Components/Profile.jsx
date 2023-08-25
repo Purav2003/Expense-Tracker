@@ -26,6 +26,9 @@ const Profile = () => {
      
   
       const data_new = await response.json();
+      if(data_new.status === 401){
+        window.location.replace('/')
+      }
       setData(data_new.user);
       setLoading(false);
     } catch (error) {
