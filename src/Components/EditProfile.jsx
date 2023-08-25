@@ -91,6 +91,7 @@ const EditProfile = () => {
                 method: 'put',
                 url: 'http://localhost:5000/api/v1/auth/profile/editProfile/' + id,
                 headers: {
+                    'Authorization': `Bearer ${token}`,                    
                     'Content-Type': 'application/json'
                 },
                 data: datab

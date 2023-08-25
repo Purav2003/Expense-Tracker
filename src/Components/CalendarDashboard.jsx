@@ -6,6 +6,7 @@ import ReactApexChart from 'react-apexcharts';
 import Loader from './Loader'
 import no_trans from '../assets/images/No_Transactions.jpg'
 
+const token = localStorage.getItem("Token");
 
 
 const CalendarDashboard = () => {
@@ -20,8 +21,13 @@ const CalendarDashboard = () => {
     const API_URL = 'http://localhost:5000/api/v1/dashboard/dateHighlight/' + id;
 
     try {
-      const response = await fetch(API_URL);
-      const datas = await response.json();
+      const response = await fetch(API_URL, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      }); const datas = await response.json();
       setData(datas.dates);
       setLoading(false);
 

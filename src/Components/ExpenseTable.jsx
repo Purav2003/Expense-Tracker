@@ -18,6 +18,7 @@ const ExpenseTable = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [loading, setLoading] = useState(false)
   const [totalPages, setTotalPages] = useState(1);
+  const token = localStorage.getItem("Token");
 
   const fetchData = async (page) => {
     let id = localStorage.getItem('createdBy');
@@ -25,8 +26,13 @@ const ExpenseTable = () => {
     daysAgoValue==="all"?API_URL = 'http://localhost:5000/api/v1/expense/' + id + '?page=' + page:
     API_URL = 'http://localhost:5000/api/v1/expense/' + id + '?page=' + page +'&daysAgo='+daysAgoValue
     try {
-      const response = await fetch(API_URL);
-      const datas = await response.json();
+      const response = await fetch(API_URL, {
+        method: 'GET', 
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });      const datas = await response.json();
 
       setDataExp(datas.expenses);
       setTotalPages(datas.totalPages);

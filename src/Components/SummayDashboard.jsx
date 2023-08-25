@@ -16,6 +16,7 @@ const SummaryDashboard = () => {
     const [transaction, setTransaction] = useState()
     const [mexpense, setMexpense] = useState()
     const [loading, setLoading] = useState(false);
+    const token = localStorage.getItem("Token");
 
     const fetchData = async () => {
         let id = localStorage.getItem('createdBy');
@@ -23,8 +24,13 @@ const SummaryDashboard = () => {
         console.log(API_URL);
 
         try {
-            const response = await fetch(API_URL);
-            const datas = await response.json();
+            const response = await fetch(API_URL, {
+                method: 'GET', 
+                headers: {
+                  'Authorization': `Bearer ${token}`,
+                  'Content-Type': 'application/json',
+                },
+              });            const datas = await response.json();
             setIncome(datas.totalIncome);
             setExpense(datas.totalExpense);
             setTransaction(datas.totalTransactions);

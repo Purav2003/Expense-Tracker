@@ -18,14 +18,20 @@ const ExpenseSearch = () => {
     const [loading, setLoading] = useState(false);
     const [totalPages, setTotalPages] = useState(1);
     let search = localStorage.getItem('expense-trial');
+    const token = localStorage.getItem("Token");
 
     const fetchData = async (page) => {
       let id = localStorage.getItem('createdBy');
       const API_URL = 'http://localhost:5000/api/v1/expense/'+id+'?search='+search+'&page='+page;
     console.log(API_URL)
       try {
-        const response = await fetch(API_URL);
-        const datas = await response.json();
+        const response = await fetch(API_URL, {
+          method: 'GET', 
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });        const datas = await response.json();
         console.log(datas)
         setData(datas.expenses);
         setTotalPages(datas.totalPages);

@@ -50,6 +50,7 @@ const ExpenseForm = () => {
                     method: 'post',
                     url: 'http://localhost:5000/api/v1/expense',
                     headers: {
+                        'Authorization': `Bearer ${token}`,                    
                         'Content-Type': 'application/json'
                     },
                     data: data

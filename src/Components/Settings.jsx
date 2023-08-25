@@ -11,9 +11,7 @@ const Settings = () => {
     const [selectedCurrency, setSelectedCurrency] = useState(""); // Initialize without a default currency
 
     let token = localStorage.getItem("Token");
-    if (token === null) {
-        window.location.replace("/");
-    }
+
     const newCur = localStorage.getItem("selectedCurrency")
     const handleSubmit = async (e) => {
         setLoading(true)
@@ -31,6 +29,7 @@ const Settings = () => {
                 method: 'patch',
                 url: 'http://localhost:5000/api/v1/settings/changeCurrency/' + id,
                 headers: {
+                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 },
                 data: data

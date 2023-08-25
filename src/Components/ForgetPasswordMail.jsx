@@ -1,5 +1,6 @@
 import axios from 'axios';
 const ForgetPasswordMail = () => {
+  const token = localStorage.getItem("Token");
   const handleSubmit = async (e) => {
     e.preventDefault()
     const email = document.querySelector('.email').value
@@ -13,6 +14,7 @@ const ForgetPasswordMail = () => {
         method: 'post',
         url: 'http://localhost:5000/api/v1/auth/forgetPasswordMailConfirmation',
         headers: {
+          'Authorization': `Bearer ${token}`,                    
           'Content-Type': 'application/json'
         },
         data: data

@@ -15,6 +15,8 @@ const IncomeTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [totalPages, setTotalPages] = useState(1);
+  const token = localStorage.getItem("Token");
+
   function getCookie(cookieName) {
     const cookies = document.cookie.split(';');
     for (let i = 0; i < cookies.length; i++) {
@@ -37,8 +39,13 @@ const IncomeTable = () => {
     API_URL = 'http://localhost:5000/api/v1/income/' + id + '?page=' + page +'&daysAgo='+daysAgoValue
     
     try {
-      const response = await fetch(API_URL);
-      const datas = await response.json();
+      const response = await fetch(API_URL, {
+        method: 'GET', 
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });      const datas = await response.json();
 
       setData(datas.income);
       setTotalPages(datas.totalPages);

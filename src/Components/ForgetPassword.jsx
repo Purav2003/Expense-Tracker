@@ -1,6 +1,8 @@
 import axios from "axios"
 import { Link } from "react-router-dom"
 const ForgetPassword = () => {
+  const token = localStorage.getItem("Token");
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     const email = localStorage.getItem("forgetemail")
@@ -17,6 +19,7 @@ const ForgetPassword = () => {
           method: 'post',
           url: 'http://localhost:5000/api/v1/auth/forgetPassword',
           headers: {
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
           },
           data: data

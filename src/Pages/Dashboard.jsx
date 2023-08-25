@@ -51,7 +51,7 @@ const Dashboard = () => {
                 <br />
                 <br />
                 <div className="lg:flex px-8 main-heading-mob">
-    <h1 className="text-4xl w-full font-bold">Hello, {name} </h1>    
+    <h1 className="text-4xl w-full font-bold">&#128075; {name} </h1>    
     <div className="ml-[33vw] justify-end	relative lg:w-[80%] bg-[#eee] rounded-lg shadow-md px-4 py-2 search-bar">
 
     <form onSubmit={handleSubmit}>

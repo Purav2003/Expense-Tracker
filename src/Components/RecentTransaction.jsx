@@ -13,14 +13,20 @@ const RecentTransaction = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const token = localStorage.getItem("Token");
 
   const fetchData = async () => {
     let id = localStorage.getItem('createdBy');
     const API_URL = 'http://localhost:5000/api/v1/dashboard/' + id;
     
     try {
-      const response = await fetch(API_URL);
-      const datas = await response.json();
+      const response = await fetch(API_URL, {
+        method: 'GET', 
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });      const datas = await response.json();
       console.log(datas.transaction)
       setData(datas.transaction);
       setTimeout(() => {  setLoading(false);}, 600);

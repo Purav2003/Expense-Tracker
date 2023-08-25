@@ -37,7 +37,9 @@ const IncomeForm = () => {
                     method: 'post',
                     url: 'http://localhost:5000/api/v1/income',
                     headers: {
+                        'Authorization': `Bearer ${token}`,                    
                         'Content-Type': 'application/json'
+                        
                     },
                     data: data
                 };

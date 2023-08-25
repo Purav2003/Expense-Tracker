@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import * as icon from "react-icons/io";
-import * as icons from "react-icons/ri";
-import axios from "axios";
 import * as iconf from "react-icons/fi"
 import Loader from "./Loader";
 import toast, { Toaster } from 'react-hot-toast';
-import Skeleton from "react-loading-skeleton";
 import Sidebar from "./Sidebar";
 
 import '../Assets/css/income.css';
 import '../index.css';
 
 const DashboardSearch = () => {
+  const token = localStorage.getItem("Token");
+
     const [data, setData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(false);
@@ -24,8 +22,13 @@ const DashboardSearch = () => {
       const API_URL = 'http://localhost:5000/api/v1/dashboard/search/'+id+'?search='+search+'&page='+page;
     console.log(API_URL)
       try {
-        const response = await fetch(API_URL);
-        const datas = await response.json();
+        const response = await fetch(API_URL, {
+          method: 'GET', 
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });        const datas = await response.json();
         console.log(datas.searchedData)
         setData(datas.searchedData.results);
         setTotalPages(datas.totalPages);
