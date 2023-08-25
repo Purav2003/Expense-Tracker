@@ -28,7 +28,7 @@ const CalendarDashboard = () => {
         },
       });       
       const datas = await response.json();
-      if(datas.status === 401){
+      if(datas.status === 495){
         window.location.replace('/')
       }      
       setData(datas.dates);
@@ -132,6 +132,7 @@ const CalendarDashboard = () => {
         method: 'post',
         url: 'http://localhost:5000/api/v1/dashboard/dateData/' + id,
         headers: {
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
         data: dataok
@@ -139,7 +140,9 @@ const CalendarDashboard = () => {
 
       axios.request(config)
         .then((response) => {
-
+          if(JSON.stringify(response.status) === 495){
+            window.location.replace('/')
+          }   
           if (JSON.stringify(response.data.status) === '200') {
             setDatedata(response.data.dateData)
             setDate(response.data.date)

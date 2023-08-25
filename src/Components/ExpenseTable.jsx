@@ -29,7 +29,7 @@ const ExpenseTable = () => {
           'Content-Type': 'application/json',
         },
       });      const datas = await response.json();
-      if(datas.status === 401){
+      if(datas.status === 495){
         window.location.replace('/')
       }
       setDataExp(datas.expenses);
@@ -61,12 +61,16 @@ let daysAgoValue = getCookie('daysAgoExp');
       method: 'delete',
       url: 'http://localhost:5000/api/v1/expense/' + e,
       headers: {
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
     };
 
     axios.request(config)
       .then((response) => {
+        if(JSON.stringify(response.status) === 495){
+          window.location.replace('/')
+        }           
         if (JSON.stringify(response.data.status) === '200') {
           toast.success('Successfully Deleted');
           window.location.reload()

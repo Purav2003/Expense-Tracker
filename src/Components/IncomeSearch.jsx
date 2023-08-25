@@ -29,7 +29,7 @@ const IncomeSearch = () => {
         },
       });
       const datas = await response.json();
-      if(datas.status === 401){
+      if(datas.status === 495){
         window.location.replace('/')
       }
       console.log(datas.income)

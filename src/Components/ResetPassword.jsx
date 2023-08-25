@@ -32,7 +32,7 @@ const ResetPassword = () => {
 
           axios.request(config)
             .then((response) => {
-              if(JSON.stringify(response.status) === 401){
+              if(JSON.stringify(response.status) === 495){
                 window.location.replace('/')
               }              
               if (JSON.stringify(response.data.status) === '200') {

@@ -23,7 +23,7 @@ const ForgetPasswordMail = () => {
         .then((response) => {
           console.log("By")
           console.log(JSON.stringify(response.status));
-          if(JSON.stringify(response.status) === 401){
+          if(JSON.stringify(response.status) === 495){
             window.location.replace('/')
           }
           if (JSON.stringify(response.status) === '200') {

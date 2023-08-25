@@ -59,7 +59,7 @@ const ExpenseForm = () => {
                 axios.request(config)
                     .then((response) => {
                         count_success = 1
-                        if(JSON.stringify(response.status) === 401){
+                        if(JSON.stringify(response.status) === 495){
                             window.location.replace('/')
                           }                        
                         if (JSON.stringify(response.status) === '200') {

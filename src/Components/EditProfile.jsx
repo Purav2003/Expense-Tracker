@@ -14,7 +14,7 @@ const EditProfile = () => {
         mobile: '',
         name: ''
     });
-    const [loading,setLoading] = useState(false)
+    const [loading, setLoading] = useState(false)
     let token = localStorage.getItem("Token")
 
 
@@ -22,11 +22,17 @@ const EditProfile = () => {
         let id = localStorage.getItem('createdBy');
         const API_URL = 'http://localhost:5000/api/v1/auth/profile/' + id;
         try {
-            const response = await fetch(API_URL);            
+            const response = await fetch(API_URL, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
             const data_new = await response.json();
-            if(data_new.status === 401){
+            if (data_new.status === 495) {
                 window.location.replace('/')
-              }            
+            }
             console.log(data_new.user)
             setData({
                 email: data_new.user.email,
@@ -92,7 +98,7 @@ const EditProfile = () => {
                 method: 'put',
                 url: 'http://localhost:5000/api/v1/auth/profile/editProfile/' + id,
                 headers: {
-                    'Authorization': `Bearer ${token}`,                    
+                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 },
                 data: datab
@@ -100,6 +106,9 @@ const EditProfile = () => {
 
             axios.request(config)
                 .then((response) => {
+                    if (response.status === 495) {
+                        window.location.replace('/')
+                    }
 
                     if (response.data.msg === "Profile Updated Successfully") {
                         window.location.replace("/profile")
@@ -136,8 +145,8 @@ const EditProfile = () => {
     return (
         <div>
             <Sidebar />
-        
-           {loading?<Loader />: <div className="setting-main">
+
+            {loading ? <Loader /> : <div className="setting-main">
                 <div className="w-[50%]">
                     <h1 className="py-4 font-bold text-[25px]">Edit Profile</h1>
                     <form onSubmit={handleSubmit}>
@@ -157,9 +166,9 @@ const EditProfile = () => {
                                     value={data.email}
                                     onChange={handleEmailChange}
                                     required
-                                /></td>            
-                                 </tr>
-                                <tr className="border p-4">
+                                /></td>
+                            </tr>
+                            <tr className="border p-4">
                                 <td className="border p-4 w-[50%]">Phone</td>
                                 <td className="border p-4 w-[50%]"><input
                                     className="appearance-none rounded w-full text-black outline-0"
@@ -173,7 +182,7 @@ const EditProfile = () => {
 
                                 <td className="py-4 w-[50%] text-center items-center" colSpan={2} >
                                     <Link to="/profile"><button type="button" className="bg-white text-fourth border border-fourth py-2 px-4 rounded-full">
-                                            Go Back
+                                        Go Back
                                     </button></Link>
                                     <button type="submit" className="ml-4 bg-fourth text-white py-2 px-4 rounded-full">
                                         Edit Changes

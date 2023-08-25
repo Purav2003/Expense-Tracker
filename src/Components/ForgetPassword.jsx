@@ -27,7 +27,7 @@ const ForgetPassword = () => {
 
         axios.request(config)
           .then((response) => {
-            if(JSON.stringify(response.status) === 401){
+            if(JSON.stringify(response.status) === 495){
               window.location.replace('/')
             }
             console.log(response)

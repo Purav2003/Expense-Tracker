@@ -31,7 +31,7 @@ const SummaryDashboard = () => {
                   'Content-Type': 'application/json',
                 },
               });            const datas = await response.json();
-              if(datas.status === 401){
+              if(datas.status === 495){
                 window.location.replace('/')
               }              
             setIncome(datas.totalIncome);
