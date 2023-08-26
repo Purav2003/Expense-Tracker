@@ -34,6 +34,9 @@ app.use(
     saveUninitialized: false,
   })
 );
+app.get("/",(req,res)=>{
+  res.json("hello")
+})
 app.use("/api/v1/auth",auth)
 app.use("/api/v1/income",income)
 app.use("/api/v1/expense",expense)
