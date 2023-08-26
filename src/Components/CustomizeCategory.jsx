@@ -24,7 +24,6 @@ const CustomizeCategory = () => {
             if (datas.status === 495) {
                 window.location.replace('/');
             }
-            console.log(datas);
             setSelectedValues(datas.user.categories);
         } catch (error) {
             // Handle error here
@@ -105,13 +104,13 @@ const CustomizeCategory = () => {
     return (
         <>
         <Sidebar />
-        <div className="flex justify-center items-center bg-white h-screen">
-            <div className='border p-4 bg-[#eee] w-[50%] border rounded-lg'>
+        <div className="flex justify-center bg-white pt-[3vw] ">
+            <div className='border p-4 bg-[#eee] lg:w-[50%] border rounded-lg'>
                 <form onSubmit={handleSubmit}>
                     <h2 className='text-center text-2xl font-bold text-black'>Expense Categories</h2><br></br>
                     <ul className='flex flex-wrap'>
                         {["Food", "Clothes", "Groceries", "Petrol", "Other"].map((value) => (
-                            <li key={value} className='ml-8 mb-4'>
+                            <li key={value} className='lg:ml-8 mb-4'>
                                 <label>
                                     <input
                                         type="checkbox"
@@ -126,8 +125,10 @@ const CustomizeCategory = () => {
                         ))}
                     </ul><br></br>
                     {showInput && (
-                        <div className='flex'><br></br>
-                            <h3 className='pl-8 pr-2 py-2 text-black'>Add Category:</h3>
+                        <div className='lg:flex'><br></br>
+                            <h3 className='lg:pl-8 lg:pr-2 lg:py-2 text-black'>Add Category:</h3>
+                            <div className='flex'>
+
                             <input
                                 type="text"
                                 value={inputValue}
@@ -136,12 +137,12 @@ const CustomizeCategory = () => {
                                 className='border rounded-lg py-2 outline-0 px-4'
                             />
                             <button onClick={handleAddInput} type='button' className='mx-4 rounded-lg bg-fourth text-white px-4'><a className='text-[20px]'>+</a></button>
-
+</div>
                         </div>
                     )}
-                    <div id="error" className='px-8 py-2'></div>
+                    <div id="error" className='lg:px-8 py-2'></div>
                     <br></br>
-                    <div className='pl-8'>
+                    <div className='lg:pl-8'>
                         <h3>Selected Categories:</h3><br></br>
                         <div className='flex flex-wrap bg-white rounded-lg'>
                             {selectedValues.map((value, index) => (
@@ -153,7 +154,7 @@ const CustomizeCategory = () => {
                             ))}
                         </div>
                     </div>
-                    <button type='submit' className='m-8 px-4 py-2 rounded-lg text-white bg-fourth'>Submit</button>
+                    <button type='submit' className='lg:m-8 my-4 px-4 py-2 rounded-lg text-white bg-fourth'>Submit</button>
                 </form>
             </div>
         </div>

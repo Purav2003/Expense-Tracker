@@ -14,7 +14,7 @@ const Dashboard = () => {
     const search = document.querySelector('.search-income').value;
     localStorage.setItem("income-trial", search);
     if (search !== "") {
-      window.location.replace('search-dashboard');
+      window.location.replace('/search-dashboard');
     } else {
       document.getElementById('errora').innerHTML = '<h1 className="pt-[0.5vw]">Enter Something</h1>';
     }
@@ -35,7 +35,7 @@ const Dashboard = () => {
                 <input
                   type="text"
                   placeholder="Type to Search"
-                  className="border-none outline-none bg-transparent pr-8 w-full"
+                  className="border-none outline-none search-income bg-transparent pr-8 w-full"
                 />
                 <div className="absolute inset-y-0 right-0 flex items-center pr-3">
                   <button type="submit"><icon.FiSearch className="h-5 w-5 text-gray-500" /></button>

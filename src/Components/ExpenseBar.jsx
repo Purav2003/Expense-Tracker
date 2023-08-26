@@ -15,7 +15,6 @@ const ExpenseBar = () => {
         for(let i=0;i<=5;i++){
             if(all[i]!==datas){
                 var trial = document.getElementById(all[i]);     
-                console.log(trial)   
                 trial.classList.add("hidden");         
             }
         }
@@ -29,7 +28,6 @@ const ExpenseBar = () => {
         for(let i=0;i<=5;i++){
             if(all[i]!==datas.target.value){
                 var trial = document.getElementById(all[i]);     
-                console.log(trial)   
                 trial.classList.add("hidden");         
             }
         }

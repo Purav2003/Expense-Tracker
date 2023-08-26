@@ -14,7 +14,7 @@ const IncomeBar = () => {
         for(let i=0;i<=5;i++){
             if(all[i]!==datas){
                 var trial = document.getElementById(all[i]);     
-                console.log(trial)   
+
                 trial.classList.add("hidden");         
             }
         }
@@ -28,8 +28,7 @@ const IncomeBar = () => {
         for(let i=0;i<=5;i++){
             if(all[i]!==datas.target.value){
                 var trial = document.getElementById(all[i]);     
-                console.log(trial)   
-                trial.classList.add("hidden");         
+               trial.classList.add("hidden");         
             }
         }
         var element = document.getElementById(datas.target.value);   

@@ -18,12 +18,23 @@ import Settings from './Components/Settings';
 import Help from './Components/Help';
 import CustomizeCategory from './Components/CustomizeCategory';
 import Logout from './Pages/Logout';
+import { useState , useEffect} from 'react';
 function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+  useEffect(() => {
+    const token = localStorage.getItem('Token');
+    if (token) {
+      setLoggedIn(true);
+    }
+  }, []);
+
   return (
     <>
     <Router>
       <Routes>
+        {loggedIn?<Route path='/dashboard' element={<Dashboard />}></Route>:
         <Route path='/' element={<Login />}></Route>
+        }
         <Route path='/signup' element={<Signup />}></Route>
         <Route path='/dashboard' element={<Dashboard />}></Route>
         <Route path='/income' element={<Income />}></Route>

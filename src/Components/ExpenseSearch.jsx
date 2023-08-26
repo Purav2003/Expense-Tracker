@@ -84,7 +84,7 @@ const ExpenseSearch = () => {
                 <input
                   type="text"
                   placeholder="Type to Search"
-                  className="border-none outline-none bg-transparent pr-8 w-full"
+                  className="border-none outline-none search-expense bg-transparent pr-8 w-full"
                 />
                 <div className="absolute inset-y-0 right-0 flex items-center pr-3">
                   <button type="submit"><iconf.FiSearch className="h-5 w-5 text-gray-500" /></button>

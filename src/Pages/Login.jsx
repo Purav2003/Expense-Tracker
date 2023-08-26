@@ -2,11 +2,10 @@ import axios from "axios"
 import signin from '../Assets/images/login.png';
 import { Link } from "react-router-dom";
 import "../assets/css/signup.css"
-
+import { useEffect } from "react";
 
 const Login = () => {
   let token = localStorage.getItem("Token")
-
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -56,6 +55,11 @@ const Login = () => {
       input.value = '';
     });
   }
+  useEffect(()=>{
+    if(token){
+      window.location.replace('/dashboard')
+    }
+  },[])
   return (
     <>
       <div className="lg:flex lg:flex-row bg-white">

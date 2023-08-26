@@ -29,7 +29,7 @@ const Expense = () => {
                 <input
                   type="text"
                   placeholder="Type to Search"
-                  className="border-none outline-none bg-transparent pr-8 w-full search-expense"
+                  className="border-none outline-none bg-transparent pr-8 search-expense"
                 />
                 <div className="absolute inset-y-0 right-0 flex items-center pr-3">
                   <button type="submit"><icon.FiSearch className="h-5 w-5 text-gray-500" /></button>

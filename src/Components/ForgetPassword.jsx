@@ -62,7 +62,7 @@ const ForgetPassword = () => {
   return (
     <div className="forget">
       <div className="setting-main">
-        <div className="w-[50%]">
+        <div className="w-[100%] lg:w-[50%]">
           <h1 className="py-4 font-bold text-[25px]">Change Password</h1>
           <form onSubmit={handleSubmit}>
             <table className="w-full">
