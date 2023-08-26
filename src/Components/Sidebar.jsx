@@ -121,7 +121,7 @@ const Sidebar = () => {
                                 <hr></hr>
                                 <li>
                                     <Link
-                                        to="/profile"
+                                        to="/logout"
                                         className="block px-4 py-2 text-gray-900 dark:text-white "
                                     >
                                         Log Out
