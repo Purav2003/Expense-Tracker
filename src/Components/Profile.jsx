@@ -8,25 +8,25 @@ const Profile = () => {
   const [loading, setLoading] = useState(true);
 
   const token = localStorage.getItem("Token");
-  
+
 
   const fetchData = async () => {
     const id = localStorage.getItem('createdBy');
     const API_URL = `http://localhost:5000/api/v1/auth/profile/${id}`;
-  
+
     try {
       const response = await fetch(API_URL, {
-        method: 'GET', 
+        method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
       });
-  
-     
-  
+
+
+
       const data_new = await response.json();
-      if(data_new.status === 495){
+      if (data_new.status === 495) {
         window.location.replace('/')
       }
       setData(data_new.user);
@@ -35,7 +35,7 @@ const Profile = () => {
       console.error(error);
     }
   };
-  
+
 
   useEffect(() => {
     setLoading(true)
@@ -45,7 +45,7 @@ const Profile = () => {
   return (
     <>
       <Sidebar />
-     { loading?<Loader />:<div className="setting-main p-4">
+      {loading ? <Loader /> : <div className="setting-main p-4">
         <div className="lg:grid grid-cols-2 gap-0 lg:ml-[11vw]">
           {/* 1st Row */}
           <div className="col-span-1 w-[60%] p-4">
@@ -64,9 +64,7 @@ const Profile = () => {
                   <table className="w-full">
                     <tr className="border p-4">
                       <td className="border p-4 w-[50%]">Name</td>
-                      <td className="border p-4 w-[50%] ">{data.name}
-
-                      </td>
+                      <td className="border p-4 w-[50%] ">{data.name}</td>
                     </tr>
                     <tr className="border p-4">
                       <td className="border p-4 w-[50%]">E-mail</td>
@@ -79,24 +77,24 @@ const Profile = () => {
                     </tr>
                     <tr className="border p-4">
                       <td className="border p-4 w-[50%]">Join Date</td>
-                      <td className="p-4">{data.createdAt?.slice(0,10)}</td>
+                      <td className="p-4">{data.categories}<br></br>{data.createdAt?.slice(0, 10)}</td>
 
                     </tr>
                     <tr className="border p-4">
                       <td className="border p-4 w-[50%]">Currency</td>
                       <td className="p-4">
-                      {
-                          data.currency==='INR'?'₹ '
-                          :data.currency==='USD'?"$ "
-                          :data.currency==='CAD'?"C$ "
-                          :data.currency==="AED"?"د.إ "
-                          :data.currency==="EUR"?"€ "
-                          :data.currency==="GBP"?"£ "
-                          :data.currency==="JPY"?"¥ "                          
-                          :data.currency==="AUD"?"AU$ "                          
-                          :""
+                        {
+                          data.currency === 'INR' ? '₹ '
+                            : data.currency === 'USD' ? "$ "
+                              : data.currency === 'CAD' ? "C$ "
+                                : data.currency === "AED" ? "د.إ "
+                                  : data.currency === "EUR" ? "€ "
+                                    : data.currency === "GBP" ? "£ "
+                                      : data.currency === "JPY" ? "¥ "
+                                        : data.currency === "AUD" ? "AU$ "
+                                          : ""
                         }
-                        
+
                         {data.currency}</td>
 
                     </tr>

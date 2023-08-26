@@ -58,7 +58,8 @@ function CustomizeCategory() {
           axios.request(config)
             .then((response) => {
               if (JSON.stringify(response.status) === '200') {               
-                window.location.replace("/dashboard")
+                console.log(selectedValues)
+                // window.location.replace("/dashboard")
               }        
               if (JSON.stringify(response.status) === '204') {               
                 document.getElementById('error').innerHTML = '<h1 className="pt-[0.5vw]">Select Atleast One Category</h1>'
