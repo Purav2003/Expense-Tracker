@@ -4,6 +4,8 @@ import "../Assets/css/signup.css";
 import { Link } from "react-router-dom";
 
 const Signup = () => {
+  let token = localStorage.getItem("Token")
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     const email = document.querySelector('.email').value
@@ -22,7 +24,6 @@ const Signup = () => {
         method: 'post',
         url: 'http://localhost:5000/api/v1/auth/signup',
         headers: {
-          
           'Content-Type': 'application/json'
         },
         data: data
@@ -34,7 +35,10 @@ const Signup = () => {
             localStorage.setItem("Token",response.data.token)
             localStorage.setItem("createdBy",response.data.user._id)
             localStorage.setItem("username",response.data.user.name)
-            window.location.replace("/dashboard")
+            response.data.user.categories.length === 0?
+            window.location.replace("/customize-category")
+            :window.location.replace("/dashboard")
+
           }
            if (response.data.msg === 'Phone Number already exists') {
             document.getElementById('phone').innerHTML = '<h1 className="pt-[0.5vw]">Phone Number already exists</h1>'
@@ -137,7 +141,7 @@ const Signup = () => {
         <div className="photo-signup ml-[23vw] w-full h-[100vh] pt-[6vw] invisible sm:invisible md:invisible lg:visible xl:visible">
           <h1 className="text-center font-semibold text-[30px] text-bold text-black">Create Your Account</h1>
           <p className="text-center">Lets get started</p>
-          <img src={signup} className="pl-[5vw] w-[86%]" alt="signupImage"></img>
+          <img src={signup} className="pl-[5vw] w-[90%]" alt="signupImage"></img>
         </div>
       </div>
     </>

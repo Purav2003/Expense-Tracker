@@ -2,11 +2,20 @@ import axios from "axios"
 import signin from '../Assets/images/login.png';
 import { Link } from "react-router-dom";
 import "../assets/css/signup.css"
+import { Input, InputGroup } from 'rsuite';
+import React from 'react'
 
+const styles = {
+  width: 300
+};
 
 const Login = () => {
   let token = localStorage.getItem("Token")
+  const [visible, setVisible] = React.useState(false);
 
+  const handleChange = () => {
+    setVisible(!visible);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -33,11 +42,11 @@ const Login = () => {
           console.log(JSON.stringify(response.status));
           if (JSON.stringify(response.data.status) === '200') {
             console.log(response.data.token)
-            localStorage.setItem("Token",response.data.token)
-            localStorage.setItem("createdBy",response.data.user._id)
-            localStorage.setItem("username",response.data.name)
+            localStorage.setItem("Token", response.data.token)
+            localStorage.setItem("createdBy", response.data.user._id)
+            localStorage.setItem("username", response.data.name)
             window.location.replace("/dashboard")
-            }
+          }
           if (JSON.stringify(response.data.status) === '404') {
             document.getElementById('error').innerHTML = '<h1 className="pt-[0.5vw]">User Not Found</h1>'
           }
@@ -66,7 +75,7 @@ const Login = () => {
           <p className="text-center">Start managing your finance faster and better</p>
           <img src={signin} className=" pl-[7vw]
              
-              h-[80%]" alt="signinImage"></img>
+              w-[80%]" alt="signinImage"></img>
         </div>
         <div className="pl-[5vw] pt-[3vw] first-div">
           <div>
@@ -87,13 +96,17 @@ const Login = () => {
                 <label className="block text-black-700 text-sm font-bold mb-2">
                   Password
                 </label>
-                <input className="password shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Password" required />
-                <div id="errora"></div>
+                <InputGroup inside style={styles}>
+                  <Input type={visible ? 'text' : 'password'} />
+                  <InputGroup.Button onClick={handleChange}>
+                    {visible ? "Yes" : "No"}
+                  </InputGroup.Button>
+                </InputGroup>                <div id="errora"></div>
               </div>
               <div className="flex form-field items-center">
                 <button className="bg-fourth button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
                   Login
-                </button>               
+                </button>
               </div>
             </form>
             <p className="pl-[2.4vw] second-signup">New user? <Link to="/signup" className="underline text-fourth">Sign up</Link></p><br></br><br></br>

@@ -106,8 +106,8 @@ const ExpenseForm = () => {
     return (
         <>
             <div><Toaster /></div>
-            <div className="flex">
-                <div className="w-[50%] mt-[-4vw]">
+            <div className="lg:flex ">
+                <div className="lg:w-[50%] w-0 mt-[-4vw]">
                     <img src={add} className="w-[80%]" />
                 </div>
                 <div className="w-full max-w-xs">

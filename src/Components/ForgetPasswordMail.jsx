@@ -46,7 +46,7 @@ const ForgetPasswordMail = () => {
   }
   return (
 
-    <div>
+    <div className='forget'>
             <div className="setting-main">
         <div className="w-[50%]">
           <h1 className="py-4 font-bold text-[25px]">Forget Password</h1>

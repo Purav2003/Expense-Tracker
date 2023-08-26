@@ -76,13 +76,13 @@ const IncomeForm = () => {
     return (
         <>
         <div><Toaster/></div>
-<div className="flex">
+<div className="lg:flex ">
 
-    <div className="w-[50%] mt-[-4vw]">
+    <div className="lg:w-[50%] w-0 mt-[-4vw]">
         <img src = {add} className="w-[80%]"/>
         </div>
-        <div className="w-full max-w-xs"><br></br>
-            <form onSubmit={handleSubmit} className="bg-white rounded w-[40vw] px-8 pt-6 pb-8 mb-4">
+        <div className="lg:w-full md:w[50%] max-w-xs"><br></br>
+            <form onSubmit={handleSubmit} className="bg-white rounded lg:w-[40vw] px-8 pt-6 pb-8 mb-4">
 
                 <div className="mb-4 form-field">
                     <label className="block text-black-700 text-sm font-bold mb-2">

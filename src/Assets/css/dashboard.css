@@ -2,6 +2,9 @@
         .main-heading-mob{
             margin-top: -8vw !important;
         }
+        .search-dashboard{
+            margin-top: 3vw;
+        }
    
         .summary-main{
             width: 96% !important;
@@ -108,7 +111,7 @@
     .calendar-main{
         width:90%;
         margin-left: 10vw !important;
-        display: flex;
+        /* display: flex; */
     }
     .table-income{
         width: 100% !important;
@@ -148,8 +151,7 @@
         margin-left: -5vw !important;
     }
     .calendar-details{
-        width: 36% !important;
-        margin-left: 5vw !important;
+        width: 96% !important;
         font-size: 12px !important;
     }
     .calendar-chart{
@@ -161,10 +163,13 @@
     .calendar-main{
         width:90%;
         margin-left: 10vw !important;
-        display: flex;
+        /* display: flex; */
     }
     .table-income{
         width: 100% !important;
+    }
+    .search-dashboard{
+        display: block !important;
     }
 }
 

@@ -154,7 +154,7 @@ table tbody tr:nth-child(odd){
 }
 
 @media screen and (min-width:220px) and (max-width:650px) {
-    .settings .setting-main,.edit-profile .setting-main,.re-pass .setting-main{
+    .settings .setting-main,.edit-profile .setting-main,.re-pass .setting-main,.forget .setting-main {
       display: flex !important;
       justify-content: flex-start;
       margin-left: 5.5vw !important;
