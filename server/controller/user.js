@@ -168,6 +168,19 @@ const editProfile = async(req,res)=>{
     }
 }
 
+const addOrEditCategory = async(req,res)=>{
+    const id = req.params.id
+    const {categories} = req.body
+    const user = await User.findOne({_id:id})
+    console.log(user.categories);
+    if(user.categories.length === 0){
+        res.send({msg:"There are no categories",success:false,status:204})
+    } else{
+        await User.findByIdAndUpdate(id,{categories:categories},{new:true,runValidators:true})
+        res.send({msg:"Categories added successfully",success:true,status:200})
+    }
+}
+
 const logout = (req,res)=>{
     if (req.headers.authorization) {
         req.headers.authorization = '';
@@ -184,5 +197,6 @@ module.exports = {
     forgetPasswordMailConfirmation,
     forgetPassword,
     editProfile,
+    addOrEditCategory,
     logout
 }

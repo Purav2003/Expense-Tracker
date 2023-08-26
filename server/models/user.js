@@ -29,6 +29,10 @@ var userSchema = new mongoose.Schema({
     currency: {
         type:String,
         default:'INR'
+    },
+    categories:{
+        type:Array,
+        default:[]
     }
 }, { timestamps: true });
 
