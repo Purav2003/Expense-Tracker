@@ -1,6 +1,4 @@
 import Sidebar from "../Components/Sidebar"
-import { Link } from "react-router-dom"
-import ExpenseForm from "../Components/ExpenseForm"
 import * as icon from "react-icons/fi"
 import ExpenseBar from "../Components/ExpenseBar"
 const Expense = () => {
