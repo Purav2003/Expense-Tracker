@@ -86,7 +86,7 @@ const getSingleIncome = async (req, res) => {
 
 const deleteIncome = async (req, res) => {
     const id = req.params.id
-    const income = await Income.deleteOne({ _id: id })
+    await Income.deleteOne({ _id: id })
     res.send({ msg: "Item deleted successfully", success: true, status: 200 })
 }
 

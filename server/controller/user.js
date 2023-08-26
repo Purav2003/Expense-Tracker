@@ -144,7 +144,7 @@ const editProfile = async(req,res)=>{
         }
         if(!emailExist){
             if(!phoneExist){
-                const editProfile = await User.findByIdAndUpdate(id,{email:email,mobile:mobile})
+                await User.findByIdAndUpdate(id,{email:email,mobile:mobile})
                 const data = {
                     to:email,
                     text:`Hey ${req.body.name}`,

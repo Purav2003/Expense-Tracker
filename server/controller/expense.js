@@ -88,7 +88,7 @@ const getSingleExpense = async (req,res)=>{
 
 const deleteExpense = async (req,res)=>{
     const id = req.params.id
-    const expense = await Expense.deleteOne({_id:id})
+    await Expense.deleteOne({_id:id})
     res.send({msg:"Item deleted successfully",success:true,status:200})
 }
 
