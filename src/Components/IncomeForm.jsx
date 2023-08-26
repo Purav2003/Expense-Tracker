@@ -1,6 +1,6 @@
 import axios from "axios"
 import toast, { Toaster } from 'react-hot-toast';
-import add from 'src/assets/images/Add_Items_Vector.png'
+import add from '../assets/images/Add_Items_Vector.png'
 
 const IncomeForm = () => {
     var todayDate = new Date().toISOString().slice(0, 10);
