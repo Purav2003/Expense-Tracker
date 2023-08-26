@@ -5,7 +5,6 @@ import CalendarDashboard from "../Components/CalendarDashboard";
 import SummaryDashboard from "../Components/SummayDashboard";
 import * as icon from "react-icons/fi";
 import '../assets/css/dashboard.css';
-
 const Dashboard = () => {
   let name = localStorage.getItem("username");
 
