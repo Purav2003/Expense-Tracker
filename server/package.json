@@ -4,7 +4,7 @@
   "description": "This is Full Stack Expense Tracker web application created using MERN STACK",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon index.js"
   },
   "author": "Jinay and Purav",
   "license": "ISC",
