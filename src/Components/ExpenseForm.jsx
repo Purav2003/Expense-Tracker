@@ -1,8 +1,10 @@
 import axios from "axios"
 import toast, { Toaster } from 'react-hot-toast';
 import add from '../assets/images/Add_Items_Vector.png'
+import { useEffect, useState } from "react";
 
 const ExpenseForm = () => {
+    const [selectedValues, setSelectedValues] = useState([]);
 
     var todayDate = new Date().toISOString().slice(0, 10);
     const handleSubmit = async (e) => {
@@ -13,18 +15,7 @@ const ExpenseForm = () => {
         const date = document.querySelector('.date').value
         const modeb = document.querySelector('.modeb').value
         const to = document.querySelector('.to').value
-        var category = document.querySelector('.category').value
-        console.log(category)
-
-        if (document.querySelector('.category').value === 'Other') {
-            if (document.querySelector('.other').value) {
-                category = document.querySelector('.other').value
-            }
-            else {
-                document.getElementById('errorother').innerHTML = '<h1 className="pt-[0.5vw] text-[red]">Enter Something</h1>'
-            }
-        }
-
+        var category = document.querySelector('.category').value   
 
         let token = localStorage.getItem("Token")
         let createdBy = localStorage.getItem("createdBy")
@@ -50,7 +41,7 @@ const ExpenseForm = () => {
                     method: 'post',
                     url: 'http://localhost:5000/api/v1/expense',
                     headers: {
-                        'Authorization': `Bearer ${token}`,                    
+                        'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json'
                     },
                     data: data
@@ -59,9 +50,9 @@ const ExpenseForm = () => {
                 axios.request(config)
                     .then((response) => {
                         count_success = 1
-                        if(JSON.stringify(response.status) === 495){
+                        if (JSON.stringify(response.status) === 495) {
                             window.location.replace('/')
-                          }                        
+                        }
                         if (JSON.stringify(response.status) === '200') {
                             toast.success("Succesfully Added", { duration: 1500 })
 
@@ -88,21 +79,37 @@ const ExpenseForm = () => {
             });
         }
     }
-    const handleCategoryChange = (e) => {
-        const selectedCategory = e.target.value;
+ 
 
-        if (selectedCategory === "Other") {
-            const inputOtherExpense = document.getElementById("Other");
-            if (inputOtherExpense) {
-                inputOtherExpense.classList.remove("hidden");
+    let id = localStorage.getItem('createdBy');
+
+    const fetchData = async () => {
+        let token = localStorage.getItem("Token")
+
+        const API_URL = 'http://localhost:5000/api/v1/auth/profile/' + id;
+        try {
+            const response = await fetch(API_URL, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            const datas = await response.json();
+            if (datas.status === 495) {
+                window.location.replace('/');
             }
-        } else {
-            const inputOtherExpense = document.getElementById("Other");
-            if (inputOtherExpense) {
-                inputOtherExpense.classList.add("hidden");
-            }
+            setSelectedValues(datas.user.categories);
+        } catch (error) {
+            // Handle error here
         }
     };
+
+    useEffect(() => {
+        fetchData()
+    }, [])
+
+
     return (
         <>
             <div><Toaster /></div>
@@ -111,7 +118,7 @@ const ExpenseForm = () => {
                     <img src={add} className="w-[80%]" />
                 </div>
                 <div className="w-full max-w-xs">
-<br></br>
+                    <br></br>
                     <form onSubmit={handleSubmit} className="bg-white rounded w-[40vw] px-8 pt-6 pb-8 mb-4" >
 
                         <div className="mb-4 form-field">
@@ -143,13 +150,13 @@ const ExpenseForm = () => {
                             <label className="block text-black-700 text-sm font-bold mb-2">
                                 Category
                             </label>
-                            <select className="category border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline " onChange={handleCategoryChange}>
+                            <select className="category border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline ">
                                 <option value="select" disabled>Select</option>
-                                <option value="Food" selected>Food</option>
-                                <option value="Petrol">Petrol</option>
-                                <option value="Cloths">Cloths</option>
-                                <option value="Grocery">Grocery</option>
-                                <option value="Other">Other</option>
+                                {selectedValues.map((value) => (
+                                    <option key={value} value={value}>
+                                        {value}
+                                    </option>
+                                ))}
                             </select>
                         </div>
                         <div className="mb-4 form-field hidden" id="Other">

@@ -37,6 +37,7 @@ const Profile = () => {
   };
 
 
+
   useEffect(() => {
     setLoading(true)
     fetchData();
@@ -77,8 +78,16 @@ const Profile = () => {
                     </tr>
                     <tr className="border p-4">
                       <td className="border p-4 w-[50%]">Join Date</td>
-                      <td className="p-4">{data.categories}<br></br>{data.createdAt?.slice(0, 10)}</td>
+                      <td className="p-4">{data.createdAt?.slice(0, 10)}</td>
 
+                    </tr>
+                    <tr className="border p-4">
+                      <td className="border p-4 w-[50%]">No of. Categories</td>
+                      <td className="p-4">{data.categories.length}</td>
+                    </tr>
+                    <tr className="border p-4">
+                      <td className="border p-4 w-[50%]">Categories</td>
+                      <td className="p-4">{data.categories.join(' , ')}</td>
                     </tr>
                     <tr className="border p-4">
                       <td className="border p-4 w-[50%]">Currency</td>

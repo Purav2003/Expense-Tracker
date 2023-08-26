@@ -35,9 +35,7 @@ const Signup = () => {
             localStorage.setItem("Token",response.data.token)
             localStorage.setItem("createdBy",response.data.user._id)
             localStorage.setItem("username",response.data.user.name)
-            response.data.user.categories.length === 0?
             window.location.replace("/customize-category")
-            :window.location.replace("/dashboard")
 
           }
            if (response.data.msg === 'Phone Number already exists') {

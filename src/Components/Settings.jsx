@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Loader from "./Loader";
 import { CurrencyList } from "./CurrencyList";
-
+import { Link } from "react-router-dom";
 const Settings = () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -115,6 +115,12 @@ const Settings = () => {
                                         <option value="dark">Dark</option>
                                     </select>
 
+                                </td>   
+                            </tr>
+                            <tr className="border p-4">
+                                <td className="border p-4 w-[50%]">Expense Categories</td>
+                                <td className="border p-4 w-[50%]">                                
+                                                <Link to="/customize-category" className="text-fourth">Edit Categories</Link>
                                 </td>
                             </tr>
                             <tr>
