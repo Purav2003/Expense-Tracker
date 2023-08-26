@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import Sidebar from "/src/Components/Sidebar";
-import RecentTransaction from "/src/Components/RecentTransaction";
-import CalendarDashboard from "/src/Components/CalendarDashboard";
-import SummaryDashboard from "/src/Components/SummayDashboard";
+import Sidebar from "../Components/Sidebar";
+import RecentTransaction from "../Components/RecentTransaction";
+import CalendarDashboard from "../Components/CalendarDashboard";
+import SummaryDashboard from "../Components/SummayDashboard";
 import * as icon from "react-icons/fi";
 import '/src/assets/css/dashboard.css';
 

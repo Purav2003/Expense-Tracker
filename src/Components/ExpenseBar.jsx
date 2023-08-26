@@ -3,7 +3,7 @@ import { barexpLinks } from "./BarListExpense"
 import { useState } from "react"
 import ExpenseForm from "./ExpenseForm"
 import ExpenseTable from "./ExpenseTable"
-import '/src/assets/css/income.css'
+import '../Assets/css/income.css'
 
 
 const ExpenseBar = () => {

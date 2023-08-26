@@ -1,6 +1,6 @@
 import axios from "axios"
-import signup from '/src/assets/images/signup.png';
-import "/src/assets/css/signup.css";
+import signup from '../Assets/images/signup.png';
+import "../Assets/css/signup.css";
 import { Link } from "react-router-dom";
 
 const Signup = () => {

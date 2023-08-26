@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import dp from "/src/assets/images/signup.png";
+import dp from "../Assets/images/signup.png";
 import Sidebar from "./Sidebar";
 import Loader from "./Loader";
 const Profile = () => {

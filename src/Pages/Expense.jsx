@@ -1,6 +1,6 @@
-import Sidebar from "/src/Components/Sidebar"
+import Sidebar from "../Components/Sidebar"
 import * as icon from "react-icons/fi"
-import ExpenseBar from "/src/Components/ExpenseBar"
+import ExpenseBar from "../Components/ExpenseBar"
 const Expense = () => {
 
     const handleSubmit = async (e) => {
