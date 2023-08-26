@@ -6,7 +6,6 @@ import { useEffect } from "react";
 
 const Login = () => {
   let token = localStorage.getItem("Token")
-
   const handleSubmit = async (e) => {
     e.preventDefault()
     const email = document.querySelector('.email').value
