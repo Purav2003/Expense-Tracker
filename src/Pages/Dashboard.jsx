@@ -18,6 +18,7 @@ const Dashboard = () => {
       document.getElementById('errora').innerHTML = '<h1 className="pt-[0.5vw]">Enter Something</h1>';
     }
   };
+  
 
   return (
     <div className="bg-normal">
