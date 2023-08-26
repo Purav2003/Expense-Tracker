@@ -51,7 +51,6 @@ function App() {
         <Route path='/logout' element={<Logout />}></Route>      
         <Route path='/customize-category' element={<CustomizeCategory />}></Route>      
         <Route path='/edit-profile' element={<EditProfile />}></Route>      
-
     <Route path='/success-changed-pass' element={<PassSuccess />}></Route>
       </Routes>
        

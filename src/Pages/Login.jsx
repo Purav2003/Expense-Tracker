@@ -1,7 +1,7 @@
 import axios from "axios"
 import signin from '../Assets/images/login.png';
 import { Link } from "react-router-dom";
-import '../assets/css/signup.css';
+import '/src/assets/css/signup.css';
 import { useEffect } from "react";
 
 const Login = () => {
@@ -11,7 +11,6 @@ const Login = () => {
     e.preventDefault()
     const email = document.querySelector('.email').value
     const password = document.querySelector('.password').value
-
     let data = JSON.stringify({
       "email": email,
       "password": password
