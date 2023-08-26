@@ -1,8 +1,6 @@
-import Sidebar from "../Components/Sidebar"
-import { Link } from "react-router-dom"
-import ExpenseForm from "../Components/ExpenseForm"
+import Sidebar from "/src/Components/Sidebar"
 import * as icon from "react-icons/fi"
-import ExpenseBar from "../Components/ExpenseBar"
+import ExpenseBar from "/src/Components/ExpenseBar"
 const Expense = () => {
 
     const handleSubmit = async (e) => {

@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import * as icon from "react-icons/io";
 import * as icons from "react-icons/ri";
-import '../Assets/css/income.css'
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
 import '../index.css'
 import Loader from "./Loader";
-import '../Assets/css/income.css';
-import '../index.css';
+import '/src/assets/css/income.css';
+import '/src/index.css';
 
 const ExpenseTable = () => {
   const [dataexp, setDataExp] = useState([]);

@@ -6,8 +6,8 @@ import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
 import Loader from "./Loader";
 
-import '../Assets/css/income.css';
-import '../index.css';
+import '/src/assets/css/income.css';
+import '/src/index.css';
 
 const IncomeTable = () => {
   const [data, setData] = useState([]);
