@@ -4,7 +4,7 @@ import RecentTransaction from "../Components/RecentTransaction";
 import CalendarDashboard from "../Components/CalendarDashboard";
 import SummaryDashboard from "../Components/SummayDashboard";
 import * as icon from "react-icons/fi";
-import '/src/assets/css/dashboard.css';
+import './src/assets/css/dashboard.css';
 
 const Dashboard = () => {
   let name = localStorage.getItem("username");
