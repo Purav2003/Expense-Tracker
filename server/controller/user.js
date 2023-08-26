@@ -172,7 +172,6 @@ const addOrEditCategory = async(req,res)=>{
     const id = req.params.id
     const {categories} = req.body
     const user = await User.findOne({_id:id})
-    console.log(user.categories);
     if(user.categories.length === 0){
         res.send({msg:"There are no categories",success:false,status:204})
     } else{

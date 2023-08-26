@@ -12,7 +12,7 @@ router.route("/profile/editProfile/:id").put(authMiddleware,signupValidation,edi
 router.route("/changePassword/:id").post(authMiddleware,changePassword)
 router.route("/forgetPasswordMailConfirmation").post(forgetPasswordMailConfirmation)
 router.route("/forgetPassword").post(forgetPassword)
-router.route("/addCategory/:id").post(authMiddleware,addOrEditCategory)
+router.route("/addOrEditCategory/:id").post(authMiddleware,addOrEditCategory)
 router.route("/logout").post(authMiddleware,logout)
 
 module.exports = router
