@@ -50,14 +50,14 @@ const Dashboard = () => {
           <br />
           <div className="lg:flex px-8 main-heading-mob">
             <h1 className="text-4xl w-full font-bold">&#128075; {name} </h1>
-            <div className="ml-[33vw] justify-end	relative lg:w-[80%] bg-[#eee] rounded-lg shadow-md px-4 py-2 search-bar">
+            {/* <div className="ml-[33vw] justify-end search-dashboard	relative lg:w-[80%] bg-[#eee] rounded-lg shadow-md px-4 py-2 search-bar">
 
               <form onSubmit={handleSubmit}>
 
                 <input
                   type="text"
                   placeholder="Type to Search"
-                  className="border-none outline-none bg-transparent pr-8 w-[90%] search-income"
+                  className="border-none outline-none bg-transparent lg:pr-8 w-[90%] search-income"
                 />
 
                 <div className="absolute inset-y-0 right-0 flex items-center pr-3 ">
@@ -65,7 +65,7 @@ const Dashboard = () => {
                 </div>
               </form>
 
-            </div>
+            </div> */}
 
 
           </div>

@@ -32,7 +32,9 @@ const Signup = () => {
         .then((response) => {
           if (JSON.stringify(response.data.status) === '200') {
             localStorage.setItem("Token",response.data.token)
-            window.location.replace("/")
+            localStorage.setItem("createdBy",response.data.user._id)
+            localStorage.setItem("username",response.data.user.name)
+            window.location.replace("/dashboard")
           }
            if (response.data.msg === 'Phone Number already exists') {
             document.getElementById('phone').innerHTML = '<h1 className="pt-[0.5vw]">Phone Number already exists</h1>'

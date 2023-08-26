@@ -270,7 +270,7 @@ const CalendarDashboard = () => {
             </div>
           </div>
         </div>
-        <div className='lg:w-[32%]'>
+        <div className='lg:w-[32%] calendar-chart'>
           <ReactApexChart options={options} series={series} type="bar" height={350} />
         </div>
       </div>
