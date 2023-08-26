@@ -1,12 +1,8 @@
 import Sidebar from "../Components/Sidebar"
-import { Link } from "react-router-dom"
-import IncomeForm from "../Components/IncomeForm"
 import * as icon from "react-icons/fi"
 import IncomeBar from "../Components/IncomeBar"
-import 'react-loading-skeleton/dist/skeleton.css'
 import { Toaster } from "react-hot-toast"
-import { useState,useEffect } from "react"
-import Loader from "../Components/Loader"
+
 const Income = () =>{
 
 

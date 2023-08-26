@@ -4,7 +4,6 @@ import * as icon from "react-icons/io";
 import * as icons from "react-icons/ri";
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
-import Skeleton from "react-loading-skeleton";
 import Loader from "./Loader";
 
 import '../Assets/css/income.css';
