@@ -61,32 +61,6 @@ const ForgetPassword = () => {
   }
   return (
     <div>
-      {/* <div className="w-full max-w-xs">
-            <form onSubmit={handleSubmit} className="bg-white rounded w-[40vw] px-8 pt-6 pb-8 mb-4">
-
-              <div className="mb-4 form-field">
-                <label className="block text-black-700 text-sm font-bold mb-2">
-                  New Password
-                </label>
-                <input className="password shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Enter New Password" required />
-              </div>
-              <div className="mb-4 form-field">
-                <label className="block text-black-700 text-sm font-bold mb-2">
-                  Re-type New Password
-                </label>
-                <input className="repassword shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Re-type New Password" required />
-                <div id="errora"></div>
-              </div>
-              <div className="flex form-field items-center">
-                <button className="bg-[#1BA329] button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
-                  Reset Password
-                </button>               
-              </div>
-<br></br>              <div id="error"></div>
-
-            </form>
-       </div>     */}
-
       <div className="setting-main">
         <div className="w-[50%]">
           <h1 className="py-4 font-bold text-[25px]">Change Password</h1>

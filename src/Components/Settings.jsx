@@ -11,9 +11,6 @@ const Settings = () => {
     const [selectedCurrency, setSelectedCurrency] = useState(""); // Initialize without a default currency
 
     let token = localStorage.getItem("Token");
-    if (token === null) {
-        window.location.replace("/")
-    }
     const newCur = localStorage.getItem("selectedCurrency")
     const handleSubmit = async (e) => {
         setLoading(true)

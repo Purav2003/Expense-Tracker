@@ -1,10 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import * as icon from "react-icons/io";
-import * as icons from "react-icons/bi";
-import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
-import Skeleton from "react-loading-skeleton";
 import Loader from './Loader'
 import '../Assets/css/income.css';
 import '../index.css';

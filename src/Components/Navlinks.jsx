@@ -1,9 +1,6 @@
 import * as dash from 'react-icons/rx'
 import * as income from 'react-icons/pi'
-import * as expenses from 'react-icons/fa'
-import * as report from 'react-icons/hi'
-import * as logout from 'react-icons/io'
-import * as profile from 'react-icons/cg'
+
 export const navLinks = [
   {
     id: "dashboard",

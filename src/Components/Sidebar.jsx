@@ -110,6 +110,14 @@ const Sidebar = () => {
                                         Settings
                                     </Link>
                                 </li>
+                                <li>
+                                    <Link
+                                        to="/help"
+                                        className="block px-4 py-2 text-gray-900 dark:text-white hover:text-[black] hover:bg-white"
+                                    >
+                                        Help
+                                    </Link>
+                                </li>
                                 <hr></hr>
                                 <li>
                                     <Link
