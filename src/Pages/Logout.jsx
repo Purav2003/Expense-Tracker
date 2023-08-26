@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 const Logout = () => {
     let token = localStorage.getItem("Token")
-
-
     const handleSubmit = async () => {
         try {
             let config = {
@@ -11,7 +9,6 @@ const Logout = () => {
                 url: 'http://localhost:5000/api/v1/auth/logout',
                 headers: {
                     'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
                 },
             };
 
