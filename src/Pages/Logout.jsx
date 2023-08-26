@@ -22,7 +22,6 @@ const Logout = () => {
                         window.location.replace('/')
                     }
                     if (JSON.stringify(response.data.status) === '200') {
-                        console.log(response.data.token)
                         localStorage.clear();
                         window.location.replace("/")
                     }
