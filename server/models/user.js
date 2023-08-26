@@ -42,7 +42,7 @@ userSchema.methods.comparePassword = function (userPassword) {
 }
 
 userSchema.methods.createJWT = function () {
-    return jwt.sign({ userId: this._id, name: this.name }, process.env.JWT_SECRET, { expiresIn:"30d" })
+    return jwt.sign({ userId: this._id, name: this.name }, process.env.JWT_SECRET)
 }
 
 module.exports = mongoose.model('User', userSchema);
