@@ -168,10 +168,9 @@ const editProfile = async(req,res)=>{
     }
 }
 
-const addOrEditCategory = async(req,res)=>{
+const addCategory = async(req,res)=>{
     const id = req.params.id
-    const {categories} = req.body
-    await User.findByIdAndUpdate(id,{categories:categories},{new:true,runValidators:true})
+    await User.findByIdAndUpdate(id,{categories:req.body},{new:true,runValidators:true})
     res.send({msg:"Categories added successfully",success:true,status:200})
 }
 
@@ -191,6 +190,6 @@ module.exports = {
     forgetPasswordMailConfirmation,
     forgetPassword,
     editProfile,
-    addOrEditCategory,
+    addCategory,
     logout
 }

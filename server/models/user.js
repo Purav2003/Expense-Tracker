@@ -32,7 +32,7 @@ var userSchema = new mongoose.Schema({
     },
     categories:{
         type:Array,
-        default:[]
+        default:["Food","Clothes","Groceries","Petrol"]
     }
 }, { timestamps: true });
 
