@@ -168,6 +168,13 @@ const editProfile = async(req,res)=>{
     }
 }
 
+const logout = (req,res)=>{
+    if (req.headers.authorization) {
+        req.headers.authorization = '';
+    }
+    res.send({msg:"Log Out Successful",success:true,status:200})
+}
+
 module.exports = {
     signup,
     signin,
@@ -176,5 +183,6 @@ module.exports = {
     changePassword,
     forgetPasswordMailConfirmation,
     forgetPassword,
-    editProfile
+    editProfile,
+    logout
 }
