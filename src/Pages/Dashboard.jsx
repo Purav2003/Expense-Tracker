@@ -19,7 +19,6 @@ const Dashboard = () => {
     }
   };
 
-
   return (
     <div className="bg-normal">
       <Sidebar />
