@@ -43,9 +43,9 @@ const Dashboard = () => {
         <div>
           <br />
           <br />
-          <div className="lg:flex px-8 main-heading-mob">
+          <div className="lg:flex md:flex px-8 main-heading-mob">
             <h1 className="text-4xl w-full font-bold">&#128075; {name} </h1>
-            <div className="ml-auto lg:ml-[33vw] justify-end search-dashboard relative lg:w-[80%] bg-[#eee] rounded-lg shadow-md lg:px-4 py-2 search-bar">
+            <div className="ml-auto lg:ml-[33vw] justify-end search-dashboard relative lg:w-[80%] bg-[#eee] rounded-lg shadow-md lg:px-4 py-2 ">
               <form onSubmit={handleSubmit}>
                 <input
                   type="text"

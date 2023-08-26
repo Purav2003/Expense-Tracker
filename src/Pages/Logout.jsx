@@ -1,7 +1,10 @@
-import React, { useEffect } from 'react';
+import  { useEffect } from 'react';
 import axios from 'axios';
 const Logout = () => {
     let token = localStorage.getItem("Token")
+    if (!token) {
+        window.location.replace('/')
+    }
     const handleSubmit = async () => {
         try {
             let config = {
@@ -31,7 +34,9 @@ const Logout = () => {
         }
     }
     useEffect(() => {
-        handleSubmit()
+        if (token) {
+            handleSubmit()
+        }
     })
     return (
         <div>
