@@ -16,6 +16,7 @@ import EditProfile from './Components/EditProfile';
 import DashboardSearch from './Components/DashboardSearch';
 import Settings from './Components/Settings';
 import Help from './Components/Help';
+import Logout from './Pages/Logout';
 function App() {
   return (
     <>
@@ -34,7 +35,8 @@ function App() {
         <Route path='/forget-password' element={<ForgetPassword />}></Route>      
         <Route path='/profile' element={<Profile />}></Route>      
         <Route path='/settings' element={<Settings />}></Route>      
-        <Route path='/Help' element={<Help />}></Route>      
+        <Route path='/help' element={<Help />}></Route>      
+        <Route path='/logout' element={<Logout />}></Route>      
         <Route path='/edit-profile' element={<EditProfile />}></Route>      
 
     <Route path='/success-changed-pass' element={<PassSuccess />}></Route>

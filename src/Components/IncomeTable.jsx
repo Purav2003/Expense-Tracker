@@ -181,7 +181,9 @@ const IncomeTable = () => {
           </div>
           <br></br>
         </div>)
-          : <><h1><center>No Data</center></h1></>
+          : <>
+          <h1 className="text-center font-semibold pt-12">No Data</h1>
+          </>
       }</>
   );
 };

@@ -84,7 +84,7 @@ const Sidebar = () => {
                                     <img src={dp} className='w-11 h-11 bg-white rounded-full img-dp' />
                                 </button>
                                 <ul
-                                    className={`${showProfileMenu ? 'block' : 'hidden'} absolute lg:right-2  mt-2 space-y-2 bg-white border rounded-lg shadow-md dark:bg-gray-900 dark:border-gray-700`}
+                                    className={`${showProfileMenu ? 'block' : 'hidden'} absolute lg:right-2  mt-2 space-y-2 rounded-lg shadow-md bg-fourth`}
                                 >
 <li >
                                     <Link

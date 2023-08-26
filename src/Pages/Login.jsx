@@ -59,16 +59,19 @@ const Login = () => {
   return (
     <>
       <div className="lg:flex lg:flex-row bg-white">
-        <div className="photo-signup w-[50%] h-[100vh] pt-[7vw] bg-[#2a8c34] invisible sm:invisible md:invisible lg:visible xl:visible">
-          <h1 className="text-center ml-[80px] w-[70%] font-bold text-[19px] text-bold text-white">A budget tells us what we can't afford, but it doesn't keep us from buying it.</h1>
-          <img src={signin} className=" fixed
-             inset-x-0
-             bottom-0 h-[70%]" alt="signinImage"></img>
+        <div className="photo-signup w-[50%] h-[100vh] pt-[7vw] invisible sm:invisible md:invisible lg:visible xl:visible">
+          <h1 className="ml-[80px] text-center w-[70%] font-semibold text-[25px] text-bold text-black">
+            Welcome Back !!
+          </h1>
+          <p className="text-center">Start managing your finance faster and better</p>
+          <img src={signin} className=" pl-[7vw]
+             
+              h-[80%]" alt="signinImage"></img>
         </div>
         <div className="pl-[5vw] pt-[3vw] first-div">
           <div>
 
-            <h1 className="text-[35px] heading-signup font-black pl-[16vw] pt-[5vw] text-[#1BA329]">Login</h1>
+            <h1 className="text-[35px] heading-signup font-semibold pl-[16vw] pt-[5vw] text-black">Login</h1>
           </div>
           <div className="w-full max-w-xs">
             <form onSubmit={handleSubmit} className="bg-white rounded w-[40vw] px-8 pt-6 pb-8 mb-4">
@@ -88,13 +91,13 @@ const Login = () => {
                 <div id="errora"></div>
               </div>
               <div className="flex form-field items-center">
-                <button className="bg-[#1BA329] button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
+                <button className="bg-fourth button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
                   Login
                 </button>               
               </div>
             </form>
-            <p className="pl-[2.4vw] second-signup">New user? <Link to="/signup" className="underline text-[#1BA329]">Sign up</Link></p><br></br><br></br>
-            <p className="pl-[2.4vw] second-signup"><Link to="/forget-password-mail" className="underline text-[#1BA329]">Forget Password? </Link></p>
+            <p className="pl-[2.4vw] second-signup">New user? <Link to="/signup" className="underline text-fourth">Sign up</Link></p><br></br><br></br>
+            <p className="pl-[2.4vw] second-signup"><Link to="/forget-password-mail" className="underline text-fourth">Forget Password? </Link></p>
 
           </div>
         </div>

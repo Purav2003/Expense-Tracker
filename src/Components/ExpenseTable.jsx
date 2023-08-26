@@ -192,7 +192,7 @@ let daysAgoValue = getCookie('daysAgoExp');
         </div>
       ) : <>
         <div>
-          <h1 className="text-center text-2xl font-bold">NO DATA</h1>
+          <h1 className="text-center font-semibold pt-12">No Data</h1>
         </div>
       </>}
     </>

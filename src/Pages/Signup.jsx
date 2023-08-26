@@ -87,7 +87,7 @@ const Signup = () => {
         <div className="pl-[5vw] pt-[3vw] first-div">
           <div>
 
-            <h1 className="text-[35px] heading-signup font-bold pl-[12vw] pt-[1vw] text-[#1BA329]">Sign up</h1>
+            <h1 className="text-[35px] heading-signup font-bold pl-[12vw] pt-[1vw] text-black">Sign up</h1>
           </div>
           <div className="w-full max-w-xs">
             <form onSubmit={handleSubmit} className="bg-white rounded w-[40vw] px-8 pt-6 pb-8 mb-4">
@@ -124,21 +124,20 @@ const Signup = () => {
 
               </div>
               <div className="flex form-field items-center">
-                <button className="bg-[#1BA329] button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
+                <button className="bg-fourth button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
                   Sign Up
                 </button>
-                {/* <Link to="http://localhost:5000/api/v1/auth/google" className="border content-center border-[#1BA329] ml-[1vw] button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline flex flex-row " type="button">
-                  <icons.FcGoogle className="icon-google"></icons.FcGoogle>
-                </Link> */}
+            
               </div>
             </form>
-            <p className="pl-[2.4vw] second-signup">Already have an account? <Link to="/" className="underline text-[#1BA329]">Login</Link></p><br></br><br></br>
+            <p className="pl-[2.4vw] second-signup">Already have an account? <Link to="/" className="underline text-fourth  ">Login</Link></p><br></br><br></br>
 
           </div>
         </div>
-        <div className="photo-signup ml-[23vw] w-full h-[100vh] pt-[6vw] bg-[#1BA329] invisible sm:invisible md:invisible lg:visible xl:visible">
-          <h1 className="text-center font-bold text-[30px] text-bold text-white">Create an Account</h1>
-          <img src={signup} className="pl-[5vw] pt-[3vw]" alt="signupImage"></img>
+        <div className="photo-signup ml-[23vw] w-full h-[100vh] pt-[6vw] invisible sm:invisible md:invisible lg:visible xl:visible">
+          <h1 className="text-center font-semibold text-[30px] text-bold text-black">Create Your Account</h1>
+          <p className="text-center">Lets get started</p>
+          <img src={signup} className="pl-[5vw] w-[86%]" alt="signupImage"></img>
         </div>
       </div>
     </>

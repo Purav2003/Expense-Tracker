@@ -84,7 +84,7 @@ const Settings = () => {
 
 
     return (
-        <div className="bg-background">
+        <div className="bg-background settings">
             <Sidebar />
             {loading ? <Loader /> : <div className="setting-main">
                 <div className="w-[50%]">

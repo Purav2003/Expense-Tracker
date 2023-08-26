@@ -143,7 +143,7 @@ const EditProfile = () => {
     }
 
     return (
-        <div>
+        <div className='edit-profile'>
             <Sidebar />
 
             {loading ? <Loader /> : <div className="setting-main">

@@ -68,13 +68,13 @@ const ResetPassword = () => {
     });
   }
   return (
-    <div className="bg-white">
+    <div className="bg-white re-pass">
       <Sidebar />
     
 
       <div className="setting-main">
-        <div className="w-[50%]">
-          <h1 className="py-4 font-bold text-[25px]">Reset Password</h1>
+        <div className="lg:w-[50%]">
+          <h1 className="py-4 font-bold text-[25px] re-heading">Reset Password</h1>
           <form onSubmit={handleSubmit}>
             <table className="w-full">
               <tr className="border p-4">

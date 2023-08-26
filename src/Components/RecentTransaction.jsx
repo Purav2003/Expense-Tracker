@@ -113,7 +113,7 @@ const RecentTransaction = () => {
           </div>
           <br></br>
         </div>)
-:<><h1><center>No Data</center></h1></>
+:<><h1 className="pt-12 pb-12 font-semibold"><center>No Transactions</center></h1></>
                   }</>
   );
 };
