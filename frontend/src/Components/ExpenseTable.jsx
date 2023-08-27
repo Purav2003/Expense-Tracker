@@ -6,7 +6,7 @@ import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
 import './../index.css'
 import Loader from "./Loader";
-
+import { config } from "./../config";
 
 const ExpenseTable = () => {
   const [dataexp, setDataExp] = useState([]);
@@ -18,7 +18,7 @@ const ExpenseTable = () => {
   const fetchData = async (page) => {
     let id = localStorage.getItem('createdBy');
     let API_URL =''
-    daysAgoValue==="all"?API_URL = 'http://localhost:5000/api/v1/expense/' + id + '?page=' + page:
+    daysAgoValue==="all"?API_URL = `${config.serverPath}/expense/` + id + '?page=' + page:
     API_URL = 'http://localhost:5000/api/v1/expense/' + id + '?page=' + page +'&daysAgo='+daysAgoValue
     try {
       const response = await fetch(API_URL, {
@@ -58,7 +58,7 @@ let daysAgoValue = getCookie('daysAgoExp');
     console.log(e);
     let config = {
       method: 'delete',
-      url: 'http://localhost:5000/api/v1/expense/' + e,
+      url: `${config.serverPath}/expense/` + e,
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'

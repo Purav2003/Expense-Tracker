@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import * as icon from 'react-icons/md';
 import axios from 'axios';
 import Sidebar from './Sidebar';
+import { config } from './../config';
 const CustomizeCategory = () => {
+
     const [selectedValues, setSelectedValues] = useState([]);
     const [inputValue, setInputValue] = useState('');
     const [showInput, setShowInput] = useState(false);
@@ -11,7 +13,7 @@ const CustomizeCategory = () => {
     let id = localStorage.getItem('createdBy');
 
     const fetchData = async () => {
-        const API_URL = 'http://localhost:5000/api/v1/auth/profile/' + id;
+        const API_URL = `${config.serverPath}/auth/profile/${id}`;
         try {
             const response = await fetch(API_URL, {
                 method: 'GET',

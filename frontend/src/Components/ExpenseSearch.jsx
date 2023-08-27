@@ -5,7 +5,7 @@ import * as iconf from "react-icons/fi"
 import Loader from "./Loader";
 import toast, { Toaster } from 'react-hot-toast';
 import Sidebar from "./Sidebar";
-
+import { config } from "./../config";
 import './../assets/css/income.css';
 import './../index.css';
 
@@ -19,7 +19,7 @@ const ExpenseSearch = () => {
 
   const fetchData = async (page) => {
     let id = localStorage.getItem('createdBy');
-    const API_URL = 'http://localhost:5000/api/v1/expense/' + id + '?search=' + search + '&page=' + page;
+    const API_URL = `${config.serverPath}/expense/` + id + '?search=' + search + '&page=' + page;
     console.log(API_URL)
     try {
       const response = await fetch(API_URL, {
