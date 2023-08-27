@@ -2,7 +2,6 @@ import axios from "axios"
 import toast, { Toaster } from 'react-hot-toast';
 import add from './../assets/images/Add_Items_Vector.png'
 import { useEffect, useState } from "react";
-import config from './../config'
 
 const ExpenseForm = () => {
     const [selectedValues, setSelectedValues] = useState([]);
@@ -38,9 +37,9 @@ const ExpenseForm = () => {
         let count_success = 0
         if (amount > 0 && category !== 'Other') {
             try {
-                let config_data = {
+                let config = {
                     method: 'post',
-                    url: `${config.serverPath}/expense`,
+                    url: 'http://localhost:5000/api/v1/expense',
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json'
@@ -48,7 +47,7 @@ const ExpenseForm = () => {
                     data: data
                 };
 
-                axios.request(config_data)
+                axios.request(config)
                     .then((response) => {
                         count_success = 1
                         if (JSON.stringify(response.status) === 495) {
@@ -87,7 +86,7 @@ const ExpenseForm = () => {
     const fetchData = async () => {
         let token = localStorage.getItem("Token")
 
-        const API_URL = `${config.serverPath}/auth/profile/${id}`;
+        const API_URL = 'http://localhost:5000/api/v1/auth/profile/' + id;
         try {
             const response = await fetch(API_URL, {
                 method: 'GET',

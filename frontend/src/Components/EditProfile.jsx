@@ -3,7 +3,6 @@ import Sidebar from './Sidebar';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Loader from './Loader';
-import { config } from './../config';
 const EditProfile = () => {
     const [data, setData] = useState({
         email: '',
@@ -21,7 +20,7 @@ const EditProfile = () => {
 
     const fetchData = async () => {
         let id = localStorage.getItem('createdBy');
-        const API_URL = `${config.serverPath}/auth/profile/${id}`;
+        const API_URL = 'http://localhost:5000/api/v1/auth/profile/' + id;
         try {
             const response = await fetch(API_URL, {
                 method: 'GET',
@@ -97,7 +96,7 @@ const EditProfile = () => {
         try {
             let config = {
                 method: 'put',
-                url: `${config.serverPath}/auth/profile/editProfile/${id}`,
+                url: 'http://localhost:5000/api/v1/auth/profile/editProfile/' + id,
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'

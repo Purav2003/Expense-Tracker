@@ -4,7 +4,7 @@ import { Calendar, Badge } from 'rsuite';
 import axios from 'axios';
 import ReactApexChart from 'react-apexcharts';
 import Loader from './Loader'
-import { config } from './../config';
+
 const token = localStorage.getItem("Token");
 
 
@@ -17,7 +17,8 @@ const CalendarDashboard = () => {
 
   const fetchData = async () => {
     let id = localStorage.getItem('createdBy');
-    const API_URL = `${config.serverPath}/dashboard/dateHighlight/${id}`;
+    const API_URL = 'http://localhost:5000/api/v1/dashboard/dateHighlight/' + id;
+
     try {
       const response = await fetch(API_URL, {
         method: 'GET',
