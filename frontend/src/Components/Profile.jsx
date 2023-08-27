@@ -24,10 +24,11 @@ const Profile = () => {
   };
 
   const handleImageUpload = async () => {
+    const id = localStorage.getItem('createdBy');
     const formData = new FormData();
     formData.append('image', image);
     try {
-      await axios.post(`/user/upload/${userId}`, formData, {
+      await axios.post(`http://localhost:5000/api/v1/auth/uploadImage/${id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
