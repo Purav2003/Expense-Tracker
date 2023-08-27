@@ -4,8 +4,8 @@ import * as iconf from "react-icons/fi"
 import toast, { Toaster } from 'react-hot-toast';
 import Sidebar from "./Sidebar";
 import Loader from './Loader'
-import '../Assets/css/income.css';
-import '../index.css';
+import './../Assets/css/income.css';
+import './../index.css';
 
 const IncomeSearch = () => {
   const [data, setData] = useState([]);

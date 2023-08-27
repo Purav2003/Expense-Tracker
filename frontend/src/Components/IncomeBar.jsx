@@ -1,9 +1,9 @@
-import "../Assets/css/sidebar.css"
+import "./../Assets/css/sidebar.css"
 import { barLinks } from "./BarList"
 import { useState } from "react"
 import IncomeForm from "./IncomeForm"
 import IncomeTable from "./IncomeTable"
-import '../Assets/css/income.css'
+import './../Assets/css/income.css'
 
 
 const IncomeBar = () => {

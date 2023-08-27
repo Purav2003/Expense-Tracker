@@ -1,7 +1,7 @@
 import "../Assets/css/sidebar.css";
 import { useState, useEffect } from 'react';
 import { navLinks } from './Navlinks';
-import dp from './assets/images/signup.png';
+import dp from './../assets/images/signup.png';
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {

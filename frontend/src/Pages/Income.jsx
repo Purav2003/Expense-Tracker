@@ -1,6 +1,6 @@
-import Sidebar from "../Components/Sidebar"
+import Sidebar from "./../Components/Sidebar"
 import * as icon from "react-icons/fi"
-import IncomeBar from "../Components/IncomeBar"
+import IncomeBar from "./../Components/IncomeBar"
 import { Toaster } from "react-hot-toast"
 
 const Income = () =>{

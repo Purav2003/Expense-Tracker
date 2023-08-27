@@ -6,8 +6,8 @@ import Loader from "./Loader";
 import toast, { Toaster } from 'react-hot-toast';
 import Sidebar from "./Sidebar";
 
-import '../Assets/css/income.css';
-import '../index.css';
+import './../Assets/css/income.css';
+import './../index.css';
 
 const ExpenseSearch = () => {
   const [data, setData] = useState([]);

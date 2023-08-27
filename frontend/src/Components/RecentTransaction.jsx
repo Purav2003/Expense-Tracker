@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import toast, { Toaster } from 'react-hot-toast';
 import Loader from './Loader'
-import '../Assets/css/income.css';
-import '../index.css';
+import './../Assets/css/income.css';
+import './../index.css';
 
 const RecentTransaction = () => {
   const [data, setData] = useState([]);
