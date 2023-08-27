@@ -122,7 +122,7 @@ const Sidebar = () => {
                                 <li>
                                     <Link
                                         to="/logout"
-                                        className="block px-4 py-2 text-gray-900 dark:text-white hover:text-[black] hover:bg-white"
+                                        className="block p-2 px-4 my-2 text-gray-900 dark:text-white hover:text-[black] hover:bg-white"
                                     >
                                         Log Out
                                     </Link>
