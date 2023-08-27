@@ -179,8 +179,6 @@ const addCategory = async (req, res) => {
 }
 
 const uploadImage = async (req, res) => {
-    console.log(req.body);
-    console.log("api called");
     const id = req.params.id
     const user = await User.findById(id)
     upload.single('image')(req, res, async function (err) {
