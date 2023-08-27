@@ -6,7 +6,7 @@ import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
 import Loader from "./Loader";
 
-import './../Assets/css/income.css';
+import './../assets/css/income.css';
 import './../index.css';
 
 const IncomeTable = () => {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import * as icon from "react-icons/io";
 import * as icons from "react-icons/ri";
-import './../Assets/css/income.css'
+import './../assets/css/income.css'
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
 import './../index.css'
