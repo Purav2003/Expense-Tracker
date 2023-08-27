@@ -1,6 +1,6 @@
 import axios from "axios"
-import signup from './../Assets/images/signup.png';
-import "./../Assets/css/signup.css";
+import signup from './../assets/images/signup.png';
+import "./../assets/css/signup.css";
 import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-tooltip/dist/react-tooltip.css'

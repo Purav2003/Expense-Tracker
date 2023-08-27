@@ -1,4 +1,4 @@
-import "../Assets/css/sidebar.css";
+import "../assets/css/sidebar.css";
 import { useState, useEffect } from 'react';
 import { navLinks } from './Navlinks';
 import dp from './../assets/images/signup.png';

@@ -1,5 +1,5 @@
 import axios from "axios"
-import signin from './../Assets/images/login.png';
+import signin from './../assets/images/login.png';
 import { Link } from "react-router-dom";
 import './../assets/css/signup.css';
 import { toast } from 'react-toastify';
