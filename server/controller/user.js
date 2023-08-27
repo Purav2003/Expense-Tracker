@@ -190,6 +190,7 @@ const uploadImage = async (req, res) => {
             data: req.file.buffer,
             contentType: req.file.mimetype,
         };
+        user.profileImage = image
         await user.save();
         res.send({msg:"Image uploaded successfully",success:true,status:200})
     })
