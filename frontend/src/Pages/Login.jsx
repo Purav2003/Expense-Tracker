@@ -33,10 +33,12 @@ const Login = () => {
         .then((response) => {
           console.log(JSON.stringify(response.status));
           if (JSON.stringify(response.data.status) === '200') {
-            console.log(response.data.token)
+            console.log(response.data.user.currency)
             localStorage.setItem("Token", response.data.token)
             localStorage.setItem("createdBy", response.data.user._id)
             localStorage.setItem("username", response.data.name)
+            localStorage.setItem("selectedCurrency",response.data.user.currency);
+
             window.location.replace("/dashboard")
           }
           if (JSON.stringify(response.data.status) === '404') {
