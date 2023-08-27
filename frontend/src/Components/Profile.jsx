@@ -17,6 +17,7 @@ const Profile = () => {
 
   const handleImageChange = (event) => {
     const selectedImage = event.target.files[0];
+    console.log(selectedImage)
     setImage(selectedImage);
 
     // Create a preview URL for the selected image
@@ -28,6 +29,7 @@ const Profile = () => {
     const id = localStorage.getItem('createdBy');
     const formData = new FormData();
     formData.append('image', image);
+    console.log(formData)
     try {
       await axios.post(`http://localhost:5000/api/v1/auth/uploadImage/${id}`, formData, {
         headers: {
@@ -60,7 +62,7 @@ const Profile = () => {
         window.location.replace('/')
       }
       setData(data_new.user);
-      setImageURL(data_new.user.imageURL); // Adjust the property name as needed
+      setImageURL(data_new.user.profileImage); // Adjust the property name as needed
 
       setLoading(false);
     } catch (error) {
