@@ -6,5 +6,10 @@ export default defineConfig({
     outDir: 'build',
   },  
   plugins: [react()],
+  server: {
+    mimeTypes: {
+      '.js': 'application/javascript',
+    },
+  },
 
 });
