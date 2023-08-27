@@ -33,6 +33,10 @@ var userSchema = new mongoose.Schema({
     categories:{
         type:Array,
         default:["Food","Clothes","Groceries","Petrol"]
+    },
+    profileImage:{
+        data: Buffer,
+        contentType: String,
     }
 }, { timestamps: true });
 
