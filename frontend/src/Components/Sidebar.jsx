@@ -84,12 +84,12 @@ const Sidebar = () => {
                                     <img src={dp} className='w-11 h-11 bg-white rounded-full img-dp' />
                                 </button>
                                 <ul
-                                    className={`${showProfileMenu ? 'block' : 'hidden'} absolute lg:right-2 md:right-2 mt-2 space-y-2 rounded-lg shadow-md bg-fourth`}
+                                    className={`${showProfileMenu ? 'block' : 'hidden'} absolute lg:right-2 md:right-2 mt-2 space-y-2 rounded-lg shadow-md bg-white`}
                                 >
 <li >
                                     <Link
                                         to="/profile"
-                                        className="block px-4 py-2 text-gray-900 dark:text-white hover:text-[black] hover:bg-white"
+                                        className="block px-4 py-2 pt-4  hover:text-[black] hover:bg-fourth hover:text-white"
                                     >
                                         My Profile
                                     </Link>
@@ -97,7 +97,7 @@ const Sidebar = () => {
                                 <li>
                                     <Link
                                         to="/profile"
-                                        className="block px-4 py-2 text-gray-900 dark:text-white hover:text-[black] hover:bg-white"
+                                        className="block px-4 py-2 hover:text-[black] hover:bg-fourth hover:text-white"
                                     >
                                         Report
                                     </Link>
@@ -105,7 +105,7 @@ const Sidebar = () => {
                                 <li>
                                     <Link
                                         to="/settings"
-                                        className="block px-4 py-2 text-gray-900 dark:text-white hover:text-[black] hover:bg-white"
+                                        className="block px-4 py-2 hover:text-[black] hover:bg-fourth hover:text-white"
                                     >
                                         Settings
                                     </Link>
@@ -113,7 +113,7 @@ const Sidebar = () => {
                                 <li>
                                     <Link
                                         to="/help"
-                                        className="block px-4 py-2 text-gray-900 dark:text-white hover:text-[black] hover:bg-white"
+                                        className="block px-4 py-2 hover:text-[black] hover:bg-fourth hover:text-white"
                                     >
                                         Help
                                     </Link>
@@ -122,7 +122,7 @@ const Sidebar = () => {
                                 <li>
                                     <Link
                                         to="/logout"
-                                        className="block p-2 px-4 my-2 text-gray-900 dark:text-white hover:text-[black] hover:bg-white"
+                                        className="block p-2 px-4 my-2 hover:text-[black] hover:bg-fourth hover:text-white"
                                     >
                                         Log Out
                                     </Link>

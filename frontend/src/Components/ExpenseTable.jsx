@@ -7,7 +7,6 @@ import toast, { Toaster } from 'react-hot-toast';
 import './../index.css'
 import Loader from "./Loader";
 
-
 const ExpenseTable = () => {
   const [dataexp, setDataExp] = useState([]);
   const [currentPage, setCurrentPage] = useState(1)
@@ -58,7 +57,7 @@ let daysAgoValue = getCookie('daysAgoExp');
     console.log(e);
     let config = {
       method: 'delete',
-      url: 'http://localhost:5000/api/v1/expense/' + e,
+      url: `${config.serverPath}/expense/` + e,
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
