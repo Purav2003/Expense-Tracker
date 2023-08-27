@@ -2,6 +2,10 @@ import axios from "axios"
 import signin from '../Assets/images/login.png';
 import { Link } from "react-router-dom";
 import '../assets/css/signup.css';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 import { useEffect } from "react";
 
 const Login = () => {
@@ -30,17 +34,34 @@ const Login = () => {
           console.log(JSON.stringify(response.status));
           if (JSON.stringify(response.data.status) === '200') {
             console.log(response.data.token)
-            localStorage.setItem("Token",response.data.token)
-            localStorage.setItem("createdBy",response.data.user._id)
-            localStorage.setItem("username",response.data.name)
+            localStorage.setItem("Token", response.data.token)
+            localStorage.setItem("createdBy", response.data.user._id)
+            localStorage.setItem("username", response.data.name)
             window.location.replace("/dashboard")
-            }
+          }
           if (JSON.stringify(response.data.status) === '404') {
-            document.getElementById('error').innerHTML = '<h1 className="pt-[0.5vw]">User Not Found</h1>'
+            toast.error('User Not Found', {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            });
           }
           if (JSON.stringify(response.data.status) === '401') {
-            document.getElementById('error').innerHTML = ' '
-            document.getElementById('errora').innerHTML = '<h1 className="pt-[0.5vw]">Password is incorrect</h1>'
+            toast.error('Incorrect Password', {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            });
           }
         })
     }
@@ -53,11 +74,11 @@ const Login = () => {
       input.value = '';
     });
   }
-  useEffect(()=>{
-    if(token){
+  useEffect(() => {
+    if (token) {
       window.location.replace('/dashboard')
     }
-  },[])
+  }, [])
   return (
     <>
       <div className="lg:flex lg:flex-row bg-white">
@@ -95,7 +116,7 @@ const Login = () => {
               <div className="flex form-field items-center">
                 <button className="bg-fourth button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
                   Login
-                </button>               
+                </button>
               </div>
             </form>
             <p className="pl-[2.4vw] second-signup">New user? <Link to="/signup" className="underline text-fourth">Sign up</Link></p><br></br><br></br>

@@ -2,6 +2,10 @@ import axios from "axios"
 import signup from '../Assets/images/signup.png';
 import "../Assets/css/signup.css";
 import { Link } from "react-router-dom";
+import { toast } from 'react-toastify';
+import 'react-tooltip/dist/react-tooltip.css'
+import { Tooltip } from 'react-tooltip'
+import * as icon from 'react-icons/hi'
 
 const Signup = () => {
   let token = localStorage.getItem("Token")
@@ -12,7 +16,7 @@ const Signup = () => {
     const password = document.querySelector('.password').value
     const name = document.querySelector('.name').value
     const mobile = document.querySelector('.mobile').value
-  let data = JSON.stringify({
+    let data = JSON.stringify({
       "name": name,
       "email": email,
       "mobile": mobile,
@@ -32,42 +36,76 @@ const Signup = () => {
       axios.request(config)
         .then((response) => {
           if (JSON.stringify(response.data.status) === '200') {
-            localStorage.setItem("Token",response.data.token)
-            localStorage.setItem("createdBy",response.data.user._id)
-            localStorage.setItem("username",response.data.user.name)
+            localStorage.setItem("Token", response.data.token)
+            localStorage.setItem("createdBy", response.data.user._id)
+            localStorage.setItem("username", response.data.user.name)
             window.location.replace("/customize-category")
 
           }
-           if (response.data.msg === 'Phone Number already exists') {
-            document.getElementById('phone').innerHTML = '<h1 className="pt-[0.5vw]">Phone Number already exists</h1>'
-          }
-          else{
-            document.getElementById('phone').innerHTML=' '
-          }
-           if (response.data.msg === 'User already exists') {
-            document.getElementById('user').innerHTML = response.data.msg
-          }
-          else{
-            document.getElementById('user').innerHTML=' '
+          if (response.data.msg === 'Phone Number already exists') {
+            toast.error('Phone Number already exists', {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            });
           }
 
-           if (response.data.msg === 'Enter Valid Number') {
-            document.getElementById('error').innerHTML = '<h1 className="pt-[0.5vw]">Invalid Phone Number</h1>'
+          if (response.data.msg === 'User already exists') {
+            toast.error('User already exists', {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            });
           }
-          else{
-            document.getElementById('error').innerHTML=' '
-          }         
-           if (response.data.msg === 'Enter Valid Email') {
-            document.getElementById('errorm').innerHTML = '<h1 className="pt-[0.5vw]">Invalid Email</h1>'
+
+
+          if (response.data.msg === 'Enter Valid Number') {
+            toast.error('Enter Valid Number', {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            });
           }
-          else{
-            document.getElementById('errorm').innerHTML=' '
+
+          if (response.data.msg === 'Enter Valid Email') {
+            toast.error('Enter Valid Email', {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            });
           }
-           if (response.data.msg === 'Enter Valid Password') {
-            document.getElementById('errora').innerHTML = '<h1 className="pt-[0.5vw]">Password Is Not Safe</h1>'
-          }
-          else{
-            document.getElementById('errora').innerHTML=' '
+
+          if (response.data.msg === 'Enter Valid Password') {
+            toast.error('Enter Valid Password', {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            });
           }
 
 
@@ -117,19 +155,45 @@ const Signup = () => {
                 <div id="user"></div>
 
               </div>
-              <div className="mb-4 form-field">
-                <label className="block text-black-700 text-sm font-bold mb-2">
-                  Password
-                </label>
-                <input className="password shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Password" required />
-                <div id="errora"></div>
+              <div className="mb-4 form-field relative">
+  <label className="block text-black-700 text-sm font-bold mb-2">
+    Password
+  </label>
+  <div className="relative">
+    <input
+      className="password shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline pr-10"
+      type="password"
+      placeholder="Password"
+      required
+    />
+    <icon.HiInformationCircle
+      className="absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer"
+      data-tooltip-id="my-tooltip"
+    />
+  </div>
+  <Tooltip
+    id="my-tooltip"
+    content={
+      <>
+        <ul>
+          <li>Password Must be At least 8 Characters Long</li>
+          <li>
+            Password Should Contain At least
+            <br></br>1 Uppercase Letter
+            <br></br>1 Digit<br></br>
+            1 Special Character
+          </li>
+        </ul>
+      </>
+    }
+  />
+</div>
 
-              </div>
               <div className="flex form-field items-center">
                 <button className="bg-fourth button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
                   Sign Up
                 </button>
-            
+
               </div>
             </form>
             <p className="pl-[2.4vw] second-signup">Already have an account? <Link to="/" className="underline text-fourth  ">Login</Link></p><br></br><br></br>
@@ -138,7 +202,7 @@ const Signup = () => {
         </div>
         <div className="photo-signup ml-[23vw] w-full h-[100vh] pt-[6vw] invisible sm:invisible md:invisible lg:visible xl:visible">
           <h1 className="text-center font-semibold text-[30px] text-bold text-black">Create Your Account</h1>
-          <p className="text-center">Lets get started</p>
+          <p className="text-center">Let's get started</p>
           <img src={signup} className="pl-[5vw] w-[90%]" alt="signupImage"></img>
         </div>
       </div>

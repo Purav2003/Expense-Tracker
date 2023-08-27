@@ -20,11 +20,11 @@ app.set("trust proxy",1)
 app.use(express.json());
 app.use(helmet())
 app.use(cors(
-  {
-    origin:["https://expense-tracker-api-six.vercel.app"],
-    mehods:["POST","GET","PATCH","PUT","DELETE"],
-    credentials:true
-  }
+  // {
+  //   origin:["https://expense-tracker-api-six.vercel.app"],
+  //   mehods:["POST","GET","PATCH","PUT","DELETE"],
+  //   credentials:true
+  // }
 ))
 app.use(xss())
 app.use(
