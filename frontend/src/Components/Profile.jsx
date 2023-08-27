@@ -40,7 +40,6 @@ const Profile = () => {
     }
   };
 
-  };
 
   const fetchData = async () => {
     const id = localStorage.getItem('createdBy');
