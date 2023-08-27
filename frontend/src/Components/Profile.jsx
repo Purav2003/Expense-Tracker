@@ -8,6 +8,7 @@ import axios from 'axios'
 const Profile = () => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
+  const [imageURL, setImageURL] = useState(null);
 
   const token = localStorage.getItem("Token");
 
@@ -32,9 +33,9 @@ const Profile = () => {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
+
       });
-      alert('Image uploaded successfully');
-    } catch (error) {
+      } catch (error) {
       console.error('Error uploading image:', error);
       alert('Error uploading image. Please try again.');
     }
@@ -59,6 +60,8 @@ const Profile = () => {
         window.location.replace('/')
       }
       setData(data_new.user);
+      setImageURL(data_new.user.imageURL); // Adjust the property name as needed
+
       setLoading(false);
     } catch (error) {
       console.error(error);
@@ -82,8 +85,8 @@ const Profile = () => {
                 {/* Open the file dialog when clicking the label */}
                 <label htmlFor="imageInput">
                   {/* Display the image preview */}
-                  {imagePreview ? (
-                    <img src={imagePreview} onClick={handleImageUpload} className="w-64 h-64 object-cover rounded-full cursor-pointer" alt="Profile" />
+                  {imageURL ? (
+                    <img src={imageURL} onClick={handleImageUpload} className="w-64 h-64 object-cover rounded-full cursor-pointer" alt="Profile" />
                   ) : (
                     <img src={dp} onClick={handleImageUpload} className="rounded-full cursor-pointer" alt="Profile" />
                   )}
