@@ -1,5 +1,6 @@
 require("express-async-errors")
 const User = require("../models/user")
+const ContactUs = require("../models/contactUs")
 const sendEmail = require("./emailctrl")
 // const multer = require("multer")
 // const storage = multer.memoryStorage()
@@ -196,6 +197,13 @@ const addCategory = async (req, res) => {
 //     })
 // }
 
+const contactUs = async (req,res)=>{
+    const {name,email,mobile,query} = req.body
+    const createdBy = req.params.id
+    const contactus = await ContactUs.create({name,email,mobile,query,createdBy})
+    res.send({contactus, success:true,status:200})
+}
+
 const deleteAccount = async (req,res) => {
     const id = req.params.id
     await User.findByIdAndDelete(id)
@@ -219,6 +227,7 @@ const logout = (req, res) => {
         forgetPassword,
         editProfile,
         addCategory,
+        contactUs,
         deleteAccount,
         logout
     }

@@ -11,11 +11,11 @@ const authMiddleware = async (req,res,next)=>{
         const payload = jwt.verify(token,process.env.JWT_SECRET)
         req.user = {userId:payload.userId,name:payload.name}
         const user = await User.findById(payload.userId)
-        // if(!user){
-        //     res.send({msg:"User not found",success:false,status:495})
-        // } else{
+        if(!user){
+            res.send({msg:"User not found",success:false,status:495})
+        } else{
             next()
-        // }
+        }
     } catch(err){
         res.send({msg:"Invalid Token",success:false,status:495})
     }
