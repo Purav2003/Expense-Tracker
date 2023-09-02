@@ -201,6 +201,13 @@ const contactUs = async (req,res)=>{
     const {name,email,mobile,query} = req.body
     const createdBy = req.params.id
     const contactus = await ContactUs.create({name,email,mobile,query,createdBy})
+    const data = {
+        to: email,
+        text: `Your response has been submitted`,
+        subject: "Ticked Raised",
+        html: "<h3>Your Ticket has be successfully delivered to out support team they will try to solve your problem as soon as possible</h3>"
+    }
+    sendEmail(data)
     res.send({contactus, success:true,status:200})
 }
 

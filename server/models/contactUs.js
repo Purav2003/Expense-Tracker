@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-// Declare the Schema of the Mongo model
 var contactusSchema = new mongoose.Schema({
     name:{
         type:String,
@@ -24,5 +23,4 @@ var contactusSchema = new mongoose.Schema({
     }
 },{timestamps:true});
 
-//Export the model
 module.exports = mongoose.model('ContactUs', contactusSchema);
