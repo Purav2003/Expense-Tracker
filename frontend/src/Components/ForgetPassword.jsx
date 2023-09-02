@@ -1,8 +1,21 @@
 import axios from "axios"
 import { Link } from "react-router-dom"
+import { Input, InputGroup } from 'rsuite';
+import EyeIcon from '@rsuite/icons/legacy/Eye';
+import EyeSlashIcon from '@rsuite/icons/legacy/EyeSlash';
+import { useState } from "react";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const ForgetPassword = () => {
   const token = localStorage.getItem("Token");
-
+  const [visible, setVisible] = useState(false);
+  const [visiblea, setVisiblea] = useState(false);
+  const handleChange = () => {
+    setVisible(!visible);
+  };
+  const handleChange_a = () => {
+    setVisiblea(!visiblea);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault()
     const email = localStorage.getItem("forgetemail")
@@ -27,21 +40,24 @@ const ForgetPassword = () => {
 
         axios.request(config)
           .then((response) => {
-            if(JSON.stringify(response.status) === 495){
+            if (JSON.stringify(response.status) === 495) {
               window.location.replace('/')
             }
             console.log(response)
             if (JSON.stringify(response.data.status) === '200') {
-              window.location.replace('/')
+              toast.success("Changed Password Successfully", { hideProgressBar: true })
+              setTimeout(() => {
+                window.location.replace('/');
+              }, 1500);
             }
             if (JSON.stringify(response.data.status) === '404') {
-              document.getElementById('error').innerHTML = '<h1 className="pt-[0.5vw]">User Not Found</h1>'
+              toast.error("User Not Found")
             }
             if (JSON.stringify(response.data.status) === '403') {
-              document.getElementById('error').innerHTML = '<h1 className="pt-[0.5vw]">Password is not strong</h1>'
+              toast.error("Password is not strong")
             }
             if (JSON.stringify(response.data.status) === '402') {
-              document.getElementById('error').innerHTML = '<h1 className="pt-[0.5vw]">Your Old Password Can Not Be Your New Password</h1>'
+              toast.error("Your Old Password Can Not Be Your New Password")
             }
 
           })
@@ -69,20 +85,28 @@ const ForgetPassword = () => {
               <tr className="border p-4">
                 <td className="border p-4 w-[50%]">New Password</td>
                 <td className="border p-4 w-[50%]">
-                  <input className="password appearance-none rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Enter New Password" required />
-                </td>
+                  <InputGroup inside >
+                    <Input type={visible ? 'text' : 'password'} placeholder="New Password" className="password h-full border-none outline-none" />
+                    <InputGroup.Button onClick={handleChange}>
+                      {visible ? <EyeIcon /> : <EyeSlashIcon />}
+                    </InputGroup.Button>
+                  </InputGroup>                </td>
               </tr>
               <tr className="border p-4">
                 <td className="border p-4 w-[50%]">Retype New Password</td>
                 <td className="border p-4 w-[50%]">
-                  <input className="repassword appearance-none rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Re-type New Password" required />
-
+                  <InputGroup inside >
+                    <Input type={visiblea ? 'text' : 'password'} placeholder="Retype New Password" className="repassword h-full border-none outline-none" />
+                    <InputGroup.Button onClick={handleChange_a}>
+                      {visiblea ? <EyeIcon /> : <EyeSlashIcon />}
+                    </InputGroup.Button>
+                  </InputGroup>
                 </td>             </tr>
               <tr>
 
                 <td className="py-4 w-[50%] text-center items-center" colSpan={2} >
-                <Link to="/"><button type="button" className="ml-4 bg-fourth text-white py-2 px-4 rounded-full">
-                    Login
+                  <Link to="/"><button type="button" className="ml-4 bg-white text-fourth border border-fourth py-2 px-4 rounded-full">
+                    Back to Login
                   </button></Link>
                   <button type="submit" className="ml-4 bg-fourth text-white py-2 px-4 rounded-full">
                     Change Password

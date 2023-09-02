@@ -1,12 +1,30 @@
 import Sidebar from "./Sidebar"
 import axios from "axios"
+import { Input, InputGroup } from 'rsuite';
+import EyeIcon from '@rsuite/icons/legacy/Eye';
+import EyeSlashIcon from '@rsuite/icons/legacy/EyeSlash';
 import { Link } from "react-router-dom"
+import { useState } from "react";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const ResetPassword = () => {
 
   let token = localStorage.getItem("Token")
- 
-  let id = localStorage.getItem('createdBy');
 
+  let id = localStorage.getItem('createdBy');
+  const [visible, setVisible] = useState(false);
+  const [visiblea, setVisiblea] = useState(false);
+  const [visibleb, setVisibleb] = useState(false);
+
+  const handleChange = () => {
+    setVisible(!visible);
+  };
+  const handleChange_a = () => {
+    setVisiblea(!visiblea);
+  };
+  const handleChange_b = () => {
+    setVisibleb(!visibleb);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault()
     const oldPassword = document.querySelector('.oldpass').value
@@ -32,20 +50,20 @@ const ResetPassword = () => {
 
           axios.request(config)
             .then((response) => {
-              if(JSON.stringify(response.status) === 495){
+              if (JSON.stringify(response.status) === 495) {
                 window.location.replace('/')
-              }              
-              if (JSON.stringify(response.data.status) === '200') {
-                window.location.replace('/success-changed-pass')
               }
+              if (JSON.stringify(response.data.status) === '200') {
+                toast.success("Succefully Changed the Password",{hideProgressBar:true})
+                setTimeout(() => {                 
+                  window.location.replace('/profile');
+                }, 1500);               }
 
               if (JSON.stringify(response.data.status) === '401') {
-                document.getElementById('error').innerHTML = ' '
-                document.getElementById('errora').innerHTML = '<h1 className="pt-[0.5vw]">Old Password is incorrect</h1>'
+                toast.error("Old Password is incorrect")                        
               }
               if (JSON.stringify(response.data.status) === '403') {
-                document.getElementById('error').innerHTML = ' '
-                document.getElementById('errora').innerHTML = '<h1 className="pt-[0.5vw]">Weak Password</h1>'
+                toast.error("Weak Password")              
               }
             })
         }
@@ -54,23 +72,20 @@ const ResetPassword = () => {
         }
       }
       else {
-        document.getElementById('errora').innerHTML = '<h1 className="pt-[0.5vw]">Password Do Not Match</h1>'
+        toast.error("Password Do Not Match")
       }
     }
     else {
-      document.getElementById('errora').innerHTML = '<h1 className="pt-[0.5vw]">You Can Not Enter Same Password </h1>'
+      toast.error("You Can Not Enter Same Password")
 
     }
-
-    const inputs = document.querySelectorAll('.email, .password');
-    inputs.forEach(input => {
-      input.value = '';
-    });
   }
+
+   
   return (
     <div className="bg-white re-pass">
       <Sidebar />
-    
+
 
       <div className="setting-main">
         <div className="lg:w-[50%]">
@@ -80,20 +95,33 @@ const ResetPassword = () => {
               <tr className="border p-4">
                 <td className="border p-4 w-[50%]">Old Password</td>
                 <td className="border p-4 w-[50%]">
-                  <input className="oldpass appearance-none rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Old Password" required />
-
+                  <InputGroup inside >
+                    <Input type={visible ? 'text' : 'password'} placeholder="Old Password" className="oldpass h-full border-none outline-none" />
+                    <InputGroup.Button onClick={handleChange}>
+                      {visible ? <EyeIcon /> : <EyeSlashIcon />}
+                    </InputGroup.Button>
+                  </InputGroup>
                 </td>
               </tr>
               <tr className="border p-4">
                 <td className="border p-4 w-[50%]">New Password</td>
-                <td className="border p-4 w-[50%]">                
-                <input className="newpass appearance-none rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="New Password" required />
-                </td>
+                <td className="border p-4 w-[50%]">
+                <InputGroup inside >
+                    <Input type={visiblea ? 'text' : 'password'} placeholder="New Password" className="newpass h-full border-none outline-none" />
+                    <InputGroup.Button onClick={handleChange_a}>
+                      {visiblea ? <EyeIcon /> : <EyeSlashIcon />}
+                    </InputGroup.Button>
+                  </InputGroup>                </td>
               </tr>
               <tr className="border p-4">
                 <td className="border p-4 w-[50%]">Retype New Password</td>
-                <td className="border p-4 w-[50%]">                <input className="retypenewpass appearance-none rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Retype New Password" required />
-</td>             </tr>
+                <td className="border p-4 w-[50%]">              
+                <InputGroup inside >
+                    <Input type={visibleb ? 'text' : 'password'} placeholder="Retype Password" className="retypenewpass h-full border-none outline-none" />
+                    <InputGroup.Button onClick={handleChange_b}>
+                      {visibleb ? <EyeIcon /> : <EyeSlashIcon />}
+                    </InputGroup.Button>
+                  </InputGroup>                </td>             </tr>
               <tr>
 
                 <td className="py-4 w-[50%] text-center items-center" colSpan={2} >
