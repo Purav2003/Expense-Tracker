@@ -12,6 +12,31 @@ const Settings = () => {
 
     let token = localStorage.getItem("Token");
     const newCur = localStorage.getItem("selectedCurrency")
+
+    const deleteUser = () => {
+        const id = localStorage.getItem('createdBy');
+        let config = {
+          method: 'delete',
+          url: `http://localhost:5000/api/v1/auth/deleteAccount/${id}`,
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+        };
+    
+        axios.request(config)
+          .then((response) => {
+            if (response.status === 495) {
+              window.location.replace('/')
+            }
+            if (JSON.stringify(response.status) === '200') {
+                localStorage.clear();
+                window.location.replace('/')
+
+            }
+          });
+      };
+
     const handleSubmit = async (e) => {
         setLoading(true)
         e.preventDefault();
@@ -58,12 +83,11 @@ const Settings = () => {
     }
 
     useEffect(() => {
-        // Retrieve the selected currency from localStorage when the component mounts
         const savedCurrency = localStorage.getItem('selectedCurrency');
         if (savedCurrency) {
             setSelectedCurrency(savedCurrency);
         } else {
-            setSelectedCurrency(data.currency || ""); // Assuming data.currency contains the initial currency value
+            setSelectedCurrency(data.currency || ""); 
         }
     }, []);
 
@@ -125,9 +149,14 @@ const Settings = () => {
                             </tr>
                             <tr>
 
-                                <td className="py-4 w-[50%] text-center items-center" colSpan={2} >
+                                <td className="py-4 w-[50%] text-center items-center" >
                                     <button type="submit" className="bg-fourth text-white py-2 px-4 rounded-full">
                                         Save Changes
+                                    </button>
+                                </td>
+                                <td className="py-4 w-[50%] text-center items-center" >
+                                    <button type="button" className="bg-[tomato] text-white py-2 px-4 rounded-full" onClick={deleteUser}>
+                                        Delete Account
                                     </button>
                                 </td>
                             </tr>

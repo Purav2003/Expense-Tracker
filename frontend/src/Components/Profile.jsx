@@ -8,8 +8,6 @@ const Profile = () => {
   const [loading, setLoading] = useState(true);
   const token = localStorage.getItem("Token");
 
-
-
   const fetchData = async () => {
     const id = localStorage.getItem('createdBy');
     const API_URL = `http://localhost:5000/api/v1/auth/profile/${id}`;
@@ -27,11 +25,7 @@ const Profile = () => {
       if (data_new.status === 495) {
         window.location.replace('/')
       }
-      setData(data_new.user);
-
-      // Check if the image is cached
-   
-
+      setData(data_new.user);   
       setLoading(false);
     } catch (error) {
       console.error(error);
@@ -139,6 +133,5 @@ const Profile = () => {
     </>
   );
 }
-// export { showimage };
 
 export default Profile;
