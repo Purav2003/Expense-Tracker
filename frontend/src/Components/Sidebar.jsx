@@ -8,7 +8,6 @@ const Sidebar = () => {
     const [showMenu, setShowMenu] = useState(false);
     const [active, setActive] = useState("");
     const [showProfileMenu,setShowProfileMenu] = useState(false)
-    const [showimage, setShowimage] = useState()
     const token = localStorage.getItem("Token");
     const fetchData = async () => {
         const id = localStorage.getItem('createdBy');
@@ -28,7 +27,6 @@ const Sidebar = () => {
             window.location.replace('/')
           }
     
-          setShowimage("data:image/png;base64," + data_new.image)
         } catch (error) {
           console.error(error);
         }
@@ -106,7 +104,7 @@ const Sidebar = () => {
                                     onClick={toggleProfileMenu}
                                     className={`flex items-center`}
                                 >
-                                    <img src={showimage || dp } className='w-11 h-11 bg-white rounded-full img-dp' />
+                                    <img src={ dp } className='w-11 h-11 bg-white rounded-full img-dp' />
                                 </button>
                                 <ul
                                     className={`${showProfileMenu ? 'block' : 'hidden'} absolute lg:right-2 md:right-2 mt-2 space-y-2 rounded-lg shadow-md bg-white`}

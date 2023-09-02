@@ -38,7 +38,7 @@ const SummaryDashboard = () => {
             setExpense(datas.totalExpense);
             setTransaction(datas.totalTransactions);
             setMexpense(datas.totalMonthlyExpense);
-            setTimeout(() => { setLoading(false); }, 100);
+            setLoading(false);
 
         } catch (error) {
             // Handle error here

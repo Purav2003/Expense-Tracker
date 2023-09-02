@@ -120,11 +120,11 @@ const CalendarDashboard = () => {
   const handleSubmit = async (e) => {
     setSelectedDate(e);
     let id = localStorage.getItem('createdBy');
-    console.log(reverseDateFormat(selectedDate.toLocaleDateString()))
+    console.log(reverseDateFormat(selectedDate?.toLocaleDateString()))
 
 
     let dataok = JSON.stringify({
-      "date": reverseDateFormat(selectedDate.toLocaleDateString())
+      "date": reverseDateFormat(selectedDate?.toLocaleDateString())
       ,
     });
     try {
@@ -211,8 +211,8 @@ const CalendarDashboard = () => {
 
     <>
       {loading ? <Loader /> : <><div className='lg:flex lg:pl-12 rounded-full calendar-main'>  <Calendar compact bordered renderCell={renderCell} onChange={handleSubmit}
-        className="lg:w-[28%] bg-white calendar rounded-md" disabledDate={(date) => date > new Date()} />
-        <div className='lg:ml-4 bg-white rounded-md calendar-details lg:w-[32%]'>
+        className="lg:w-[28%] bg-white dark:bg-[yellow] calendar rounded-md" disabledDate={(date) => date > new Date()} />
+        <div className='lg:ml-4 dark dark:bg-[#4a4a4a] bg-white rounded-md calendar-details lg:w-[32%]'>
           <div className='p-4 '>
             <h1 className='font-semibold text-calendar text-[20px]'>Transactions on {reverseDate(date)}</h1><br></br>
             <div className='display-cal'>

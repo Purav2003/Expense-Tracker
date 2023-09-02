@@ -8,7 +8,7 @@ const RecentTransaction = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const token = localStorage.getItem("Token");
+  const token = localStorage.getItem("Token"); 
 
   const fetchData = async () => {
     let id = localStorage.getItem('createdBy');
@@ -27,7 +27,7 @@ const RecentTransaction = () => {
       }      
       console.log(datas.transaction)
       setData(datas.transaction);
-      setTimeout(() => {  setLoading(false);}, 600);
+       setLoading(false);
     } catch (error) {
       // Handle error here
     }
@@ -50,10 +50,10 @@ const RecentTransaction = () => {
       <h1 className="p-4 lg:px-12 font-bold text-[20px]">Recent Transactions</h1>
 {loading?<Loader />:data.length!==0?(        <div className="relative lg:px-12">
           <div>
-            <div className="table-income table-dash">
-              <table className="table-income rounded-lg lg:w-full shadow-lg bg-white overflow-scroll text-sm text-left">
-                <thead className="pt-4 text-xs bg-fourth text-white uppercase">
-                  <tr className="text-white text-[14px]">
+            <div className="table-income table-dash ">
+              <table className="table-income  dark:bg-[#4a4a4a] rounded-lg lg:w-full shadow-lg overflow-scroll text-sm text-left dark:bg-primary">
+                <thead className="pt-4 text-xs dark:bg-tertiary bg-fourth text-white uppercase">
+                  <tr className="text-white dark:text-black text-[14px]">
                     <th scope="col" className="px-6 py-3 text-center  ">
                       Sr.No
                     </th>
@@ -75,7 +75,7 @@ const RecentTransaction = () => {
                     
                   </tr>
                 </thead>
-                <tbody className="w-[10%] bg-[#e8ebf8]">
+                <tbody className="w-[10%] dark:bg-[#000]">
                   {
                     data.map((tables) => {
                       const { description, amount, date, mode, from ,to} = tables;

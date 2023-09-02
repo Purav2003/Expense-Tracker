@@ -4,11 +4,17 @@ import { Link } from "react-router-dom";
 import './../assets/css/signup.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-
-import { useEffect } from "react";
+import { Input, InputGroup } from 'rsuite';
+import EyeIcon from '@rsuite/icons/legacy/Eye';
+import EyeSlashIcon from '@rsuite/icons/legacy/EyeSlash';
+import { useEffect,useState } from "react";
 
 const Login = () => {
+  const [visible, setVisible] = useState(false);
+
+  const handleChange = () => {
+    setVisible(!visible);
+  };
   let token = localStorage.getItem("Token")
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -105,14 +111,20 @@ const Login = () => {
                 <label className="block text-black-700 text-sm font-bold mb-2">
                   Email
                 </label>
-                <input className="email shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="E-mail" required />
+                <Input placeholder="Enter Email" className="email" />
+
                 <div id="error"></div>
               </div>
               <div className="mb-4 form-field">
                 <label className="block text-black-700 text-sm font-bold mb-2">
                   Password
                 </label>
-                <input className="password shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Password" required />
+                <InputGroup inside >
+      <Input type={visible ? 'text' : 'password'} className="password" placeholder="Enter Password" />
+      <InputGroup.Button onClick={handleChange}>
+        {visible ? <EyeIcon /> : <EyeSlashIcon />}
+      </InputGroup.Button>
+    </InputGroup>
                 <div id="errora"></div>
               </div>
               <div className="flex form-field items-center">
