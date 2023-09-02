@@ -62,9 +62,8 @@ const getAllUser = async (req, res) => {
 }
 
 const profile = async (req, res) => {
-    const user = await User.findById(req.params.id).select("-profileImage")
-    const user1 = await User.findById(req.params.id).select("profileImage")
-    res.send({ user, image: user1.profileImage.data.toString('base64'),success: true, status: 200 })
+    const user = await User.findById(req.params.id)
+    res.send({ user,success: true, status: 200 })
 }
 
 const changePassword = async (req, res) => {
@@ -197,6 +196,12 @@ const addCategory = async (req, res) => {
 //     })
 // }
 
+const deleteAccount = async (req,res) => {
+    const id = req.params.id
+    await User.findByIdAndDelete(id)
+    res.send({msg:"Account deleted successfully",success:true,status:200})
+}
+
 const logout = (req, res) => {
         if (req.headers.authorization) {
             req.headers.authorization = '';
@@ -214,5 +219,6 @@ const logout = (req, res) => {
         forgetPassword,
         editProfile,
         addCategory,
+        deleteAccount,
         logout
     }
