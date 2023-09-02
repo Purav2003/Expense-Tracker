@@ -114,7 +114,7 @@ const ExpenseForm = () => {
         <>
             <div><Toaster /></div>
             <div className="lg:flex ">
-                <div className="lg:w-[50%] w-0 mt-[-4vw]">
+                <div className="lg:w-[50%] w-0">
                     <img src={add} className="w-[80%]" />
                 </div>
                 <div className="w-full max-w-xs">

@@ -78,8 +78,8 @@ const IncomeForm = () => {
         <div><Toaster/></div>
 <div className="lg:flex ">
 
-    <div className="lg:w-[50%] w-0 mt-[-4vw]">
-        <img src = {add} className="w-[80%]"/>
+    <div className="lg:w-[50%] w-0 ">
+        <img src = {add} className="w-[80%] "/>
         </div>
         <div className="lg:w-full md:w[50%] max-w-xs"><br></br>
             <form onSubmit={handleSubmit} className="bg-white rounded lg:w-[40vw] px-8 pt-6 pb-8 mb-4">
