@@ -23,6 +23,10 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import NotFound from './Components/NotFound';
 import LandingPage from './Pages/LandingPage';
+import 'aos/dist/aos.css'; // Import the CSS
+import AOS from 'aos';
+AOS.init(); 
+
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);

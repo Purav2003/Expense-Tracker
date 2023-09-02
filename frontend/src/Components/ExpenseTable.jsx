@@ -26,7 +26,10 @@ const ExpenseTable = () => {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
-      });      const datas = await response.json();
+      });      
+      setLoading(false);
+
+      const datas = await response.json();
       if(datas.status === 495){
         window.location.replace('/')
       }

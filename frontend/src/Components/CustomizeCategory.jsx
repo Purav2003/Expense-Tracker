@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import * as icon from 'react-icons/md';
 import axios from 'axios';
+import Loader from './Loader';
 import Sidebar from './Sidebar';
 const CustomizeCategory = () => {
     const [selectedValues, setSelectedValues] = useState([]);
     const [inputValue, setInputValue] = useState('');
     const [showInput, setShowInput] = useState(false);
     const [otherChecked, setOtherChecked] = useState(false);
+    const [loading, setLoading] = useState(false);
+
     let token = localStorage.getItem("Token");
     let id = localStorage.getItem('createdBy');
 
@@ -25,6 +28,8 @@ const CustomizeCategory = () => {
                 window.location.replace('/');
             }
             setSelectedValues(datas.user.categories);
+            setLoading(false)
+
         } catch (error) {
             // Handle error here
         }
@@ -98,13 +103,14 @@ const CustomizeCategory = () => {
     };
 
     useEffect(() => {
+        setLoading(true)
         fetchData();
     }, []);
 
     return (
         <>
         <Sidebar />
-        <div className="flex justify-center bg-white pt-[3vw] ">
+{  loading?<Loader />  :    <div className="flex justify-center bg-white pt-[3vw] ">
             <div className='border p-4 bg-[#eee] lg:w-[50%] border rounded-lg'>
                 <form onSubmit={handleSubmit}>
                     <h2 className='text-center text-2xl font-bold text-black'>Expense Categories</h2><br></br>
@@ -157,7 +163,7 @@ const CustomizeCategory = () => {
                     <button type='submit' className='lg:m-8 my-4 px-4 py-2 rounded-lg text-white bg-fourth'>Submit</button>
                 </form>
             </div>
-        </div>
+        </div>}
         </>
     );
 }

@@ -3,9 +3,11 @@ import { useState } from "react";
 import axios from "axios";
 import Loader from "./Loader";
 import { Input } from 'rsuite';
+import { useEffect } from "react";
 
 const Help = () => {
   const [loading, setLoading] = useState(false)
+  const [faq, setFaq] = useState([]); // State for FAQ data
 
   let token = localStorage.getItem("Token");
   const handleSubmit = async (e) => {
@@ -54,14 +56,65 @@ const Help = () => {
       input.value = '';
     });
   }
+  // Sample FAQ data
+  const initialFaq = [
+    {
+      question: "How do I create an account on your website?",
+      answer: "To create an account, click on the 'Sign Up' button in the top-right corner of the homepage and follow the registration process.",
+      isOpen: false, // Initially closed
+    },
+    {
+      question: "Can I reset my password if I forget it?",
+      answer: "Yes, you can reset your password by clicking on the 'Forgot Password' link on the login page and following the instructions sent to your email.",
+      isOpen: false, // Initially closed
+    },
+    {
+      question: "How do I add income and expenses to my account?",
+      answer: "To add income and expenses, log in to your account, go to the dashboard, and click on the 'Add Income' or 'Add Expense' button.",
+      isOpen: false, // Initially closed
+    },
+  ];
 
+  // Function to toggle FAQ answers
+  const toggleAnswer = (index) => {
+    const updatedFaq = [...faq];
+    updatedFaq[index].isOpen = !updatedFaq[index].isOpen;
+    setFaq(updatedFaq);
+  };
 
+  // Initialize FAQ data with isOpen property
+  useEffect(() => {
+    const initializedFaq = initialFaq.map((item) => ({ ...item, isOpen: false }));
+    setFaq(initializedFaq);
+  }, []);
   return (
     <div className="bg-background">
       <Sidebar />
-      {loading ? <Loader /> : <div className="setting-main lg:px-[120px]">
+      {loading ? <Loader /> : 
+      <div>
+      <div className="lg:px-36 px-4">
+        <h1 className="text-center pt-12 text-[30px] font-semibold">FAQ's</h1><br></br>
+        <div>
+        {faq.map((item, index) => (
+          <div key={index} className="mb-2 p-4 bg-[#eee] rounded-lg">
+            <button
+              className="font-bold text-left w-full text-left cursor-pointer focus:outline-none"
+              onClick={() => toggleAnswer(index)}
+            >
+              {item.isOpen ? "-" : "+"} {item.question}
+            </button>
+            {item.isOpen && <p className="pt-4">{item.answer}</p>}
+          </div>
+        ))}
+        </div>
+      </div>
+      
+      
+      
+      
+      <div className="lg:px-36 px-4">
         <div className="w-[50%]">
-          <h1 className="py-4 font-bold text-[25px]">Help</h1>
+          <h1 className="py-4 font-bold text-[25px]">Contact Us</h1>
           <form onSubmit={handleSubmit} className="bg-white rounded w-[40vw] pt-6 pb-8 mb-4">
             <div className="mb-4 form-field">
               <label className="block text-black-700 text-sm font-bold mb-2">
@@ -98,7 +151,7 @@ const Help = () => {
             </div>
           </form>
         </div>
-      </div>}
+      </div></div>}
     </div>
   );
 };

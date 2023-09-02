@@ -20,13 +20,13 @@ const Profile = () => {
           'Content-Type': 'application/json',
         },
       });
-
+      setLoading(false);
       const data_new = await response.json();
       if (data_new.status === 495) {
         window.location.replace('/')
       }
       setData(data_new.user);   
-      setLoading(false);
+
     } catch (error) {
       console.error(error);
     }
@@ -87,11 +87,11 @@ const Profile = () => {
                     </tr> */}
                     <tr className="border p-4">
                       <td className="border p-4 w-[50%]">No of. Categories</td>
-                      <td className="p-4">{data.categories.length}</td>
+                      <td className="p-4">{data.categories?.length}</td>
                     </tr>
                     <tr className="border p-4">
                       <td className="border p-4 w-[50%]">Categories</td>
-                      <td className="p-4">{data.categories.join(' , ')}</td>
+                      <td className="p-4">{data.categories?.join(' , ')}</td>
                     </tr>
                     <tr className="border p-4">
                       <td className="border p-4 w-[50%]">Currency</td>

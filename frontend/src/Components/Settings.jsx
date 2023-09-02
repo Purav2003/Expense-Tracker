@@ -60,6 +60,8 @@ const Settings = () => {
                 };
                 axios.request(config)
                     .then((response) => {
+                        setLoading(false)
+
                         if(JSON.stringify(response.status) === 495){
                             window.location.replace('/')
                           }
@@ -67,7 +69,6 @@ const Settings = () => {
                             setData(response.data.user);
                             setSelectedCurrency(cur);
                             localStorage.setItem('selectedCurrency', cur);
-                            setLoading(false)
                         }
                     })
             }

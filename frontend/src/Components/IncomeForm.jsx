@@ -1,12 +1,13 @@
 import axios from "axios"
-import toast, { Toaster } from 'react-hot-toast';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import add from './../assets/images/Add_Items_Vector.png'
-import { Input, SelectPicker } from 'rsuite';
+import { Input} from 'rsuite';
 import { useState } from "react";
 import { InputPicker } from 'rsuite';
 const IncomeForm = () => {
     var todayDate = new Date().toISOString().slice(0, 10);
-    const [selectedMode, setSelectedMode] = useState("Online");
+    const [selectedMode, setSelectedMode] = useState();
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -15,7 +16,10 @@ const IncomeForm = () => {
         const date = document.querySelector('.date').value
         const modea = selectedMode
         const from = document.querySelector('.from').value
-
+        if(!modea){
+            toast.error('Mode is required.',{hideProgressBar:true})
+            return;
+        }
         let token = localStorage.getItem("Token")
         let createdBy = localStorage.getItem("createdBy")
         let data = JSON.stringify({
@@ -33,7 +37,7 @@ const IncomeForm = () => {
         }
     
         let count_success = 0
-        if (amount > 0 ) {
+        if (amount > 0 && modea) {
             try {
                 let config = {
                     method: 'post',
@@ -53,12 +57,15 @@ const IncomeForm = () => {
                             window.location.replace('/')
                           }
                         if (JSON.stringify(response.data.status) === '200') {
-                            window.location.reload()
-                            toast.success('Successfully Added');
-                            const inputs = document.querySelectorAll('.description, .amount, .date,.from');                        
-                            inputs.forEach(input => {
-                                input.value = '';
-                            });
+                            toast.success('Successfully Added',{hideProgressBar:true});
+                            setTimeout(() => {
+                                const inputs = document.querySelectorAll('.description, .amount, .date, .to');
+                                inputs.forEach(input => {
+                                  input.value = '';
+                                });
+                                window.location.reload();
+                              }, 1500); 
+                            
                         }
                         if (JSON.stringify(response.data.status) === '400') {
                             toast.error('Description Is More Than 25 Letters');
@@ -80,7 +87,6 @@ const IncomeForm = () => {
 
     return (
         <>
-        <div><Toaster/></div>
 <div className="lg:flex ">
 
     <div className="lg:w-[50%] w-0 ">
@@ -120,7 +126,6 @@ const IncomeForm = () => {
                         Mode
                     </label>
                     <InputPicker data={datab} className="w-full"
-                    value={selectedMode}
                             onChange={(value) => setSelectedMode(value)}/>
                     <div id="errora"></div>
                 </div>

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Sidebar from "./../Components/Sidebar";
 import RecentTransaction from "./../Components/RecentTransaction";
 import CalendarDashboard from "./../Components/CalendarDashboard";
-import SummaryDashboard from "./../Components/SummayDashboard";
+import SummaryDashboard from "../Components/SummayDashboard";
 import * as icon from "react-icons/fi";
 import './../assets/css/dashboard.css';
 const Dashboard = () => {

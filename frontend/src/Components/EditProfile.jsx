@@ -29,6 +29,8 @@ const EditProfile = () => {
                     'Content-Type': 'application/json',
                 },
             });
+            setLoading(false)
+
             const data_new = await response.json();
             if (data_new.status === 495) {
                 window.location.replace('/')
@@ -44,7 +46,6 @@ const EditProfile = () => {
                 mobile: data_new.user.mobile,
                 name: data_new.user.name
             });
-            setLoading(false)
 
         } catch (error) {
             console.log(error)

@@ -47,6 +47,7 @@ const Signup = () => {
             localStorage.setItem("Token", response.data.token)
             localStorage.setItem("createdBy", response.data.user._id)
             localStorage.setItem("username", response.data.user.name)
+            localStorage.setItem("selectedCurrency",response.data.user.currency);
             window.location.replace("/customize-category")
 
           }

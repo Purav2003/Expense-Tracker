@@ -1,5 +1,6 @@
 import axios from "axios"
-import toast, { Toaster } from 'react-hot-toast';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import add from './../assets/images/Add_Items_Vector.png'
 import { useEffect, useState } from "react";
 import { Input } from 'rsuite';
@@ -9,8 +10,8 @@ import { InputPicker } from 'rsuite';
 const ExpenseForm = () => {
     const [selectedValues, setSelectedValues] = useState([]);
     const datac = selectedValues.map(item => ({ label: item, value: item }));
-    const [selectedCategory, setSelectedCategory] = useState(datac[0]?.value);
-    const [selectedMode, setSelectedMode] = useState("Online");
+    const [selectedCategory, setSelectedCategory] = useState(); // Set the first option as the default value
+    const [selectedMode, setSelectedMode] = useState();
     var todayDate = new Date().toISOString().slice(0, 10);
     const handleSubmit = async (e) => {
 
@@ -20,8 +21,15 @@ const ExpenseForm = () => {
         const date = document.querySelector('.date').value
         const modeb = selectedMode
         const to = document.querySelector('.to').value
-        var category = selectedCategory  
-
+        const category = selectedCategory  
+        if (!category) {
+            toast.error('Category is required.',{hideProgressBar:true})
+            return;
+          }
+          if(!modeb){
+            toast.error('Mode is required.',{hideProgressBar:true})
+            return;
+        }
         let token = localStorage.getItem("Token")
         let createdBy = localStorage.getItem("createdBy")
         let data = JSON.stringify({
@@ -40,7 +48,7 @@ const ExpenseForm = () => {
         }
 
         let count_success = 0
-        if (amount > 0 && category !== 'Other') {
+        if (amount > 0 && category && modeb) {
             try {
                 let config = {
                     method: 'post',
@@ -59,13 +67,16 @@ const ExpenseForm = () => {
                             window.location.replace('/')
                         }
                         if (JSON.stringify(response.status) === '200') {
-                            toast.success("Succesfully Added", { duration: 1500 })
+                            toast.success("Succesfully Added",{hideProgressBar:true})
 
-                            const inputs = document.querySelectorAll('.description, .amount, .date,.from');
-                            inputs.forEach(input => {
-                                input.value = '';
-                            });
-                            window.location.reload()
+                            setTimeout(() => {
+                                const inputs = document.querySelectorAll('.description, .amount, .date, .to');
+                                inputs.forEach(input => {
+                                  input.value = '';
+                                });
+                                window.location.reload();
+                              }, 1500); 
+                            
 
                         }
                         if (JSON.stringify(response.data.status) === '400') {
@@ -112,12 +123,16 @@ const ExpenseForm = () => {
 
     useEffect(() => {
         fetchData()
+        .then(() => {
+            if (datac.length > 0) {
+              setSelectedCategory(datac[0]?.value);
+            }
+          });
     }, [])
     console.log()
     const datab = ["Online","Offline"].map(item => ({ label: item, value: item }));
     return (
         <>
-            <div><Toaster /></div>
             <div className="lg:flex ">
                 <div className="lg:w-[50%] w-0">
                     <img src={add} className="w-[80%]" />
@@ -161,7 +176,6 @@ const ExpenseForm = () => {
                             </label>
 
                             <InputPicker data={datac} className=" w-full" 
-                                            value={selectedCategory}
                             onChange={(value) => setSelectedCategory(value)}/>
                         </div>
 
@@ -170,8 +184,6 @@ const ExpenseForm = () => {
                                 Mode
                             </label>                          
                             <InputPicker data={datab} className="w-full"
-                                            value={selectedMode}
-
                             onChange={(value) => setSelectedMode(value)}/>
 
                             <div id="errora"></div>

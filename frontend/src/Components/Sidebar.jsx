@@ -70,7 +70,7 @@ const Sidebar = () => {
 
     return (
         <>
-            <nav className="bg-[#3b72ff] border-gray-200 fixed w-full z-[100]">                
+            <nav className="bg-fourth border-gray-200 fixed w-full z-[100]">                
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <Link to="/dashboard" className="flex items-center">
                         <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">Expense Tracker</span>
@@ -84,7 +84,7 @@ const Sidebar = () => {
                     >
                         <span className="sr-only">Toggle menu</span>
                         <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15"/>
                         </svg>
                     </button>
                     <div className={`w-full md:block md:w-auto ${showMenu ? 'block' : 'hidden'}`} id="navbar-default">

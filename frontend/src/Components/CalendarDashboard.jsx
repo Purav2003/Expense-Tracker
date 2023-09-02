@@ -27,12 +27,12 @@ const CalendarDashboard = () => {
           'Content-Type': 'application/json',
         },
       });       
+      setLoading(false);
       const datas = await response.json();
       if(datas.status === 495){
         window.location.replace('/')
       }      
       setData(datas.dates);
-      setLoading(false);
 
     } catch (error) {
       // Handle error here
