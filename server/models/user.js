@@ -34,10 +34,10 @@ var userSchema = new mongoose.Schema({
         type:Array,
         default:["Food","Clothes","Groceries","Petrol"]
     },
-    profileImage:{
-        data: Buffer,
-        contentType: String,
-    }
+    // profileImage:{
+    //     data: Buffer,
+    //     contentType: String,
+    // }
 }, { timestamps: true });
 
 userSchema.pre("save", async function () {
