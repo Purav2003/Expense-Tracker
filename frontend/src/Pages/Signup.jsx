@@ -6,10 +6,18 @@ import { toast } from 'react-toastify';
 import 'react-tooltip/dist/react-tooltip.css'
 import { Tooltip } from 'react-tooltip'
 import * as icon from 'react-icons/hi'
+import { Input, InputGroup } from 'rsuite';
+import EyeIcon from '@rsuite/icons/legacy/Eye';
+import EyeSlashIcon from '@rsuite/icons/legacy/EyeSlash';
+import { useState } from "react";
 
 const Signup = () => {
   let token = localStorage.getItem("Token")
+  const [visible, setVisible] = useState(false);
 
+  const handleChange = () => {
+    setVisible(!visible);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault()
     const email = document.querySelector('.email').value
@@ -135,13 +143,14 @@ const Signup = () => {
                 <label className="block text-black-700 text-sm font-bold mb-2 ">
                   Name
                 </label>
-                <input className="name shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Username" required />
+                <Input placeholder="Enter Name" className="name"  required/>
               </div>
               <div className="mb-4 form-field">
                 <label className="block text-black-700 text-sm font-bold mb-2">
                   Phone Number
                 </label>
-                <input className="mobile shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="number" placeholder="Phone Number" required />
+                <Input placeholder="Enter Phone Number" className="mobile"  type="number" required/>
+
                 <div id="error"></div>
                 <div id="phone"></div>
 
@@ -150,7 +159,7 @@ const Signup = () => {
                 <label className="block text-black-700 text-sm font-bold mb-2">
                   Email
                 </label>
-                <input className="email shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="E-mail" required />
+                <Input placeholder="Enter Email" className="email"  type="email" required/>
                 <div id="errorm"></div>
                 <div id="user"></div>
 
@@ -160,16 +169,18 @@ const Signup = () => {
     Password
   </label>
   <div className="relative">
-    <input
-      className="password shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline pr-10"
-      type="password"
-      placeholder="Password"
-      required
-    />
-    <icon.HiInformationCircle
-      className="absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer"
+  <InputGroup inside >
+      <Input type={visible ? 'text' : 'password'} className="password" placeholder="Enter Password" />
+      <InputGroup.Button onClick={handleChange}>
+        {visible ? <EyeIcon /> : <EyeSlashIcon />}
+        
+      </InputGroup.Button>
+      <icon.HiInformationCircle
+      className="absolute pl-[100px] top-1/2 right-2 transform -translate-y-1/2 cursor-pointer"
       data-tooltip-id="my-tooltip"
     />
+    </InputGroup>
+
   </div>
   <Tooltip
     id="my-tooltip"

@@ -13,17 +13,21 @@ const Help = () => {
         const name = document.querySelector('.name').value
         const email = document.querySelector('.email').value
         const query = document.querySelector('.query').value
+        const mobile = document.querySelector('.mobile').value
 
     
         let data = JSON.stringify({
           "name":name,
           "email": email,
-          "query":query
+          "query":query,
+          "mobile":mobile
         });
+        const id = localStorage.getItem('createdBy');
+
         try {
           let config = {
             method: 'post',
-            url: 'http://localhost:5000/api/v1/auth/signin',
+            url: `http://localhost:5000/api/v1/auth/contactus/${id}`,
             headers: {
               'Authorization': `Bearer ${token}`,
               'Content-Type': 'application/json'
@@ -45,7 +49,7 @@ const Help = () => {
           console.log(err.code)
         }
     
-        const inputs = document.querySelectorAll('.name, .email,.query');
+        const inputs = document.querySelectorAll('.name, .email,.query,.mobile');
         inputs.forEach(input => {
           input.value = '';
         });
@@ -64,6 +68,13 @@ const Help = () => {
                                 Name
                             </label>
                             <input className="name shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Name" required />
+                            <div id="error"></div>
+                        </div>
+                        <div className="mb-4 form-field">
+                            <label className="block text-black-700 text-sm font-bold mb-2">
+                                Phone
+                            </label>
+                            <input className="mobile shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="number" placeholder="Name" required />
                             <div id="error"></div>
                         </div>
                         <div className="mb-4 form-field">
