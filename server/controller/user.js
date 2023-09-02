@@ -204,7 +204,7 @@ const contactUs = async (req,res)=>{
     const data = {
         to: email,
         text: `Your response has been submitted`,
-        subject: "Ticked Raised",
+        subject: "Ticket Raised",
         html: "<h3>Your Ticket has be successfully delivered to out support team they will try to solve your problem as soon as possible</h3>"
     }
     sendEmail(data)
