@@ -1,9 +1,9 @@
 require("express-async-errors")
 const User = require("../models/user")
 const sendEmail = require("./emailctrl")
-const multer = require("multer")
-const storage = multer.memoryStorage()
-const upload = multer({ storage })
+// const multer = require("multer")
+// const storage = multer.memoryStorage()
+// const upload = multer({ storage })
 
 const signup = async (req, res) => {
     const { numberError, passwordError, emailError } = req.user
@@ -178,24 +178,24 @@ const addCategory = async (req, res) => {
     res.send({ msg: "Categories added successfully", success: true, status: 200 })
 }
 
-const uploadImage = async (req, res) => {
-    const id = req.params.id
-    const user = await User.findById(id)
-    upload.single('image')(req, res, async function (err) {
-        if (err instanceof multer.MulterError) {
-            return res.send({ msg: 'File upload error' ,success:false,status:400});
-        } else if (err) {
-            return res.send({ msg: 'Internal server error',success:false,status:500 });
-        }
-        const image = {
-            data: req.file.buffer,
-            contentType: req.file.mimetype,
-        };
-        user.profileImage = image
-        await user.save();
-        res.send({msg:"Image uploaded successfully",success:true,status:200})
-    })
-}
+// const uploadImage = async (req, res) => {
+//     const id = req.params.id
+//     const user = await User.findById(id)
+//     upload.single('image')(req, res, async function (err) {
+//         if (err instanceof multer.MulterError) {
+//             return res.send({ msg: 'File upload error' ,success:false,status:400});
+//         } else if (err) {
+//             return res.send({ msg: 'Internal server error',success:false,status:500 });
+//         }
+//         const image = {
+//             data: req.file.buffer,
+//             contentType: req.file.mimetype,
+//         };
+//         user.profileImage = image
+//         await user.save();
+//         res.send({msg:"Image uploaded successfully",success:true,status:200})
+//     })
+// }
 
 const logout = (req, res) => {
         if (req.headers.authorization) {

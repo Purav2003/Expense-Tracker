@@ -13,7 +13,7 @@ router.route("/changePassword/:id").post(authMiddleware,changePassword)
 router.route("/forgetPasswordMailConfirmation").post(forgetPasswordMailConfirmation)
 router.route("/forgetPassword").post(forgetPassword)
 router.route("/addCategory/:id").post(authMiddleware,addCategory)
-router.route("/uploadImage/:id").post(authMiddleware,uploadImage)
+// router.route("/uploadImage/:id").post(authMiddleware,uploadImage)
 router.route("/logout").post(authMiddleware,logout)
 
 module.exports = router
