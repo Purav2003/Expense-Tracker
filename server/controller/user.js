@@ -214,6 +214,5 @@ const logout = (req, res) => {
         forgetPassword,
         editProfile,
         addCategory,
-        uploadImage,
         logout
     }
