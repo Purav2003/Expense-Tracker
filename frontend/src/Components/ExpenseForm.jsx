@@ -2,10 +2,15 @@ import axios from "axios"
 import toast, { Toaster } from 'react-hot-toast';
 import add from './../assets/images/Add_Items_Vector.png'
 import { useEffect, useState } from "react";
+import { Input } from 'rsuite';
+import { InputPicker } from 'rsuite';
+
 
 const ExpenseForm = () => {
     const [selectedValues, setSelectedValues] = useState([]);
-
+    const datac = selectedValues.map(item => ({ label: item, value: item }));
+    const [selectedCategory, setSelectedCategory] = useState(datac[0]?.value);
+    const [selectedMode, setSelectedMode] = useState("Online");
     var todayDate = new Date().toISOString().slice(0, 10);
     const handleSubmit = async (e) => {
 
@@ -13,9 +18,9 @@ const ExpenseForm = () => {
         const description = document.querySelector('.description').value
         const amount = document.querySelector('.amount').value
         const date = document.querySelector('.date').value
-        const modeb = document.querySelector('.modeb').value
+        const modeb = selectedMode
         const to = document.querySelector('.to').value
-        var category = document.querySelector('.category').value   
+        var category = selectedCategory  
 
         let token = localStorage.getItem("Token")
         let createdBy = localStorage.getItem("createdBy")
@@ -108,8 +113,8 @@ const ExpenseForm = () => {
     useEffect(() => {
         fetchData()
     }, [])
-
-
+    console.log()
+    const datab = ["Online","Offline"].map(item => ({ label: item, value: item }));
     return (
         <>
             <div><Toaster /></div>
@@ -125,54 +130,50 @@ const ExpenseForm = () => {
                             <label className="block text-black-700 text-sm font-bold mb-2">
                                 Description
                             </label>
-                            <input className="description shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Description" required />
+                            <Input placeholder="Description" className="description" required/>
+
                         </div>
                         <div className="mb-4 form-field">
                             <label className="block text-black-700 text-sm font-bold mb-2">
                                 Amount
                             </label>
-                            <input className="amount shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="number" placeholder="Amount" required />
+                            <Input placeholder="Amount" className="amount" type="number" required/>
+
                             <div id="error"></div>
                         </div>
                         <div className="mb-4 form-field">
                             <label className="block text-black-700 text-sm font-bold mb-2">
                                 Date
                             </label>
-                            <input className="date shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="date" id="date" placeholder="Date" max={todayDate} required />
+                            <Input type="date" className="date" max={todayDate} required/>
+
                         </div>
                         <div className="mb-4 form-field">
                             <label className="block text-black-700 text-sm font-bold mb-2">
                                 To
                             </label>
-                            <input className="to shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="To" required />
+                            <Input placeholder="To"  className="to" required/>
+
                         </div>
                         <div className="mb-4 form-field">
                             <label className="block text-black-700 text-sm font-bold mb-2">
                                 Category
                             </label>
-                            <select className="category border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline ">
-                                <option value="select" disabled>Select</option>
-                                {selectedValues.map((value) => (
-                                    <option key={value} value={value}>
-                                        {value}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                        <div className="mb-4 form-field hidden" id="Other">
-                            <input className="other shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight" type="text" placeholder="Specify Other" />
-                            <div id="errorother" className="text-[red]"></div>
 
+                            <InputPicker data={datac} className=" w-full" 
+                                            value={selectedCategory}
+                            onChange={(value) => setSelectedCategory(value)}/>
                         </div>
+
                         <div className="mb-4 form-field">
                             <label className="block text-black-700 text-sm font-bold mb-2">
                                 Mode
-                            </label>
-                            <select className="modeb border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline ">
-                                <option value="select" disabled>Select</option>
-                                <option value="Online" >Online</option>
-                                <option value="Offline">Offline</option>
-                            </select>
+                            </label>                          
+                            <InputPicker data={datab} className="w-full"
+                                            value={selectedMode}
+
+                            onChange={(value) => setSelectedMode(value)}/>
+
                             <div id="errora"></div>
                         </div>
                         <div className="flex form-field items-center">

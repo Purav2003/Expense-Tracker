@@ -21,7 +21,8 @@ import Logout from './Pages/Logout';
 import { useState, useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import NotFound from './Components/NotFound';
+import LandingPage from './Pages/LandingPage';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -58,6 +59,9 @@ function App() {
           <Route path='/customize-category' element={<CustomizeCategory />}></Route>
           <Route path='/edit-profile' element={<EditProfile />}></Route>
           <Route path='/success-changed-pass' element={<PassSuccess />}></Route>
+          <Route path='/landing-page' element={<LandingPage />}></Route>
+          <Route path="*" element={<NotFound />} />
+
         </Routes>
 
       </Router>

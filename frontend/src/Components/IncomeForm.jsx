@@ -1,16 +1,19 @@
 import axios from "axios"
 import toast, { Toaster } from 'react-hot-toast';
 import add from './../assets/images/Add_Items_Vector.png'
-
+import { Input, SelectPicker } from 'rsuite';
+import { useState } from "react";
+import { InputPicker } from 'rsuite';
 const IncomeForm = () => {
     var todayDate = new Date().toISOString().slice(0, 10);
+    const [selectedMode, setSelectedMode] = useState("Online");
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         const description = document.querySelector('.description').value
         const amount = document.querySelector('.amount').value
         const date = document.querySelector('.date').value
-        const modea = document.querySelector('.modea').value
+        const modea = selectedMode
         const from = document.querySelector('.from').value
 
         let token = localStorage.getItem("Token")
@@ -73,6 +76,8 @@ const IncomeForm = () => {
         });
     }
     }
+    const datab = ["Online","Offline"].map(item => ({ label: item, value: item }));
+
     return (
         <>
         <div><Toaster/></div>
@@ -88,36 +93,35 @@ const IncomeForm = () => {
                     <label className="block text-black-700 text-sm font-bold mb-2">
                         Description
                     </label>
-                    <input className="description shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Description" required />
+                    <Input placeholder="Description" className="description" required/>
                 </div>
                 <div className="mb-4 form-field">
                     <label className="block text-black-700 text-sm font-bold mb-2">
                         Amount
                     </label>
-                    <input className="amount shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="number" placeholder="Amount" required min={0}/>
+                    <Input placeholder="Amount" className="amount" type="number" required/>
                     <div id="error"></div>
                 </div>
                 <div className="mb-4 form-field">
                     <label className="block text-black-700 text-sm font-bold mb-2">
                         Date
                     </label>
-                    <input className="date shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="date" placeholder="Date" max={todayDate} required />
+                    <Input type="date" className="date" max={todayDate} required/>
                 </div>
                 <div className="mb-4 form-field">
                     <label className="block text-black-700 text-sm font-bold mb-2">
                         From
                     </label>
-                    <input className="from shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="From" required />
+                    <Input placeholder="From"  className="from"/>
+
                 </div>
                 <div className="mb-4 form-field">
                     <label className="block text-black-700 text-sm font-bold mb-2">
                         Mode
                     </label>
-                    <select className="modea border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline ">
-                        <option value="select" disabled>Select</option>
-                        <option value="Online" >Online</option>
-                        <option value="Offline">Offline</option>
-                    </select>
+                    <InputPicker data={datab} className="w-full"
+                    value={selectedMode}
+                            onChange={(value) => setSelectedMode(value)}/>
                     <div id="errora"></div>
                 </div>
                 <div className="flex form-field items-center">

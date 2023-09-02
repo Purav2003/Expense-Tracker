@@ -2,6 +2,7 @@ import Sidebar from "./Sidebar";
 import { useState } from "react";
 import axios from "axios";
 import Loader from "./Loader";
+import { Input } from 'rsuite';
 
 const Help = () => {
   const [loading, setLoading] = useState(false)
@@ -66,28 +67,28 @@ const Help = () => {
               <label className="block text-black-700 text-sm font-bold mb-2">
                 Name
               </label>
-              <input className="name shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Name" required />
+              <Input placeholder="Name" className="name" required/>
               <div id="error"></div>
             </div>
             <div className="mb-4 form-field">
               <label className="block text-black-700 text-sm font-bold mb-2">
                 Phone
               </label>
-              <input className="mobile shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="number" placeholder="Name" required />
+              <Input placeholder="Phone" className="mobile" type="number" required/>
               <div id="error"></div>
             </div>
             <div className="mb-4 form-field">
               <label className="block text-black-700 text-sm font-bold mb-2">
                 Email
               </label>
-              <input className="email shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="E-mail" required />
+              <Input placeholder="Email" className="email" type="email" required/>
               <div id="error"></div>
             </div>
             <div className="mb-4 form-field">
               <label className="block text-black-700 text-sm font-bold mb-2">
                 Query
               </label>
-              <textarea className="query shadow appearance-none border border-black rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Query" required />
+              <Input as="textarea" rows={3} placeholder="Query" className="query" required/>
               <div id="error"></div>
             </div>
             <div className="flex form-field items-center">
