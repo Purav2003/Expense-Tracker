@@ -72,7 +72,6 @@ const ExpenseSearch = () => {
   return (
     <>
       <div className="bg-white">
-        <Sidebar />
 
         <div><Toaster /></div>
 

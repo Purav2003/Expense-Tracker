@@ -110,7 +110,6 @@ const Settings = () => {
 
     return (
         <div className="bg-background settings">
-            <Sidebar />
             {loading ? <Loader /> : <div className="setting-main">
                 <div className="w-[50%]">
                     <h1 className="py-4 font-bold text-[25px]">Settings</h1>

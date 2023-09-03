@@ -17,7 +17,6 @@ const Expense = () => {
       }
     return (
         <div className="bg-white">
-                            <Sidebar />
 
             <div><br></br><br></br>
             <div className="lg:flex px-8 main-heading-mob">
