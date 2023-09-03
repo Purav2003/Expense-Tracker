@@ -130,16 +130,16 @@ const Sidebar = () => {
                     key={link.id}
                     className={`${
                       active === link.title
-                        ? "font-bold rounded-lg text-white"
-                        : "font-thin text-[#fefefe]"
-                    }  text-[18px] lg:self-center md:self-center `}
+                        ? "rounded-lg text-white bg-[rgba(255,255,255,0.2)]"
+                        : " text-[#fefefe]"
+                    }   px-2 text-[18px] hover:bg-[rgba(255,255,255,0.2)] hover:rounded-lg lg:self-center md:self-center `}
                   >
                     <Link
                       to={link.link}
                       className="flex items-center p-2 rounded-lg  group"
                       onClick={() => handleMenuItemClick(link.title)}
                     >
-                     <a className="font-bold">{link.icon}</a>
+                     {link.icon}
                       <span className="ml-3">{link.title}</span>
                     </Link>
                   </li>
@@ -148,8 +148,8 @@ const Sidebar = () => {
                   <button onClick={toggleProfileMenu} className={`flex items-center`}>
                     <Identicon
                       string={data.email} // Use user's email as the identifier
-                      size={54} // Adjust size as needed
-                      className="bg-[#eee] border border-[2px] p-1 rounded-full"
+                      size={44} // Adjust size as needed
+                      className="bg-[#eee] p-1 rounded-full"
                     />
                   </button>
                   <ul
