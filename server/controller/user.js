@@ -70,7 +70,7 @@ const profile = async (req, res) => {
 const changePassword = async (req, res) => {
     const id = req.params.id
     const { oldPassword, newPassword } = req.body
-    let passwordValidation = /^(?=.*bablu\d)(?=.*bablu[a-z])(?=.*bablu[A-Z])(?=.*bablu[^a-zA-Z0-9]).{8,1024}$/.test(newPassword)
+    let passwordValidation = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/.test(newPassword)
     const user = await User.findById(id)
     if (await user.comparePassword(oldPassword)) {
         if (!passwordValidation) {
