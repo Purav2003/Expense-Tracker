@@ -5,33 +5,33 @@ import landing1 from '../assets/images/landing-1.png'
 import landing2 from '../assets/images/landing-2.png'
 import landing3 from '../assets/images/landing-3.png'
 import landing4 from '../assets/images/landing-4.png'
-import {useState} from 'react'
+import { useState } from 'react'
 import { useEffect } from 'react';
 
 const LandingPage = () => {
     const [prevScrollPos, setPrevScrollPos] = useState(0);
     const [visible, setVisible] = useState(true);
-  
+
     useEffect(() => {
-      window.addEventListener('scroll', handleScroll);
-      return () => {
-        window.removeEventListener('scroll', handleScroll);
-      };
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
     }, [prevScrollPos]);
-  
+
     const handleScroll = () => {
-      const currentScrollPos = window.pageYOffset;
-      const visible = prevScrollPos > currentScrollPos || currentScrollPos < 10;
-      setVisible(visible);
-      setPrevScrollPos(currentScrollPos);
+        const currentScrollPos = window.pageYOffset;
+        const visible = prevScrollPos > currentScrollPos || currentScrollPos < 10;
+        setVisible(visible);
+        setPrevScrollPos(currentScrollPos);
     };
     return (
         <div className='landing'>
-                  <header className={`fixed w-full z-[100] ${visible ? '' : 'navbar-hidden'}`}>
-        <nav>
-          <div className="logo">Expense Tracker</div>
-        </nav>
-      </header><br></br><br></br>
+            <header className={`fixed w-full z-[100] ${visible ? '' : 'navbar-hidden'}`}>
+                <nav>
+                    <div className="logo">Expense Tracker</div>
+                </nav>
+            </header><br></br><br></br>
 
             <section className="hero flex w-full justify-center items-center">
                 <div className="hero-content text-center">
@@ -73,16 +73,17 @@ const LandingPage = () => {
                     <div className='text-center'>
                         <img src={heroImage} alt="Expense" />
                     </div>
-                    <div className='w-[50%] text-center'>
-                        <h3>Dashboard</h3>
-                        <p></p>
+                    <div className='w-[50%] text-left'>
+                        <h3 className='font-semibold'>Simple money tracker</h3>
+                        <p>It takes seconds to record daily transactions. Put them into clear and visualized categories such as Expense: Food, Shopping or Income: Salary, Gift.</p>
                     </div>
                 </div>
 
                 <div className="feature flex w-full justify-center items-center">
-                    <div className='text-center w-[50%]' ><h3>Add Income </h3>
-                        <p>Easily add your income records.</p></div>
+                    <div className='font-semibold  w-[29%]' ><h3 className='text-right'>Painless budgeting</h3>
+                        <p className='text-left pl-2'>It takes seconds to record daily transactions. Put them into clear and visualized categories such as Expense: Food, Shopping or Income: Salary, Gift.
 
+                        </p></div>
                     <div className="text-center"><img src={heroImage} alt="Income" /></div>
 
                 </div>
@@ -91,26 +92,14 @@ const LandingPage = () => {
                     <div className='text-center'>
                         <img src={heroImage} alt="Expense" />
                     </div>
-                    <div className='text-center w-[50%]'><h3>Add Expense</h3>
-                        <p>Effortlessly record your expenses.</p>
+                    <div className='w-[50%] text-left'>
+                        <h3 className='font-semibold'>The whole picture in one place</h3>
+                        <p>One report to give a clear view on your spending patterns. Understand where your money comes and goes with easy-to-read graphs.</p>
                     </div>
                 </div>
-                <div className="feature flex w-full justify-center items-center">
-                    <div className='text-center w-[50%]'><h3>View your data </h3>
-                        <p>View income / expense as you want</p></div>
-                    <div className='text-center'>
-                        <img src={heroImage} alt="Expense" />
-                    </div>
-                </div>
-                <div className="feature flex w-full justify-center items-center">
-                    <div className='text-center'>
-                        <img src={heroImage} alt="Expense" />
-                    </div>
-                    <div className='text-center w-[50%]'><h3>Report </h3>
-                        <p>View / Download your reports effortlessly</p></div>
-                </div>
+              
                 {/* Add more features here */}
-            </section>
+            </section><br></br><br></br>
 
             {/* Other sections like How It Works, Testimonials, CTA, Footer, etc. */}
 
