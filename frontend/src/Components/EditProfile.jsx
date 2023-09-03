@@ -145,7 +145,6 @@ const EditProfile = () => {
 
     return (
         <div className='edit-profile'>
-            <Sidebar />
 
             {loading ? <Loader /> : <div className="setting-main">
                 <div className="w-[50%]">

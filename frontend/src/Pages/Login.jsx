@@ -45,6 +45,7 @@ const Login = () => {
             localStorage.setItem("createdBy", response.data.user._id)
             localStorage.setItem("username", response.data.name)
             localStorage.setItem("selectedCurrency",response.data.user.currency);
+            localStorage.setItem("userMail",response.data.user.email);
 
             window.location.replace("/dashboard")
           }

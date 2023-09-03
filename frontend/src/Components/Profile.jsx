@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import dp from "./../assets/images/signup.png";
 import Sidebar from "./Sidebar";
 import Loader from "./Loader";
+import Identicon from "react-identicons";
+
 const Profile = () => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
@@ -41,20 +43,18 @@ const Profile = () => {
 
   return (
     <>
-      <Sidebar />
       {loading ? <Loader /> : <div>
         <div className="lg:grid grid-cols-2 gap-0 lg:ml-[11vw]">
           <div className="col-span-1 w-[60%] p-4">
             <div className="bg-white">
               <center><br></br>
 
-                <div className="relative cursor-pointer">
-                  <img
-                    src={dp}
-                    className="w-64 h-64 object-cover rounded-full"
-                    alt="Profile"
-                  />
-                  
+                <div className="relative">
+                <Identicon
+                      string={data.email} // Use user's email as the identifier
+                      size={170} // Adjust size as needed
+                      className="w-64 h-64 object-cover rounded-full"
+                    />
                 </div>
 
                 <br></br>

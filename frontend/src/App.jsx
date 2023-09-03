@@ -23,9 +23,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import NotFound from './Components/NotFound';
 import LandingPage from './Pages/LandingPage';
-import 'aos/dist/aos.css'; // Import the CSS
-import AOS from 'aos';
-AOS.init(); 
+import Sidebar from './Components/Sidebar'; 
 
 
 function App() {
@@ -42,10 +40,14 @@ function App() {
       <ToastContainer />
 
       <Router>
+{loggedIn?      <Sidebar />:""
+}
         <Routes>
           {loggedIn ? <Route path='/dashboard' element={<Dashboard />}></Route> :
             <Route path='/' element={<Login />}></Route>
           }
+                      <Route path='/' element={<Login />}></Route>
+
           <Route path='/signup' element={<Signup />}></Route>
           <Route path='/dashboard' element={<Dashboard />}></Route>
           <Route path='/income' element={<Income />}></Route>

@@ -86,7 +86,6 @@ const ResetPassword = () => {
    
   return (
     <div className="bg-white re-pass">
-      <Sidebar />
 
 
       <div className="setting-main">

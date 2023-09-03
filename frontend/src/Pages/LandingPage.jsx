@@ -7,7 +7,8 @@ import landing3 from '../assets/images/landing-3.png'
 import landing4 from '../assets/images/landing-4.png'
 import { useState } from 'react'
 import { useEffect } from 'react';
-
+import * as icon from 'react-icons/bi'
+import { Link } from 'react-router-dom';
 const LandingPage = () => {
     const [prevScrollPos, setPrevScrollPos] = useState(0);
     const [visible, setVisible] = useState(true);
@@ -30,6 +31,11 @@ const LandingPage = () => {
             <header className={`fixed w-full z-[100] ${visible ? '' : 'navbar-hidden'}`}>
                 <nav>
                     <div className="logo">Expense Tracker</div>
+                    <ul>
+                        <li>About</li>
+                        <li className='pl-8'>Contact</li>
+                        <li className='pl-8'>Why us?</li>
+                    </ul>
                 </nav>
             </header><br></br><br></br>
 
@@ -37,7 +43,7 @@ const LandingPage = () => {
                 <div className="hero-content text-center">
                     <h1>Take Control of Your Finances</h1>
                     <p>Simplify Your Expenses with Expense Tracker</p>
-                    <a href="#" className="cta-button">Get Started</a>
+                    <Link to="/" className="cta-button">Get Started</Link>
                 </div>
 
             </section>
@@ -104,15 +110,27 @@ const LandingPage = () => {
             {/* Other sections like How It Works, Testimonials, CTA, Footer, etc. */}
 
             <footer>
-                <div className="contact">
-                    <p>Contact us: contact@expensetracker.com</p>
+            <div className="lg:grid lg:grid-cols-4 gap-4">
+                <div className='col-span-2'>
+                    <h1 className='text-center'>&copy; 2023 Expense Tracker Co. Ltd. All Rights reserved.</h1>
                 </div>
-                <div className="social">
-                    <a href="#" className="social-icon p-4">Facebook</a>
-                    <a href="#" className="social-icon p-4">Twitter</a>
-                    <a href="#" className="social-icon p-4">LinkedIn</a>
+                <div>
+                    <div className='flex align-center justify-center'>
+                        <h1>About us</h1>
+                        <h2 className='pl-8'>Contact us</h2>
+                        <h2 className='pl-8'>Privacy Policy</h2>
+
+                    </div>
                 </div>
-            </footer>
+                <div>
+                    <div className='flex align-center justify-center'>
+                        <h1 className='rounded-full p-2  text-[20px] border border-[#333]'><icon.BiLogoFacebook /></h1>
+                        <h1 className='rounded-full p-2 ml-4 text-[20px] border border-[#333]'><icon.BiLogoInstagram /></h1>
+                        <h1 className='rounded-full p-2 ml-4 text-[20px] border border-[#333]'><icon.BiLogoTwitter /></h1>
+                    </div>
+                </div>
+</div>
+            </footer><br></br>
 
         </div>
     );

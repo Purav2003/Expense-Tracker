@@ -20,7 +20,6 @@ const Income = () =>{
     return(
       
         <div className="bg-white">       
-          <Sidebar />
      
                
 <>

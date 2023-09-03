@@ -89,7 +89,6 @@ const Help = () => {
   }, []);
   return (
     <div className="bg-background">
-      <Sidebar />
       {loading ? <Loader /> : 
       <div>
       <div className="lg:px-36 px-4">
