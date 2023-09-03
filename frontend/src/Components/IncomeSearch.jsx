@@ -73,7 +73,6 @@ const IncomeSearch = () => {
   return (
     <>
       <div className="bg-white">
-        <Sidebar />
 
         <div><Toaster /></div>
 

@@ -72,8 +72,6 @@ const DashboardSearch = () => {
   return (
     <>
       <div className="bg-white">
-        <Sidebar />
-
         <div><Toaster /></div>
 
         <div><br></br><br></br>
