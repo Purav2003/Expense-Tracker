@@ -84,11 +84,10 @@ const Sidebar = () => {
   return (
     <>
       {loading ? (
-        // Display a loading indicator here
-        <div>Loading...</div>
+""        
       ) : (
         // Render the navigation menu when data is not loading
-        <nav className="bg-fourth border-gray-200 fixed w-full z-[100]">
+<nav className="bg-fourth border-gray-200 fixed w-full z-[100]">
           <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <Link to="/dashboard" className="flex items-center">
               <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
@@ -145,16 +144,16 @@ const Sidebar = () => {
                     </Link>
                   </li>
                 ))}
-                <li>
+                <li className="relative">
                   <button onClick={toggleProfileMenu} className={`flex items-center`}>
                     <Identicon
                       string={data.email} // Use user's email as the identifier
-                      size={40} // Adjust size as needed
-                      className="bg-white p-1 object-cover rounded-full"
+                      size={50} // Adjust size as needed
+                      className="bg-[#eee] border p-2 rounded-full"
                     />
                   </button>
                   <ul
-                    className={`${showProfileMenu ? "block" : "hidden"} absolute lg:right-2 md:right-2 mt-2 space-y-2 rounded-lg shadow-md bg-white`}
+                    className={`${showProfileMenu ? "block" : "hidden"} absolute right-0 mt-4 mr-[-20px] w-32 border space-y-2 rounded-lg shadow-md bg-white`}
                   >
                     {/* Profile menu items */}
                     <li>

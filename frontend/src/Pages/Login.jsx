@@ -10,9 +10,31 @@ import EyeSlashIcon from '@rsuite/icons/legacy/EyeSlash';
 import { useEffect,useState } from "react";
 import * as icon from 'react-icons/fc'
 
-const Login = () => {
+const Login =  () => {
   const [visible, setVisible] = useState(false);
+const googleAuth = async () => {
+  let API_URL = ''
+ 
+    API_URL = 'http://localhost:5000/api/v1/auth/google' 
 
+  try {
+    const response = await fetch(API_URL, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const datas = await response.json();
+    if (datas.status === 495) {
+      window.location.replace('/')
+    }
+
+  } catch (error) {
+    // Handle error here
+  }
+}
   const handleChange = () => {
     setVisible(!visible);
   };
@@ -134,7 +156,7 @@ const Login = () => {
                   Login
                 </button>
                 <div className="flex justify-center items-center w-1/2">
-  <button className="bg-white border border-fourth flex items-center p-8 ml-2 button font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="button">
+  <button className="bg-white border border-fourth flex items-center p-8 ml-2 button font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="button" onClick={googleAuth}>
     <icon.FcGoogle className="mr-2" /> Login with Google
   </button>
 </div>
