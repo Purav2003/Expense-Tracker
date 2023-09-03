@@ -156,9 +156,7 @@ const googleAuth = async () => {
                   Login
                 </button>
                 <div className="flex justify-center items-center w-1/2">
-  <button className="bg-white border border-fourth flex items-center p-8 ml-2 button font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="button" onClick={googleAuth}>
-    <icon.FcGoogle className="mr-2" /> Login with Google
-  </button>
+  
 </div>
 
               </div>
@@ -167,6 +165,9 @@ const googleAuth = async () => {
     </div>
 
             </form>
+            <button className="bg-white border border-fourth flex items-center p-8 ml-2 button font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="button" onClick={googleAuth}>
+    <icon.FcGoogle className="mr-2" /> Login with Google
+  </button><br></br><br></br>
             <p className="pl-[2.4vw] second-signup">New user? <Link to="/signup" className="underline text-fourth">Sign up</Link></p><br></br><br></br>
             <p className="pl-[2.4vw] second-signup"><Link to="/forget-password-mail" className="underline text-fourth">Forget Password? </Link></p>
 
