@@ -133,7 +133,7 @@ const Login = () => {
                   Login
                 </button>
                 <div className="flex justify-center items-center w-1/2">
-  <button className="bg-white border border-fourth flex items-center p-8 ml-2 button font-bold py-2 rounded focus:outline-none focus:shadow-outline">
+  <button className="bg-white border border-fourth flex items-center p-8 ml-2 button font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="button">
     <icon.FcGoogle className="mr-2" /> Login with Google
   </button>
 </div>
