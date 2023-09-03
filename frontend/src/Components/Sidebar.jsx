@@ -130,16 +130,16 @@ const Sidebar = () => {
                     key={link.id}
                     className={`${
                       active === link.title
-                        ? "font-bold bg-[rgba(255,255,255,0.1)] rounded-lg"
-                        : "font-medium"
-                    } text-hello hover:text-white text-[18px]`}
+                        ? "font-bold rounded-lg text-white"
+                        : "font-thin text-[#fefefe]"
+                    }  text-[18px] self-center `}
                   >
                     <Link
                       to={link.link}
-                      className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-[rgba(255,255,255,0.1)] group"
+                      className="flex items-center p-2 rounded-lg ] group"
                       onClick={() => handleMenuItemClick(link.title)}
                     >
-                      {link.icon}
+                     <a className="font-bold">{link.icon}</a>
                       <span className="ml-3">{link.title}</span>
                     </Link>
                   </li>

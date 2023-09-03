@@ -16,7 +16,7 @@ const googleAuth = async () => {
   let API_URL = ''
  
     API_URL = 'http://localhost:5000/api/v1/auth/google' 
-
+console.log("Called")
   try {
     const response = await fetch(API_URL, {
       method: 'GET',
