@@ -8,6 +8,7 @@ import { Input, InputGroup } from 'rsuite';
 import EyeIcon from '@rsuite/icons/legacy/Eye';
 import EyeSlashIcon from '@rsuite/icons/legacy/EyeSlash';
 import { useEffect,useState } from "react";
+import * as icon from 'react-icons/fc'
 
 const Login = () => {
   const [visible, setVisible] = useState(false);
@@ -128,10 +129,20 @@ const Login = () => {
                 <div id="errora"></div>
               </div>
               <div className="flex form-field items-center">
-                <button className="bg-fourth button w-full text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
+                <button className="bg-fourth button w-1/2 text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline" type="submit">
                   Login
                 </button>
+                <div className="flex justify-center items-center w-1/2">
+  <button className="bg-white border border-fourth flex items-center p-8 ml-2 button font-bold py-2 rounded focus:outline-none focus:shadow-outline">
+    <icon.FcGoogle className="mr-2" /> Login with Google
+  </button>
+</div>
+
               </div>
+              <div className="flex justify-center">
+     
+    </div>
+
             </form>
             <p className="pl-[2.4vw] second-signup">New user? <Link to="/signup" className="underline text-fourth">Sign up</Link></p><br></br><br></br>
             <p className="pl-[2.4vw] second-signup"><Link to="/forget-password-mail" className="underline text-fourth">Forget Password? </Link></p>

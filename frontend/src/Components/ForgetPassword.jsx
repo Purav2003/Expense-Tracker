@@ -6,6 +6,10 @@ import EyeSlashIcon from '@rsuite/icons/legacy/EyeSlash';
 import { useState } from "react";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import * as icon from 'react-icons/hi'
+import { Tooltip } from 'react-tooltip'
+
+
 const ForgetPassword = () => {
   const token = localStorage.getItem("Token");
   const [visible, setVisible] = useState(false);
@@ -83,7 +87,27 @@ const ForgetPassword = () => {
           <form onSubmit={handleSubmit}>
             <table className="w-full">
               <tr className="border p-4">
-                <td className="border p-4 w-[50%]">New Password</td>
+                <td className="items-center px-4 py-6 w-full flex">New Password
+                <icon.HiInformationCircle
+      className="ml-2 text-[16px] cursor-pointer"
+      data-tooltip-id="my-tooltip"
+    />  <Tooltip
+    id="my-tooltip"
+    content={
+      <>
+        <ul>
+          <li>Password Must be At least 8 Characters Long</li>
+          <li>
+            Password Should Contain At least
+            <br></br>1 Uppercase Letter
+            <br></br>1 Digit<br></br>
+            1 Special Character
+          </li>
+        </ul>
+      </>
+    }
+  />
+                </td>
                 <td className="border p-4 w-[50%]">
                   <InputGroup inside >
                     <Input type={visible ? 'text' : 'password'} placeholder="New Password" className="password h-full border-none outline-none" />

@@ -166,8 +166,12 @@ const Signup = () => {
 
               </div>
               <div className="mb-4 form-field relative">
-  <label className="block text-black-700 text-sm font-bold mb-2">
-    Password
+                
+  <label className="flex items-center text-black-700 text-sm font-bold mb-2">
+    Password      <icon.HiInformationCircle
+      className="ml-2 text-[16px] cursor-pointer"
+      data-tooltip-id="my-tooltip"
+    />
   </label>
   <div className="relative">
   <InputGroup inside >
@@ -176,13 +180,11 @@ const Signup = () => {
         {visible ? <EyeIcon /> : <EyeSlashIcon />}
         
       </InputGroup.Button>
-      <icon.HiInformationCircle
-      className="absolute pl-[100px] top-1/2 right-2 transform -translate-y-1/2 cursor-pointer"
-      data-tooltip-id="my-tooltip"
-    />
+
     </InputGroup>
 
   </div>
+     
   <Tooltip
     id="my-tooltip"
     content={
