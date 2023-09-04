@@ -90,14 +90,14 @@ const Sidebar = () => {
 <nav className="bg-fourth border-gray-200 fixed w-full z-[100]">
           <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <Link to="/dashboard" className="flex items-center">
-              <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
+              <span className="self-center text-2xl font-semibold md:text-xl whitespace-nowrap text-white">
                 Expense Tracker
               </span>
             </Link>
             <button
               onClick={toggleMenu}
               type="button"
-              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-white rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
               aria-controls="navbar-default"
               aria-expanded={showMenu}
             >
@@ -130,16 +130,16 @@ const Sidebar = () => {
                     key={link.id}
                     className={`${
                       active === link.title
-                        ? "font-bold bg-[rgba(255,255,255,0.1)] rounded-lg"
-                        : "font-medium"
-                    } text-hello hover:text-white text-[18px]`}
+                        ? "rounded-lg text-white bg-[rgba(255,255,255,0.2)]"
+                        : " text-[#fefefe]"
+                    }   px-2 text-[18px] hover:bg-[rgba(255,255,255,0.2)] hover:rounded-lg lg:self-center md:self-center `}
                   >
                     <Link
                       to={link.link}
-                      className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-[rgba(255,255,255,0.1)] group"
+                      className="flex items-center p-2 rounded-lg  group"
                       onClick={() => handleMenuItemClick(link.title)}
                     >
-                      {link.icon}
+                     {link.icon}
                       <span className="ml-3">{link.title}</span>
                     </Link>
                   </li>
@@ -148,12 +148,12 @@ const Sidebar = () => {
                   <button onClick={toggleProfileMenu} className={`flex items-center`}>
                     <Identicon
                       string={data.email} // Use user's email as the identifier
-                      size={50} // Adjust size as needed
-                      className="bg-[#eee] border p-2 rounded-full"
+                      size={44} // Adjust size as needed
+                      className="bg-[#eee] p-1 rounded-full"
                     />
                   </button>
                   <ul
-                    className={`${showProfileMenu ? "block" : "hidden"} absolute right-0 mt-4 mr-[-20px] w-32 border space-y-2 rounded-lg shadow-md bg-white`}
+                    className={`${showProfileMenu ? "block" : "hidden"} absolute lg:right-0 md:right-0 mt-4 md:mr-[-3px] lg:mr-[-20px] w-32 border space-y-2 rounded-lg shadow-md bg-white`}
                   >
                     {/* Profile menu items */}
                     <li>

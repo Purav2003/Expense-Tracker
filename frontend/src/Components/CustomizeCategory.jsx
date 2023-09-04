@@ -109,7 +109,6 @@ const CustomizeCategory = () => {
 
     return (
         <>
-        <Sidebar />
 {  loading?<Loader />  :    <div className="flex justify-center bg-white pt-[3vw] ">
             <div className='border p-4 bg-[#eee] lg:w-[50%] border rounded-lg'>
                 <form onSubmit={handleSubmit}>

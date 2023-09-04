@@ -7,7 +7,7 @@ export const navLinks = [
     title: "Dashboard",
     link:"/dashboard",
     icon: <dash.RxDashboard></dash.RxDashboard>,
-    iconm:<dash.RxDashboard className='text-white text-[25px]'></dash.RxDashboard>,
+    iconm:<dash.RxDashboard></dash.RxDashboard>,
   },
   {
     id: "income",
