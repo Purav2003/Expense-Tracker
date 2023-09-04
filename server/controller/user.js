@@ -1,4 +1,5 @@
 require("express-async-errors")
+const passport = require("passport")
 const User = require("../models/user")
 const ContactUs = require("../models/contactUs")
 const sendEmail = require("./emailctrl")
@@ -56,6 +57,16 @@ const signin = async (req, res) => {
         }
     }
 }
+
+// const googleLogin = passport.authenticate('google', {scope: ['profile', 'email'],})
+
+// const googleLoginCallback = async (req,res)=>{
+//     console.log("welcom");
+//     const user = req.user
+//     const token = user.createJWT()
+//     passport.authenticate('google')
+//     // res.send({ user, name: user.name, token, success: true, status: 200 })
+// }
 
 const getAllUser = async (req, res) => {
     const users = await User.find()
@@ -227,6 +238,8 @@ const logout = (req, res) => {
     module.exports = {
         signup,
         signin,
+        // googleLogin,
+        // googleLoginCallback,
         getAllUser,
         profile,
         changePassword,

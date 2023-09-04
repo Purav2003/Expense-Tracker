@@ -4,7 +4,6 @@ const connectDB = require("./db/connectDB")
 const notFound = require("./middlewares/not-found")
 const errorHandler = require("./middlewares/error-handler")
 const auth = require("./routes/user")
-const session = require('express-session');
 const income = require("./routes/income")
 const expense = require("./routes/expense")
 const dashboard = require("./routes/dashboard")
@@ -12,6 +11,9 @@ const settings = require("./routes/settings")
 const helmet = require("helmet")
 const cors = require("cors")
 const xss = require("xss-clean")
+const passport = require('passport');
+const session = require('express-session');
+require("./config/passport")
 
 const app = express()
 app.use(express.json())
@@ -19,21 +21,12 @@ app.use(express.urlencoded({extended: true}));
 app.set("trust proxy",1)
 app.use(express.json());
 app.use(helmet())
-app.use(cors(
-  // {
-  //   origin:["https://expense-tracker-api-six.vercel.app"],
-  //   mehods:["POST","GET","PATCH","PUT","DELETE"],
-  //   credentials:true
-  // }
-))
+app.use(cors({ origin: '*' }));
 app.use(xss())
-app.use(
-  session({
-    secret: process.env.EXPRESS_SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-  })
-);
+app.use(session({ secret: process.env.EXPRESS_SESSION_SECRET, resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use("/api/v1/auth",auth)
 app.use("/api/v1/income",income)
 app.use("/api/v1/expense",expense)

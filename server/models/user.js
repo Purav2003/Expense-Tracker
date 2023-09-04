@@ -1,15 +1,17 @@
 const mongoose = require('mongoose');
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
+const findOrCreate = require('mongoose-findorcreate');
 
 var userSchema = new mongoose.Schema({
+    googleId:{
+        type:String
+    },
     name: {
         type: String,
-        required: [true, "Please enter your name"],
     },
     email: {
         type: String,
-        required: [true, "Please enter you email"],
         match: [
             /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, "Please provide valid email"
         ],
@@ -17,13 +19,10 @@ var userSchema = new mongoose.Schema({
     },
     mobile: {
         type: String,
-        required: true,
-        unique: true,
         match: [/^(\+\d{1,3}[- ]?)?\d{10}$/]
     },
     password: {
         type: String,
-        required: true,
         match: [/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/]
     },
     currency: {
@@ -40,9 +39,13 @@ var userSchema = new mongoose.Schema({
     // }
 }, { timestamps: true });
 
+userSchema.plugin(findOrCreate);
+
 userSchema.pre("save", async function () {
-    const salt = await bcrypt.genSalt(10)
-    this.password = await bcrypt.hash(this.password, salt)
+    if(this.password){
+        const salt = await bcrypt.genSalt(10)
+        this.password = await bcrypt.hash(this.password, salt)
+    }
 })
 
 userSchema.methods.comparePassword = function (userPassword) {
